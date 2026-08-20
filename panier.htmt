@@ -4,8 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Panier | Alois Design</title>
-  <meta name="description" content="Votre panier Alois Design">
+  <title>Panier - Alois Design</title>
 
   <style>
     * {
@@ -18,14 +17,13 @@
       font-family: Arial, sans-serif;
       background: #f5f5f5;
       color: #222;
-      line-height: 1.6;
     }
 
     header {
       background: #111;
       color: white;
       text-align: center;
-      padding: 22px 15px;
+      padding: 25px 15px;
     }
 
     header h1 {
@@ -39,8 +37,8 @@
 
     .container {
       width: 92%;
-      max-width: 950px;
-      margin: 35px auto;
+      max-width: 900px;
+      margin: 40px auto;
     }
 
     h2 {
@@ -49,29 +47,29 @@
       margin-bottom: 30px;
     }
 
-    .panier-vide {
+    .vide {
       background: white;
-      padding: 40px 20px;
+      padding: 45px 20px;
       border-radius: 18px;
       text-align: center;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
     }
 
-    .panier-vide .icon {
+    .vide .icone {
       font-size: 55px;
       margin-bottom: 15px;
     }
 
-    .panier-vide p {
+    .vide p {
       color: #666;
       margin: 10px 0 25px;
     }
 
     .produit {
       background: white;
-      border-radius: 16px;
       padding: 20px;
       margin-bottom: 15px;
+      border-radius: 16px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.07);
 
       display: flex;
@@ -80,11 +78,11 @@
       gap: 20px;
     }
 
-    .produit-info {
+    .infos {
       flex: 1;
     }
 
-    .produit-info h3 {
+    .infos h3 {
       font-size: 20px;
       margin-bottom: 8px;
     }
@@ -95,15 +93,15 @@
       line-height: 1.7;
     }
 
-    .produit-prix {
+    .prix {
       text-align: right;
-      min-width: 130px;
+      min-width: 120px;
     }
 
-    .prix-total {
+    .sous-total {
       font-size: 21px;
       font-weight: bold;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .supprimer {
@@ -121,20 +119,19 @@
 
     .resume {
       background: white;
-      border-radius: 18px;
       padding: 25px;
       margin-top: 25px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+      border-radius: 18px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
     }
 
     .ligne {
       display: flex;
       justify-content: space-between;
       margin-bottom: 12px;
-      gap: 20px;
     }
 
-    .total {
+    .grand-total {
       border-top: 1px solid #ddd;
       padding-top: 18px;
       margin-top: 15px;
@@ -147,53 +144,41 @@
       display: block;
       width: 100%;
       padding: 15px;
+      margin-top: 15px;
+
       border-radius: 10px;
       border: none;
-      text-decoration: none;
+
       text-align: center;
+      text-decoration: none;
 
       font-size: 16px;
       font-weight: bold;
-      cursor: pointer;
 
-      margin-top: 15px;
+      cursor: pointer;
     }
 
-    .bouton-principal {
+    .principal {
       background: #111;
       color: white;
     }
 
-    .bouton-secondaire {
+    .secondaire {
       background: #eee;
       color: #111;
     }
 
-    .bouton:hover {
-      opacity: 0.9;
-    }
-
     .vider {
-      background: transparent;
+      display: block;
+      margin: 18px auto 0;
+
+      background: none;
       border: none;
+
       color: #777;
       text-decoration: underline;
 
       cursor: pointer;
-
-      display: block;
-      margin: 18px auto 0;
-    }
-
-    .retour {
-      text-align: center;
-      margin-top: 30px;
-    }
-
-    .retour a {
-      color: #111;
-      text-decoration: none;
-      font-weight: bold;
     }
 
     footer {
@@ -216,18 +201,15 @@
         align-items: flex-start;
       }
 
-      .produit-prix {
+      .prix {
         width: 100%;
         text-align: left;
       }
 
-      .prix-total {
-        margin-bottom: 10px;
-      }
-
-      .total {
+      .grand-total {
         font-size: 22px;
       }
+
     }
   </style>
 </head>
@@ -248,7 +230,7 @@
 
   <h2>🛒 Mon panier</h2>
 
-  <div id="contenuPanier"></div>
+  <div id="panier"></div>
 
 </main>
 
@@ -264,7 +246,7 @@
   </p>
 
   <p>
-    © 2026 Alois Design - Tous droits réservés
+    © 2026 Alois Design
   </p>
 
 </footer>
@@ -281,13 +263,13 @@
 
 
   /*
-   * AFFICHER LE PANIER
+   * AFFICHAGE
    */
 
   function afficherPanier() {
 
-    const contenu =
-      document.getElementById("contenuPanier");
+    const zone =
+      document.getElementById("panier");
 
 
     /*
@@ -296,11 +278,11 @@
 
     if (panier.length === 0) {
 
-      contenu.innerHTML = `
+      zone.innerHTML = `
 
-        <div class="panier-vide">
+        <div class="vide">
 
-          <div class="icon">
+          <div class="icone">
             🛒
           </div>
 
@@ -309,14 +291,14 @@
           </h3>
 
           <p>
-            Vous n'avez encore ajouté aucun produit.
+            Ajoutez un produit pour commencer.
           </p>
 
           <a
             href="impression-3D.html"
-            class="bouton bouton-principal"
+            class="bouton principal"
           >
-            Découvrir nos impressions 3D
+            Voir nos produits
           </a>
 
         </div>
@@ -327,13 +309,13 @@
     }
 
 
-    let html = "";
+    let contenu = "";
 
     let total = 0;
 
 
     /*
-     * AFFICHAGE DES PRODUITS
+     * PRODUITS
      */
 
     panier.forEach((produit, index) => {
@@ -354,11 +336,15 @@
       let details = "";
 
 
+      /*
+       * Détails porte-clé
+       */
+
       if (produit.texte) {
 
         details +=
           "Texte : " +
-          echapperHTML(produit.texte) +
+          escapeHTML(produit.texte) +
           "<br>";
 
       }
@@ -368,7 +354,7 @@
 
         details +=
           "Couleur : " +
-          echapperHTML(produit.couleur) +
+          escapeHTML(produit.couleur) +
           "<br>";
 
       }
@@ -378,7 +364,7 @@
 
         details +=
           "Taille : " +
-          echapperHTML(produit.taille) +
+          escapeHTML(produit.taille) +
           "<br>";
 
       }
@@ -388,20 +374,20 @@
 
         details +=
           "Dessin : " +
-          echapperHTML(produit.imageNom) +
+          escapeHTML(produit.imageNom) +
           "<br>";
 
       }
 
 
-      html += `
+      contenu += `
 
         <div class="produit">
 
-          <div class="produit-info">
+          <div class="infos">
 
             <h3>
-              ${echapperHTML(
+              ${escapeHTML(
                 produit.nom || "Produit"
               )}
             </h3>
@@ -412,6 +398,7 @@
 
               Quantité :
               ${quantite}
+
               <br>
 
               Prix unitaire :
@@ -422,17 +409,15 @@
           </div>
 
 
-          <div class="produit-prix">
+          <div class="prix">
 
-            <div class="prix-total">
-
+            <div class="sous-total">
               ${formatPrix(sousTotal)}
-
             </div>
 
             <button
               class="supprimer"
-              onclick="supprimerProduit(${index})"
+              onclick="supprimer(${index})"
             >
               Supprimer
             </button>
@@ -450,7 +435,7 @@
      * RÉSUMÉ
      */
 
-    html += `
+    contenu += `
 
       <div class="resume">
 
@@ -480,7 +465,7 @@
         </div>
 
 
-        <div class="ligne total">
+        <div class="ligne grand-total">
 
           <span>
             Total
@@ -495,15 +480,15 @@
 
         <a
           href="impression-3D.html"
-          class="bouton bouton-secondaire"
+          class="bouton secondaire"
         >
           ← Continuer mes achats
         </a>
 
 
         <button
-          class="bouton bouton-principal"
-          onclick="passerCommande()"
+          class="bouton principal"
+          onclick="commander()"
         >
           Commander
         </button>
@@ -521,20 +506,20 @@
     `;
 
 
-    contenu.innerHTML = html;
+    zone.innerHTML = contenu;
 
   }
 
 
   /*
-   * SUPPRIMER UN PRODUIT
+   * SUPPRIMER
    */
 
-  function supprimerProduit(index) {
+  function supprimer(index) {
 
     panier.splice(index, 1);
 
-    sauvegarderPanier();
+    sauvegarder();
 
     afficherPanier();
 
@@ -542,36 +527,33 @@
 
 
   /*
-   * VIDER LE PANIER
+   * VIDER
    */
 
   function viderPanier() {
 
     if (
-      !confirm(
+      confirm(
         "Voulez-vous vraiment vider votre panier ?"
       )
     ) {
 
-      return;
+      panier = [];
+
+      sauvegarder();
+
+      afficherPanier();
 
     }
-
-
-    panier = [];
-
-    sauvegarderPanier();
-
-    afficherPanier();
 
   }
 
 
   /*
-   * SAUVEGARDER LE PANIER
+   * SAUVEGARDER
    */
 
-  function sauvegarderPanier() {
+  function sauvegarder() {
 
     localStorage.setItem(
       "panier",
@@ -598,10 +580,10 @@
 
 
   /*
-   * PROTECTION DU TEXTE
+   * PROTECTION HTML
    */
 
-  function echapperHTML(texte) {
+  function escapeHTML(texte) {
 
     return String(texte)
 
@@ -619,10 +601,10 @@
 
 
   /*
-   * PASSER COMMANDE
+   * COMMANDER
    */
 
-  function passerCommande() {
+  function commander() {
 
     if (panier.length === 0) {
 
@@ -646,7 +628,7 @@
 
 
   /*
-   * AFFICHER AU CHARGEMENT
+   * LANCEMENT
    */
 
   afficherPanier();
