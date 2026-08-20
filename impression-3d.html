@@ -8,20 +8,19 @@
 
   <meta
     name="description"
-    content="Commandez vos créations 3D personnalisées chez Aloïs Design."
+    content="Découvrez les créations 3D Aloïs Design : tampons, logos 3D, porte-clés et créations personnalisées."
   >
 
   <style>
     :root {
       --bg: #090909;
       --card: #151515;
-      --card-hover: #1c1c1c;
+      --card-hover: #1b1b1b;
       --gold: #d9a72b;
       --gold-light: #f3cc68;
       --white: #ffffff;
       --gray: #aaa;
       --border: #292929;
-      --green: #35c46a;
     }
 
     * {
@@ -59,8 +58,8 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(9, 9, 9, 0.96);
-      backdrop-filter: blur(12px);
+      background: rgba(9, 9, 9, 0.95);
+      backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
     }
 
@@ -77,10 +76,17 @@
       font-weight: 900;
       letter-spacing: 2px;
       color: var(--gold);
+      white-space: nowrap;
     }
 
     .logo span {
       color: white;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
     }
 
     .back {
@@ -92,40 +98,38 @@
       color: var(--gold-light);
     }
 
-    /* PANIER */
-
-    .cart-button {
+    .cart-link {
+      position: relative;
       display: flex;
       align-items: center;
-      gap: 8px;
-      background: #151515;
-      border: 1px solid #3a3a3a;
-      padding: 9px 13px;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--border);
       border-radius: 10px;
-      font-weight: bold;
+      font-size: 21px;
       transition: 0.2s;
     }
 
-    .cart-button:hover {
+    .cart-link:hover {
       border-color: var(--gold);
-      color: var(--gold-light);
-    }
-
-    .cart-icon {
-      font-size: 21px;
+      transform: translateY(-2px);
     }
 
     .cart-count {
-      min-width: 22px;
-      height: 22px;
-      padding: 0 6px;
-      display: inline-flex;
+      position: absolute;
+      top: -7px;
+      right: -7px;
+      min-width: 20px;
+      height: 20px;
+      padding: 0 5px;
+      display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 50%;
+      border-radius: 50px;
       background: var(--gold);
       color: #111;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 900;
     }
 
@@ -135,7 +139,7 @@
 
     .hero {
       text-align: center;
-      padding: 80px 0 55px;
+      padding: 90px 0 65px;
       background:
         radial-gradient(
           circle at center top,
@@ -145,7 +149,7 @@
     }
 
     .hero-icon {
-      font-size: 60px;
+      font-size: 65px;
       margin-bottom: 15px;
     }
 
@@ -160,7 +164,7 @@
     }
 
     .hero p {
-      max-width: 700px;
+      max-width: 720px;
       margin: auto;
       color: var(--gray);
       font-size: 18px;
@@ -171,12 +175,12 @@
     ========================= */
 
     .products {
-      padding: 45px 0 90px;
+      padding: 55px 0 90px;
     }
 
     .section-title {
       text-align: center;
-      margin-bottom: 35px;
+      margin-bottom: 38px;
     }
 
     .section-title h2 {
@@ -188,143 +192,84 @@
       color: var(--gray);
     }
 
-    .category-title {
-      margin: 45px 0 20px;
-      font-size: 28px;
-      color: var(--gold-light);
-    }
-
-    .products-grid {
+    .cards {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
+      gap: 22px;
     }
 
-    .product {
+    .card {
       display: flex;
       flex-direction: column;
-      padding: 28px;
+      padding: 32px;
+      min-height: 330px;
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 18px;
+      border-radius: 20px;
       transition: 0.25s;
     }
 
-    .product:hover {
-      transform: translateY(-4px);
+    .card:hover {
+      transform: translateY(-5px);
       background: var(--card-hover);
-      border-color: #554516;
+      border-color: #594616;
     }
 
-    .product-icon {
-      font-size: 45px;
-      margin-bottom: 12px;
+    .card-icon {
+      font-size: 52px;
+      margin-bottom: 17px;
     }
 
-    .product h3 {
-      font-size: 23px;
+    .card h3 {
+      font-size: 26px;
       color: var(--gold-light);
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
-    .product-description {
+    .card p {
       color: var(--gray);
-      margin-bottom: 18px;
       flex-grow: 1;
     }
 
-    .price {
-      font-size: 25px;
-      font-weight: 900;
-      color: white;
-      margin-bottom: 15px;
-    }
-
-    .price small {
-      font-size: 13px;
-      color: var(--gray);
-      font-weight: normal;
-    }
-
-    /* =========================
-       OPTIONS
-    ========================= */
-
-    .option-label {
-      display: block;
+    .card-info {
+      margin-top: 18px;
       color: #ddd;
       font-size: 14px;
-      font-weight: bold;
-      margin-bottom: 7px;
     }
 
-    select,
-    input {
-      width: 100%;
-      padding: 12px;
-      border-radius: 9px;
-      border: 1px solid #333;
-      background: #080808;
-      color: white;
-      font: inherit;
-      margin-bottom: 15px;
+    .card-info strong {
+      color: var(--gold-light);
     }
 
-    select:focus,
-    input:focus {
-      outline: 1px solid var(--gold);
-      border-color: var(--gold);
-    }
-
-    /* =========================
-       BOUTON
-    ========================= */
-
-    .add-button {
-      width: 100%;
-      padding: 13px 16px;
-      border: none;
+    .card-button {
+      display: block;
+      margin-top: 23px;
+      padding: 13px 17px;
+      text-align: center;
       border-radius: 10px;
       background: var(--gold);
       color: #111;
       font-weight: 900;
-      font-size: 15px;
-      cursor: pointer;
       transition: 0.2s;
     }
 
-    .add-button:hover {
+    .card-button:hover {
       background: var(--gold-light);
-      transform: translateY(-1px);
     }
 
-    /* =========================
-       MESSAGE
-    ========================= */
-
-    #cart-message {
-      position: fixed;
-      left: 50%;
-      bottom: 25px;
-      transform: translateX(-50%) translateY(100px);
-      background: #151515;
-      border: 1px solid var(--green);
+    .card-button.secondary {
+      background: transparent;
+      border: 1px solid #444;
       color: white;
-      padding: 14px 20px;
-      border-radius: 12px;
-      z-index: 1000;
-      opacity: 0;
-      transition: 0.3s;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
     }
 
-    #cart-message.show {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
+    .card-button.secondary:hover {
+      border-color: var(--gold);
+      color: var(--gold-light);
     }
 
     /* =========================
-       INFORMATIONS
+       INFO
     ========================= */
 
     .info {
@@ -335,7 +280,7 @@
       padding: 35px;
       background: #111;
       border: 1px solid var(--border);
-      border-radius: 18px;
+      border-radius: 20px;
       text-align: center;
     }
 
@@ -344,7 +289,7 @@
     }
 
     .info-box p {
-      max-width: 700px;
+      max-width: 720px;
       margin: auto;
       color: var(--gray);
     }
@@ -367,43 +312,35 @@
 
     @media (max-width: 750px) {
 
-      nav {
-        flex-wrap: wrap;
-        padding: 12px 0;
-      }
-
-      .products-grid {
+      .cards {
         grid-template-columns: 1fr;
       }
 
-      .back {
-        order: 3;
-        width: 100%;
-        text-align: center;
-        padding-bottom: 5px;
+      .hero {
+        padding-top: 65px;
       }
 
-      .hero {
-        padding-top: 55px;
+      .hero p {
+        font-size: 16px;
+      }
+
+      .back {
+        display: none;
       }
     }
 
-    @media (max-width: 450px) {
-
-      .logo {
-        font-size: 17px;
-      }
-
-      .cart-button {
-        padding: 8px 10px;
-      }
+    @media (max-width: 500px) {
 
       .hero h1 {
         font-size: 42px;
       }
 
-      .product {
-        padding: 23px;
+      .card {
+        padding: 27px 22px;
+      }
+
+      .nav-right {
+        gap: 8px;
       }
     }
   </style>
@@ -425,15 +362,30 @@
           ALOÏS <span>DESIGN</span>
         </a>
 
-        <a href="panier.html" class="cart-button">
-          <span class="cart-icon">🛒</span>
-          <span>Panier</span>
-          <span class="cart-count" id="cart-count">0</span>
-        </a>
+        <div class="nav-right">
 
-        <a href="index.html" class="back">
-          ← Retour à l'accueil
-        </a>
+          <a
+            href="index.html"
+            class="back"
+          >
+            ← Accueil
+          </a>
+
+          <a
+            href="panier.html"
+            class="cart-link"
+            aria-label="Voir le panier"
+          >
+            🛒
+            <span
+              id="cartCount"
+              class="cart-count"
+            >
+              0
+            </span>
+          </a>
+
+        </div>
 
       </nav>
 
@@ -443,10 +395,12 @@
 
 
   <!-- =========================
-       HERO
+       CONTENU
   ========================== -->
 
   <main>
+
+    <!-- HERO -->
 
     <section class="hero">
 
@@ -461,8 +415,9 @@
         </h1>
 
         <p>
-          Choisissez votre création, sélectionnez les options
-          souhaitées et ajoutez-la directement à votre panier.
+          Découvrez nos différentes créations 3D.
+          Choisissez une catégorie pour voir les modèles,
+          les formules et les prix.
         </p>
 
       </div>
@@ -470,9 +425,7 @@
     </section>
 
 
-    <!-- =========================
-         PRODUITS
-    ========================== -->
+    <!-- PRODUITS -->
 
     <section class="products">
 
@@ -481,411 +434,148 @@
         <div class="section-title">
 
           <h2>
-            Nos créations
+            Que souhaitez-vous créer ?
           </h2>
 
           <p>
-            Des prix simples et transparents.
+            Sélectionnez une catégorie pour continuer.
           </p>
 
         </div>
 
 
-        <!-- =========================
-             TAMPONS
-        ========================== -->
-
-        <h2 class="category-title">
-          🖨️ Tampons personnalisés
-        </h2>
-
-        <div class="products-grid">
+        <div class="cards">
 
 
-          <!-- PETIT -->
+          <!-- =========================
+               TAMPONS
+          ========================== -->
 
-          <article class="product">
+          <article class="card">
 
-            <div class="product-icon">
+            <div class="card-icon">
               🖨️
             </div>
 
             <h3>
-              Petit tampon
+              Tampons
             </h3>
 
-            <p class="product-description">
-              Un tampon compact pour vos textes,
-              signatures ou petites utilisations.
+            <p>
+              Créez votre tampon personnalisé avec
+              un texte, un logo ou les deux.
             </p>
 
-            <div class="price">
-              12,50 €
+            <div class="card-info">
+              À partir de <strong>10 €</strong>
             </div>
 
-            <label class="option-label">
-              Texte du tampon
-            </label>
-
-            <input
-              type="text"
-              id="tampon-petit"
-              placeholder="Ex. Aloïs Design"
+            <a
+              href="tampons.html"
+              class="card-button"
             >
-
-            <button
-              class="add-button"
-              onclick="addProduct(
-                'Petit tampon',
-                12.50,
-                document.getElementById('tampon-petit').value
-              )"
-            >
-              🛒 Ajouter au panier
-            </button>
+              Voir les tampons →
+            </a>
 
           </article>
 
 
-          <!-- ENTREPRISE -->
+          <!-- =========================
+               LOGO 3D
+          ========================== -->
 
-          <article class="product">
+          <article class="card">
 
-            <div class="product-icon">
-              🏢
-            </div>
-
-            <h3>
-              Tampon entreprise
-            </h3>
-
-            <p class="product-description">
-              Un tampon adapté aux entreprises,
-              associations et professionnels.
-            </p>
-
-            <div class="price">
-              20 €
-            </div>
-
-            <label class="option-label">
-              Texte du tampon
-            </label>
-
-            <input
-              type="text"
-              id="tampon-entreprise"
-              placeholder="Nom de l'entreprise"
-            >
-
-            <button
-              class="add-button"
-              onclick="addProduct(
-                'Tampon entreprise',
-                20,
-                document.getElementById('tampon-entreprise').value
-              )"
-            >
-              🛒 Ajouter au panier
-            </button>
-
-          </article>
-
-
-          <!-- LOGO -->
-
-          <article class="product">
-
-            <div class="product-icon">
+            <div class="card-icon">
               🎨
             </div>
 
             <h3>
-              Tampon avec logo
+              Logo 3D
             </h3>
 
-            <p class="product-description">
-              Votre logo transformé en tampon personnalisé.
+            <p>
+              Transformez votre logo en création 3D,
+              plaque ou décoration en relief.
             </p>
 
-            <div class="price">
-              25 €
+            <div class="card-info">
+              À partir de <strong>25 €</strong>
             </div>
 
-            <label class="option-label">
-              Nom / description du logo
-            </label>
-
-            <input
-              type="text"
-              id="tampon-logo"
-              placeholder="Ex. Logo Aloïs Design"
+            <a
+              href="logos-3d.html"
+              class="card-button"
             >
-
-            <button
-              class="add-button"
-              onclick="addProduct(
-                'Tampon avec logo',
-                25,
-                document.getElementById('tampon-logo').value
-              )"
-            >
-              🛒 Ajouter au panier
-            </button>
+              Voir les logos 3D →
+            </a>
 
           </article>
 
 
-          <!-- GROS -->
+          <!-- =========================
+               PORTE-CLÉS
+          ========================== -->
 
-          <article class="product">
+          <article class="card">
 
-            <div class="product-icon">
-              📦
-            </div>
-
-            <h3>
-              Gros tampon personnalisé
-            </h3>
-
-            <p class="product-description">
-              Un format plus important pour les grandes
-              impressions et utilisations professionnelles.
-            </p>
-
-            <div class="price">
-              32,50 €
-            </div>
-
-            <label class="option-label">
-              Texte / description
-            </label>
-
-            <input
-              type="text"
-              id="tampon-gros"
-              placeholder="Décrivez votre tampon"
-            >
-
-            <button
-              class="add-button"
-              onclick="addProduct(
-                'Gros tampon personnalisé',
-                32.50,
-                document.getElementById('tampon-gros').value
-              )"
-            >
-              🛒 Ajouter au panier
-            </button>
-
-          </article>
-
-        </div>
-
-
-        <!-- =========================
-             LOGOS 3D
-        ========================== -->
-
-        <h2 class="category-title">
-          🎨 Logo 3D
-        </h2>
-
-        <div class="products-grid">
-
-
-          <!-- LOGO PETIT -->
-
-          <article class="product">
-
-            <div class="product-icon">
-              🟨
-            </div>
-
-            <h3>
-              Logo 3D — Petit
-            </h3>
-
-            <p class="product-description">
-              Petit logo ou petite plaque en relief,
-              idéal pour une décoration ou un objet.
-            </p>
-
-            <div class="price">
-              25 €
-            </div>
-
-            <button
-              class="add-button"
-              onclick="addProduct(
-                'Logo 3D - Petit',
-                25,
-                'Petite taille'
-              )"
-            >
-              🛒 Ajouter au panier
-            </button>
-
-          </article>
-
-
-          <!-- LOGO MOYEN -->
-
-          <article class="product">
-
-            <div class="product-icon">
-              🟧
-            </div>
-
-            <h3>
-              Logo 3D — Moyen
-            </h3>
-
-            <p class="product-description">
-              Format moyen pour une présence visuelle
-              plus importante.
-            </p>
-
-            <div class="price">
-              45 €
-            </div>
-
-            <button
-              class="add-button"
-              onclick="addProduct(
-                'Logo 3D - Moyen',
-                45,
-                'Taille moyenne'
-              )"
-            >
-              🛒 Ajouter au panier
-            </button>
-
-          </article>
-
-
-          <!-- LOGO GRAND -->
-
-          <article class="product">
-
-            <div class="product-icon">
-              🟥
-            </div>
-
-            <h3>
-              Logo 3D — Grand
-            </h3>
-
-            <p class="product-description">
-              Grand format réalisé en plusieurs parties
-              si nécessaire pour respecter les dimensions
-              de l'imprimante.
-            </p>
-
-            <div class="price">
-              70 €
-            </div>
-
-            <button
-              class="add-button"
-              onclick="addProduct(
-                'Logo 3D - Grand',
-                70,
-                'Grande taille - assemblage possible'
-              )"
-            >
-              🛒 Ajouter au panier
-            </button>
-
-          </article>
-
-
-          <!-- PREMIUM -->
-
-          <article class="product">
-
-            <div class="product-icon">
-              👑
-            </div>
-
-            <h3>
-              Logo 3D — Premium
-            </h3>
-
-            <p class="product-description">
-              Création plus complexe, finition poussée
-              et projet nécessitant davantage de travail.
-            </p>
-
-            <div class="price">
-              À partir de 100 €
-            </div>
-
-            <button
-              class="add-button"
-              onclick="addProduct(
-                'Logo 3D - Premium',
-                100,
-                'À partir de 100 € - validation du projet nécessaire'
-              )"
-            >
-              🛒 Ajouter au panier
-            </button>
-
-          </article>
-
-        </div>
-
-
-        <!-- =========================
-             PORTE-CLÉS
-        ========================== -->
-
-        <h2 class="category-title">
-          🔑 Porte-clés
-        </h2>
-
-        <div class="products-grid">
-
-          <article class="product">
-
-            <div class="product-icon">
+            <div class="card-icon">
               🔑
             </div>
 
             <h3>
-              Porte-clé personnalisé
+              Porte-clés
             </h3>
 
-            <p class="product-description">
-              Porte-clé personnalisé avec un prénom,
-              un texte, un symbole ou un petit logo.
+            <p>
+              Un porte-clés personnalisé réalisé en
+              impression 3D.
             </p>
 
-            <div class="price">
-              6 €
+            <div class="card-info">
+              <strong>6 €</strong> l'unité
             </div>
 
-            <label class="option-label">
-              Texte / prénom
-            </label>
-
-            <input
-              type="text"
-              id="porte-cle"
-              placeholder="Ex. Aloïs"
+            <a
+              href="porte-cles.html"
+              class="card-button"
             >
+              Voir les porte-clés →
+            </a>
 
-            <button
-              class="add-button"
-              onclick="addProduct(
-                'Porte-clé personnalisé',
-                6,
-                document.getElementById('porte-cle').value
-              )"
+          </article>
+
+
+          <!-- =========================
+               AUTRE
+          ========================== -->
+
+          <article class="card">
+
+            <div class="card-icon">
+              📦
+            </div>
+
+            <h3>
+              Autre création
+            </h3>
+
+            <p>
+              Vous avez une idée qui ne correspond
+              pas aux catégories proposées ?
+              Nous pouvons étudier votre projet.
+            </p>
+
+            <div class="card-info">
+              <strong>Prix sur devis</strong>
+            </div>
+
+            <a
+              href="index.html#devis"
+              class="card-button secondary"
             >
-              🛒 Ajouter au panier
-            </button>
+              Demander un devis →
+            </a>
 
           </article>
 
@@ -907,29 +597,27 @@
         <div class="info-box">
 
           <h2>
-            📦 Une création personnalisée ?
+            💡 Une création particulière ?
           </h2>
 
           <p>
-            Si tu as besoin d'une taille particulière,
-            d'une forme spéciale ou d'une création qui
-            n'est pas proposée ici, contacte-nous pour
-            demander un devis.
+            Si vous avez une idée précise ou une création
+            personnalisée, contactez-nous avec les détails
+            de votre projet. Nous étudierons votre demande
+            et vous proposerons un prix adapté.
           </p>
-
-          <br>
 
           <a
             href="index.html#devis"
-            class="add-button"
+            class="card-button"
             style="
               display: inline-block;
-              width: auto;
+              margin-top: 22px;
               padding-left: 25px;
               padding-right: 25px;
             "
           >
-            Demander un devis
+            Décrire mon projet
           </a>
 
         </div>
@@ -941,13 +629,6 @@
   </main>
 
 
-  <!-- MESSAGE PANIER -->
-
-  <div id="cart-message">
-    ✅ Produit ajouté au panier
-  </div>
-
-
   <!-- =========================
        FOOTER
   ========================== -->
@@ -957,10 +638,10 @@
     <div class="container">
 
       © 2026 Aloïs Design
-
       <br>
-
       Impression 3D · Création de logos · Sculpture & gravure
+      <br>
+      aloisryckebuschvandaele@gmail.com
 
     </div>
 
@@ -968,89 +649,30 @@
 
 
   <!-- =========================
-       JAVASCRIPT PANIER
+       PANIER : COMPTEUR
   ========================== -->
 
   <script>
 
-    /* Récupération du panier */
-
-    let cart = JSON.parse(
-      localStorage.getItem("aloisDesignCart")
-    ) || [];
-
-
-    /* Mise à jour du nombre d'articles */
-
     function updateCartCount() {
 
-      const count = cart.reduce(
-        (total, item) => total + item.quantity,
-        0
-      );
+      const cart =
+        JSON.parse(
+          localStorage.getItem("aloisDesignCart")
+        ) || [];
 
-      document.getElementById("cart-count").textContent = count;
-    }
+      let count = 0;
 
+      cart.forEach(item => {
 
-    /* Ajout d'un produit */
+        count += Number(item.quantity) || 1;
 
-    function addProduct(name, price, option) {
+      });
 
-      if (!option || option.trim() === "") {
-        option = "Personnalisation à définir";
-      }
-
-      const existingProduct = cart.find(
-        item =>
-          item.name === name &&
-          item.option === option
-      );
-
-      if (existingProduct) {
-
-        existingProduct.quantity += 1;
-
-      } else {
-
-        cart.push({
-          name: name,
-          price: price,
-          option: option,
-          quantity: 1
-        });
-
-      }
-
-
-      /* Sauvegarde */
-
-      localStorage.setItem(
-        "aloisDesignCart",
-        JSON.stringify(cart)
-      );
-
-
-      /* Mise à jour */
-
-      updateCartCount();
-
-
-      /* Message */
-
-      const message =
-        document.getElementById("cart-message");
-
-      message.classList.add("show");
-
-      setTimeout(() => {
-        message.classList.remove("show");
-      }, 1800);
+      document.getElementById("cartCount").textContent =
+        count;
 
     }
-
-
-    /* Initialisation */
 
     updateCartCount();
 
