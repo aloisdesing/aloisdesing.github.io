@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
 
   <meta charset="UTF-8">
@@ -10,223 +9,554 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Impression 3D | Alois Design</title>
+  <title>Impression 3D | Aloïs Design</title>
 
   <meta
     name="description"
-    content="Découvrez les services d'impression 3D personnalisée de Alois Design."
+    content="Découvrez les créations 3D personnalisées Aloïs Design : logos 3D, porte-clés et tampons."
   >
 
   <style>
 
+    :root {
+      --bg: #090909;
+      --bg-light: #121212;
+      --card: #171717;
+      --gold: #d9a72b;
+      --gold-light: #f3cc68;
+      --white: #ffffff;
+      --gray: #aaaaaa;
+      --border: #292929;
+    }
+
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      color: #222;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--white);
       line-height: 1.6;
     }
 
-    header {
-      background: #111;
-      color: white;
-      text-align: center;
-      padding: 25px 15px;
-    }
-
-    header h1 {
-      font-size: 30px;
-    }
-
-    header p {
-      color: #ccc;
-      margin-top: 5px;
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
     .container {
-      width: 92%;
-      max-width: 1000px;
-      margin: 40px auto;
-    }
-
-    .intro {
-      text-align: center;
-      margin-bottom: 35px;
-    }
-
-    .intro h2 {
-      font-size: 32px;
-      margin-bottom: 10px;
-    }
-
-    .intro p {
-      color: #666;
-      max-width: 700px;
+      width: min(1120px, 92%);
       margin: auto;
     }
 
-    .produits {
+    /* =========================
+       HEADER
+    ========================== */
 
-      display: grid;
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
 
-      grid-template-columns:
-        repeat(auto-fit, minmax(240px, 1fr));
+      background: rgba(9, 9, 9, 0.96);
 
-      gap: 22px;
+      backdrop-filter: blur(12px);
 
-      margin-top: 30px;
+      border-bottom: 1px solid var(--border);
     }
 
-    .carte {
+    nav {
+      min-height: 72px;
 
-      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
-      padding: 28px 22px;
-
-      border-radius: 18px;
-
-      text-align: center;
-
-      box-shadow:
-        0 5px 20px rgba(0,0,0,0.08);
-
-      transition:
-        transform 0.2s,
-        box-shadow 0.2s;
+      gap: 15px;
     }
 
-    .carte:hover {
+    .logo {
+      font-size: 20px;
+      font-weight: 900;
 
-      transform: translateY(-4px);
+      letter-spacing: 2px;
 
-      box-shadow:
-        0 8px 25px rgba(0,0,0,0.12);
+      color: var(--gold);
+
+      white-space: nowrap;
     }
 
-    .icone {
-
-      font-size: 55px;
-
-      margin-bottom: 15px;
+    .logo span {
+      color: white;
     }
 
-    .carte h3 {
+    .nav-links {
+      display: flex;
+      align-items: center;
 
-      font-size: 23px;
+      gap: 20px;
 
-      margin-bottom: 10px;
+      font-size: 14px;
+
+      color: #ddd;
     }
 
-    .carte p {
-
-      color: #666;
-
-      margin-bottom: 20px;
-
-      min-height: 70px;
+    .nav-links a:hover {
+      color: var(--gold-light);
     }
 
-    .bouton {
+    /* =========================
+       PANIER
+    ========================== */
 
-      display: inline-block;
+    .cart-link {
+      position: relative;
 
-      padding: 13px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 42px;
+      height: 42px;
+
+      border: 1px solid #333;
 
       border-radius: 10px;
 
       background: #111;
-
-      color: white;
-
-      text-decoration: none;
-
-      font-weight: bold;
 
       transition: 0.2s;
     }
 
-    .bouton:hover {
-
-      opacity: 0.9;
+    .cart-link:hover {
+      border-color: var(--gold);
 
       transform: translateY(-2px);
     }
 
-    .panier {
+    .cart-icon {
+      width: 25px;
+      height: 25px;
 
-      text-align: center;
+      fill: none;
 
-      margin-top: 40px;
+      stroke: var(--gold-light);
+
+      stroke-width: 2;
+
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
-    .panier a {
+    .cart-count {
+      position: absolute;
 
+      top: -7px;
+      right: -7px;
+
+      min-width: 20px;
+      height: 20px;
+
+      padding: 2px 5px;
+
+      border-radius: 50%;
+
+      background: var(--gold);
+
+      color: #111;
+
+      font-size: 11px;
+
+      font-weight: 900;
+
+      text-align: center;
+    }
+
+    /* =========================
+       BOUTONS
+    ========================== */
+
+    .btn {
       display: inline-block;
 
-      padding: 14px 25px;
+      padding: 13px 20px;
 
       border-radius: 10px;
 
-      background: #e8e8e8;
+      background: var(--gold);
+
+      border: 1px solid var(--gold);
 
       color: #111;
 
-      text-decoration: none;
+      font-weight: 900;
 
-      font-weight: bold;
+      cursor: pointer;
+
+      transition: 0.2s;
     }
 
-    .retour {
+    .btn:hover {
+      background: var(--gold-light);
+
+      border-color: var(--gold-light);
+    }
+
+    .btn-secondary {
+      background: transparent;
+
+      border-color: #444;
+
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--gold);
+
+      color: var(--gold-light);
+
+      background: transparent;
+    }
+
+    /* =========================
+       HERO
+    ========================== */
+
+    .hero {
+      padding: 100px 0 80px;
+
+      background:
+        radial-gradient(
+          circle at 80% 20%,
+          #30240c 0,
+          transparent 35%
+        );
+    }
+
+    .kicker {
+      color: var(--gold-light);
+
+      text-transform: uppercase;
+
+      letter-spacing: 2px;
+
+      font-size: 13px;
+
+      font-weight: 800;
+
+      margin-bottom: 15px;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 7vw, 72px);
+
+      line-height: 1.02;
+
+      max-width: 850px;
+
+      margin-bottom: 22px;
+    }
+
+    .hero h1 span {
+      color: var(--gold);
+    }
+
+    .hero p {
+      max-width: 730px;
+
+      color: var(--gray);
+
+      font-size: 19px;
+    }
+
+    .hero-buttons {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 12px;
+
+      margin-top: 30px;
+    }
+
+    /* =========================
+       SECTION
+    ========================== */
+
+    section {
+      padding: 70px 0;
+    }
+
+    .section-title {
+      margin-bottom: 40px;
+    }
+
+    .section-title.center {
+      text-align: center;
+    }
+
+    .section-title h2 {
+      font-size: clamp(30px, 4vw, 44px);
+
+      line-height: 1.1;
+
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: var(--gray);
+    }
+
+    /* =========================
+       CARTES PRODUITS
+    ========================== */
+
+    .products {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 20px;
+    }
+
+    .product {
+      padding: 30px;
+
+      border: 1px solid var(--border);
+
+      background:
+        linear-gradient(
+          145deg,
+          #181818,
+          #101010
+        );
+
+      border-radius: 18px;
+
+      transition: 0.2s;
+
+      display: flex;
+
+      flex-direction: column;
+    }
+
+    .product:hover {
+      transform: translateY(-5px);
+
+      border-color: #4a3a15;
+    }
+
+    .product-icon {
+      font-size: 48px;
+
+      margin-bottom: 18px;
+    }
+
+    .product h3 {
+      font-size: 25px;
+
+      color: var(--gold-light);
+
+      margin-bottom: 10px;
+    }
+
+    .product p {
+      color: var(--gray);
+
+      margin-bottom: 20px;
+    }
+
+    .product ul {
+      list-style: none;
+
+      margin-bottom: 25px;
+    }
+
+    .product li {
+      margin: 9px 0;
+
+      color: #ddd;
+    }
+
+    .product li::before {
+      content: "✓";
+
+      color: var(--gold-light);
+
+      font-weight: bold;
+
+      margin-right: 9px;
+    }
+
+    .product .btn {
+      margin-top: auto;
 
       text-align: center;
-
-      margin-top: 35px;
     }
 
-    .retour a {
+    /* =========================
+       INFORMATION
+    ========================== */
 
-      color: #111;
+    .info {
+      background:
+        linear-gradient(
+          145deg,
+          #171207,
+          #0e0e0e
+        );
 
-      text-decoration: none;
+      border-top: 1px solid #392c10;
 
-      font-weight: bold;
+      border-bottom: 1px solid #392c10;
     }
+
+    .info-box {
+      padding: 35px;
+
+      border: 1px solid var(--border);
+
+      border-radius: 18px;
+
+      background: #101010;
+    }
+
+    .info-box h2 {
+      color: var(--gold-light);
+
+      margin-bottom: 12px;
+    }
+
+    .info-box p {
+      color: var(--gray);
+
+      margin-bottom: 12px;
+    }
+
+    .info-box ul {
+      list-style: none;
+
+      margin-top: 18px;
+    }
+
+    .info-box li {
+      margin: 10px 0;
+
+      color: #ddd;
+    }
+
+    .info-box li::before {
+      content: "•";
+
+      color: var(--gold);
+
+      margin-right: 10px;
+    }
+
+    /* =========================
+       PANIER
+    ========================== */
+
+    .cart-section {
+      text-align: center;
+    }
+
+    .cart-box {
+      padding: 40px;
+
+      border: 1px solid var(--border);
+
+      border-radius: 18px;
+
+      background: var(--card);
+    }
+
+    .cart-box h2 {
+      font-size: 30px;
+
+      margin-bottom: 10px;
+    }
+
+    .cart-box p {
+      color: var(--gray);
+
+      margin-bottom: 25px;
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
 
     footer {
+      border-top: 1px solid var(--border);
 
-      background: #111;
-
-      color: #ccc;
+      padding: 35px 0;
 
       text-align: center;
 
-      padding: 25px 15px;
+      color: #888;
 
-      margin-top: 50px;
+      font-size: 13px;
     }
 
     footer a {
-
-      color: white;
-
-      text-decoration: none;
+      color: var(--gold-light);
     }
 
-    @media (max-width: 600px) {
+    /* =========================
+       MOBILE
+    ========================== */
 
-      .intro h2 {
+    @media (max-width: 850px) {
 
-        font-size: 27px;
+      .nav-links {
+        display: none;
       }
 
-      .carte {
+      .products {
+        grid-template-columns: 1fr;
+      }
 
-        padding: 25px 18px;
+      .hero {
+        padding-top: 75px;
+      }
+
+    }
+
+    @media (max-width: 500px) {
+
+      .container {
+        width: 90%;
+      }
+
+      .hero h1 {
+        font-size: 42px;
+      }
+
+      .hero p {
+        font-size: 17px;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+      }
+
+      .hero-buttons .btn {
+        width: 100%;
+
+        text-align: center;
+      }
+
+      section {
+        padding: 55px 0;
       }
 
     }
@@ -239,175 +569,580 @@
 <body>
 
 
+<!-- =========================
+     HEADER
+========================== -->
+
 <header>
 
-  <h1>Alois Design</h1>
+  <div class="container">
 
-  <p>
-    Impression 3D personnalisée
-  </p>
+    <nav>
+
+      <a
+        href="index.html"
+        class="logo"
+      >
+        ALOÏS <span>DESIGN</span>
+      </a>
+
+
+      <div class="nav-links">
+
+        <a href="index.html">
+          Accueil
+        </a>
+
+        <a href="impression-3D.html">
+          Impression 3D
+        </a>
+
+        <a href="logo3D.html">
+          Logo 3D
+        </a>
+
+        <a href="porte-clé.html">
+          Porte-clé
+        </a>
+
+        <a href="tampons.html">
+          Tampons
+        </a>
+
+      </div>
+
+
+      <!-- PANIER -->
+
+      <a
+        href="panier.html"
+        class="cart-link"
+        aria-label="Voir le panier"
+      >
+
+        <svg
+          class="cart-icon"
+          viewBox="0 0 24 24"
+        >
+
+          <circle
+            cx="9"
+            cy="20"
+            r="1.5"
+          ></circle>
+
+          <circle
+            cx="18"
+            cy="20"
+            r="1.5"
+          ></circle>
+
+          <path
+            d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L21 8H6"
+          ></path>
+
+        </svg>
+
+
+        <span
+          class="cart-count"
+          id="cartCount"
+        >
+          0
+        </span>
+
+      </a>
+
+    </nav>
+
+  </div>
 
 </header>
 
 
-<main class="container">
+<main>
 
 
-  <section class="intro">
+<!-- =========================
+     HERO
+========================== -->
 
-    <h2>
+<section class="hero">
+
+  <div class="container">
+
+    <div class="kicker">
+      Aloïs Design
+    </div>
+
+
+    <h1>
+
       Impression 3D
-    </h2>
+      <span>personnalisée.</span>
+
+    </h1>
+
 
     <p>
-      Découvrez nos différentes créations et
-      services d'impression 3D personnalisée.
-      Cliquez sur une catégorie pour découvrir
-      les options disponibles.
+
+      Découvrez nos créations imprimées en 3D.
+      Choisissez le produit qui vous intéresse
+      et personnalisez-le selon votre projet.
+
     </p>
 
-  </section>
 
-
-  <section class="produits">
-
-
-    <!-- LOGO -->
-
-    <div class="carte">
-
-      <div class="icone">
-        🎨
-      </div>
-
-      <h3>
-        Logo 3D
-      </h3>
-
-      <p>
-        Transformez votre logo en une création
-        3D personnalisée.
-      </p>
+    <div class="hero-buttons">
 
       <a
-        href="logo3D.html"
-        class="bouton"
+        href="#produits"
+        class="btn"
       >
-        Voir les logos
+        Découvrir les produits
+      </a>
+
+
+      <a
+        href="panier.html"
+        class="btn btn-secondary"
+      >
+        🛒 Voir mon panier
       </a>
 
     </div>
 
+  </div>
 
-    <!-- PORTE-CLÉ -->
+</section>
 
-    <div class="carte">
 
-      <div class="icone">
-        🔑
-      </div>
 
-      <h3>
-        Porte-clé
-      </h3>
+<!-- =========================
+     PRODUITS
+========================== -->
+
+<section id="produits">
+
+  <div class="container">
+
+
+    <div class="section-title center">
+
+      <h2>
+        Nos créations 3D
+      </h2>
 
       <p>
-        Créez un porte-clé personnalisé avec
-        votre propre dessin ou image.
+        Cliquez sur le produit qui vous intéresse.
       </p>
-
-      <a
-        href="porte-clé.html"
-        class="bouton"
-      >
-        Personnaliser
-      </a>
 
     </div>
 
 
-    <!-- TAMPON -->
+    <div class="products">
 
-    <div class="carte">
 
-      <div class="icone">
-        🖋️
-      </div>
+      <!-- =====================
+           LOGO 3D
+      ====================== -->
 
-      <h3>
-        Tampons
-      </h3>
+      <article class="product">
+
+        <div class="product-icon">
+          🎨
+        </div>
+
+
+        <h3>
+          Logo 3D
+        </h3>
+
+
+        <p>
+
+          Transformez votre logo en une
+          magnifique création en relief
+          grâce à l'impression 3D.
+
+        </p>
+
+
+        <ul>
+
+          <li>
+            Plusieurs tailles
+          </li>
+
+          <li>
+            Différentes couleurs
+          </li>
+
+          <li>
+            Personnalisation
+          </li>
+
+          <li>
+            Fabrication sur commande
+          </li>
+
+        </ul>
+
+
+        <a
+          href="logo3D.html"
+          class="btn"
+        >
+          Voir les logos 3D
+        </a>
+
+      </article>
+
+
+
+      <!-- =====================
+           PORTE-CLÉ
+      ====================== -->
+
+      <article class="product">
+
+        <div class="product-icon">
+          🔑
+        </div>
+
+
+        <h3>
+          Porte-clé
+        </h3>
+
+
+        <p>
+
+          Créez votre porte-clé personnalisé
+          avec le dessin, texte ou motif
+          de votre choix.
+
+        </p>
+
+
+        <ul>
+
+          <li>
+            Personnalisable
+          </li>
+
+          <li>
+            Votre propre dessin
+          </li>
+
+          <li>
+            Plusieurs couleurs
+          </li>
+
+          <li>
+            Petit et facile à transporter
+          </li>
+
+        </ul>
+
+
+        <a
+          href="porte-clé.html"
+          class="btn"
+        >
+          Personnaliser
+        </a>
+
+      </article>
+
+
+
+      <!-- =====================
+           TAMPONS
+      ====================== -->
+
+      <article class="product">
+
+        <div class="product-icon">
+          🖋️
+        </div>
+
+
+        <h3>
+          Tampons
+        </h3>
+
+
+        <p>
+
+          Des tampons personnalisés pour
+          entreprises, associations,
+          professionnels ou particuliers.
+
+        </p>
+
+
+        <ul>
+
+          <li>
+            Petit tampon
+          </li>
+
+          <li>
+            Tampon entreprise
+          </li>
+
+          <li>
+            Tampon avec logo
+          </li>
+
+          <li>
+            Gros tampon
+          </li>
+
+        </ul>
+
+
+        <a
+          href="tampons.html"
+          class="btn"
+        >
+          Voir les tampons
+        </a>
+
+      </article>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     SI PAS DE LOGO
+========================== -->
+
+<section class="info">
+
+  <div class="container">
+
+    <div class="info-box">
+
+      <h2>
+        🎨 Vous n'avez pas encore de logo ?
+      </h2>
+
 
       <p>
-        Créez votre tampon personnalisé pour
-        votre entreprise, association ou projet.
+
+        Aucun problème ! Si vous souhaitez
+        commander un logo 3D mais que vous
+        n'avez pas encore votre logo,
+        nous pouvons d'abord créer votre logo.
+
       </p>
 
+
+      <ul>
+
+        <li>
+          Création d'un logo personnalisé
+        </li>
+
+        <li>
+          Modification d'un logo existant
+        </li>
+
+        <li>
+          Préparation du logo pour l'impression 3D
+        </li>
+
+      </ul>
+
+
       <a
-        href="tampons.html"
-        class="bouton"
+        href="creation-logo.html"
+        class="btn"
+        style="margin-top: 20px;"
       >
-        Voir les tampons
+        Créer mon logo
       </a>
 
     </div>
 
+  </div>
 
-  </section>
-
-
-  <!-- PANIER -->
-
-  <section class="panier">
-
-    <a href="panier.html">
-
-      🛒 Voir mon panier
-
-    </a>
-
-  </section>
+</section>
 
 
-  <!-- RETOUR ACCUEIL -->
 
-  <div class="retour">
+<!-- =========================
+     PANIER
+========================== -->
 
-    <a href="index.html">
+<section class="cart-section">
 
+  <div class="container">
+
+    <div class="cart-box">
+
+      <h2>
+        🛒 Votre panier
+      </h2>
+
+
+      <p>
+
+        Retrouvez ici tous les produits
+        que vous avez sélectionnés.
+
+      </p>
+
+
+      <a
+        href="panier.html"
+        class="btn"
+      >
+        Ouvrir mon panier
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     RETOUR ACCUEIL
+========================== -->
+
+<section>
+
+  <div
+    class="container"
+    style="text-align: center;"
+  >
+
+    <a
+      href="index.html"
+      class="btn btn-secondary"
+    >
       ← Retour à l'accueil
-
     </a>
 
   </div>
+
+</section>
 
 
 </main>
 
 
+
+<!-- =========================
+     FOOTER
+========================== -->
+
 <footer>
 
-  <p>
-    Alois Design
-  </p>
+  <div class="container">
 
-  <p>
+    <p>
+      Aloïs Design
+    </p>
 
-    <a
-      href="mailto:aloisryckebuschvandaele@gmail.com"
-    >
-      aloisryckebuschvandaele@gmail.com
-    </a>
+    <p>
 
-  </p>
+      Impression 3D · Création de logos ·
+      Sculpture & gravure
 
-  <p>
-    © 2026 Alois Design
-  </p>
+    </p>
+
+
+    <p style="margin-top: 10px;">
+
+      <a
+        href="mailto:aloisryckebuschvandaele@gmail.com"
+      >
+        aloisryckebuschvandaele@gmail.com
+      </a>
+
+    </p>
+
+
+    <p style="margin-top: 10px;">
+
+      © 2026 Aloïs Design
+
+    </p>
+
+  </div>
 
 </footer>
 
 
-</body>
 
+<!-- =========================
+     COMPTEUR PANIER
+========================== -->
+
+<script>
+
+  function updateCartCount() {
+
+    const cartCount =
+      document.getElementById("cartCount");
+
+    let panier = [];
+
+
+    try {
+
+      panier =
+        JSON.parse(
+          localStorage.getItem("panier")
+        ) || [];
+
+    } catch (error) {
+
+      panier = [];
+
+    }
+
+
+    let total = 0;
+
+
+    panier.forEach(function(produit) {
+
+      total +=
+        Number(
+          produit.quantite
+        ) || 1;
+
+    });
+
+
+    cartCount.textContent = total;
+
+  }
+
+
+  updateCartCount();
+
+
+  window.addEventListener(
+    "storage",
+    updateCartCount
+  );
+
+</script>
+
+
+</body>
 </html>
