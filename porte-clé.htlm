@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Porte-clé personnalisé | Alois Design</title>
+  <meta name="description" content="Créez votre porte-clé personnalisé avec votre propre dessin chez Alois Design.">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      color: #222;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    header h1 {
+      font-size: 30px;
+      margin-bottom: 5px;
+    }
+
+    header p {
+      color: #ccc;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 900px;
+      margin: 35px auto;
+    }
+
+    .intro {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .intro h2 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .intro p {
+      color: #666;
+    }
+
+    .card {
+      background: white;
+      padding: 28px;
+      border-radius: 18px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      margin-bottom: 25px;
+    }
+
+    .card h3 {
+      margin-bottom: 18px;
+      font-size: 22px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 7px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 16px;
+      margin-bottom: 18px;
+      font-family: Arial, sans-serif;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #111;
+    }
+
+    input[type="file"] {
+      padding: 10px;
+      background: #fafafa;
+    }
+
+    .preview {
+      display: none;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .preview img {
+      max-width: 100%;
+      max-height: 300px;
+      border-radius: 12px;
+      border: 1px solid #ddd;
+      padding: 5px;
+    }
+
+    .preview p {
+      color: #666;
+      margin-top: 8px;
+      font-size: 14px;
+    }
+
+    .price-box {
+      background: #f0f0f0;
+      padding: 18px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .price {
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .small {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .button {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      background: #111;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .button:hover {
+      opacity: 0.9;
+    }
+
+    .back {
+      text-align: center;
+      margin: 30px 0;
+    }
+
+    .back a {
+      color: #111;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    footer {
+      background: #111;
+      color: #ccc;
+      text-align: center;
+      padding: 25px 15px;
+      margin-top: 40px;
+    }
+
+    footer a {
+      color: white;
+      text-decoration: none;
+    }
+
+    @media (max-width: 600px) {
+      .intro h2 {
+        font-size: 27px;
+      }
+
+      .card {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Alois Design</h1>
+  <p>Impression 3D personnalisée</p>
+</header>
+
+
+<main class="container">
+
+  <section class="intro">
+    <h2>🔑 Crée ton porte-clé personnalisé</h2>
+
+    <p>
+      Insère ton dessin ou ton image et nous nous occupons
+      de préparer ton porte-clé pour l'impression 3D.
+    </p>
+  </section>
+
+
+  <!-- IMPORT DU DESSIN -->
+  <section class="card">
+
+    <h3>1. Ton dessin</h3>
+
+    <label for="image">
+      Insère ton dessin ou ton image *
+    </label>
+
+    <input
+      type="file"
+      id="image"
+      accept="image/png,image/jpeg,image/webp"
+      required
+    >
+
+    <div class="preview" id="preview">
+      <img id="previewImage" src="" alt="Aperçu du dessin">
+      <p>Aperçu de ton dessin</p>
+    </div>
+
+  </section>
+
+
+  <!-- OPTIONS -->
+  <section class="card">
+
+    <h3>2. Personnalise ton porte-clé</h3>
+
+    <label for="texte">
+      Texte à ajouter
+    </label>
+
+    <input
+      type="text"
+      id="texte"
+      placeholder="Exemple : Alois Design"
+    >
+
+
+    <label for="couleur">
+      Couleur
+    </label>
+
+    <select id="couleur">
+
+      <option value="Noir">
+        Noir
+      </option>
+
+      <option value="Blanc">
+        Blanc
+      </option>
+
+      <option value="Rouge">
+        Rouge
+      </option>
+
+      <option value="Bleu">
+        Bleu
+      </option>
+
+      <option value="Vert">
+        Vert
+      </option>
+
+      <option value="Jaune">
+        Jaune
+      </option>
+
+      <option value="Autre">
+        Autre
+      </option>
+
+    </select>
+
+
+    <label for="taille">
+      Taille
+    </label>
+
+    <select id="taille">
+
+      <option value="Petit">
+        Petit
+      </option>
+
+      <option value="Moyen">
+        Moyen
+      </option>
+
+      <option value="Grand">
+        Grand
+      </option>
+
+    </select>
+
+
+    <label for="quantite">
+      Quantité
+    </label>
+
+    <input
+      type="number"
+      id="quantite"
+      value="1"
+      min="1"
+      max="50"
+      onchange="calculerPrix()"
+    >
+
+  </section>
+
+
+  <!-- PRIX -->
+  <section class="card">
+
+    <div class="price-box">
+
+      <div class="small">
+        Prix indicatif
+      </div>
+
+      <div class="price" id="prix">
+        5,00 €
+      </div>
+
+      <div class="small">
+        Le prix peut être ajusté selon la complexité du dessin.
+      </div>
+
+    </div>
+
+    <button
+      class="button"
+      onclick="ajouterAuPanier()"
+    >
+      🛒 Ajouter au panier
+    </button>
+
+  </section>
+
+
+  <div class="back">
+    <a href="impression.html">
+      ← Retour à l'impression 3D
+    </a>
+  </div>
+
+</main>
+
+
+<footer>
+
+  <p>Alois Design</p>
+
+  <p>
+    <a href="mailto:aloisryckebuschvandaele@gmail.com">
+      aloisryckebuschvandaele@gmail.com
+    </a>
+  </p>
+
+  <p>
+    © 2026 Alois Design - Tous droits réservés
+  </p>
+
+</footer>
+
+
+<script>
+
+  const imageInput = document.getElementById("image");
+  const preview = document.getElementById("preview");
+  const previewImage = document.getElementById("previewImage");
+
+  /*
+    Affichage de l'image sélectionnée
+  */
+
+  imageInput.addEventListener("change", function() {
+
+    const file = this.files[0];
+
+    if (!file) {
+      preview.style.display = "none";
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+
+      previewImage.src = e.target.result;
+
+      preview.style.display = "block";
+
+    };
+
+    reader.readAsDataURL(file);
+
+  });
+
+
+  /*
+    Calcul du prix
+  */
+
+  function calculerPrix() {
+
+    const quantite =
+      parseInt(document.getElementById("quantite").value) || 1;
+
+    const prixUnitaire = 5;
+
+    const total = prixUnitaire * quantite;
+
+    document.getElementById("prix").textContent =
+      total.toFixed(2).replace(".", ",") + " €";
+
+  }
+
+
+  /*
+    Ajout au panier
+  */
+
+  function ajouterAuPanier() {
+
+    const image =
+      document.getElementById("image").files[0];
+
+    const texte =
+      document.getElementById("texte").value;
+
+    const couleur =
+      document.getElementById("couleur").value;
+
+    const taille =
+      document.getElementById("taille").value;
+
+    const quantite =
+      parseInt(document.getElementById("quantite").value) || 1;
+
+
+    if (!image) {
+
+      alert("Merci d'insérer ton dessin ou ton image.");
+
+      return;
+
+    }
+
+
+    /*
+      IMPORTANT :
+
+      Pour l'instant, le navigateur garde l'image
+      uniquement sur cette page.
+
+      Le vrai envoi du fichier vers ton entreprise
+      sera ajouté avec le système de commande.
+    */
+
+
+    const produit = {
+
+      nom: "Porte-clé personnalisé",
+
+      prix: 5,
+
+      quantite: quantite,
+
+      texte: texte,
+
+      couleur: couleur,
+
+      taille: taille,
+
+      imageNom: image.name
+
+    };
+
+
+    /*
+      Récupération du panier existant
+    */
+
+    let panier =
+      JSON.parse(localStorage.getItem("panier")) || [];
+
+
+    panier.push(produit);
+
+
+    localStorage.setItem(
+      "panier",
+      JSON.stringify(panier)
+    );
+
+
+    alert(
+      "Ton porte-clé a été ajouté au panier !"
+    );
+
+
+    window.location.href = "panier.html";
+
+  }
+
+</script>
+
+</body>
+</html>
