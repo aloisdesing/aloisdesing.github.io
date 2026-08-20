@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Création de logo | Alois Design</title>
+  <meta name="description" content="Demandez la création de votre logo personnalisé avec Alois Design.">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      color: #222;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    header h1 {
+      font-size: 30px;
+      margin-bottom: 5px;
+    }
+
+    header p {
+      color: #ccc;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 800px;
+      margin: 40px auto;
+    }
+
+    .intro {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .intro h2 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .intro p {
+      color: #666;
+    }
+
+    .form-box {
+      background: white;
+      padding: 30px;
+      border-radius: 18px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 7px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 16px;
+      font-family: Arial, sans-serif;
+    }
+
+    textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #111;
+    }
+
+    .button {
+      display: inline-block;
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      background: #111;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .button:hover {
+      opacity: 0.9;
+    }
+
+    .info {
+      background: #f0f0f0;
+      padding: 18px;
+      border-radius: 12px;
+      margin-bottom: 25px;
+      font-size: 14px;
+    }
+
+    .back {
+      text-align: center;
+      margin-top: 25px;
+    }
+
+    .back a {
+      color: #111;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    footer {
+      background: #111;
+      color: #ccc;
+      text-align: center;
+      padding: 25px 15px;
+      margin-top: 50px;
+    }
+
+    footer a {
+      color: white;
+      text-decoration: none;
+    }
+
+    @media (max-width: 600px) {
+      .intro h2 {
+        font-size: 27px;
+      }
+
+      .form-box {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Alois Design</h1>
+    <p>Création de logo personnalisé</p>
+  </header>
+
+  <main class="container">
+
+    <section class="intro">
+      <h2>Créons votre logo</h2>
+
+      <p>
+        Vous n'avez pas encore de logo ?
+        Expliquez-nous votre idée et nous vous proposerons
+        une solution adaptée à votre projet.
+      </p>
+    </section>
+
+
+    <div class="form-box">
+
+      <div class="info">
+        💡 <strong>Comment ça marche ?</strong><br><br>
+
+        1. Vous nous expliquez votre idée.<br>
+        2. Nous étudions votre demande.<br>
+        3. Nous vous répondons avec une proposition et un devis.
+      </div>
+
+
+      <form
+        action="mailto:aloisryckebuschvandaele@gmail.com"
+        method="post"
+        enctype="text/plain"
+      >
+
+        <div class="form-group">
+          <label for="nom">Nom / Prénom *</label>
+
+          <input
+            type="text"
+            id="nom"
+            name="Nom / Prénom"
+            placeholder="Votre nom"
+            required
+          >
+        </div>
+
+
+        <div class="form-group">
+          <label for="email">Adresse e-mail *</label>
+
+          <input
+            type="email"
+            id="email"
+            name="Email"
+            placeholder="votre@email.com"
+            required
+          >
+        </div>
+
+
+        <div class="form-group">
+          <label for="entreprise">Nom de l'entreprise</label>
+
+          <input
+            type="text"
+            id="entreprise"
+            name="Entreprise"
+            placeholder="Nom de votre entreprise (facultatif)"
+          >
+        </div>
+
+
+        <div class="form-group">
+          <label for="type">Type de logo souhaité *</label>
+
+          <select id="type" name="Type de logo" required>
+
+            <option value="">
+              Sélectionnez une option
+            </option>
+
+            <option value="Logo pour entreprise">
+              Logo pour entreprise
+            </option>
+
+            <option value="Logo pour association">
+              Logo pour association
+            </option>
+
+            <option value="Logo pour projet personnel">
+              Logo pour projet personnel
+            </option>
+
+            <option value="Logo pour réseaux sociaux">
+              Logo pour réseaux sociaux
+            </option>
+
+            <option value="Autre">
+              Autre
+            </option>
+
+          </select>
+        </div>
+
+
+        <div class="form-group">
+          <label for="style">Style souhaité</label>
+
+          <select id="style" name="Style souhaité">
+
+            <option value="">
+              Choisissez un style
+            </option>
+
+            <option value="Moderne">
+              Moderne
+            </option>
+
+            <option value="Minimaliste">
+              Minimaliste
+            </option>
+
+            <option value="Professionnel">
+              Professionnel
+            </option>
+
+            <option value="Coloré">
+              Coloré
+            </option>
+
+            <option value="3D">
+              Style 3D
+            </option>
+
+            <option value="Je ne sais pas">
+              Je ne sais pas encore
+            </option>
+
+          </select>
+        </div>
+
+
+        <div class="form-group">
+          <label for="description">
+            Décrivez votre idée *
+          </label>
+
+          <textarea
+            id="description"
+            name="Description du projet"
+            placeholder="Expliquez-nous ce que vous imaginez : texte, couleurs, forme, symbole, activité de votre entreprise, etc."
+            required
+          ></textarea>
+        </div>
+
+
+        <div class="form-group">
+          <label for="budget">
+            Budget approximatif
+          </label>
+
+          <select id="budget" name="Budget approximatif">
+
+            <option value="">
+              Je ne sais pas
+            </option>
+
+            <option value="Moins de 20 €">
+              Moins de 20 €
+            </option>
+
+            <option value="20 à 50 €">
+              20 à 50 €
+            </option>
+
+            <option value="50 à 100 €">
+              50 à 100 €
+            </option>
+
+            <option value="Plus de 100 €">
+              Plus de 100 €
+            </option>
+
+          </select>
+        </div>
+
+
+        <button type="submit" class="button">
+          📩 Demander mon devis
+        </button>
+
+      </form>
+
+    </div>
+
+
+    <div class="back">
+      <a href="logo.html">
+        ← Retour à la page Logo
+      </a>
+    </div>
+
+  </main>
+
+
+  <footer>
+
+    <p>Alois Design</p>
+
+    <p>
+      <a href="mailto:aloisryckebuschvandaele@gmail.com">
+        aloisryckebuschvandaele@gmail.com
+      </a>
+    </p>
+
+    <p>
+      © 2026 Alois Design - Tous droits réservés
+    </p>
+
+  </footer>
+
+</body>
+</html>
