@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tampons personnalisés 3D | Aloïs Design</title>
+
+<meta name="description" content="Création de tampons personnalisés en 3D pour entreprises, associations et particuliers. Envoyez votre logo et demandez votre devis.">
+
+<style>
+:root{
+  --bg:#0a0a0a;
+  --panel:#121212;
+  --gold:#d9a72b;
+  --gold2:#f3cc68;
+  --text:#f5f5f5;
+  --muted:#bdbdbd;
+  --border:#292929;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:Inter,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+.container{
+  width:min(1120px,92%);
+  margin:auto;
+}
+
+header{
+  position:sticky;
+  top:0;
+  z-index:10;
+  background:rgba(10,10,10,.94);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+}
+
+nav{
+  min-height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.brand{
+  font-weight:800;
+  letter-spacing:2px;
+  color:var(--gold);
+}
+
+.navlinks{
+  display:flex;
+  gap:24px;
+  font-size:14px;
+  color:#ddd;
+}
+
+.navlinks a:hover{
+  color:var(--gold2);
+}
+
+.hero{
+  text-align:center;
+  padding:90px 0 70px;
+}
+
+.badge{
+  display:inline-block;
+  padding:7px 14px;
+  border:1px solid var(--gold);
+  border-radius:999px;
+  color:var(--gold2);
+  font-size:13px;
+  margin-bottom:20px;
+}
+
+h1{
+  font-size:clamp(38px,6vw,64px);
+  line-height:1.05;
+  margin-bottom:20px;
+}
+
+h1 span{
+  color:var(--gold);
+}
+
+.hero p{
+  max-width:700px;
+  margin:auto;
+  color:var(--muted);
+  font-size:18px;
+}
+
+.button{
+  display:inline-block;
+  margin-top:30px;
+  padding:14px 25px;
+  border-radius:10px;
+  background:var(--gold);
+  color:#111;
+  font-weight:800;
+}
+
+.button:hover{
+  background:var(--gold2);
+}
+
+section{
+  padding:65px 0;
+}
+
+.section-title{
+  text-align:center;
+  margin-bottom:40px;
+}
+
+.section-title h2{
+  font-size:34px;
+  margin-bottom:10px;
+}
+
+.section-title p{
+  color:var(--muted);
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.card{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:28px;
+}
+
+.card-icon{
+  font-size:35px;
+  margin-bottom:15px;
+}
+
+.card h3{
+  margin-bottom:10px;
+  color:var(--gold2);
+}
+
+.card p{
+  color:var(--muted);
+}
+
+.steps{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:15px;
+}
+
+.step{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:22px;
+  text-align:center;
+}
+
+.number{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto 14px;
+  background:var(--gold);
+  color:#111;
+  font-weight:900;
+}
+
+.step p{
+  color:var(--muted);
+  font-size:14px;
+}
+
+.form-box{
+  max-width:750px;
+  margin:auto;
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:30px;
+}
+
+.form-group{
+  margin-bottom:20px;
+}
+
+label{
+  display:block;
+  margin-bottom:8px;
+  font-weight:700;
+}
+
+input,
+select,
+textarea{
+  width:100%;
+  padding:13px;
+  border-radius:9px;
+  border:1px solid #333;
+  background:#090909;
+  color:white;
+  font-size:15px;
+}
+
+textarea{
+  min-height:120px;
+  resize:vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+  outline:1px solid var(--gold);
+}
+
+small{
+  color:var(--muted);
+}
+
+.checkbox{
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+  margin:20px 0;
+}
+
+.checkbox input{
+  width:auto;
+  margin-top:5px;
+}
+
+.submit{
+  width:100%;
+  border:0;
+  cursor:pointer;
+  padding:15px;
+  border-radius:10px;
+  background:var(--gold);
+  color:#111;
+  font-size:16px;
+  font-weight:900;
+}
+
+.submit:hover{
+  background:var(--gold2);
+}
+
+.notice{
+  margin-top:20px;
+  padding:15px;
+  border-radius:10px;
+  background:#181818;
+  border:1px solid var(--border);
+  color:var(--muted);
+  font-size:14px;
+}
+
+footer{
+  border-top:1px solid var(--border);
+  padding:30px 0;
+  text-align:center;
+  color:var(--muted);
+}
+
+@media(max-width:800px){
+  .cards{
+    grid-template-columns:1fr;
+  }
+
+  .steps{
+    grid-template-columns:1fr;
+  }
+
+  .navlinks{
+    gap:12px;
+    font-size:12px;
+  }
+
+  .hero{
+    padding:65px 0 50px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <nav>
+      <a href="index.html" class="brand">ALOÏS DESIGN</a>
+
+      <div class="navlinks">
+        <a href="index.html">Accueil</a>
+        <a href="#services">Tampons</a>
+        <a href="#commande">Commander</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="container">
+
+    <div class="badge">FABRICATION 3D</div>
+
+    <h1>Tampons <span>personnalisés</span></h1>
+
+    <p>
+      Créez un tampon personnalisé pour votre entreprise,
+      association ou projet. Vous avez déjà votre logo ?
+      Envoyez-le-nous et nous nous occupons de l'adaptation.
+    </p>
+
+    <a href="#commande" class="button">
+      Créer mon tampon
+    </a>
+
+  </div>
+</section>
+
+<section id="services">
+  <div class="container">
+
+    <div class="section-title">
+      <h2>Quel tampon souhaitez-vous ?</h2>
+      <p>Une solution adaptée à votre besoin.</p>
+    </div>
+
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-icon">🖊️</div>
+        <h3>Texte personnalisé</h3>
+        <p>
+          Votre nom, votre entreprise, vos coordonnées
+          ou tout autre texte.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🏢</div>
+        <h3>Votre logo</h3>
+        <p>
+          Vous possédez déjà votre logo ?
+          Envoyez simplement votre fichier.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🎨</div>
+        <h3>Logo + texte</h3>
+        <p>
+          Combinez votre logo avec du texte pour créer
+          un tampon entièrement personnalisé.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="container">
+
+    <div class="section-title">
+      <h2>Comment ça marche ?</h2>
+      <p>De votre idée jusqu'au tampon.</p>
+    </div>
+
+    <div class="steps">
+
+      <div class="step">
+        <div class="number">1</div>
+        <strong>Demande</strong>
+        <p>Vous remplissez le formulaire.</p>
+      </div>
+
+      <div class="step">
+        <div class="number">2</div>
+        <strong>Logo</strong>
+        <p>Vous envoyez votre fichier si nécessaire.</p>
+      </div>
+
+      <div class="step">
+        <div class="number">3</div>
+        <strong>Vérification</strong>
+        <p>Nous vérifions la faisabilité.</p>
+      </div>
+
+      <div class="step">
+        <div class="number">4</div>
+        <strong>Validation</strong>
+        <p>Vous validez le modèle.</p>
+      </div>
+
+      <div class="step">
+        <div class="number">5</div>
+        <strong>Fabrication</strong>
+        <p>Votre tampon est fabriqué.</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section id="commande">
+  <div class="container">
+
+    <div class="section-title">
+      <h2>Créer mon tampon</h2>
+      <p>Remplissez les informations ci-dessous.</p>
+    </div>
+
+    <div class="form-box">
+
+      <form>
+
+        <div class="form-group">
+          <label for="name">Nom / entreprise</label>
+          <input id="name" type="text" placeholder="Ex : Aloïs Design" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input id="email" type="email" placeholder="votre@email.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="type">Type de tampon</label>
+
+          <select id="type" required>
+            <option value="">Choisissez une option</option>
+            <option>Texte uniquement</option>
+            <option>Logo uniquement</option>
+            <option>Logo + texte</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="size">Dimensions souhaitées</label>
+          <input id="size" type="text" placeholder="Ex : 40 × 20 mm">
+        </div>
+
+        <div class="form-group">
+          <label for="quantity">Quantité</label>
+          <input id="quantity" type="number" min="1" value="1">
+        </div>
+
+        <div class="form-group">
+          <label for="text">Texte du tampon</label>
+          <textarea id="text" placeholder="Écrivez ici le texte à faire apparaître sur le tampon."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="logo">Votre logo</label>
+          <input id="logo" type="file" accept=".png,.jpg,.jpeg,.svg,.pdf">
+
+          <small>
+            Formats acceptés : PNG, JPG, SVG ou PDF.
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Informations supplémentaires</label>
+          <textarea id="message" placeholder="Couleur, forme, demande particulière..."></textarea>
+        </div>
+
+        <div class="checkbox">
+          <input id="rights" type="checkbox" required>
+
+          <label for="rights">
+            Je confirme avoir le droit d'utiliser le logo ou
+            le contenu envoyé pour la fabrication de ce tampon.
+          </label>
+        </div>
+
+        <button type="submit" class="submit">
+          Demander mon devis
+        </button>
+
+        <div class="notice">
+          Votre demande sera vérifiée avant la fabrication.
+          Le prix final dépendra notamment des dimensions,
+          de la quantité et de la complexité du logo.
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    © 2026 Aloïs Design — Tous droits réservés
+  </div>
+</footer>
+
+</body>
+</html>
