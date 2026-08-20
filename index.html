@@ -8,7 +8,7 @@
 
   <meta
     name="description"
-    content="Aloïs Design : impression 3D personnalisée, création de logos, sculpture et gravure sur différents supports."
+    content="Aloïs Design : impression 3D personnalisée, création de logos, sculpture et gravure."
   >
 
   <style>
@@ -52,13 +52,13 @@
 
     /* =========================
        HEADER
-    ========================= */
+    ========================== */
 
     header {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(9, 9, 9, 0.94);
+      background: rgba(9, 9, 9, 0.96);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
@@ -68,7 +68,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
+      gap: 15px;
     }
 
     .logo {
@@ -86,7 +86,7 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 22px;
+      gap: 20px;
       font-size: 14px;
       color: #ddd;
     }
@@ -96,8 +96,55 @@
     }
 
     /* =========================
+       PANIER
+    ========================== */
+
+    .cart-link {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border: 1px solid #333;
+      border-radius: 10px;
+      background: #111;
+      transition: 0.2s;
+    }
+
+    .cart-link:hover {
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .cart-icon {
+      width: 25px;
+      height: 25px;
+      fill: none;
+      stroke: var(--gold-light);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -7px;
+      right: -7px;
+      min-width: 20px;
+      height: 20px;
+      padding: 2px 5px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: #111;
+      font-size: 11px;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    /* =========================
        BOUTONS
-    ========================= */
+    ========================== */
 
     .btn {
       display: inline-block;
@@ -113,6 +160,7 @@
 
     .btn:hover {
       background: var(--gold-light);
+      border-color: var(--gold-light);
     }
 
     .btn-secondary {
@@ -129,7 +177,7 @@
 
     /* =========================
        HERO
-    ========================= */
+    ========================== */
 
     .hero {
       padding: 110px 0 90px;
@@ -176,7 +224,7 @@
 
     /* =========================
        SECTIONS
-    ========================= */
+    ========================== */
 
     section {
       padding: 80px 0;
@@ -202,7 +250,7 @@
 
     /* =========================
        ACTIVITÉS
-    ========================= */
+    ========================== */
 
     .services {
       display: grid;
@@ -246,7 +294,7 @@
 
     /* =========================
        CARTES
-    ========================= */
+    ========================== */
 
     .grid {
       display: grid;
@@ -293,7 +341,7 @@
 
     /* =========================
        ÉTAPES
-    ========================= */
+    ========================== */
 
     .steps {
       display: grid;
@@ -325,7 +373,7 @@
 
     /* =========================
        DEVIS
-    ========================= */
+    ========================== */
 
     .quote {
       background:
@@ -378,7 +426,7 @@
 
     /* =========================
        FORMULAIRE
-    ========================= */
+    ========================== */
 
     form label {
       display: block;
@@ -411,10 +459,6 @@
       resize: vertical;
     }
 
-    input[type="file"] {
-      padding: 9px;
-    }
-
     .small-text {
       font-size: 12px;
       color: #888;
@@ -422,8 +466,8 @@
     }
 
     /* =========================
-       FUTURE COMMANDES
-    ========================= */
+       COMMANDES
+    ========================== */
 
     .future {
       text-align: center;
@@ -446,7 +490,7 @@
 
     /* =========================
        FOOTER
-    ========================= */
+    ========================== */
 
     footer {
       border-top: 1px solid var(--border);
@@ -458,7 +502,7 @@
 
     /* =========================
        MOBILE
-    ========================= */
+    ========================== */
 
     @media (max-width: 850px) {
 
@@ -533,14 +577,37 @@
 
         <div class="nav-links">
           <a href="#activites">Activités</a>
-          <a href="#impression-3d">Impression 3D</a>
+          <a href="impression-3d.html">Impression 3D</a>
           <a href="#logos">Logos</a>
           <a href="#gravure">Gravure</a>
           <a href="#devis">Devis</a>
         </div>
 
-        <a href="#devis" class="btn">
-          Demander un devis
+        <!-- PANIER -->
+
+        <a
+          href="panier.html"
+          class="cart-link"
+          aria-label="Voir le panier"
+        >
+
+          <svg
+            class="cart-icon"
+            viewBox="0 0 24 24"
+          >
+            <circle cx="9" cy="20" r="1.5"></circle>
+            <circle cx="18" cy="20" r="1.5"></circle>
+
+            <path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L21 8H6"></path>
+          </svg>
+
+          <span
+            class="cart-count"
+            id="homeCartCount"
+          >
+            0
+          </span>
+
         </a>
 
       </nav>
@@ -580,8 +647,8 @@
             Découvrir mes activités
           </a>
 
-          <a href="#devis" class="btn btn-secondary">
-            Parler de mon projet
+          <a href="impression-3d.html" class="btn btn-secondary">
+            🛒 Voir la boutique 3D
           </a>
 
         </div>
@@ -614,6 +681,8 @@
 
         <div class="services">
 
+          <!-- IMPRESSION 3D -->
+
           <article class="service">
 
             <div class="service-icon">
@@ -625,19 +694,21 @@
             </h3>
 
             <p>
-              Tampons personnalisés, logos en relief
-              et créations 3D réalisées selon votre projet.
+              Tampons personnalisés, logos 3D,
+              porte-clés et créations sur mesure.
             </p>
 
             <a
-              href="#impression-3d"
+              href="impression-3d.html"
               class="service-link"
             >
-              Découvrir →
+              Voir les produits →
             </a>
 
           </article>
 
+
+          <!-- LOGOS -->
 
           <article class="service">
 
@@ -665,6 +736,8 @@
           </article>
 
 
+          <!-- GRAVURE -->
+
           <article class="service">
 
             <div class="service-icon">
@@ -676,8 +749,8 @@
             </h3>
 
             <p>
-              Personnalisation du bois, du cuir, du verre
-              et d'autres supports.
+              Personnalisation du bois, du cuir,
+              du verre et d'autres supports.
             </p>
 
             <a
@@ -711,8 +784,8 @@
           </h2>
 
           <p>
-            Des objets personnalisés, du petit détail
-            à la pièce unique.
+            Des produits personnalisés disponibles directement
+            dans notre boutique.
           </p>
 
         </div>
@@ -723,28 +796,28 @@
           <article class="card">
 
             <h3>
-              Tampons personnalisés
+              🎨 Logos 3D
             </h3>
 
             <p>
-              Texte, logo ou combinaison des deux,
-              préparés pour la fabrication.
+              Petit, moyen, grand ou premium.
+              Les grands modèles peuvent être réalisés
+              en plusieurs pièces.
             </p>
 
             <ul>
-              <li>Tampon avec texte</li>
-              <li>Tampon avec logo</li>
-              <li>Logo + texte</li>
-              <li>Différentes dimensions</li>
-              <li>Petites quantités possibles</li>
+              <li>Petit — 25 €</li>
+              <li>Moyen — 45 €</li>
+              <li>Grand — 70 €</li>
+              <li>Premium — à partir de 100 €</li>
             </ul>
 
             <a
-              href="tampons.html"
+              href="impression-3d.html"
               class="btn"
               style="margin-top: 20px;"
             >
-              Voir les tampons
+              Voir les logos 3D
             </a>
 
           </article>
@@ -753,28 +826,28 @@
           <article class="card">
 
             <h3>
-              Logos & créations 3D
+              🖨️ Tampons & 🔑 Porte-clés
             </h3>
 
             <p>
-              Transformation d'une identité visuelle
-              ou d'une idée en objet, plaque ou pièce en relief.
+              Plusieurs formules pour les tampons
+              et porte-clés personnalisés.
             </p>
 
             <ul>
-              <li>Logo en relief</li>
-              <li>Plaque 3D</li>
-              <li>Création personnalisée</li>
-              <li>Petites séries</li>
-              <li>Projet sur mesure</li>
+              <li>Petit tampon — 12,50 €</li>
+              <li>Tampon entreprise — 20 €</li>
+              <li>Tampon avec logo — 25 €</li>
+              <li>Gros tampon — 32,50 €</li>
+              <li>Porte-clé — 6 €</li>
             </ul>
 
             <a
-              href="#devis"
-              class="btn btn-secondary"
+              href="impression-3d.html"
+              class="btn"
               style="margin-top: 20px;"
             >
-              Demander un devis
+              Voir les produits
             </a>
 
           </article>
@@ -873,7 +946,7 @@
 
 
     <!-- =========================
-         SCULPTURE & GRAVURE
+         GRAVURE
     ========================== -->
 
     <section id="gravure">
@@ -908,7 +981,7 @@
 
             <p>
               Gravure de textes, motifs, logos
-              et personnalisations sur pièces adaptées.
+              et personnalisations.
             </p>
 
           </article>
@@ -943,29 +1016,11 @@
             </h3>
 
             <p>
-              Gravure sur verre, verres et autres objets
-              compatibles avec la technique utilisée.
+              Gravure sur verre et objets compatibles
+              avec la technique utilisée.
             </p>
 
           </article>
-
-        </div>
-
-
-        <div
-          class="card"
-          style="margin-top: 20px;"
-        >
-
-          <h3>
-            Un autre support ?
-          </h3>
-
-          <p>
-            Si votre matériau n'est pas dans la liste,
-            décrivez-le dans votre demande de devis.
-            Chaque projet peut être étudié au cas par cas.
-          </p>
 
         </div>
 
@@ -998,73 +1053,27 @@
         <div class="steps">
 
           <div class="step">
-
-            <div class="step-number">
-              01
-            </div>
-
-            <h3>
-              Votre idée
-            </h3>
-
-            <p>
-              Vous expliquez ce que vous souhaitez réaliser.
-            </p>
-
+            <div class="step-number">01</div>
+            <h3>Votre idée</h3>
+            <p>Vous choisissez votre produit ou expliquez votre projet.</p>
           </div>
 
-
           <div class="step">
-
-            <div class="step-number">
-              02
-            </div>
-
-            <h3>
-              Étude
-            </h3>
-
-            <p>
-              Le projet, le matériau, les dimensions
-              et la quantité sont étudiés.
-            </p>
-
+            <div class="step-number">02</div>
+            <h3>Commande</h3>
+            <p>Vous ajoutez les produits souhaités à votre panier.</p>
           </div>
 
-
           <div class="step">
-
-            <div class="step-number">
-              03
-            </div>
-
-            <h3>
-              Devis
-            </h3>
-
-            <p>
-              Vous recevez les informations et le prix
-              adaptés à votre projet.
-            </p>
-
+            <div class="step-number">03</div>
+            <h3>Paiement</h3>
+            <p>Le paiement sécurisé sera effectué directement en ligne.</p>
           </div>
 
-
           <div class="step">
-
-            <div class="step-number">
-              04
-            </div>
-
-            <h3>
-              Création
-            </h3>
-
-            <p>
-              Après validation, la création est préparée
-              puis fabriquée.
-            </p>
-
+            <div class="step-number">04</div>
+            <h3>Expédition</h3>
+            <p>Votre commande est préparée puis envoyée par La Poste.</p>
           </div>
 
         </div>
@@ -1075,7 +1084,7 @@
 
 
     <!-- =========================
-         FUTURES COMMANDES
+         BOUTIQUE
     ========================== -->
 
     <section>
@@ -1085,20 +1094,21 @@
         <div class="future">
 
           <h3>
-            🛒 Commandes en ligne
+            🛒 Boutique Aloïs Design
           </h3>
 
           <p>
-            Les produits avec un prix défini pourront
-            progressivement être commandés directement
-            depuis le site.
+            Retrouvez les produits disponibles à la commande,
+            ajoutez-les au panier et préparez votre commande.
           </p>
 
-          <p style="margin-top: 12px;">
-            <strong>
-              Boutique et paiement en ligne : bientôt disponibles.
-            </strong>
-          </p>
+          <a
+            href="impression-3d.html"
+            class="btn"
+            style="margin-top: 22px;"
+          >
+            Voir la boutique
+          </a>
 
         </div>
 
@@ -1108,7 +1118,7 @@
 
 
     <!-- =========================
-         DEMANDE DE DEVIS
+         DEVIS
     ========================== -->
 
     <section
@@ -1125,8 +1135,7 @@
           </h2>
 
           <p>
-            Pour les projets personnalisés, indiquez-moi
-            les informations nécessaires.
+            Pour les projets personnalisés, contactez-moi directement.
           </p>
 
         </div>
@@ -1144,37 +1153,30 @@
             </h3>
 
             <p>
-              Utilisez ce formulaire pour les demandes
-              qui nécessitent une étude ou un prix personnalisé.
+              Pour une création qui n'est pas encore disponible
+              dans la boutique, envoyez-moi votre demande.
             </p>
 
             <ul>
 
-              <li>
-                Impression 3D personnalisée
-              </li>
-
-              <li>
-                Création ou adaptation de logo
-              </li>
-
-              <li>
-                Sculpture et gravure
-              </li>
-
-              <li>
-                Projet sur un matériau particulier
-              </li>
-
-              <li>
-                Petite ou moyenne quantité
-              </li>
+              <li>Impression 3D personnalisée</li>
+              <li>Création ou adaptation de logo</li>
+              <li>Sculpture</li>
+              <li>Gravure</li>
+              <li>Projet personnalisé</li>
 
             </ul>
 
             <p style="margin-top: 25px;">
-              📩 L'adresse e-mail est utilisée uniquement
-              pour les demandes de devis.
+
+              📩
+              <a
+                href="mailto:aloisryckebuschvandaele@gmail.com"
+                style="color: var(--gold-light); font-weight: bold;"
+              >
+                aloisryckebuschvandaele@gmail.com
+              </a>
+
             </p>
 
           </div>
@@ -1184,15 +1186,8 @@
 
           <div class="quote-form">
 
-            <!--
-              IMPORTANT :
-              Le formulaire ci-dessous est une base.
-              Pour recevoir automatiquement les fichiers joints,
-              il faudra ensuite le connecter à un service de formulaire.
-            -->
-
             <form
-              action="mailto:TON-EMAIL-ICI"
+              action="mailto:aloisryckebuschvandaele@gmail.com"
               method="post"
               enctype="text/plain"
             >
@@ -1219,7 +1214,7 @@
                 id="email"
                 name="Email"
                 required
-                placeholder="aloisryckebuschvandaele@gmail.com"
+                placeholder="Votre adresse e-mail"
               >
 
 
@@ -1264,18 +1259,6 @@
               </select>
 
 
-              <label for="materiau">
-                Matériau / support
-              </label>
-
-              <input
-                type="text"
-                id="materiau"
-                name="Matériau / support"
-                placeholder="Ex. PLA, bois, cuir, verre..."
-              >
-
-
               <label for="dimensions">
                 Dimensions
               </label>
@@ -1284,7 +1267,7 @@
                 type="text"
                 id="dimensions"
                 name="Dimensions"
-                placeholder="Ex. 80 × 50 mm"
+                placeholder="Ex. 20 × 15 cm"
               >
 
 
@@ -1309,24 +1292,8 @@
                 id="description"
                 name="Description"
                 required
-                placeholder="Décrivez votre idée, le rendu souhaité, les couleurs, etc."
+                placeholder="Décrivez votre projet..."
               ></textarea>
-
-
-              <label for="fichier">
-                Image / logo
-              </label>
-
-              <input
-                type="file"
-                id="fichier"
-                name="Image / logo"
-                accept=".png,.jpg,.jpeg,.svg,.pdf"
-              >
-
-              <div class="small-text">
-                Formats conseillés : PNG, JPG, SVG ou PDF.
-              </div>
 
 
               <button
@@ -1338,7 +1305,7 @@
                   border: none;
                 "
               >
-                Préparer ma demande de devis
+                Envoyer ma demande
               </button>
 
             </form>
@@ -1368,10 +1335,58 @@
 
       Impression 3D · Création de logos · Sculpture & gravure
 
+      <br><br>
+
+      <a
+        href="mailto:aloisryckebuschvandaele@gmail.com"
+        style="color: var(--gold-light);"
+      >
+        aloisryckebuschvandaele@gmail.com
+      </a>
+
     </div>
 
   </footer>
 
+
+  <!-- =========================
+       PANIER : COMPTEUR
+  ========================== -->
+
+  <script>
+
+    function updateHomeCartCount() {
+
+      const cartCount =
+        document.getElementById("homeCartCount");
+
+      let cart = [];
+
+      try {
+        cart = JSON.parse(
+          localStorage.getItem("aloisDesignCart")
+        ) || [];
+      } catch (error) {
+        cart = [];
+      }
+
+      let count = 0;
+
+      cart.forEach(item => {
+        count += Number(item.quantity) || 0;
+      });
+
+      cartCount.textContent = count;
+    }
+
+    updateHomeCartCount();
+
+    window.addEventListener(
+      "storage",
+      updateHomeCartCount
+    );
+
+  </script>
 
 </body>
 </html>
