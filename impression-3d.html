@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Impression 3D | Aloïs Design</title>
+
+  <meta
+    name="description"
+    content="Impression 3D personnalisée : logos, tampons et créations sur mesure avec Aloïs Design."
+  >
+
+  <style>
+    :root {
+      --bg: #090909;
+      --card: #151515;
+      --card-hover: #1b1b1b;
+      --gold: #d9a72b;
+      --gold-light: #f3cc68;
+      --white: #ffffff;
+      --gray: #aaa;
+      --border: #292929;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--white);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1100px, 92%);
+      margin: auto;
+    }
+
+    /* HEADER */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(9, 9, 9, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav {
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: var(--gold);
+    }
+
+    .logo span {
+      color: white;
+    }
+
+    .back {
+      color: #ddd;
+      font-size: 14px;
+    }
+
+    .back:hover {
+      color: var(--gold-light);
+    }
+
+    /* HERO */
+
+    .hero {
+      text-align: center;
+      padding: 90px 0 60px;
+      background:
+        radial-gradient(
+          circle at center top,
+          #30240c 0,
+          transparent 45%
+        );
+    }
+
+    .hero-icon {
+      font-size: 65px;
+      margin-bottom: 15px;
+    }
+
+    .hero h1 {
+      font-size: clamp(40px, 7vw, 65px);
+      line-height: 1.05;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 span {
+      color: var(--gold);
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: auto;
+      color: var(--gray);
+      font-size: 18px;
+    }
+
+    /* CHOIX */
+
+    .choices {
+      padding: 50px 0 90px;
+    }
+
+    .choices-title {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .choices-title h2 {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    .choices-title p {
+      color: var(--gray);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      padding: 35px 28px;
+      min-height: 330px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      transition: 0.25s;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      background: var(--card-hover);
+      border-color: #594616;
+    }
+
+    .card-icon {
+      font-size: 50px;
+      margin-bottom: 18px;
+    }
+
+    .card h3 {
+      font-size: 25px;
+      color: var(--gold-light);
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      color: var(--gray);
+      flex-grow: 1;
+    }
+
+    .card-button {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 12px 16px;
+      text-align: center;
+      border-radius: 9px;
+      background: var(--gold);
+      color: #111;
+      font-weight: 900;
+    }
+
+    .card-button:hover {
+      background: var(--gold-light);
+    }
+
+    .card-button.secondary {
+      background: transparent;
+      border: 1px solid #444;
+      color: white;
+    }
+
+    .card-button.secondary:hover {
+      border-color: var(--gold);
+      color: var(--gold-light);
+    }
+
+    /* INFO */
+
+    .info {
+      padding: 0 0 80px;
+    }
+
+    .info-box {
+      padding: 35px;
+      background: #111;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      text-align: center;
+    }
+
+    .info-box h2 {
+      margin-bottom: 10px;
+    }
+
+    .info-box p {
+      max-width: 700px;
+      margin: auto;
+      color: var(--gray);
+    }
+
+    /* FOOTER */
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 30px 0;
+      text-align: center;
+      color: #777;
+      font-size: 13px;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 850px) {
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .hero {
+        padding-top: 65px;
+      }
+
+      .hero h1 {
+        font-size: 42px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .card {
+        padding: 28px 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+
+  <header>
+    <div class="container">
+
+      <nav>
+
+        <a href="index.html" class="logo">
+          ALOÏS <span>DESIGN</span>
+        </a>
+
+        <a href="index.html" class="back">
+          ← Retour à l'accueil
+        </a>
+
+      </nav>
+
+    </div>
+  </header>
+
+
+  <!-- HERO -->
+
+  <main>
+
+    <section class="hero">
+
+      <div class="container">
+
+        <div class="hero-icon">
+          🖨️
+        </div>
+
+        <h1>
+          Impression <span>3D</span>
+        </h1>
+
+        <p>
+          Choisissez le type de création que vous souhaitez
+          réaliser et découvrez les différentes possibilités.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- CHOIX -->
+
+    <section class="choices">
+
+      <div class="container">
+
+        <div class="choices-title">
+
+          <h2>
+            Que souhaitez-vous créer ?
+          </h2>
+
+          <p>
+            Sélectionnez une catégorie.
+          </p>
+
+        </div>
+
+
+        <div class="cards">
+
+
+          <!-- LOGO -->
+
+          <article class="card">
+
+            <div class="card-icon">
+              🎨
+            </div>
+
+            <h3>
+              Logo 3D
+            </h3>
+
+            <p>
+              Transformez votre logo en création 3D,
+              plaque, décoration ou objet en relief.
+            </p>
+
+            <a
+              href="index.html#logos"
+              class="card-button"
+            >
+              Créer mon logo
+            </a>
+
+          </article>
+
+
+          <!-- TAMPONS -->
+
+          <article class="card">
+
+            <div class="card-icon">
+              🖨️
+            </div>
+
+            <h3>
+              Tampons
+            </h3>
+
+            <p>
+              Créez un tampon personnalisé avec un texte,
+              un logo ou les deux.
+            </p>
+
+            <a
+              href="tampons.html"
+              class="card-button"
+            >
+              Voir les tampons
+            </a>
+
+          </article>
+
+
+          <!-- AUTRE -->
+
+          <article class="card">
+
+            <div class="card-icon">
+              📦
+            </div>
+
+            <h3>
+              Autre création
+            </h3>
+
+            <p>
+              Vous avez une autre idée d'impression 3D ?
+              Décrivez-nous votre projet et demandez un devis.
+            </p>
+
+            <a
+              href="index.html#devis"
+              class="card-button"
+            >
+              Demander un devis
+            </a>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- INFORMATIONS -->
+
+    <section class="info">
+
+      <div class="container">
+
+        <div class="info-box">
+
+          <h2>
+            💡 Une idée particulière ?
+          </h2>
+
+          <p>
+            Si votre projet ne correspond pas exactement
+            aux catégories ci-dessus, ce n'est pas un problème.
+            Expliquez-nous simplement ce que vous souhaitez
+            réaliser dans la demande de devis.
+          </p>
+
+          <a
+            href="index.html#devis"
+            class="card-button"
+            style="
+              display: inline-block;
+              margin-top: 22px;
+            "
+          >
+            Décrire mon projet
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <div class="container">
+
+      © 2026 Aloïs Design
+      <br>
+      Impression 3D · Création de logos · Sculpture & gravure
+
+    </div>
+
+  </footer>
+
+</body>
+</html>
