@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>HomeAI V0.9</title>
+<title>HomeAI V1.1</title>
 
 <style>
 * {
@@ -19,7 +19,7 @@ body {
 }
 
 .container {
-    max-width: 800px;
+    max-width: 850px;
     margin: auto;
     padding: 25px 18px 50px;
 }
@@ -40,39 +40,16 @@ h1 {
 
 .status {
     text-align: center;
-    color: #aaa;
+    padding: 14px;
+    border-radius: 15px;
+    background: #1b1d22;
     margin-bottom: 20px;
 }
 
-.micro-container {
+.nova {
     text-align: center;
-}
-
-#micro {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    border: none;
-    background: #25282e;
-    color: white;
-    font-size: 60px;
-    cursor: pointer;
-    transition: .2s;
-}
-
-#micro:hover {
-    transform: scale(1.04);
-}
-
-#micro.ecoute {
-    transform: scale(1.1);
-}
-
-#texte {
-    text-align: center;
-    margin: 25px 0;
-    font-size: 20px;
-    min-height: 45px;
+    font-size: 30px;
+    margin: 25px;
 }
 
 .panel {
@@ -91,25 +68,20 @@ h1 {
 
 .execution {
     background: #15171b;
-    border-left: 4px solid #777;
     padding: 12px;
     margin-top: 12px;
     border-radius: 10px;
-}
-
-.succes {
-    margin-top: 10px;
-}
-
-.historique {
-    max-height: 300px;
-    overflow-y: auto;
 }
 
 .log {
     padding: 10px;
     border-bottom: 1px solid #333;
     font-size: 14px;
+}
+
+.historique {
+    max-height: 300px;
+    overflow-y: auto;
 }
 
 .objet {
@@ -119,21 +91,16 @@ h1 {
 
 .badge {
     display: inline-block;
-    margin-top: 5px;
-    padding: 4px 8px;
+    margin-top: 6px;
+    padding: 5px 9px;
     border-radius: 8px;
     background: #292c32;
     font-size: 12px;
 }
 
-button.test {
-    border: none;
-    border-radius: 10px;
-    padding: 10px 15px;
-    background: #292c32;
-    color: white;
-    cursor: pointer;
-    margin: 4px;
+.info {
+    color: #aaa;
+    line-height: 1.6;
 }
 </style>
 </head>
@@ -147,34 +114,30 @@ button.test {
 <h1>🏠 HomeAI</h1>
 
 <div class="subtitle">
-V0.9 — Compréhension + exécution
+V1.1 — Intelligence vocale
 </div>
 
 </header>
 
 
-<div class="status" id="status">
-🟢 HomeAI est prêt
+<div id="status" class="status">
+🟢 Démarrage de Nova...
 </div>
 
 
-<div class="micro-container">
-
-<button id="micro">
-🎙️
-</button>
-
+<div class="nova">
+🤖 <strong>Nova</strong>
 </div>
 
 
-<div id="texte">
-Appuie sur le micro et parle.
+<div id="texte" style="text-align:center;">
+J'attends mon nom...
 </div>
 
 
 <div class="panel">
 
-<h2>🧠 Analyse</h2>
+<h2>🧠 Compréhension</h2>
 
 <div id="resultat">
 Aucune commande.
@@ -185,10 +148,10 @@ Aucune commande.
 
 <div class="panel">
 
-<h2>📡 Centre de contrôle</h2>
+<h2>📡 Exécution</h2>
 
 <div id="etat">
-Aucune action exécutée.
+Aucune action.
 </div>
 
 </div>
@@ -198,8 +161,8 @@ Aucune action exécutée.
 
 <h2>📜 Historique</h2>
 
-<div class="historique" id="historique">
-Aucune commande pour le moment.
+<div id="historique" class="historique">
+Aucune commande.
 </div>
 
 </div>
@@ -207,7 +170,7 @@ Aucune commande pour le moment.
 
 <div class="panel">
 
-<h2>🏠 Appareils</h2>
+<h2>🏠 Appareils connus</h2>
 
 <div id="listeMaison"></div>
 
@@ -216,27 +179,29 @@ Aucune commande pour le moment.
 
 <div class="panel">
 
-<h2>🧪 Tests rapides</h2>
+<h2>ℹ️ Informations</h2>
 
-<button class="test"
-onclick="analyserPhrase('allume la lumière du salon')">
-💡 Lumière
-</button>
+<div class="info">
 
-<button class="test"
-onclick="analyserPhrase('ouvre les volets du salon')">
-🪟 Volets
-</button>
+Nova comprend de nombreuses formulations naturelles.
 
-<button class="test"
-onclick="analyserPhrase('mets le chauffage à 21 degrés')">
-🌡️ Chauffage
-</button>
+<br><br>
 
-<button class="test"
-onclick="analyserPhrase('éteins la télé et ferme les volets')">
-🏠 Multiple
-</button>
+Exemple :
+
+<br><br>
+
+<strong>
+« Nova, s'il te plaît, mets un peu de lumière
+dans le salon, monte les volets et démarre la télé. »
+</strong>
+
+<br><br>
+
+⚠️ Les appareils sont encore simulés.
+La connexion aux vrais boîtiers viendra ensuite.
+
+</div>
 
 </div>
 
@@ -246,20 +211,30 @@ onclick="analyserPhrase('éteins la télé et ferme les volets')">
 <script>
 
 /* =====================================================
-   RECONNAISSANCE VOCALE
+   CONFIGURATION
 ===================================================== */
 
-const micro =
-    document.getElementById("micro");
+const NOM_IA = "nova";
+
+let active = true;
+
+let reconnaissance = null;
+
+let traitement = false;
+
+
+/* =====================================================
+   INTERFACE
+===================================================== */
+
+const status =
+    document.getElementById("status");
 
 const texte =
     document.getElementById("texte");
 
 const resultat =
     document.getElementById("resultat");
-
-const status =
-    document.getElementById("status");
 
 const etat =
     document.getElementById("etat");
@@ -271,87 +246,26 @@ const listeMaison =
     document.getElementById("listeMaison");
 
 
-const SpeechRecognition =
-    window.SpeechRecognition ||
-    window.webkitSpeechRecognition;
+/* =====================================================
+   VOIX
+===================================================== */
 
+function parler(message) {
 
-let reconnaissance = null;
+    if (!("speechSynthesis" in window)) {
+        return;
+    }
 
+    speechSynthesis.cancel();
 
-if (SpeechRecognition) {
+    const voix =
+        new SpeechSynthesisUtterance(message);
 
-    reconnaissance =
-        new SpeechRecognition();
+    voix.lang = "fr-FR";
+    voix.rate = 1;
+    voix.pitch = 1;
 
-    reconnaissance.lang = "fr-FR";
-
-    reconnaissance.continuous = false;
-
-    reconnaissance.interimResults = false;
-
-
-    micro.onclick = function() {
-
-        try {
-
-            reconnaissance.start();
-
-            status.innerText =
-                "🎙️ J'écoute...";
-
-            micro.classList.add("ecoute");
-
-        } catch (e) {
-
-            console.log(e);
-
-        }
-
-    };
-
-
-    reconnaissance.onresult =
-        function(event) {
-
-            const phrase =
-                event.results[0][0].transcript;
-
-            texte.innerText =
-                "🗣️ « " + phrase + " »";
-
-            analyserPhrase(phrase);
-
-        };
-
-
-    reconnaissance.onend =
-        function() {
-
-            status.innerText =
-                "🟢 HomeAI est prêt";
-
-            micro.classList.remove("ecoute");
-
-        };
-
-
-    reconnaissance.onerror =
-        function(event) {
-
-            status.innerText =
-                "❌ Erreur : " +
-                event.error;
-
-            micro.classList.remove("ecoute");
-
-        };
-
-} else {
-
-    status.innerText =
-        "❌ Reconnaissance vocale non disponible.";
-
+    speechSynthesis.speak(voix);
 }
 
 
@@ -363,41 +277,104 @@ const appareils = [
 
     {
         nom: "TV",
-        mots: ["télé", "tele", "télévision", "television", "tv"],
-        pieces: ["salon"],
+        mots: [
+            "télé",
+            "tele",
+            "télévision",
+            "television",
+            "tv",
+            "écran",
+            "ecran"
+        ],
+        pieces: ["salon", "chambre"],
         modules: ["electronique"],
         emoji: "📺"
     },
 
     {
         nom: "LUMIÈRE",
-        mots: ["lumière", "lumiere", "lampe", "éclairage", "eclairage"],
-        pieces: ["salon", "chambre", "cuisine", "salle de bain"],
-        modules: ["electronique", "mecanique"],
+        mots: [
+            "lumière",
+            "lumiere",
+            "lampe",
+            "lampes",
+            "éclairage",
+            "eclairage",
+            "lumières",
+            "lumieres",
+            "ampoule",
+            "ampoules"
+        ],
+        pieces: [
+            "salon",
+            "chambre",
+            "cuisine",
+            "salle de bain"
+        ],
+        modules: [
+            "electronique",
+            "mecanique"
+        ],
         emoji: "💡"
     },
 
     {
         nom: "VOLETS",
-        mots: ["volet", "volets", "store", "stores"],
-        pieces: ["salon", "chambre"],
-        modules: ["electronique", "mecanique"],
+        mots: [
+            "volet",
+            "volets",
+            "store",
+            "stores",
+            "rideau",
+            "rideaux"
+        ],
+        pieces: [
+            "salon",
+            "chambre"
+        ],
+        modules: [
+            "electronique",
+            "mecanique"
+        ],
         emoji: "🪟"
     },
 
     {
         nom: "PORTE",
-        mots: ["porte"],
-        pieces: ["maison", "salon", "chambre", "cuisine"],
-        modules: ["electronique", "mecanique"],
+        mots: [
+            "porte",
+            "portes"
+        ],
+        pieces: [
+            "maison",
+            "salon",
+            "chambre",
+            "cuisine"
+        ],
+        modules: [
+            "electronique",
+            "mecanique"
+        ],
         emoji: "🚪"
     },
 
     {
         nom: "FENÊTRE",
-        mots: ["fenêtre", "fenetre"],
-        pieces: ["salon", "chambre", "cuisine"],
-        modules: ["electronique", "mecanique"],
+        mots: [
+            "fenêtre",
+            "fenetre",
+            "fenêtres",
+            "fenetres"
+        ],
+        pieces: [
+            "salon",
+            "chambre",
+            "cuisine"
+        ],
+        modules: [
+            "electronique",
+            "mecanique"
+        ],
         emoji: "🪟"
     },
 
@@ -410,13 +387,20 @@ const appareils = [
             "frigidaire"
         ],
         pieces: ["cuisine"],
-        modules: ["electronique", "mecanique"],
+        modules: [
+            "electronique",
+            "mecanique"
+        ],
         emoji: "🧊"
     },
 
     {
         nom: "FOUR",
-        mots: ["four"],
+        mots: [
+            "four",
+            "four électrique",
+            "four electrique"
+        ],
         pieces: ["cuisine"],
         modules: ["electronique"],
         emoji: "🔥"
@@ -427,7 +411,8 @@ const appareils = [
         mots: [
             "micro-onde",
             "micro onde",
-            "microondes"
+            "microondes",
+            "micro-ondes"
         ],
         pieces: ["cuisine"],
         modules: ["electronique"],
@@ -435,34 +420,13 @@ const appareils = [
     },
 
     {
-        nom: "LAVE-VAISSELLE",
-        mots: [
-            "lave-vaisselle",
-            "lave vaisselle"
-        ],
-        pieces: ["cuisine"],
-        modules: ["electronique"],
-        emoji: "🍽️"
-    },
-
-    {
-        nom: "MACHINE À CAFÉ",
-        mots: [
-            "machine à café",
-            "machine a cafe",
-            "cafetière",
-            "cafetiere"
-        ],
-        pieces: ["cuisine"],
-        modules: ["electronique"],
-        emoji: "☕"
-    },
-
-    {
         nom: "CHAUFFAGE",
         mots: [
             "chauffage",
-            "radiateur"
+            "radiateur",
+            "chauffe",
+            "chauffe-eau",
+            "chauffe eau"
         ],
         pieces: [
             "salon",
@@ -478,6 +442,7 @@ const appareils = [
         mots: [
             "climatisation",
             "clim",
+            "climatiseur",
             "climatiseur"
         ],
         pieces: [
@@ -490,7 +455,10 @@ const appareils = [
 
     {
         nom: "VENTILATEUR",
-        mots: ["ventilateur"],
+        mots: [
+            "ventilateur",
+            "ventilo"
+        ],
         pieces: [
             "salon",
             "chambre"
@@ -501,7 +469,11 @@ const appareils = [
 
     {
         nom: "ASPIRATEUR",
-        mots: ["aspirateur"],
+        mots: [
+            "aspirateur",
+            "aspirateur robot",
+            "robot aspirateur"
+        ],
         pieces: ["maison"],
         modules: ["electronique"],
         emoji: "🧹"
@@ -521,8 +493,37 @@ const appareils = [
     },
 
     {
+        nom: "LAVE-VAISSELLE",
+        mots: [
+            "lave-vaisselle",
+            "lave vaisselle"
+        ],
+        pieces: ["cuisine"],
+        modules: ["electronique"],
+        emoji: "🍽️"
+    },
+
+    {
+        nom: "CAFETIÈRE",
+        mots: [
+            "cafetière",
+            "cafetiere",
+            "machine à café",
+            "machine a cafe",
+            "café"
+        ],
+        pieces: ["cuisine"],
+        modules: ["electronique"],
+        emoji: "☕"
+    },
+
+    {
         nom: "LIT",
-        mots: ["lit"],
+        mots: [
+            "lit",
+            "lit électrique",
+            "lit electrique"
+        ],
         pieces: ["chambre"],
         modules: [
             "electronique",
@@ -533,7 +534,11 @@ const appareils = [
 
     {
         nom: "FAUTEUIL",
-        mots: ["fauteuil"],
+        mots: [
+            "fauteuil",
+            "fauteuil électrique",
+            "fauteuil electrique"
+        ],
         pieces: ["salon"],
         modules: [
             "electronique",
@@ -546,7 +551,9 @@ const appareils = [
         nom: "SERRURE",
         mots: [
             "serrure",
-            "verrou"
+            "verrou",
+            "serrure électrique",
+            "serrure electrique"
         ],
         pieces: ["maison"],
         modules: [
@@ -575,7 +582,9 @@ const appareils = [
         mots: [
             "prise",
             "prise électrique",
-            "prise electrique"
+            "prise electrique",
+            "prise connectée",
+            "prise connectee"
         ],
         pieces: ["maison"],
         modules: ["electronique"],
@@ -587,7 +596,8 @@ const appareils = [
         mots: [
             "enceinte",
             "haut-parleur",
-            "haut parleur"
+            "haut parleur",
+            "speaker"
         ],
         pieces: [
             "salon",
@@ -595,13 +605,30 @@ const appareils = [
         ],
         modules: ["electronique"],
         emoji: "🔊"
+    },
+
+    {
+        nom: "MUSIQUE",
+        mots: [
+            "musique",
+            "spotify",
+            "chanson",
+            "son",
+            "audio"
+        ],
+        pieces: [
+            "salon",
+            "chambre"
+        ],
+        modules: ["electronique"],
+        emoji: "🎵"
     }
 
 ];
 
 
 /* =====================================================
-   VOCABULAIRE
+   VOCABULAIRE DES ACTIONS
 ===================================================== */
 
 const vocabulaire = {
@@ -613,15 +640,31 @@ const vocabulaire = {
         "allumez",
         "active",
         "activer",
+        "actives",
+        "activez",
         "démarre",
         "demarre",
         "démarrer",
         "demarrer",
+        "démarres",
+        "démarrez",
         "lance",
         "lancer",
+        "lances",
+        "lancez",
         "mets",
         "met",
-        "mettre"
+        "mettre",
+        "mettez",
+        "enclenche",
+        "enclencher",
+        "branche",
+        "brancher",
+        "fais fonctionner",
+        "fais marcher",
+        "fait fonctionner",
+        "fais démarrer",
+        "fais demarrer"
     ],
 
     eteindre: [
@@ -642,7 +685,14 @@ const vocabulaire = {
         "arrête",
         "arrete",
         "arrêter",
-        "arreter"
+        "arreter",
+        "arrête-moi",
+        "éteins-moi",
+        "laisse éteint",
+        "laisse eteint",
+        "stoppe",
+        "stopper",
+        "stop"
     ],
 
     ouvrir: [
@@ -653,7 +703,14 @@ const vocabulaire = {
         "déverrouille",
         "deverrouille",
         "déverrouiller",
-        "deverrouiller"
+        "deverrouiller",
+        "entrouvre",
+        "entrouvrir",
+        "ouvre-moi",
+        "ouvre moi",
+        "peux-tu ouvrir",
+        "peut tu ouvrir",
+        "tu peux ouvrir"
     ],
 
     fermer: [
@@ -662,7 +719,13 @@ const vocabulaire = {
         "fermes",
         "fermez",
         "referme",
-        "refermer"
+        "refermer",
+        "ferme-moi",
+        "ferme moi",
+        "rabats",
+        "rabaisser",
+        "peux-tu fermer",
+        "tu peux fermer"
     ],
 
     monter: [
@@ -674,7 +737,14 @@ const vocabulaire = {
         "leve",
         "lever",
         "soulève",
-        "souleve"
+        "souleve",
+        "soulevez",
+        "remonte",
+        "remonter",
+        "relève",
+        "releve",
+        "relever",
+        "ouvre vers le haut"
     ],
 
     descendre: [
@@ -684,31 +754,93 @@ const vocabulaire = {
         "baisse",
         "baisser",
         "abaisse",
-        "abaisser"
+        "abaisser",
+        "rabaisse",
+        "rabaisser",
+        "redescends",
+        "redescendre",
+        "mets en bas"
     ],
 
     verrouiller: [
         "verrouille",
         "verrouiller",
         "verrouilles",
-        "verrouillez"
+        "verrouillez",
+        "ferme à clé",
+        "ferme a cle",
+        "mets sous clé",
+        "bloque",
+        "bloquer",
+        "sécurise",
+        "securise",
+        "sécuriser",
+        "securiser"
+    ],
+
+    augmenter: [
+        "augmente",
+        "augmenter",
+        "monte",
+        "monter",
+        "plus fort",
+        "plus chaud",
+        "augmente un peu",
+        "augmente beaucoup"
+    ],
+
+    diminuer: [
+        "diminue",
+        "diminuer",
+        "baisse",
+        "baisser",
+        "moins fort",
+        "moins chaud",
+        "réduis",
+        "reduis",
+        "réduire",
+        "reduire"
     ]
 
 };
 
 
 /* =====================================================
-   UTILITAIRES
+   MOTS INUTILES / POLITESSE
 ===================================================== */
 
-function contient(texte, liste) {
+const motsPolitesse = [
+    "s'il te plaît",
+    "s il te plaît",
+    "s il te plait",
+    "s'il te plait",
+    "stp",
+    "s'il vous plaît",
+    "s il vous plaît",
+    "merci",
+    "please",
+    "peux-tu",
+    "peut-tu",
+    "peut tu",
+    "tu peux",
+    "est-ce que tu peux",
+    "est ce que tu peux",
+    "j'aimerais que tu",
+    "j aimerais que tu",
+    "je voudrais que tu",
+    "pourrais-tu",
+    "pourrait-tu",
+    "pourrais tu",
+    "si tu peux",
+    "si possible",
+    "vas-y",
+    "allez"
+];
 
-    return liste.some(
-        mot => texte.includes(mot)
-    );
 
-}
-
+/* =====================================================
+   NORMALISATION
+===================================================== */
 
 function nettoyer(texte) {
 
@@ -721,6 +853,175 @@ function nettoyer(texte) {
 }
 
 
+function sansPolitesse(texte) {
+
+    let resultat = texte;
+
+    for (
+        const mot of motsPolitesse
+    ) {
+
+        resultat =
+            resultat.replace(
+                new RegExp(
+                    mot.replace(
+                        /[.*+?^${}()|[\]\\]/g,
+                        "\\$&"
+                    ),
+                    "gi"
+                ),
+                " "
+            );
+
+    }
+
+    return resultat
+        .replace(/\s+/g, " ")
+        .trim();
+
+}
+
+
+function contient(texte, liste) {
+
+    return liste.some(
+        mot => texte.includes(mot)
+    );
+
+}
+
+
+/* =====================================================
+   NOM DE NOVA
+===================================================== */
+
+function contientNom(phrase) {
+
+    return nettoyer(phrase)
+        .includes(NOM_IA);
+
+}
+
+
+function retirerNom(phrase) {
+
+    return phrase
+        .replace(
+            new RegExp(
+                "\\b" +
+                NOM_IA +
+                "\\b",
+                "gi"
+            ),
+            ""
+        )
+        .trim();
+
+}
+
+
+/* =====================================================
+   SOMMEIL
+===================================================== */
+
+function commandeSommeil(phrase) {
+
+    const texte =
+        nettoyer(phrase);
+
+    const motsSommeil = [
+
+        "dors",
+        "endors toi",
+        "endors-toi",
+        "va dormir",
+        "mets toi en veille",
+        "mets-toi en veille",
+        "mets toi en sommeil",
+        "mets-toi en sommeil",
+        "arrête d'écouter",
+        "arrete d'ecouter",
+        "ne m'écoute plus",
+        "ne m ecoute plus",
+        "tais toi",
+        "tais-toi"
+
+    ];
+
+    if (
+        contient(
+            texte,
+            motsSommeil
+        )
+    ) {
+
+        active = false;
+
+        status.innerText =
+            "💤 Nova dort";
+
+        texte.innerHTML =
+            "💤 Nova : je dors.";
+
+        parler(
+            "D'accord. Je dors."
+        );
+
+        return true;
+    }
+
+    return false;
+}
+
+
+/* =====================================================
+   RÉVEIL
+===================================================== */
+
+function commandeReveil(phrase) {
+
+    const texte =
+        nettoyer(phrase);
+
+    const motsReveil = [
+
+        "réveille toi",
+        "réveille-toi",
+        "reveille toi",
+        "reveille-toi",
+        "réveille",
+        "reveille",
+        "réveille toi nova",
+        "reveille toi nova"
+
+    ];
+
+    if (
+        contient(
+            texte,
+            motsReveil
+        )
+    ) {
+
+        active = true;
+
+        status.innerText =
+            "🟢 Nova écoute";
+
+        texte.innerHTML =
+            "👋 Nova : je suis réveillée.";
+
+        parler(
+            "Je suis réveillée."
+        );
+
+        return true;
+    }
+
+    return false;
+}
+
+
 /* =====================================================
    PIÈCE
 ===================================================== */
@@ -729,26 +1030,41 @@ function detecterPiece(texte) {
 
     if (
         texte.includes("salle de bain") ||
-        texte.includes("salle de bains")
-    ) {
+        texte.includes("salle de bains") ||
+        texte.includes("toilettes") ||
+        texte.includes("wc")
+    )
         return "salle de bain";
-    }
 
-    if (texte.includes("chambre")) {
+    if (
+        texte.includes("chambre") ||
+        texte.includes("chambre à coucher")
+    )
         return "chambre";
-    }
 
-    if (texte.includes("cuisine")) {
+    if (
+        texte.includes("cuisine")
+    )
         return "cuisine";
-    }
 
     if (
         texte.includes("salon") ||
         texte.includes("séjour") ||
         texte.includes("sejour")
-    ) {
+    )
         return "salon";
-    }
+
+    if (
+        texte.includes("garage")
+    )
+        return "garage";
+
+    if (
+        texte.includes("maison") ||
+        texte.includes("partout") ||
+        texte.includes("dans toute la maison")
+    )
+        return "maison";
 
     return null;
 }
@@ -779,23 +1095,24 @@ function trouverAppareil(texte) {
                     );
 
                 return bMax - aMax;
-
             }
         );
 
 
-    for (const appareil of liste) {
+    for (
+        const appareil of liste
+    ) {
 
-        for (const mot of appareil.mots) {
+        for (
+            const mot of appareil.mots
+        ) {
 
-            if (texte.includes(mot)) {
-
+            if (
+                texte.includes(mot)
+            )
                 return appareil;
 
-            }
-
         }
-
     }
 
     return null;
@@ -811,65 +1128,74 @@ function detecterAction(texte) {
     if (
         contient(
             texte,
+            vocabulaire.verrouiller
+        )
+    )
+        return "VERROUILLER";
+
+    if (
+        contient(
+            texte,
             vocabulaire.ouvrir
         )
-    ) {
+    )
         return "OUVRIR";
-    }
 
     if (
         contient(
             texte,
             vocabulaire.fermer
         )
-    ) {
+    )
         return "FERMER";
-    }
-
-    if (
-        contient(
-            texte,
-            vocabulaire.verrouiller
-        )
-    ) {
-        return "VERROUILLER";
-    }
-
-    if (
-        contient(
-            texte,
-            vocabulaire.monter
-        )
-    ) {
-        return "MONTER";
-    }
 
     if (
         contient(
             texte,
             vocabulaire.descendre
         )
-    ) {
+    )
         return "DESCENDRE";
-    }
+
+    if (
+        contient(
+            texte,
+            vocabulaire.monter
+        )
+    )
+        return "MONTER";
 
     if (
         contient(
             texte,
             vocabulaire.eteindre
         )
-    ) {
+    )
         return "ÉTEINDRE";
-    }
+
+    if (
+        contient(
+            texte,
+            vocabulaire.augmenter
+        )
+    )
+        return "AUGMENTER";
+
+    if (
+        contient(
+            texte,
+            vocabulaire.diminuer
+        )
+    )
+        return "DIMINUER";
 
     if (
         contient(
             texte,
             vocabulaire.allumer
         )
-    ) {
+    )
         return "ALLUMER";
-    }
 
     return null;
 }
@@ -886,11 +1212,29 @@ function detecterValeur(texte) {
             /(\d{1,3})\s*(?:°|degr[eé]s?)/i
         );
 
-    if (match) {
-
+    if (match)
         return match[1] + "°C";
 
+
+    const temperature =
+        texte.match(
+            /(?:à|a|sur|en|de)\s+(\d{1,3})\b/i
+        );
+
+    if (
+        temperature &&
+        (
+            texte.includes("chauffage") ||
+            texte.includes("four") ||
+            texte.includes("clim") ||
+            texte.includes("température") ||
+            texte.includes("temperature")
+        )
+    ) {
+
+        return temperature[1] + "°C";
     }
+
 
     return null;
 }
@@ -906,33 +1250,31 @@ function choisirModule(
 ) {
 
     const mecanique = [
+
         "OUVRIR",
         "FERMER",
         "MONTER",
         "DESCENDRE",
         "VERROUILLER"
+
     ];
 
 
     if (
         mecanique.includes(action) &&
-        appareil.modules.includes("mecanique")
-    ) {
-
+        appareil.modules.includes(
+            "mecanique"
+        )
+    )
         return "🤖 MÉCANIQUE";
-
-    }
 
 
     if (
         appareil.modules.includes(
             "electronique"
         )
-    ) {
-
+    )
         return "⚡ ÉLECTRONIQUE";
-
-    }
 
 
     return "❓ INCONNU";
@@ -940,7 +1282,7 @@ function choisirModule(
 
 
 /* =====================================================
-   DÉCOUPAGE
+   DÉCOUPAGE INTELLIGENT
 ===================================================== */
 
 function decouperPhrase(phrase) {
@@ -948,81 +1290,37 @@ function decouperPhrase(phrase) {
     let texte =
         nettoyer(phrase);
 
+    texte =
+        sansPolitesse(texte);
+
+
+    /*
+     * Séparateurs naturels.
+     */
 
     texte =
         texte
         .replace(
-            /\s+puis\s+/g,
+            /\s+puis\s+/gi,
             "|"
         )
         .replace(
-            /\s+ensuite\s+/g,
+            /\s+ensuite\s+/gi,
             "|"
         )
         .replace(
-            /\s+après\s+/g,
+            /\s+après\s+/gi,
             "|"
         )
         .replace(
-            /\s+apres\s+/g,
+            /\s+apres\s+/gi,
             "|"
         )
         .replace(
-            /;/g,
+            /\s+et\s+(?=(allume|ouvre|ferme|éteins|eteins|mets|met|active|désactive|desactive|monte|descends|baisse|verrouille|démarre|demarre|lance|arrête|arrete)\b)/gi,
             "|"
-        );
-
-
-    const actions = [
-
-        "allume",
-        "allumer",
-        "éteins",
-        "eteins",
-        "ouvre",
-        "ouvrir",
-        "ferme",
-        "fermer",
-        "mets",
-        "met",
-        "mettre",
-        "active",
-        "activer",
-        "lance",
-        "lancer",
-        "monte",
-        "monter",
-        "descends",
-        "descendre",
-        "baisse",
-        "baisser",
-        "verrouille",
-        "verrouiller"
-
-    ];
-
-
-    for (const action of actions) {
-
-        const regex =
-            new RegExp(
-                "\\s+et\\s+(" +
-                action +
-                ")\\b",
-                "gi"
-            );
-
-        texte =
-            texte.replace(
-                regex,
-                "|$1"
-            );
-
-    }
-
-
-    texte =
-        texte.replace(
+        )
+        .replace(
             /,/g,
             "|"
         );
@@ -1030,8 +1328,12 @@ function decouperPhrase(phrase) {
 
     return texte
         .split("|")
-        .map(x => x.trim())
-        .filter(x => x);
+        .map(
+            x => x.trim()
+        )
+        .filter(
+            x => x.length > 0
+        );
 }
 
 
@@ -1040,6 +1342,12 @@ function decouperPhrase(phrase) {
 ===================================================== */
 
 function analyserCommande(texte) {
+
+    texte =
+        sansPolitesse(
+            nettoyer(texte)
+        );
+
 
     const appareil =
         trouverAppareil(texte);
@@ -1057,11 +1365,8 @@ function analyserCommande(texte) {
     if (
         !appareil ||
         !action
-    ) {
-
+    )
         return null;
-
-    }
 
 
     let vraieAction =
@@ -1071,40 +1376,35 @@ function analyserCommande(texte) {
 
 
     let vraiePiece =
-        piece;
-
-
-    if (!vraiePiece) {
-
-        vraiePiece =
-            appareil.pieces[0];
-
-    }
+        piece ||
+        appareil.pieces[0];
 
 
     if (
         !appareil.pieces.includes(
             vraiePiece
         )
-    ) {
-
+    )
         vraiePiece =
             appareil.pieces[0];
-
-    }
 
 
     return {
 
-        appareil: appareil.nom,
+        appareil:
+            appareil.nom,
 
-        emoji: appareil.emoji,
+        emoji:
+            appareil.emoji,
 
-        piece: vraiePiece,
+        piece:
+            vraiePiece,
 
-        action: vraieAction,
+        action:
+            vraieAction,
 
-        valeur: valeur || "aucune",
+        valeur:
+            valeur || "aucune",
 
         module:
             choisirModule(
@@ -1113,7 +1413,34 @@ function analyserCommande(texte) {
             )
 
     };
+}
 
+
+/* =====================================================
+   HISTORIQUE
+===================================================== */
+
+function ajouterHistorique(message) {
+
+    if (
+        historique.innerText ===
+        "Aucune commande."
+    )
+        historique.innerHTML = "";
+
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+    div.className =
+        "log";
+
+    div.innerText =
+        "✅ " + message;
+
+    historique.prepend(div);
 }
 
 
@@ -1121,93 +1448,80 @@ function analyserCommande(texte) {
    EXÉCUTION
 ===================================================== */
 
-function executerCommande(commande) {
+async function executerCommande(
+    commande,
+    index
+) {
 
-    return new Promise(
-        resolve => {
+    etat.innerHTML =
+        "📡 Envoi vers " +
+        commande.module +
+        "...";
 
+
+    await new Promise(
+        resolve =>
             setTimeout(
-                () => {
-
-                    const maintenant =
-                        new Date()
-                        .toLocaleTimeString(
-                            "fr-FR"
-                        );
-
-
-                    const message =
-
-                        "📡 Module reçu : " +
-
-                        commande.module +
-
-                        "<br>" +
-
-                        "🏠 " +
-
-                        commande.piece +
-
-                        "<br>" +
-
-                        commande.emoji +
-
-                        " " +
-
-                        commande.appareil +
-
-                        "<br>" +
-
-                        "⚙️ " +
-
-                        commande.action +
-
-                        "<br>" +
-
-                        (
-                            commande.valeur !== "aucune"
-                            ? "📊 " +
-                              commande.valeur
-                            : ""
-                        );
-
-
-                    ajouterHistorique(
-                        maintenant +
-                        " — " +
-                        commande.action +
-                        " " +
-                        commande.appareil
-                    );
-
-
-                    resolve(message);
-
-                },
-
-                600
-
-            );
-
-        }
+                resolve,
+                500
+            )
     );
 
+
+    const bloc =
+        document.getElementById(
+            "execution-" + index
+        );
+
+
+    if (bloc) {
+
+        bloc.innerHTML =
+
+            "📡 Module : " +
+            commande.module +
+
+            "<br>🏠 Pièce : " +
+            commande.piece +
+
+            "<br>⚙️ Action : " +
+            commande.action +
+
+            (
+                commande.valeur !==
+                "aucune"
+                ?
+                "<br>📊 Valeur : " +
+                commande.valeur
+                :
+                ""
+            )
+
+            +
+
+            "<div style='margin-top:8px'>" +
+            "✅ Commande exécutée" +
+            "</div>";
+    }
+
+
+    ajouterHistorique(
+        commande.action +
+        " — " +
+        commande.appareil +
+        " — " +
+        commande.piece
+    );
 }
 
 
 /* =====================================================
-   EXÉCUTION DE TOUTES LES COMMANDES
+   EXÉCUTER PLUSIEURS COMMANDES
 ===================================================== */
 
 async function executerToutes(
     commandes
 ) {
-
-    etat.innerHTML =
-        "📡 Préparation de " +
-        commandes.length +
-        " commande(s)...";
-
 
     for (
         let i = 0;
@@ -1215,53 +1529,26 @@ async function executerToutes(
         i++
     ) {
 
-        const commande =
-            commandes[i];
-
-
-        etat.innerHTML =
-
-            "📡 Exécution " +
-            (i + 1) +
-            "/" +
-            commandes.length +
-
-            "<br><br>" +
-
-            "⏳ " +
-            commande.emoji +
-            " " +
-            commande.appareil;
-
-
-        const message =
-            await executerCommande(
-                commande
-            );
-
-
-        document
-            .getElementById(
-                "execution-" + i
-            )
-            .innerHTML =
-
-            message +
-
-            "<div class='succes'>" +
-            "✅ Commande exécutée" +
-            "</div>";
-
+        await executerCommande(
+            commandes[i],
+            i
+        );
     }
 
 
     etat.innerHTML =
-
         "🟢 <strong>Terminé</strong><br><br>" +
+        commandes.length +
+        " commande(s) exécutée(s).";
 
-        "Toutes les commandes ont été " +
-        "traitées par HomeAI.";
 
+    parler(
+        commandes.length === 1
+        ?
+        "C'est fait."
+        :
+        "C'est fait. Toutes les commandes sont exécutées."
+    );
 }
 
 
@@ -1273,15 +1560,86 @@ async function analyserPhrase(
     phrase
 ) {
 
-    texte.innerText =
+    if (traitement)
+        return;
+
+
+    traitement = true;
+
+
+    texte.innerHTML =
         "🗣️ « " +
         phrase +
         " »";
 
 
+    /*
+     * Réveil.
+     */
+
+    if (
+        commandeReveil(phrase)
+    ) {
+
+        traitement = false;
+        return;
+    }
+
+
+    /*
+     * Nova doit être appelée.
+     */
+
+    if (
+        !contientNom(phrase)
+    ) {
+
+        traitement = false;
+        return;
+    }
+
+
+    /*
+     * Sommeil.
+     */
+
+    if (
+        commandeSommeil(phrase)
+    ) {
+
+        traitement = false;
+        return;
+    }
+
+
+    /*
+     * Retirer "Nova".
+     */
+
+    const commandeTexte =
+        retirerNom(phrase);
+
+
+    if (
+        !commandeTexte
+    ) {
+
+        parler(
+            "Oui, je t'écoute."
+        );
+
+        traitement = false;
+        return;
+    }
+
+
+    /*
+     * Découpage.
+     */
+
     const morceaux =
         decouperPhrase(
-            phrase
+            commandeTexte
         );
 
 
@@ -1298,40 +1656,40 @@ async function analyserPhrase(
             );
 
 
-        if (commande) {
-
+        if (commande)
             commandes.push(
                 commande
             );
-
-        }
-
     }
 
+
+    /*
+     * Rien compris.
+     */
 
     if (
         commandes.length === 0
     ) {
 
         resultat.innerHTML =
+            "❓ Je n'ai pas compris cette commande.";
 
-            "❌ HomeAI n'a pas compris.<br><br>" +
+        parler(
+            "Je n'ai pas compris cette commande."
+        );
 
-            "Essaie par exemple :<br>" +
-
-            "« Allume la lumière et ouvre les volets »";
-
+        traitement = false;
         return;
-
     }
 
 
+    /*
+     * Affichage.
+     */
+
     let html =
-
         "🧠 <strong>" +
-
         commandes.length +
-
         " commande(s) comprise(s)</strong>";
 
 
@@ -1343,14 +1701,14 @@ async function analyserPhrase(
             <div class="commande">
 
                 <strong>
-                ${index + 1}️⃣
+                    ${index + 1}️⃣
                 </strong>
 
                 <br><br>
 
                 ${commande.emoji}
                 <strong>
-                ${commande.appareil}
+                    ${commande.appareil}
                 </strong>
 
                 <br>
@@ -1379,7 +1737,6 @@ async function analyserPhrase(
             </div>
 
             `;
-
         }
     );
 
@@ -1388,53 +1745,21 @@ async function analyserPhrase(
         html;
 
 
+    /*
+     * Exécution.
+     */
+
     await executerToutes(
         commandes
     );
 
+
+    traitement = false;
 }
 
 
 /* =====================================================
-   HISTORIQUE
-===================================================== */
-
-function ajouterHistorique(message) {
-
-    if (
-        historique.innerText ===
-        "Aucune commande pour le moment."
-    ) {
-
-        historique.innerHTML = "";
-
-    }
-
-
-    const div =
-        document.createElement(
-            "div"
-        );
-
-
-    div.className =
-        "log";
-
-
-    div.innerHTML =
-        "✅ " +
-        message;
-
-
-    historique.prepend(
-        div
-    );
-
-}
-
-
-/* =====================================================
-   AFFICHAGE MAISON
+   AFFICHAGE DES APPAREILS
 ===================================================== */
 
 function afficherMaison() {
@@ -1460,13 +1785,12 @@ function afficherMaison() {
             appareil.modules
             .map(
                 module =>
-
                     module ===
                     "electronique"
-
-                    ? "⚡ électronique"
-
-                    : "🤖 mécanique"
+                    ?
+                    "⚡ électronique"
+                    :
+                    "🤖 mécanique"
             )
             .join(" + ");
 
@@ -1474,17 +1798,11 @@ function afficherMaison() {
         div.innerHTML =
 
             appareil.emoji +
-
             " <strong>" +
-
             appareil.nom +
-
             "</strong>" +
 
-            "<br>" +
-
-            "🏠 " +
-
+            "<br>🏠 " +
             appareil.pieces.join(
                 ", "
             ) +
@@ -1492,22 +1810,166 @@ function afficherMaison() {
             "<br>" +
 
             "<span class='badge'>" +
-
             modules +
-
             "</span>";
 
 
         listeMaison.appendChild(
             div
         );
-
     }
-
 }
 
 
 afficherMaison();
+
+
+/* =====================================================
+   RECONNAISSANCE VOCALE
+===================================================== */
+
+const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+
+if (!SpeechRecognition) {
+
+    status.innerText =
+        "❌ Reconnaissance vocale non disponible.";
+
+}
+else {
+
+    reconnaissance =
+        new SpeechRecognition();
+
+
+    reconnaissance.lang =
+        "fr-FR";
+
+
+    reconnaissance.continuous =
+        true;
+
+
+    reconnaissance.interimResults =
+        false;
+
+
+    reconnaissance.onstart =
+        function() {
+
+            status.innerText =
+                active
+                ?
+                "🟢 Nova écoute"
+                :
+                "💤 Nova dort";
+        };
+
+
+    reconnaissance.onresult =
+        function(event) {
+
+            const result =
+                event.results[
+                    event.results.length - 1
+                ];
+
+
+            if (
+                !result.isFinal
+            )
+                return;
+
+
+            const phrase =
+                result[0].transcript;
+
+
+            analyserPhrase(
+                phrase
+            );
+        };
+
+
+    reconnaissance.onerror =
+        function(event) {
+
+            console.log(
+                "Erreur micro :",
+                event.error
+            );
+
+
+            if (
+                event.error ===
+                "not-allowed"
+            ) {
+
+                status.innerText =
+                    "❌ Autorisation du microphone refusée.";
+            }
+        };
+
+
+    reconnaissance.onend =
+        function() {
+
+            setTimeout(
+                () => {
+
+                    try {
+
+                        reconnaissance.start();
+
+                    }
+                    catch (e) {}
+
+                },
+                500
+            );
+        };
+
+
+    /*
+     * Démarrage.
+     */
+
+    setTimeout(
+        () => {
+
+            try {
+
+                reconnaissance.start();
+
+            }
+            catch (e) {}
+
+        },
+        1000
+    );
+}
+
+
+/* =====================================================
+   MESSAGE DE DÉMARRAGE
+===================================================== */
+
+setTimeout(
+    () => {
+
+        status.innerText =
+            "🟢 Nova écoute";
+
+        parler(
+            "Bonjour. Je suis Nova. Je t'écoute."
+        );
+
+    },
+    1500
+);
 
 </script>
 
