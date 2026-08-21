@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Impression 3D | Aloïs Design</title><meta name="description" content="Aloïs Design : impression 3D, logos, tampons et créations personnalisées."><style>
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Porte-clé personnalisé | Aloïs Design</title><meta name="description" content="Aloïs Design : impression 3D, logos, tampons et créations personnalisées."><style>
 :root{--bg:#090909;--bg2:#121212;--card:#171717;--gold:#d9a72b;--gold2:#f3cc68;--white:#fff;--gray:#aaa;--border:#292929}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -45,14 +45,25 @@ footer{border-top:1px solid var(--border);padding:35px 0;text-align:center;color
 <span class="cart-count" data-cart-count>0</span></a>
 </nav></div></header>
 <main>
-<section class="hero"><div class="container"><div class="kicker">Boutique</div><h1>Impression <span>3D</span></h1><p>Retrouvez les produits imprimés en 3D et accédez aux pages dédiées pour personnaliser votre projet.</p></div></section>
-<section><div class="container"><div class="section-title"><h2>Nos produits</h2><p>Chaque produit peut être ajouté au même panier.</p></div>
-<div class="grid">
-<article class="card"><h3>🎨 Logos 3D</h3><p>Logo en relief ou modèle personnalisé.</p><ul><li>Petit — 25 €</li><li>Moyen — 45 €</li><li>Grand — 70 €</li><li>Premium — à partir de 100 €</li></ul><div class="actions"><a class="btn" href="Logo3D.html">Personnaliser / voir →</a></div></article>
-<article class="card"><h3>🔑 Porte-clés</h3><p>Ajoutez un dessin ou une idée pour créer votre porte-clé.</p><div class="price">6 €</div><div class="actions"><a class="btn" href="porte-cle.html">Personnaliser →</a></div></article>
-<article class="card"><h3>🖋️ Tampons</h3><p>Tampons personnalisés pour vos besoins personnels ou professionnels.</p><div class="price">À partir de 12,50 €</div><div class="actions"><a class="btn" href="tampons.html">Voir les tampons →</a></div></article>
-<article class="card"><h3>✨ Création sur mesure</h3><p>Vous ne trouvez pas ce qu'il vous faut ? Demandez un devis.</p><div class="actions"><a class="btn" href="creation-logo.html">Demander un projet →</a></div></article>
+<section class="hero"><div class="container"><div class="kicker">Personnalisation</div><h1>🔑 Porte-clé <span>personnalisé</span></h1><p>Envoyez le dessin ou l'idée que vous souhaitez retrouver sur votre porte-clé.</p></div></section>
+<section><div class="container"><div class="grid">
+<div class="card"><h2>Votre dessin</h2><p>Choisissez une image depuis votre appareil pour voir un aperçu. Pour l'envoi définitif, le fichier devra être joint à l'e-mail.</p>
+<label for="dessin" style="display:block;margin-top:20px">Dessin / image</label><input id="dessin" type="file" accept="image/*">
+<img id="preview" class="preview" alt="Aperçu du dessin">
+<div class="notice">💡 Conseil : utilisez une image nette avec un fond simple pour faciliter la préparation du modèle.</div>
+</div>
+<div class="form-box"><h2>Ajouter au panier</h2><div class="price">6 €</div>
+<label for="texte">Texte à ajouter (facultatif)</label><input id="texte" placeholder="Ex. Prénom, marque...">
+<label for="forme">Forme souhaitée</label><select id="forme"><option>Plaque</option><option>Rond</option><option>Logo</option><option>À définir</option></select>
+<button class="btn" style="width:100%;margin-top:20px" onclick="addKey()">Ajouter au panier</button>
+<div class="actions"><a class="btn secondary" href="panier.html">Voir le panier</a></div></div>
 </div></div></section>
+<section><div class="container"><div class="card"><h2>📩 Après la commande</h2><p>Le panier contient votre demande. Lors de la validation, vous pourrez envoyer les informations par e-mail et joindre votre dessin.</p></div></div></section>
+<script>
+const fileInput=document.getElementById("dessin"),preview=document.getElementById("preview");
+fileInput.addEventListener("change",()=>{const f=fileInput.files[0];if(!f){preview.style.display="none";return}preview.src=URL.createObjectURL(f);preview.style.display="block"});
+function addKey(){const text=document.getElementById("texte").value.trim(),forme=document.getElementById("forme").value;const desc=(text?"Texte: "+text+" | ":"")+"Forme: "+forme+(fileInput.files[0]?" | Dessin sélectionné":" | Dessin à joindre");addToCart("Porte-clé personnalisé",6,{key:"porte-cle-"+Date.now(),details:desc});}
+</script>
 </main>
 <footer><div class="container">© 2026 Aloïs Design<br>Impression 3D · Création de logos · Sculpture & gravure<br><br>
 <a class="gold" href="mailto:aloisryckebuschvandaele@gmail.com">aloisryckebuschvandaele@gmail.com</a></div></footer>

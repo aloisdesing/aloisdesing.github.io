@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Impression 3D | Aloïs Design</title><meta name="description" content="Aloïs Design : impression 3D, logos, tampons et créations personnalisées."><style>
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Logo 3D | Aloïs Design</title><meta name="description" content="Aloïs Design : impression 3D, logos, tampons et créations personnalisées."><style>
 :root{--bg:#090909;--bg2:#121212;--card:#171717;--gold:#d9a72b;--gold2:#f3cc68;--white:#fff;--gray:#aaa;--border:#292929}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -45,14 +45,23 @@ footer{border-top:1px solid var(--border);padding:35px 0;text-align:center;color
 <span class="cart-count" data-cart-count>0</span></a>
 </nav></div></header>
 <main>
-<section class="hero"><div class="container"><div class="kicker">Boutique</div><h1>Impression <span>3D</span></h1><p>Retrouvez les produits imprimés en 3D et accédez aux pages dédiées pour personnaliser votre projet.</p></div></section>
-<section><div class="container"><div class="section-title"><h2>Nos produits</h2><p>Chaque produit peut être ajouté au même panier.</p></div>
-<div class="grid">
-<article class="card"><h3>🎨 Logos 3D</h3><p>Logo en relief ou modèle personnalisé.</p><ul><li>Petit — 25 €</li><li>Moyen — 45 €</li><li>Grand — 70 €</li><li>Premium — à partir de 100 €</li></ul><div class="actions"><a class="btn" href="Logo3D.html">Personnaliser / voir →</a></div></article>
-<article class="card"><h3>🔑 Porte-clés</h3><p>Ajoutez un dessin ou une idée pour créer votre porte-clé.</p><div class="price">6 €</div><div class="actions"><a class="btn" href="porte-cle.html">Personnaliser →</a></div></article>
-<article class="card"><h3>🖋️ Tampons</h3><p>Tampons personnalisés pour vos besoins personnels ou professionnels.</p><div class="price">À partir de 12,50 €</div><div class="actions"><a class="btn" href="tampons.html">Voir les tampons →</a></div></article>
-<article class="card"><h3>✨ Création sur mesure</h3><p>Vous ne trouvez pas ce qu'il vous faut ? Demandez un devis.</p><div class="actions"><a class="btn" href="creation-logo.html">Demander un projet →</a></div></article>
+<section class="hero"><div class="container"><div class="kicker">Impression 3D</div><h1>🎨 Logo <span>3D</span></h1><p>Choisissez une taille puis ajoutez votre logo 3D au panier.</p></div></section>
+<section><div class="container"><div class="grid">
+<div class="card"><h2>Choisissez votre modèle</h2><p>Le prix dépend de la taille et de la complexité du modèle.</p>
+<div class="actions">
+<button class="btn" onclick="choose('Petit',25)">Petit — 25 €</button>
+<button class="btn" onclick="choose('Moyen',45)">Moyen — 45 €</button>
+<button class="btn" onclick="choose('Grand',70)">Grand — 70 €</button>
+<button class="btn secondary" onclick="choose('Premium',100)">Premium — à partir de 100 €</button>
+</div></div>
+<div class="form-box"><h2>Votre logo</h2><label for="logoFile">Fichier du logo</label><input id="logoFile" type="file" accept="image/*,.svg,.pdf">
+<label for="logoNote">Précisions</label><textarea id="logoNote" placeholder="Couleur, dimensions, texte, finition..."></textarea>
+<div class="notice">📩 Le fichier sera à joindre lors de l'envoi de la demande finale.</div><div id="chosen" class="gold">Aucune taille choisie.</div></div>
 </div></div></section>
+<script>
+let selected=null;
+function choose(size,price){selected={size,price};document.getElementById("chosen").textContent=size+" — "+price+" €";const note=document.getElementById("logoNote").value.trim();addToCart("Logo 3D "+size,price,{key:"logo3d-"+Date.now(),details:note||"Logo à fournir"});}
+</script>
 </main>
 <footer><div class="container">© 2026 Aloïs Design<br>Impression 3D · Création de logos · Sculpture & gravure<br><br>
 <a class="gold" href="mailto:aloisryckebuschvandaele@gmail.com">aloisryckebuschvandaele@gmail.com</a></div></footer>

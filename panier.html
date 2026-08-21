@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Impression 3D | Aloïs Design</title><meta name="description" content="Aloïs Design : impression 3D, logos, tampons et créations personnalisées."><style>
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Panier | Aloïs Design</title><meta name="description" content="Aloïs Design : impression 3D, logos, tampons et créations personnalisées."><style>
 :root{--bg:#090909;--bg2:#121212;--card:#171717;--gold:#d9a72b;--gold2:#f3cc68;--white:#fff;--gray:#aaa;--border:#292929}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -45,14 +45,21 @@ footer{border-top:1px solid var(--border);padding:35px 0;text-align:center;color
 <span class="cart-count" data-cart-count>0</span></a>
 </nav></div></header>
 <main>
-<section class="hero"><div class="container"><div class="kicker">Boutique</div><h1>Impression <span>3D</span></h1><p>Retrouvez les produits imprimés en 3D et accédez aux pages dédiées pour personnaliser votre projet.</p></div></section>
-<section><div class="container"><div class="section-title"><h2>Nos produits</h2><p>Chaque produit peut être ajouté au même panier.</p></div>
-<div class="grid">
-<article class="card"><h3>🎨 Logos 3D</h3><p>Logo en relief ou modèle personnalisé.</p><ul><li>Petit — 25 €</li><li>Moyen — 45 €</li><li>Grand — 70 €</li><li>Premium — à partir de 100 €</li></ul><div class="actions"><a class="btn" href="Logo3D.html">Personnaliser / voir →</a></div></article>
-<article class="card"><h3>🔑 Porte-clés</h3><p>Ajoutez un dessin ou une idée pour créer votre porte-clé.</p><div class="price">6 €</div><div class="actions"><a class="btn" href="porte-cle.html">Personnaliser →</a></div></article>
-<article class="card"><h3>🖋️ Tampons</h3><p>Tampons personnalisés pour vos besoins personnels ou professionnels.</p><div class="price">À partir de 12,50 €</div><div class="actions"><a class="btn" href="tampons.html">Voir les tampons →</a></div></article>
-<article class="card"><h3>✨ Création sur mesure</h3><p>Vous ne trouvez pas ce qu'il vous faut ? Demandez un devis.</p><div class="actions"><a class="btn" href="creation-logo.html">Demander un projet →</a></div></article>
+<section class="hero"><div class="container"><div class="kicker">Commande</div><h1>🛒 Votre <span>panier</span></h1><p>Tous les produits ajoutés depuis les différentes pages apparaissent ici.</p></div></section>
+<section><div class="container"><div id="empty" class="card" style="text-align:center;display:none"><h2>Votre panier est vide.</h2><p>Ajoutez un produit depuis la boutique.</p><div class="actions" style="justify-content:center"><a class="btn" href="impression-3d.html">Voir les produits</a></div></div>
+<div id="cartArea" style="display:none"><div class="table-wrap"><table class="cart-table"><thead><tr><th>Produit</th><th>Détails</th><th>Prix</th><th>Qté</th><th>Sous-total</th><th></th></tr></thead><tbody id="cartBody"></tbody></table></div>
+<div class="total-box"><div><div style="color:#aaa">Total produits</div><strong id="total" class="gold" style="font-size:30px">0,00 €</strong></div><div class="actions"><button class="btn secondary" onclick="clearCart()">Vider le panier</button><button class="btn" onclick="sendOrder()">📩 Envoyer la commande</button></div></div>
+<div class="notice">⚠️ Le bouton d'envoi ouvre votre application e-mail avec le récapitulatif. Vous pourrez vérifier les informations avant l'envoi.</div>
 </div></div></section>
+<script>
+function euros(n){return Number(n).toFixed(2).replace(".",",")+" €"}
+function renderCart(){const cart=getCart(),empty=document.getElementById("empty"),area=document.getElementById("cartArea"),body=document.getElementById("cartBody");if(!cart.length){empty.style.display="block";area.style.display="none";return}empty.style.display="none";area.style.display="block";body.innerHTML="";let total=0;
+cart.forEach(i=>{let sub=Number(i.price)*Number(i.quantity);total+=sub;let tr=document.createElement("tr");tr.innerHTML=`<td><strong>${escapeHtml(i.name)}</strong></td><td>${escapeHtml(i.details||"—")}</td><td>${euros(i.price)}</td><td><input class="qty" type="number" min="1" value="${Number(i.quantity)}" onchange="changeQty('${String(i.key).replace(/'/g,"&#39;")}',this.value)"></td><td>${euros(sub)}</td><td><button class="btn secondary" onclick="removeFromCart('${String(i.key).replace(/'/g,"&#39;")}')">Supprimer</button></td>`;body.appendChild(tr)});document.getElementById("total").textContent=euros(total)}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]))}
+function clearCart(){if(confirm("Vider le panier ?")){localStorage.removeItem(CART_KEY);updateCartCount();renderCart()}}
+function sendOrder(){const cart=getCart();if(!cart.length)return;let total=cart.reduce((s,i)=>s+Number(i.price)*Number(i.quantity),0);let lines=cart.map(i=>`- ${i.name} x${i.quantity} — ${euros(Number(i.price)*Number(i.quantity))}${i.details?" | "+i.details:""}`).join("%0D%0A");let subject=encodeURIComponent("Commande Aloïs Design");let body=encodeURIComponent("Bonjour,%0D%0A%0D%0AJe souhaite commander :%0D%0A"+cart.map(i=>`- ${i.name} x${i.quantity} — ${euros(Number(i.price)*Number(i.quantity))}${i.details?" | "+i.details:""}`).join("\n")+"\n\nTotal : "+euros(total)+"\n\nNom / prénom : \nAdresse : \nTéléphone : \n\nMerci.");location.href="mailto:aloisryckebuschvandaele@gmail.com?subject="+subject+"&body="+body}
+renderCart();window.addEventListener("cartUpdated",renderCart);
+</script>
 </main>
 <footer><div class="container">© 2026 Aloïs Design<br>Impression 3D · Création de logos · Sculpture & gravure<br><br>
 <a class="gold" href="mailto:aloisryckebuschvandaele@gmail.com">aloisryckebuschvandaele@gmail.com</a></div></footer>
