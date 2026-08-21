@@ -1,80 +1,837 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Logo 3D | Aloïs Design</title><meta name="description" content="Aloïs Design : impression 3D, logos, tampons et créations personnalisées."><style>
-:root{--bg:#090909;--bg2:#121212;--card:#171717;--gold:#d9a72b;--gold2:#f3cc68;--white:#fff;--gray:#aaa;--border:#292929}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--white);line-height:1.6}
-a{text-decoration:none;color:inherit}.container{width:min(1120px,92%);margin:auto}
-header{position:sticky;top:0;z-index:100;background:rgba(9,9,9,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
-nav{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:15px}
-.logo{font-size:20px;font-weight:900;letter-spacing:2px;color:var(--gold);white-space:nowrap}.logo span{color:#fff}
-.nav-links{display:flex;gap:18px;align-items:center;color:#ddd;font-size:14px}.nav-links a:hover{color:var(--gold2)}
-.cart-link{position:relative;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:1px solid #333;border-radius:10px;background:#111}
-.cart-link:hover{border-color:var(--gold)}.cart-icon{width:25px;height:25px;fill:none;stroke:var(--gold2);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.cart-count{position:absolute;top:-7px;right:-7px;min-width:20px;height:20px;padding:2px 5px;border-radius:50%;background:var(--gold);color:#111;font-size:11px;font-weight:900;text-align:center}
-.btn{display:inline-block;padding:13px 20px;border-radius:10px;background:var(--gold);border:1px solid var(--gold);color:#111;font-weight:900;cursor:pointer}.btn:hover{background:var(--gold2);border-color:var(--gold2)}
-.btn.secondary{background:transparent;border-color:#444;color:#fff}.btn.secondary:hover{border-color:var(--gold);color:var(--gold2)}
-.hero{padding:100px 0 80px;background:radial-gradient(circle at 80% 20%,#30240c 0,transparent 35%)}
-.kicker{color:var(--gold2);text-transform:uppercase;letter-spacing:2px;font-size:13px;font-weight:800;margin-bottom:15px}
-h1{font-size:clamp(42px,7vw,76px);line-height:1.02;margin-bottom:20px}.hero h1 span{color:var(--gold)}
-.hero p{max-width:760px;color:var(--gray);font-size:19px}.hero-buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
-section{padding:75px 0}.section-title{margin-bottom:35px}.section-title.center{text-align:center}.section-title h2{font-size:clamp(30px,4vw,44px);line-height:1.1;margin-bottom:10px}.section-title p{color:var(--gray)}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.card,.service,.form-box{padding:28px;border:1px solid var(--border);background:linear-gradient(145deg,#181818,#101010);border-radius:18px}
-.card h3,.service h3{font-size:24px;margin-bottom:9px}.card p,.service p{color:var(--gray)}.card ul{list-style:none;margin-top:15px}.card li{margin:8px 0;color:#ddd}.card li:before{content:"✓";color:var(--gold2);font-weight:bold;margin-right:9px}
-.service:hover,.card:hover{border-color:#4a3a15;transform:translateY(-2px);transition:.2s}.service-icon{font-size:38px;margin-bottom:12px}.service h3{color:var(--gold2)}
-.price{font-size:26px;font-weight:900;color:var(--gold2);margin:15px 0}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-form label{display:block;margin:12px 0 6px;color:#ddd;font-size:14px}input,select,textarea{width:100%;padding:12px;border-radius:9px;border:1px solid #333;background:#080808;color:#fff;font:inherit}textarea{min-height:130px;resize:vertical}input:focus,select:focus,textarea:focus{outline:1px solid var(--gold);border-color:var(--gold)}
-.notice{padding:15px 18px;border:1px solid #4a3a15;background:#171207;border-radius:12px;color:#ddd;margin:20px 0}.gold{color:var(--gold2)}
-footer{border-top:1px solid var(--border);padding:35px 0;text-align:center;color:#888;font-size:13px}
-.table-wrap{overflow:auto}.cart-table{width:100%;border-collapse:collapse}.cart-table th,.cart-table td{padding:14px 10px;border-bottom:1px solid var(--border);text-align:left}.cart-table th{color:var(--gold2)}
-.qty{width:75px}.total-box{margin-top:25px;padding:25px;border:1px solid var(--border);border-radius:16px;background:#101010;display:flex;justify-content:space-between;align-items:center;gap:15px}
-.preview{display:none;margin-top:15px;max-width:220px;max-height:220px;border-radius:12px;border:1px solid var(--border)}
-@media(max-width:850px){.nav-links{display:none}.grid,.grid3{grid-template-columns:1fr}.hero{padding-top:70px}.hero h1{font-size:48px}.total-box{flex-direction:column;align-items:stretch}}
-@media(max-width:500px){.container{width:90%}.hero h1{font-size:42px}.hero-buttons,.actions{flex-direction:column}.btn{width:100%;text-align:center}section{padding:55px 0}}
-</style></head><body>
-<header><div class="container"><nav>
-<a href="index.html" class="logo">ALOÏS <span>DESIGN</span></a>
-<div class="nav-links">
-<a href="index.html">Accueil</a>
-<a href="impression-3d.html">Impression 3D</a>
-<a href="creation-logo.html">Création de logo</a>
-<a href="tampons.html">Tampons</a>
-</div>
-<a href="panier.html" class="cart-link" aria-label="Panier">
-<svg class="cart-icon" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.5"></circle><circle cx="18" cy="20" r="1.5"></circle><path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L21 8H6"></path></svg>
-<span class="cart-count" data-cart-count>0</span></a>
-</nav></div></header>
-<main>
-<section class="hero"><div class="container"><div class="kicker">Impression 3D</div><h1>🎨 Logo <span>3D</span></h1><p>Choisissez une taille puis ajoutez votre logo 3D au panier.</p></div></section>
-<section><div class="container"><div class="grid">
-<div class="card"><h2>Choisissez votre modèle</h2><p>Le prix dépend de la taille et de la complexité du modèle.</p>
-<div class="actions">
-<button class="btn" onclick="choose('Petit',25)">Petit — 25 €</button>
-<button class="btn" onclick="choose('Moyen',45)">Moyen — 45 €</button>
-<button class="btn" onclick="choose('Grand',70)">Grand — 70 €</button>
-<button class="btn secondary" onclick="choose('Premium',100)">Premium — à partir de 100 €</button>
-</div></div>
-<div class="form-box"><h2>Votre logo</h2><label for="logoFile">Fichier du logo</label><input id="logoFile" type="file" accept="image/*,.svg,.pdf">
-<label for="logoNote">Précisions</label><textarea id="logoNote" placeholder="Couleur, dimensions, texte, finition..."></textarea>
-<div class="notice">📩 Le fichier sera à joindre lors de l'envoi de la demande finale.</div><div id="chosen" class="gold">Aucune taille choisie.</div></div>
-</div></div></section>
-<script>
-let selected=null;
-function choose(size,price){selected={size,price};document.getElementById("chosen").textContent=size+" — "+price+" €";const note=document.getElementById("logoNote").value.trim();addToCart("Logo 3D "+size,price,{key:"logo3d-"+Date.now(),details:note||"Logo à fournir"});}
-</script>
-</main>
-<footer><div class="container">© 2026 Aloïs Design<br>Impression 3D · Création de logos · Sculpture & gravure<br><br>
-<a class="gold" href="mailto:aloisryckebuschvandaele@gmail.com">aloisryckebuschvandaele@gmail.com</a></div></footer>
+<!DOCTYPE html>
+<html lang="fr">
 
-<script>
-const CART_KEY="aloisDesignCart";
-function getCart(){try{return JSON.parse(localStorage.getItem(CART_KEY))||[]}catch(e){return[]}}
-function saveCart(cart){localStorage.setItem(CART_KEY,JSON.stringify(cart));updateCartCount();window.dispatchEvent(new Event("cartUpdated"))}
-function updateCartCount(){let n=getCart().reduce((s,i)=>s+(Number(i.quantity)||0),0);document.querySelectorAll("[data-cart-count]").forEach(e=>e.textContent=n)}
-function addToCart(name,price,extra={}){let cart=getCart();let key=extra.key||name;let item=cart.find(i=>i.key===key);if(item)item.quantity=(Number(item.quantity)||0)+1;else cart.push({key,name,price:Number(price),quantity:1,...extra});saveCart(cart);alert(name+" a été ajouté au panier.");}
-function removeFromCart(key){saveCart(getCart().filter(i=>i.key!==key));renderCart?.()}
-function changeQty(key,q){let cart=getCart(),i=cart.find(x=>x.key===key);if(!i)return;i.quantity=Math.max(1,Number(q)||1);saveCart(cart);renderCart?.()}
-updateCartCount();
-window.addEventListener("storage",updateCartCount);window.addEventListener("cartUpdated",updateCartCount);
-</script>
-</body></html>
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO -->
+  <title>Logo en 3D personnalisé | Création de logo 3D – Aloïs Design</title>
+
+  <meta
+    name="description"
+    content="Aloïs Design crée des logos en 3D personnalisés. Création, modélisation et impression 3D de logos pour entreprises, associations, commerces et particuliers."
+  >
+
+  <meta
+    name="keywords"
+    content="logo en 3D, logo 3D, création logo 3D, logo 3D personnalisé, modélisation logo 3D, impression logo 3D, création logo, Aloïs Design"
+  >
+
+  <meta name="robots" content="index, follow">
+
+  <!-- URL officielle de la page -->
+  <link
+    rel="canonical"
+    href="https://aloisdesing.github.io/logo3D.html"
+  >
+
+  <!-- Open Graph -->
+  <meta
+    property="og:title"
+    content="Logo en 3D personnalisé | Aloïs Design"
+  >
+
+  <meta
+    property="og:description"
+    content="Création de logos en 3D personnalisés par Aloïs Design. Modélisation et impression 3D sur mesure."
+  >
+
+  <meta property="og:type" content="website">
+
+  <meta
+    property="og:url"
+    content="https://aloisdesing.github.io/logo3D.html"
+  >
+
+  <!-- Données structurées pour Google -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Création de logo en 3D",
+    "description": "Création et modélisation de logos en 3D personnalisés pour entreprises, associations, commerces et particuliers.",
+    "provider": {
+      "@type": "Organization",
+      "name": "Aloïs Design",
+      "url": "https://aloisdesing.github.io/"
+    },
+    "serviceType": "Création de logo en 3D",
+    "areaServed": "France",
+    "url": "https://aloisdesing.github.io/logo3D.html"
+  }
+  </script>
+
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5f5f5;
+      color: #222;
+      line-height: 1.6;
+    }
+
+    /* HEADER */
+
+    header {
+      background: #111;
+      color: white;
+      padding: 18px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .header-container {
+      max-width: 1100px;
+      margin: auto;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      gap: 20px;
+    }
+
+    .logo {
+      color: white;
+      text-decoration: none;
+
+      font-size: 24px;
+      font-weight: bold;
+
+      letter-spacing: 1px;
+    }
+
+    nav {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #ddd;
+    }
+
+
+    /* HERO */
+
+    .hero {
+      background: linear-gradient(135deg, #111, #333);
+
+      color: white;
+
+      padding: 80px 20px;
+
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .hero h1 {
+      font-size: 46px;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 20px;
+
+      max-width: 750px;
+
+      margin: 0 auto 30px;
+
+      color: #eee;
+    }
+
+    .btn {
+      display: inline-block;
+
+      background: white;
+      color: #111;
+
+      padding: 14px 25px;
+
+      border-radius: 8px;
+
+      text-decoration: none;
+
+      font-weight: bold;
+
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      background: #ddd;
+    }
+
+
+    /* SECTIONS */
+
+    section {
+      max-width: 1100px;
+
+      margin: auto;
+
+      padding: 60px 20px;
+    }
+
+    h2 {
+      font-size: 32px;
+
+      margin-bottom: 20px;
+
+      text-align: center;
+    }
+
+    .intro {
+      max-width: 850px;
+
+      margin: auto;
+
+      text-align: center;
+
+      font-size: 18px;
+    }
+
+
+    /* SERVICES */
+
+    .services {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 25px;
+
+      margin-top: 35px;
+    }
+
+    .card {
+      background: white;
+
+      padding: 30px 22px;
+
+      border-radius: 12px;
+
+      box-shadow:
+        0 5px 20px rgba(0,0,0,0.08);
+
+      text-align: center;
+    }
+
+    .card .icon {
+      font-size: 45px;
+
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      margin-bottom: 12px;
+
+      font-size: 22px;
+    }
+
+    .card p {
+      color: #555;
+    }
+
+
+    /* ETAPES */
+
+    .process {
+      display: grid;
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
+      gap: 20px;
+
+      margin-top: 35px;
+    }
+
+    .step {
+      background: white;
+
+      border-radius: 12px;
+
+      padding: 25px 18px;
+
+      text-align: center;
+
+      box-shadow:
+        0 5px 20px rgba(0,0,0,0.07);
+    }
+
+    .number {
+      width: 45px;
+      height: 45px;
+
+      margin: 0 auto 15px;
+
+      background: #111;
+
+      color: white;
+
+      border-radius: 50%;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      font-weight: bold;
+
+      font-size: 20px;
+    }
+
+
+    /* CTA */
+
+    .cta {
+      background: #111;
+
+      color: white;
+
+      text-align: center;
+
+      border-radius: 15px;
+
+      padding: 55px 25px;
+    }
+
+    .cta h2 {
+      margin-bottom: 15px;
+    }
+
+    .cta p {
+      margin-bottom: 25px;
+
+      color: #ddd;
+    }
+
+
+    /* FOOTER */
+
+    footer {
+      background: #111;
+
+      color: #aaa;
+
+      text-align: center;
+
+      padding: 30px 20px;
+
+      margin-top: 40px;
+    }
+
+    footer a {
+      color: white;
+
+      text-decoration: none;
+    }
+
+
+    /* MOBILE */
+
+    @media (max-width: 800px) {
+
+      .hero h1 {
+        font-size: 34px;
+      }
+
+      .services {
+        grid-template-columns: 1fr;
+      }
+
+      .process {
+        grid-template-columns:
+          1fr 1fr;
+      }
+
+      .header-container {
+        flex-direction: column;
+      }
+
+      nav {
+        justify-content: center;
+      }
+    }
+
+
+    @media (max-width: 500px) {
+
+      .process {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding: 60px 15px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- HEADER -->
+
+  <header>
+
+    <div class="header-container">
+
+      <a href="index.html" class="logo">
+        ALOÏS DESIGN
+      </a>
+
+      <nav>
+
+        <a href="index.html">
+          Accueil
+        </a>
+
+        <a href="impression.html">
+          Impression 3D
+        </a>
+
+        <a href="logo3D.html">
+          Logo 3D
+        </a>
+
+        <a href="porte-cle.html">
+          Porte-clés
+        </a>
+
+        <a href="tampon.html">
+          Tampons
+        </a>
+
+        <a href="panier.html">
+          Panier
+        </a>
+
+      </nav>
+
+    </div>
+
+  </header>
+
+
+
+  <!-- CONTENU PRINCIPAL -->
+
+  <main>
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+      <div class="hero-content">
+
+        <h1>
+          Logo en 3D personnalisé
+        </h1>
+
+        <p>
+          Donnez du relief à votre identité avec un
+          <strong>logo en 3D</strong>
+          créé sur mesure par
+          <strong>Aloïs Design</strong>.
+        </p>
+
+        <a
+          href="#commande"
+          class="btn"
+        >
+          Demander mon logo 3D
+        </a>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- PRESENTATION -->
+
+    <section>
+
+      <h2>
+        Création de logo 3D
+      </h2>
+
+      <div class="intro">
+
+        <p>
+          Vous recherchez un
+          <strong>logo en 3D</strong>
+          pour votre entreprise, votre commerce,
+          votre association ou votre projet ?
+          Aloïs Design vous accompagne dans la création
+          d'un
+          <strong>logo 3D personnalisé</strong>.
+        </p>
+
+        <br>
+
+        <p>
+          Votre logo peut être conçu pour différents
+          projets, notamment la
+          <strong>modélisation 3D</strong>,
+          l'<strong>impression 3D</strong>
+          ou la réalisation d'un objet personnalisé.
+        </p>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- SERVICES -->
+
+    <section>
+
+      <h2>
+        Nos services de logo en 3D
+      </h2>
+
+      <div class="services">
+
+
+        <div class="card">
+
+          <div class="icon">
+            🎨
+          </div>
+
+          <h3>
+            Création personnalisée
+          </h3>
+
+          <p>
+            Nous adaptons votre projet afin de créer
+            un <strong>logo 3D personnalisé</strong>
+            correspondant à votre identité.
+          </p>
+
+        </div>
+
+
+
+        <div class="card">
+
+          <div class="icon">
+            🧊
+          </div>
+
+          <h3>
+            Modélisation 3D
+          </h3>
+
+          <p>
+            Votre logo peut être transformé en modèle
+            tridimensionnel adapté à votre projet.
+          </p>
+
+        </div>
+
+
+
+        <div class="card">
+
+          <div class="icon">
+            🖨️
+          </div>
+
+          <h3>
+            Impression 3D
+          </h3>
+
+          <p>
+            Votre modèle peut ensuite être préparé
+            pour une <strong>impression 3D</strong>
+            personnalisée.
+          </p>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+
+    <!-- POUR QUI -->
+
+    <section>
+
+      <h2>
+        Un logo 3D pour votre projet
+      </h2>
+
+      <div class="intro">
+
+        <p>
+          La création de logo en 3D peut convenir
+          aux <strong>entreprises</strong>,
+          commerces, associations, événements,
+          créateurs et particuliers.
+        </p>
+
+        <br>
+
+        <p>
+          Que vous possédiez déjà un logo ou que vous
+          souhaitiez partir d'une nouvelle idée,
+          nous pouvons étudier votre projet de
+          <strong>logo 3D sur mesure</strong>.
+        </p>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ETAPES -->
+
+    <section>
+
+      <h2>
+        Comment créer votre logo en 3D ?
+      </h2>
+
+      <div class="process">
+
+
+        <div class="step">
+
+          <div class="number">
+            1
+          </div>
+
+          <h3>
+            Votre idée
+          </h3>
+
+          <p>
+            Vous nous expliquez votre projet et
+            nous envoyez votre logo ou vos indications.
+          </p>
+
+        </div>
+
+
+
+        <div class="step">
+
+          <div class="number">
+            2
+          </div>
+
+          <h3>
+            Modélisation
+          </h3>
+
+          <p>
+            Nous préparons votre logo afin d'obtenir
+            un rendu en trois dimensions.
+          </p>
+
+        </div>
+
+
+
+        <div class="step">
+
+          <div class="number">
+            3
+          </div>
+
+          <h3>
+            Validation
+          </h3>
+
+          <p>
+            Le projet est vérifié avant la préparation
+            finale.
+          </p>
+
+        </div>
+
+
+
+        <div class="step">
+
+          <div class="number">
+            4
+          </div>
+
+          <h3>
+            Réalisation
+          </h3>
+
+          <p>
+            Le modèle peut ensuite être préparé
+            pour votre projet d'impression 3D.
+          </p>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+
+    <!-- TEXTE SEO -->
+
+    <section>
+
+      <h2>
+        Logo 3D personnalisé en France
+      </h2>
+
+      <div class="intro">
+
+        <p>
+          Aloïs Design propose la
+          <strong>création de logos en 3D</strong>
+          et la
+          <strong>modélisation de logos personnalisés</strong>.
+          L'objectif est de transformer votre identité
+          visuelle en un modèle 3D adapté à vos besoins.
+        </p>
+
+        <br>
+
+        <p>
+          Si vous recherchez une
+          <strong>création de logo 3D</strong>,
+          un <strong>logo en relief</strong>
+          ou un modèle destiné à
+          l'<strong>impression 3D</strong>,
+          contactez Aloïs Design pour présenter
+          votre projet.
+        </p>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- CONTACT -->
+
+    <section id="commande">
+
+      <div class="cta">
+
+        <h2>
+          Vous voulez votre logo en 3D ?
+        </h2>
+
+        <p>
+          Présentez-nous votre projet et nous pourrons
+          étudier votre demande.
+        </p>
+
+        <a
+          class="btn"
+          href="mailto:aloisryckebuschvandaele@gmail.com?subject=Demande%20de%20logo%20en%203D"
+        >
+          Demander mon logo 3D
+        </a>
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <p>
+      © 2026
+      <strong>Aloïs Design</strong>
+      — Création de logo en 3D et impression 3D.
+    </p>
+
+    <br>
+
+    <p>
+
+      <a href="index.html">
+        Accueil
+      </a>
+
+      ·
+
+      <a href="impression.html">
+        Impression 3D
+      </a>
+
+      ·
+
+      <a href="logo3D.html">
+        Logo 3D
+      </a>
+
+      ·
+
+      <a href="porte-cle.html">
+        Porte-clés
+      </a>
+
+      ·
+
+      <a href="tampon.html">
+        Tampons
+      </a>
+
+      ·
+
+      <a href="panier.html">
+        Panier
+      </a>
+
+    </p>
+
+  </footer>
+
+
+</body>
+
+</html>
