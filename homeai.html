@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>HomeAI V0.5</title>
+<title>HomeAI V0.5.1</title>
 
 <style>
 body {
@@ -92,10 +92,11 @@ Appuie sur le micro et parle.
 </div>
 
 <div id="resultat">
-🧠 HomeAI : aucune commande.
+🤖 HomeAI : aucune commande.
 </div>
 
 <div id="appareils">
+
 <h2>🏠 Maison</h2>
 
 <div class="appareil">
@@ -159,10 +160,18 @@ if (!SpeechRecognition) {
 
     micro.addEventListener("click", () => {
 
-        reconnaissance.start();
+        try {
 
-        status.innerText = "🎙️ J'écoute...";
-        micro.classList.add("ecoute");
+            reconnaissance.start();
+
+            status.innerText = "🎙️ J'écoute...";
+            micro.classList.add("ecoute");
+
+        } catch (erreur) {
+
+            console.log(erreur);
+
+        }
 
     });
 
@@ -247,12 +256,130 @@ const appareils = [
 
 
 /* =========================================
+   VOCABULAIRE HOMEAI
+========================================= */
+
+const vocabulaire = {
+
+    allumer: [
+        "allume",
+        "allumer",
+        "allumes",
+        "allume-moi",
+        "allume moi",
+        "allumez",
+        "active",
+        "activer",
+        "actives",
+        "active-moi",
+        "démarre",
+        "demarre",
+        "démarrer",
+        "demarrer",
+        "lance",
+        "lancer",
+        "lances",
+        "mets",
+        "met",
+        "mettre",
+        "met-moi",
+        "met moi"
+    ],
+
+    eteindre: [
+        "éteins",
+        "eteins",
+        "éteindre",
+        "eteindre",
+        "éteint",
+        "eteint",
+        "éteignez",
+        "eteignez",
+        "éteins-moi",
+        "eteins moi",
+        "coupe",
+        "couper",
+        "coupes",
+        "coupez",
+        "désactive",
+        "desactive",
+        "désactiver",
+        "desactiver",
+        "arrête",
+        "arrete",
+        "arrêter",
+        "arreter"
+    ],
+
+    ouvrir: [
+        "ouvre",
+        "ouvrir",
+        "ouvres",
+        "ouvrez",
+        "ouvre-moi",
+        "ouvre moi",
+        "ouvre-le",
+        "ouvre le",
+        "ouvre-la",
+        "ouvre la",
+        "ouvert"
+    ],
+
+    fermer: [
+        "ferme",
+        "fermer",
+        "fermes",
+        "fermez",
+        "ferme-moi",
+        "ferme moi",
+        "ferme-le",
+        "ferme le",
+        "ferme-la",
+        "ferme la",
+        "fermé",
+        "fermee",
+        "fermer ça",
+        "ferme ça"
+    ]
+
+};
+
+
+/* =========================================
+   FONCTION POUR CHERCHER UN MOT
+========================================= */
+
+function contientUnMot(texte, liste) {
+
+    for (const mot of liste) {
+
+        if (texte.includes(mot)) {
+            return true;
+        }
+
+    }
+
+    return false;
+}
+
+
+/* =========================================
    ANALYSE DE LA COMMANDE
 ========================================= */
 
 function analyserCommande(commande) {
 
-    const c = commande.toLowerCase();
+    let c = commande.toLowerCase();
+
+    /*
+       On enlève quelques signes
+       pour faciliter la compréhension.
+    */
+
+    c = c
+        .replace(/[.,!?]/g, "")
+        .trim();
+
 
     let appareil = null;
     let action = null;
@@ -260,152 +387,390 @@ function analyserCommande(commande) {
     let valeur = null;
 
 
-    /* -------- PIÈCE -------- */
+    /* =====================================
+       DÉTECTION DE LA PIÈCE
+    ===================================== */
 
-    if (c.includes("salon")) {
+    if (
+        c.includes("salon") ||
+        c.includes("séjour") ||
+        c.includes("sejour")
+    ) {
+
         piece = "salon";
+
     }
 
-    else if (c.includes("cuisine")) {
-        piece = "cuisine";
-    }
+    else if (
+        c.includes("chambre") ||
+        c.includes("chambre à coucher")
+    ) {
 
-    else if (c.includes("chambre")) {
         piece = "chambre";
+
+    }
+
+    else if (
+        c.includes("cuisine")
+    ) {
+
+        piece = "cuisine";
+
+    }
+
+    else if (
+        c.includes("salle de bain") ||
+        c.includes("sdb")
+    ) {
+
+        piece = "salle de bain";
+
     }
 
 
-    /* -------- TV -------- */
+    /* =====================================
+       TÉLÉVISION
+    ===================================== */
 
     if (
         c.includes("télé") ||
         c.includes("tele") ||
+        c.includes("télévision") ||
+        c.includes("television") ||
         c.includes("tv")
     ) {
 
         appareil = "TV";
 
+
         if (
-            c.includes("allume") ||
-            c.includes("mets") ||
-            c.includes("regarder")
+            contientUnMot(c, vocabulaire.allumer) ||
+            c.includes("regarder la télé") ||
+            c.includes("regarder la tv") ||
+            c.includes("je veux regarder")
         ) {
+
             action = "ALLUMER";
+
         }
 
+
         else if (
-            c.includes("éteins") ||
-            c.includes("eteins")
+            contientUnMot(c, vocabulaire.eteindre) ||
+            c.includes("je ne veux plus regarder")
         ) {
+
             action = "ÉTEINDRE";
+
         }
+
     }
 
 
-    /* -------- LUMIÈRE -------- */
+    /* =====================================
+       LUMIÈRE
+    ===================================== */
 
     else if (
         c.includes("lumière") ||
         c.includes("lumiere") ||
-        c.includes("lampe")
+        c.includes("lampe") ||
+        c.includes("éclairage") ||
+        c.includes("eclairage")
     ) {
 
         appareil = "LUMIERE";
 
+
         if (
-            c.includes("allume") ||
-            c.includes("mets")
+            contientUnMot(c, vocabulaire.allumer)
         ) {
+
             action = "ALLUMER";
+
         }
 
+
         else if (
-            c.includes("éteins") ||
-            c.includes("eteins")
+            contientUnMot(c, vocabulaire.eteindre)
         ) {
+
             action = "ÉTEINDRE";
+
         }
+
     }
 
 
-    /* -------- VOLETS -------- */
+    /* =====================================
+       VOLETS
+    ===================================== */
 
-    else if (c.includes("volet")) {
+    else if (
+        c.includes("volet") ||
+        c.includes("volets") ||
+        c.includes("store") ||
+        c.includes("stores")
+    ) {
 
         appareil = "VOLETS";
 
+
         if (
-            c.includes("ouvre") ||
-            c.includes("ouvrir")
+            contientUnMot(c, vocabulaire.ouvrir)
         ) {
+
             action = "OUVRIR";
+
         }
 
+
         else if (
-            c.includes("ferme") ||
-            c.includes("fermer")
+            contientUnMot(c, vocabulaire.fermer)
         ) {
+
             action = "FERMER";
+
         }
+
     }
 
 
-    /* -------- FRIGO -------- */
+    /* =====================================
+       FRIGO
+    ===================================== */
 
     else if (
         c.includes("frigo") ||
         c.includes("réfrigérateur") ||
-        c.includes("refrigerateur")
+        c.includes("refrigerateur") ||
+        c.includes("frigidaire")
     ) {
 
         appareil = "FRIGO";
 
+
         if (
-            c.includes("ouvre") ||
-            c.includes("ouvrir")
+            contientUnMot(c, vocabulaire.ouvrir)
         ) {
+
             action = "OUVRIR";
+
         }
 
+
         else if (
-            c.includes("ferme") ||
-            c.includes("fermer")
+            contientUnMot(c, vocabulaire.fermer)
         ) {
+
             action = "FERMER";
+
         }
+
     }
 
 
-    /* -------- FOUR -------- */
+    /* =====================================
+       FOUR
+    ===================================== */
 
-    else if (c.includes("four")) {
+    else if (
+        c.includes("four")
+    ) {
 
         appareil = "FOUR";
+
+
+        /*
+           On cherche une température
+           entre 50 et 300°C.
+        */
 
         for (let i = 50; i <= 300; i++) {
 
             if (c.includes(i.toString())) {
 
                 valeur = i + "°C";
+
                 action = "RÉGLER";
 
                 break;
+
             }
+
         }
+
+
+        /*
+           Si aucune température n'est
+           donnée, on peut quand même
+           comprendre une commande simple.
+        */
+
+        if (
+            action === null &&
+            contientUnMot(c, vocabulaire.allumer)
+        ) {
+
+            action = "ALLUMER";
+
+        }
+
+
+        if (
+            action === null &&
+            contientUnMot(c, vocabulaire.eteindre)
+        ) {
+
+            action = "ÉTEINDRE";
+
+        }
+
     }
 
 
-    /* =========================================
-       RECHERCHE DANS LA MAISON
-    ========================================= */
+    /* =====================================
+       CHAUFFAGE
+    ===================================== */
 
-    if (appareil === null || action === null) {
+    else if (
+        c.includes("chauffage") ||
+        c.includes("radiateur") ||
+        c.includes("chauffe")
+    ) {
+
+        appareil = "CHAUFFAGE";
+
+
+        for (let i = 5; i <= 35; i++) {
+
+            if (c.includes(i.toString())) {
+
+                valeur = i + "°C";
+
+                action = "RÉGLER";
+
+                break;
+
+            }
+
+        }
+
+
+        if (
+            action === null &&
+            contientUnMot(c, vocabulaire.allumer)
+        ) {
+
+            action = "ALLUMER";
+
+        }
+
+
+        if (
+            action === null &&
+            contientUnMot(c, vocabulaire.eteindre)
+        ) {
+
+            action = "ÉTEINDRE";
+
+        }
+
+    }
+
+
+    /* =====================================
+       MUSIQUE / SPOTIFY
+    ===================================== */
+
+    else if (
+        c.includes("spotify") ||
+        c.includes("musique") ||
+        c.includes("chanson") ||
+        c.includes("son")
+    ) {
+
+        appareil = "MUSIQUE";
+
+
+        if (
+            contientUnMot(c, vocabulaire.allumer) ||
+            c.includes("joue") ||
+            c.includes("jouer") ||
+            c.includes("écoute") ||
+            c.includes("ecoute")
+        ) {
+
+            action = "LANCER";
+
+            valeur = "Spotify";
+
+        }
+
+
+        else if (
+            contientUnMot(c, vocabulaire.eteindre)
+        ) {
+
+            action = "ARRÊTER";
+
+        }
+
+    }
+
+
+    /* =====================================
+       MICRO-ONDES
+    ===================================== */
+
+    else if (
+        c.includes("micro-onde") ||
+        c.includes("micro onde") ||
+        c.includes("microondes")
+    ) {
+
+        appareil = "MICRO-ONDES";
+
+
+        if (
+            contientUnMot(c, vocabulaire.allumer)
+        ) {
+
+            action = "ALLUMER";
+
+        }
+
+
+        else if (
+            contientUnMot(c, vocabulaire.eteindre)
+        ) {
+
+            action = "ÉTEINDRE";
+
+        }
+
+    }
+
+
+    /* =====================================
+       RECHERCHE DE L'APPAREIL
+    ===================================== */
+
+    if (
+        appareil === null ||
+        action === null
+    ) {
 
         resultat.innerHTML =
+
             "🤖 <strong>HomeAI :</strong><br><br>" +
-            "Je n'ai pas compris la commande.";
+
+            "Je n'ai pas encore compris cette commande.<br><br>" +
+
+            "🗣️ Essaie de la reformuler.";
 
         return;
+
     }
 
 
@@ -422,16 +787,19 @@ function analyserCommande(commande) {
             ) {
 
                 appareilTrouve = a;
+
                 break;
 
             }
+
         }
+
     }
 
 
-    /* =========================================
+    /* =====================================
        APPAREIL TROUVÉ
-    ========================================= */
+    ===================================== */
 
     if (appareilTrouve !== null) {
 
@@ -469,7 +837,9 @@ function analyserCommande(commande) {
 
             "J'ai compris la commande, mais je ne trouve pas " +
 
-            "<strong>" + appareil + "</strong>" +
+            "<strong>" +
+            appareil +
+            "</strong>" +
 
             " dans cette pièce.";
 
