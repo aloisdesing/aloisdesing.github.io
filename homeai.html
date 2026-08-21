@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HomeAI V1.3</title>
+<title>HomeAI V1.4</title>
 
 <style>
 * {
@@ -12,90 +12,87 @@
 
 body {
     margin: 0;
-    background: #101114;
+    background: #0e1014;
     color: white;
     font-family: Arial, sans-serif;
 }
 
 .container {
-    max-width: 900px;
+    width: 100%;
+    max-width: 950px;
     margin: auto;
-    padding: 20px 16px 50px;
+    padding: 20px;
 }
 
 header {
     text-align: center;
+    margin-bottom: 20px;
 }
 
 h1 {
     font-size: 42px;
-    margin: 5px;
+    margin: 5px 0;
 }
 
 .subtitle {
-    color: #999;
-    margin-bottom: 20px;
-}
-
-.status,
-.panel {
-    background: #1b1d22;
-    border-radius: 20px;
-    padding: 20px;
-    margin-top: 18px;
+    color: #9297a1;
 }
 
 .status {
     text-align: center;
+    background: #191c22;
+    border-radius: 18px;
+    padding: 18px;
+    margin-bottom: 18px;
 }
 
 .nova {
     text-align: center;
-    font-size: 30px;
-    margin: 25px;
+    font-size: 32px;
+    margin: 20px;
 }
 
-.commande {
-    background: #272a30;
-    padding: 16px;
-    border-radius: 15px;
-    margin: 12px 0;
+.panel {
+    background: #191c22;
+    border-radius: 18px;
+    padding: 20px;
+    margin-top: 18px;
 }
 
-.execution {
-    background: #15171b;
-    padding: 12px;
-    margin-top: 12px;
-    border-radius: 10px;
+.command {
+    background: #252932;
+    border-radius: 12px;
+    padding: 14px;
+    margin-top: 10px;
 }
 
-.log {
-    padding: 10px;
-    border-bottom: 1px solid #333;
-}
-
-.historique {
-    max-height: 300px;
-    overflow-y: auto;
-}
-
-.objet {
-    padding: 13px 0;
-    border-bottom: 1px solid #333;
+.device {
+    padding: 14px 0;
+    border-bottom: 1px solid #30343d;
 }
 
 .badge {
     display: inline-block;
+    padding: 5px 8px;
     margin-top: 6px;
-    padding: 5px 9px;
-    border-radius: 8px;
-    background: #292c32;
+    border-radius: 7px;
+    background: #292e37;
     font-size: 12px;
 }
 
+.history {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.log {
+    padding: 10px 0;
+    border-bottom: 1px solid #30343d;
+}
+
 .info {
-    color: #aaa;
-    line-height: 1.6;
+    color: #a8adb7;
+    line-height: 1.7;
 }
 </style>
 </head>
@@ -107,12 +104,12 @@ h1 {
 <header>
     <h1>🏠 HomeAI</h1>
     <div class="subtitle">
-        V1.3 — Assistant vocal intelligent
+        V1.4 — Assistant vocal intelligent
     </div>
 </header>
 
 <div id="status" class="status">
-    🟢 Démarrage...
+    🟡 Initialisation...
 </div>
 
 <div class="nova">
@@ -120,7 +117,7 @@ h1 {
 </div>
 
 <div id="texte" style="text-align:center;">
-    J'attends une commande...
+    J'attends ta voix...
 </div>
 
 
@@ -137,18 +134,7 @@ h1 {
 
 <div class="panel">
 
-<h2>🏠 État de la maison</h2>
-
-<div id="etatMaison">
-    Chargement...
-</div>
-
-</div>
-
-
-<div class="panel">
-
-<h2>⚙️ Exécution</h2>
+<h2>⚙️ Dernière action</h2>
 
 <div id="etat">
     Aucune action.
@@ -159,10 +145,21 @@ h1 {
 
 <div class="panel">
 
+<h2>🏠 Maison</h2>
+
+<div id="etatMaison">
+    Chargement...
+</div>
+
+</div>
+
+
+<div class="panel">
+
 <h2>📜 Historique</h2>
 
-<div id="historique">
-    Aucune commande.
+<div id="historique" class="history">
+    Aucun historique.
 </div>
 
 </div>
@@ -170,16 +167,7 @@ h1 {
 
 <div class="panel">
 
-<h2>🏠 Appareils</h2>
-
-<div id="listeMaison"></div>
-
-</div>
-
-
-<div class="panel">
-
-<h2>ℹ️ Exemples</h2>
+<h2>📚 Exemples</h2>
 
 <div class="info">
 
@@ -187,25 +175,31 @@ h1 {
 
 <br><br>
 
-« Nova, éteins tout. »
+« Ouvre la porte. »
 
 <br><br>
 
-« Nova, mode nuit. »
+« Ferme le frigo puis éteins la télé. »
 
 <br><br>
 
-« Nova, ferme la maison. »
+« Allume la lumière et le chauffage. »
 
 <br><br>
 
-« Nova, qu'est-ce qui est allumé ? »
+« Monte les volets et allume la lumière. »
 
 <br><br>
 
-<strong>
-« Nova, appelle-toi HomeAI. »
-</strong>
+« Éteins tout. »
+
+<br><br>
+
+« Mets la maison en mode nuit. »
+
+<br><br>
+
+« Nova, appelle-toi Home. »
 
 <br><br>
 
@@ -213,9 +207,7 @@ Puis :
 
 <br><br>
 
-<strong>
-« HomeAI, allume la lumière. »
-</strong>
+« Home, allume la lumière. »
 
 </div>
 
@@ -227,12 +219,35 @@ Puis :
 <script>
 
 /* =====================================================
-   NOM DE HOMEAI
+   HOMEAI V1.4
+===================================================== */
+
+
+/* =====================================================
+   NOM
 ===================================================== */
 
 let NOM_IA =
     localStorage.getItem("homeai_nom") ||
-    "nova";
+    "Nova";
+
+
+/* =====================================================
+   ÉTAT
+===================================================== */
+
+let assistantActif = true;
+
+let derniereActivite = Date.now();
+
+
+/*
+   Après avoir entendu le nom de l'assistant,
+   HomeAI reste active pendant cette durée.
+*/
+
+const DUREE_SESSION =
+    30000;
 
 
 /* =====================================================
@@ -254,9 +269,6 @@ const etat =
 const historique =
     document.getElementById("historique");
 
-const listeMaison =
-    document.getElementById("listeMaison");
-
 const etatMaison =
     document.getElementById("etatMaison");
 
@@ -266,14 +278,14 @@ const nomAffiche =
 
 function actualiserNom() {
 
-    nomAffiche.innerText =
+    nomAffiche.textContent =
         NOM_IA;
 
 }
 
 
 /* =====================================================
-   VOIX
+   PAROLE
 ===================================================== */
 
 function parler(message) {
@@ -284,15 +296,31 @@ function parler(message) {
     speechSynthesis.cancel();
 
     const voix =
-        new SpeechSynthesisUtterance(
-            message
-        );
+        new SpeechSynthesisUtterance(message);
 
     voix.lang = "fr-FR";
     voix.rate = 1;
     voix.pitch = 1;
 
     speechSynthesis.speak(voix);
+}
+
+
+/* =====================================================
+   NORMALISATION
+===================================================== */
+
+function normaliser(phrase) {
+
+    return phrase
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[!?;:]/g, " ")
+        .replace(/[.,]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+
 }
 
 
@@ -304,280 +332,270 @@ const appareils = [
 
     {
         nom: "LUMIÈRE",
+        emoji: "💡",
         mots: [
-            "lumière",
             "lumiere",
+            "lumieres",
             "lampe",
             "lampes",
             "ampoule",
             "ampoules",
-            "éclairage",
             "eclairage"
         ],
-        emoji: "💡",
-        etat: false,
         modules: [
             "electronique",
             "mecanique"
-        ]
+        ],
+        etat: false
     },
 
     {
-        nom: "TV",
-        mots: [
-            "tv",
-            "télé",
-            "tele",
-            "télévision",
-            "television",
-            "écran",
-            "ecran"
-        ],
+        nom: "TÉLÉVISION",
         emoji: "📺",
-        etat: false,
+        mots: [
+            "tele",
+            "television",
+            "tv",
+            "ecran",
+            "ecran de television"
+        ],
         modules: [
             "electronique"
-        ]
+        ],
+        etat: false
     },
 
     {
         nom: "FOUR",
+        emoji: "🔥",
         mots: [
             "four"
         ],
-        emoji: "🔥",
-        etat: false,
         modules: [
             "electronique"
-        ]
+        ],
+        etat: false,
+        temperature: null
     },
 
     {
         nom: "MICRO-ONDES",
+        emoji: "📡",
         mots: [
-            "micro-onde",
             "micro onde",
-            "micro-ondes",
+            "micro ondes",
+            "microonde",
             "microondes"
         ],
-        emoji: "📡",
-        etat: false,
         modules: [
             "electronique"
-        ]
+        ],
+        etat: false
     },
 
     {
         nom: "FRIGO",
+        emoji: "🧊",
         mots: [
             "frigo",
-            "réfrigérateur",
             "refrigerateur",
             "frigidaire"
         ],
-        emoji: "🧊",
-        etat: false,
         modules: [
             "electronique",
             "mecanique"
-        ]
+        ],
+        etat: false
+    },
+
+    {
+        nom: "PORTE",
+        emoji: "🚪",
+        mots: [
+            "porte",
+            "portes"
+        ],
+        modules: [
+            "electronique",
+            "mecanique"
+        ],
+        etat: false
+    },
+
+    {
+        nom: "FENÊTRE",
+        emoji: "🪟",
+        mots: [
+            "fenetre",
+            "fenetres"
+        ],
+        modules: [
+            "electronique",
+            "mecanique"
+        ],
+        etat: false
     },
 
     {
         nom: "VOLETS",
+        emoji: "🪟",
         mots: [
             "volet",
             "volets",
             "store",
             "stores"
         ],
-        emoji: "🪟",
-        etat: false,
         modules: [
             "electronique",
             "mecanique"
-        ]
-    },
-
-    {
-        nom: "PORTE",
-        mots: [
-            "porte",
-            "portes"
         ],
-        emoji: "🚪",
-        etat: false,
-        modules: [
-            "electronique",
-            "mecanique"
-        ]
-    },
-
-    {
-        nom: "FENÊTRE",
-        mots: [
-            "fenêtre",
-            "fenetre",
-            "fenêtres",
-            "fenetres"
-        ],
-        emoji: "🪟",
-        etat: false,
-        modules: [
-            "electronique",
-            "mecanique"
-        ]
+        etat: false
     },
 
     {
         nom: "CHAUFFAGE",
+        emoji: "🌡️",
         mots: [
             "chauffage",
             "radiateur"
         ],
-        emoji: "🌡️",
-        etat: false,
         modules: [
             "electronique"
-        ]
+        ],
+        etat: false
     },
 
     {
         nom: "CLIMATISATION",
+        emoji: "❄️",
         mots: [
-            "climatisation",
             "clim",
+            "climatisation",
             "climatiseur"
         ],
-        emoji: "❄️",
-        etat: false,
         modules: [
             "electronique"
-        ]
+        ],
+        etat: false
     },
 
     {
         nom: "VENTILATEUR",
+        emoji: "🌀",
         mots: [
             "ventilateur",
             "ventilo"
         ],
-        emoji: "🌀",
-        etat: false,
         modules: [
             "electronique"
-        ]
+        ],
+        etat: false
     },
 
     {
         nom: "ASPIRATEUR",
+        emoji: "🧹",
         mots: [
             "aspirateur",
             "robot aspirateur"
         ],
-        emoji: "🧹",
-        etat: false,
         modules: [
             "electronique"
-        ]
+        ],
+        etat: false
     },
 
     {
         nom: "LAVE-LINGE",
-        mots: [
-            "lave-linge",
-            "lave linge",
-            "machine à laver",
-            "machine a laver"
-        ],
         emoji: "🧺",
-        etat: false,
+        mots: [
+            "lave linge",
+            "machine a laver",
+            "machine laver"
+        ],
         modules: [
             "electronique"
-        ]
+        ],
+        etat: false
     },
 
     {
         nom: "LAVE-VAISSELLE",
+        emoji: "🍽️",
         mots: [
-            "lave-vaisselle",
             "lave vaisselle"
         ],
-        emoji: "🍽️",
-        etat: false,
         modules: [
             "electronique"
-        ]
+        ],
+        etat: false
     },
 
     {
         nom: "CAFETIÈRE",
+        emoji: "☕",
         mots: [
             "cafetière",
             "cafetiere",
-            "machine à café",
-            "machine a cafe"
+            "machine a cafe",
+            "machine cafe"
         ],
-        emoji: "☕",
-        etat: false,
         modules: [
             "electronique"
-        ]
+        ],
+        etat: false
     },
 
     {
         nom: "SERRURE",
+        emoji: "🔒",
         mots: [
             "serrure",
             "verrou"
         ],
-        emoji: "🔒",
-        etat: false,
         modules: [
             "electronique",
             "mecanique"
-        ]
+        ],
+        etat: false
     },
 
     {
         nom: "PRISE",
+        emoji: "🔌",
         mots: [
             "prise",
-            "prise électrique",
             "prise electrique",
-            "prise connectée",
             "prise connectee"
         ],
-        emoji: "🔌",
-        etat: false,
         modules: [
             "electronique"
-        ]
+        ],
+        etat: false
     },
 
     {
         nom: "ENCEINTE",
+        emoji: "🔊",
         mots: [
             "enceinte",
-            "haut-parleur",
             "haut parleur",
             "speaker"
         ],
-        emoji: "🔊",
-        etat: false,
         modules: [
             "electronique"
-        ]
+        ],
+        etat: false
     }
 
 ];
 
 
 /* =====================================================
-   VOCABULAIRE
+   VOCABULAIRE DES ACTIONS
 ===================================================== */
 
-const vocabulaire = {
+const actions = {
 
     allumer: [
         "allume",
@@ -586,35 +604,30 @@ const vocabulaire = {
         "allumez",
         "active",
         "activer",
+        "actives",
         "démarre",
         "demarre",
-        "démarrer",
         "demarrer",
         "lance",
         "lancer",
         "mets en marche",
-        "met en marche"
+        "met en marche",
+        "mettre en marche"
     ],
 
     eteindre: [
-        "éteins",
         "eteins",
-        "éteindre",
         "eteindre",
-        "éteint",
         "eteint",
         "coupe",
         "couper",
-        "désactive",
         "desactive",
-        "désactiver",
         "desactiver",
-        "arrête",
         "arrete",
-        "arrêter",
         "arreter",
         "stoppe",
-        "stopper"
+        "stopper",
+        "mets a l arret"
     ],
 
     ouvrir: [
@@ -622,8 +635,8 @@ const vocabulaire = {
         "ouvrir",
         "ouvres",
         "ouvrez",
-        "déverrouille",
-        "deverrouille"
+        "deverrouille",
+        "deverrouiller"
     ],
 
     fermer: [
@@ -638,7 +651,6 @@ const vocabulaire = {
     monter: [
         "monte",
         "monter",
-        "lève",
         "leve",
         "lever",
         "remonte",
@@ -657,13 +669,9 @@ const vocabulaire = {
     verrouiller: [
         "verrouille",
         "verrouiller",
-        "verrouilles",
-        "verrouillez",
         "bloque",
         "bloquer",
-        "sécurise",
         "securise",
-        "sécuriser",
         "securiser"
     ]
 
@@ -671,21 +679,13 @@ const vocabulaire = {
 
 
 /* =====================================================
-   NETTOYAGE
+   OUTILS
 ===================================================== */
 
-function nettoyer(texte) {
-
-    return texte
-        .toLowerCase()
-        .replace(/[!?]/g, "")
-        .replace(/\s+/g, " ")
-        .trim();
-
-}
-
-
-function contient(texte, liste) {
+function contientUnDes(
+    texte,
+    liste
+) {
 
     return liste.some(
         mot => texte.includes(mot)
@@ -695,41 +695,259 @@ function contient(texte, liste) {
 
 
 /* =====================================================
-   RECONNAÎTRE LE NOM
+   RECONNAISSANCE DE L'ACTION
 ===================================================== */
 
-function contientNom(phrase) {
+function detecterAction(
+    phrase
+) {
 
     const t =
-        nettoyer(phrase);
+        normaliser(phrase);
 
-    return t.includes(
-        nettoyer(NOM_IA)
-    );
+
+    if (
+        contientUnDes(
+            t,
+            actions.verrouiller
+        )
+    )
+        return "VERROUILLER";
+
+
+    if (
+        contientUnDes(
+            t,
+            actions.ouvrir
+        )
+    )
+        return "OUVRIR";
+
+
+    if (
+        contientUnDes(
+            t,
+            actions.fermer
+        )
+    )
+        return "FERMER";
+
+
+    if (
+        contientUnDes(
+            t,
+            actions.monter
+        )
+    )
+        return "MONTER";
+
+
+    if (
+        contientUnDes(
+            t,
+            actions.descendre
+        )
+    )
+        return "DESCENDRE";
+
+
+    if (
+        contientUnDes(
+            t,
+            actions.eteindre
+        )
+    )
+        return "ETEINDRE";
+
+
+    if (
+        contientUnDes(
+            t,
+            actions.allumer
+        )
+    )
+        return "ALLUMER";
+
+
+    return null;
 
 }
 
 
-function retirerNom(phrase) {
+/* =====================================================
+   RECONNAISSANCE APPAREIL
+===================================================== */
 
-    const expression =
-        new RegExp(
-            "\\b" +
-            NOM_IA
-                .replace(
-                    /[.*+?^${}()|[\]\\]/g,
-                    "\\$&"
-                ) +
-            "\\b",
-            "gi"
+function trouverAppareil(
+    phrase
+) {
+
+    const t =
+        normaliser(phrase);
+
+
+    for (
+        const appareil of appareils
+    ) {
+
+        for (
+            const mot of appareil.mots
+        ) {
+
+            if (
+                t.includes(mot)
+            ) {
+
+                return appareil;
+
+            }
+
+        }
+
+    }
+
+
+    return null;
+
+}
+
+
+/* =====================================================
+   TEMPÉRATURE
+===================================================== */
+
+function trouverTemperature(
+    phrase
+) {
+
+    const t =
+        normaliser(phrase);
+
+
+    const correspondance =
+        t.match(
+            /(\d{2,3})\s*(degres|degree|°)?/
         );
 
-    return phrase
-        .replace(
-            expression,
-            ""
+
+    if (!correspondance)
+        return null;
+
+
+    const temperature =
+        parseInt(
+            correspondance[1]
+        );
+
+
+    if (
+        temperature < 20 ||
+        temperature > 300
+    )
+        return null;
+
+
+    return temperature;
+
+}
+
+
+/* =====================================================
+   MODULE
+===================================================== */
+
+function trouverModule(
+    appareil,
+    action
+) {
+
+    const actionsMecaniques = [
+        "OUVRIR",
+        "FERMER",
+        "MONTER",
+        "DESCENDRE",
+        "VERROUILLER"
+    ];
+
+
+    if (
+        actionsMecaniques.includes(
+            action
+        ) &&
+        appareil.modules.includes(
+            "mecanique"
         )
-        .trim();
+    ) {
+
+        return "🤖 Mécanique";
+
+    }
+
+
+    if (
+        appareil.modules.includes(
+            "electronique"
+        )
+    ) {
+
+        return "⚡ Électronique";
+
+    }
+
+
+    return "❓ Inconnu";
+
+}
+
+
+/* =====================================================
+   COMMANDE
+===================================================== */
+
+function analyserCommande(
+    phrase
+) {
+
+    const appareil =
+        trouverAppareil(
+            phrase
+        );
+
+
+    const action =
+        detecterAction(
+            phrase
+        );
+
+
+    if (
+        !appareil ||
+        !action
+    ) {
+
+        return null;
+
+    }
+
+
+    const temperature =
+        trouverTemperature(
+            phrase
+        );
+
+
+    return {
+
+        appareil,
+        action,
+        temperature,
+        module:
+            trouverModule(
+                appareil,
+                action
+            )
+
+    };
 
 }
 
@@ -743,14 +961,14 @@ function detecterChangementNom(
 ) {
 
     const t =
-        nettoyer(phrase);
+        normaliser(phrase);
 
 
     const modeles = [
 
-        /appelle[- ]toi maintenant (.+)/i,
+        /appelle toi maintenant (.+)/i,
 
-        /appelle[- ]toi (.+)/i,
+        /appelle toi (.+)/i,
 
         /ton nom est maintenant (.+)/i,
 
@@ -759,8 +977,6 @@ function detecterChangementNom(
         /change ton nom pour (.+)/i,
 
         /change de nom pour (.+)/i,
-
-        /je veux t'appeler (.+)/i,
 
         /je veux t appeler (.+)/i
 
@@ -784,30 +1000,28 @@ function detecterChangementNom(
                 match[1]
                     .trim()
                     .replace(
-                        /[.!?,]+$/g,
+                        /[.,!?]+$/g,
                         ""
                     )
                     .trim();
 
 
             if (
-                nouveauNom.length < 2
-            )
-                return null;
+                nouveauNom.length >= 2 &&
+                nouveauNom.length <= 25
+            ) {
 
+                return nouveauNom;
 
-            if (
-                nouveauNom.length > 25
-            )
-                return null;
+            }
 
-
-            return nouveauNom;
         }
+
     }
 
 
     return null;
+
 }
 
 
@@ -832,18 +1046,6 @@ function changerNom(
     actualiserNom();
 
 
-    texte.innerHTML =
-        "🧠 Nouveau nom : <strong>" +
-        NOM_IA +
-        "</strong>";
-
-
-    resultat.innerHTML =
-        "✅ Mon nom est maintenant <strong>" +
-        NOM_IA +
-        "</strong>.";
-
-
     ajouterHistorique(
         "Nom changé : " +
         ancienNom +
@@ -852,382 +1054,171 @@ function changerNom(
     );
 
 
-    parler(
-        "D'accord. À partir de maintenant, tu peux m'appeler " +
+    resultat.innerHTML =
+        "🧠 Nouveau nom : <strong>" +
         NOM_IA +
-        "."
+        "</strong>";
+
+
+    parler(
+        "D'accord. Mon nouveau nom est " +
+        NOM_IA
     );
 
 }
 
 
 /* =====================================================
-   ACTION
+   RECONNAÎTRE LE NOM
 ===================================================== */
 
-function detecterAction(
-    texte
+function contientNom(
+    phrase
 ) {
 
-    if (
-        contient(
-            texte,
-            vocabulaire.verrouiller
-        )
-    )
-        return "VERROUILLER";
+    const t =
+        normaliser(phrase);
 
 
-    if (
-        contient(
-            texte,
-            vocabulaire.ouvrir
-        )
-    )
-        return "OUVRIR";
+    const nom =
+        normaliser(NOM_IA);
 
 
-    if (
-        contient(
-            texte,
-            vocabulaire.fermer
-        )
-    )
-        return "FERMER";
+    return t.includes(nom);
 
-
-    if (
-        contient(
-            texte,
-            vocabulaire.descendre
-        )
-    )
-        return "DESCENDRE";
-
-
-    if (
-        contient(
-            texte,
-            vocabulaire.monter
-        )
-    )
-        return "MONTER";
-
-
-    if (
-        contient(
-            texte,
-            vocabulaire.eteindre
-        )
-    )
-        return "ÉTEINDRE";
-
-
-    if (
-        contient(
-            texte,
-            vocabulaire.allumer
-        )
-    )
-        return "ALLUMER";
-
-
-    return null;
 }
 
 
 /* =====================================================
-   APPAREIL
+   RETIRER LE NOM
 ===================================================== */
 
-function trouverAppareil(
-    texte
+function retirerNom(
+    phrase
 ) {
 
-    for (
-        const appareil of appareils
-    ) {
-
-        for (
-            const mot of appareil.mots
-        ) {
-
-            if (
-                texte.includes(mot)
-            )
-                return appareil;
-        }
-    }
-
-    return null;
-}
-
-
-/* =====================================================
-   PIÈCE
-===================================================== */
-
-function detecterPiece(
-    texte
-) {
-
-    if (
-        texte.includes("cuisine")
-    )
-        return "cuisine";
-
-    if (
-        texte.includes("chambre")
-    )
-        return "chambre";
-
-    if (
-        texte.includes("salon")
-    )
-        return "salon";
-
-    if (
-        texte.includes("garage")
-    )
-        return "garage";
-
-    if (
-        texte.includes("salle de bain")
-    )
-        return "salle de bain";
-
-    return "maison";
-}
-
-
-/* =====================================================
-   MODULE
-===================================================== */
-
-function choisirModule(
-    appareil,
-    action
-) {
-
-    const mecanique = [
-        "OUVRIR",
-        "FERMER",
-        "MONTER",
-        "DESCENDRE",
-        "VERROUILLER"
-    ];
-
-
-    if (
-        mecanique.includes(action) &&
-        appareil.modules.includes(
-            "mecanique"
-        )
-    )
-        return "🤖 MÉCANIQUE";
-
-
-    if (
-        appareil.modules.includes(
-            "electronique"
-        )
-    )
-        return "⚡ ÉLECTRONIQUE";
-
-
-    return "❓ INCONNU";
-}
-
-
-/* =====================================================
-   ANALYSE
-===================================================== */
-
-function analyserCommande(
-    texte
-) {
-
-    const appareil =
-        trouverAppareil(texte);
-
-
-    const action =
-        detecterAction(texte);
-
-
-    if (
-        !appareil ||
-        !action
-    )
-        return null;
-
-
-    return {
-
-        appareil:
-            appareil.nom,
-
-        emoji:
-            appareil.emoji,
-
-        action:
-            action,
-
-        piece:
-            detecterPiece(texte),
-
-        module:
-            choisirModule(
-                appareil,
-                action
-            ),
-
-        objet:
-            appareil
-
-    };
-}
-
-
-/* =====================================================
-   HISTORIQUE
-===================================================== */
-
-function ajouterHistorique(
-    message
-) {
-
-    if (
-        historique.innerText ===
-        "Aucune commande."
-    )
-        historique.innerHTML = "";
-
-
-    const div =
-        document.createElement(
-            "div"
+    const expression =
+        new RegExp(
+            "\\b" +
+            NOM_IA
+                .replace(
+                    /[.*+?^${}()|[\]\\]/g,
+                    "\\$&"
+                ) +
+            "\\b",
+            "gi"
         );
 
 
-    div.className = "log";
-
-    div.innerText =
-        "✅ " + message;
-
-    historique.prepend(div);
+    return phrase
+        .replace(
+            expression,
+            ""
+        )
+        .trim();
 
 }
 
 
 /* =====================================================
-   ÉTAT
+   ACTIVATION AUTOMATIQUE
 ===================================================== */
 
-function afficherEtatMaison() {
-
-    const actifs =
-        appareils.filter(
-            a => a.etat
-        );
-
+function verifierActivation(
+    phrase
+) {
 
     if (
-        actifs.length === 0
+        contientNom(
+            phrase
+        )
     ) {
 
-        etatMaison.innerHTML =
-            "🌙 Aucun appareil actif.";
+        assistantActif = true;
 
-        return;
+        derniereActivite =
+            Date.now();
+
+        return true;
+
     }
 
 
-    etatMaison.innerHTML =
-        actifs
-            .map(
-                a =>
-                    a.emoji +
-                    " " +
-                    a.nom
-            )
-            .join("<br>");
+    /*
+       Si l'utilisateur vient de parler
+       à Nova récemment, elle continue
+       à comprendre les commandes.
+    */
+
+    if (
+        Date.now() -
+        derniereActivite <
+        DUREE_SESSION
+    ) {
+
+        return true;
+
+    }
+
+
+    return false;
+
 }
 
 
 /* =====================================================
-   AFFICHAGE DES APPAREILS
+   DÉCOUPAGE DES COMMANDES
 ===================================================== */
 
-function afficherMaison() {
+function decouperCommandes(
+    phrase
+) {
 
-    listeMaison.innerHTML = "";
-
-
-    appareils.forEach(
-        appareil => {
-
-            const div =
-                document.createElement(
-                    "div"
-                );
+    let texte =
+        phrase;
 
 
-            div.className =
-                "objet";
+    /*
+       Séparateurs naturels
+    */
+
+    texte =
+        texte.replace(
+            /\s+puis\s+/gi,
+            "|"
+        );
 
 
-            div.innerHTML =
-
-                appareil.emoji +
-                " <strong>" +
-                appareil.nom +
-                "</strong>" +
-
-                "<br>" +
-
-                "<span class='badge'>" +
-
-                appareil.modules
-                    .map(
-                        m =>
-                            m ===
-                            "electronique"
-                            ?
-                            "⚡ électronique"
-                            :
-                            "🤖 mécanique"
-                    )
-                    .join(" + ") +
-
-                "</span>" +
-
-                "<br>" +
-
-                (
-                    appareil.etat
-                    ?
-                    "🟢 Actif"
-                    :
-                    "⚪ Inactif"
-                );
+    texte =
+        texte.replace(
+            /\s+ensuite\s+/gi,
+            "|"
+        );
 
 
-            listeMaison.appendChild(
-                div
-            );
+    texte =
+        texte.replace(
+            /\s+et\s+(?=(allume|allumer|eteins|eteindre|ouvre|ouvrir|ferme|fermer|monte|monter|descends|descendre|baisse|baisser|verrouille|verrouiller|active|activer|coupe|couper|arrete|arreter)\b)/gi,
+            "|"
+        );
 
-        }
-    );
 
-
-    afficherEtatMaison();
+    return texte
+        .split("|")
+        .map(
+            morceau =>
+                morceau.trim()
+        )
+        .filter(
+            morceau =>
+                morceau.length > 0
+        );
 
 }
 
 
 /* =====================================================
-   EXÉCUTION
+   EXÉCUTER
 ===================================================== */
 
 function executerCommande(
@@ -1235,7 +1226,7 @@ function executerCommande(
 ) {
 
     const appareil =
-        commande.objet;
+        commande.appareil;
 
 
     if (
@@ -1254,7 +1245,7 @@ function executerCommande(
 
     if (
         commande.action ===
-        "ÉTEINDRE" ||
+        "ETEINDRE" ||
         commande.action ===
         "FERMER" ||
         commande.action ===
@@ -1268,21 +1259,51 @@ function executerCommande(
     }
 
 
-    afficherMaison();
+    if (
+        commande.temperature !==
+        null &&
+        appareil.nom ===
+        "FOUR"
+    ) {
+
+        appareil.temperature =
+            commande.temperature;
+
+    }
+
+
+    let message =
+        commande.action +
+        " → " +
+        appareil.nom;
+
+
+    if (
+        commande.temperature !==
+        null
+    ) {
+
+        message +=
+            " à " +
+            commande.temperature +
+            " °C";
+
+    }
 
 
     etat.innerHTML =
         "✅ " +
-        commande.action +
-        " → " +
-        commande.appareil;
+        message +
+        "<br>" +
+        commande.module;
 
 
     ajouterHistorique(
-        commande.action +
-        " — " +
-        commande.appareil
+        message
     );
+
+
+    afficherMaison();
 
 }
 
@@ -1291,89 +1312,140 @@ function executerCommande(
    COMMANDES GLOBALES
 ===================================================== */
 
-function commandeGlobale(
-    texte
+function traiterCommandeGlobale(
+    phrase
 ) {
 
+    const t =
+        normaliser(
+            phrase
+        );
+
+
+    /*
+       TOUT ÉTEINDRE
+    */
+
     if (
-        texte.includes(
-            "éteins tout"
-        ) ||
-        texte.includes(
+        t.includes(
             "eteins tout"
         ) ||
-        texte.includes(
+        t.includes(
             "coupe tout"
+        ) ||
+        t.includes(
+            "arrete tout"
+        ) ||
+        t.includes(
+            "desactive tout"
         )
     ) {
 
         appareils.forEach(
-            a => a.etat = false
+            appareil => {
+                appareil.etat =
+                    false;
+            }
         );
 
+
         afficherMaison();
+
+
+        resultat.innerHTML =
+            "🌙 Toute la maison a été éteinte.";
+
+
+        ajouterHistorique(
+            "Tout éteindre"
+        );
+
 
         parler(
             "C'est fait. Tout est éteint."
         );
 
+
         return true;
+
     }
 
 
+    /*
+       TOUT ALLUMER
+    */
+
     if (
-        texte.includes(
-            "allume toutes les lumières"
+        t.includes(
+            "allume tout"
         ) ||
-        texte.includes(
-            "allume toutes les lumieres"
+        t.includes(
+            "active tout"
         )
     ) {
 
-        const lumiere =
-            appareils.find(
-                a =>
-                    a.nom ===
-                    "LUMIÈRE"
-            );
-
-
-        if (lumiere)
-            lumiere.etat = true;
+        appareils.forEach(
+            appareil => {
+                appareil.etat =
+                    true;
+            }
+        );
 
 
         afficherMaison();
 
-        parler(
-            "Toutes les lumières sont allumées."
+
+        resultat.innerHTML =
+            "☀️ Toute la maison a été activée.";
+
+
+        ajouterHistorique(
+            "Tout allumer"
         );
 
+
+        parler(
+            "C'est fait. Tout est allumé."
+        );
+
+
         return true;
+
     }
 
 
+    /*
+       MODE NUIT
+    */
+
     if (
-        texte.includes(
+        t.includes(
             "mode nuit"
         ) ||
-        texte.includes(
+        t.includes(
             "bonne nuit"
         )
     ) {
 
         appareils.forEach(
-            a => {
+            appareil => {
 
                 if (
                     [
                         "LUMIÈRE",
-                        "TV",
-                        "ENCEINTE",
+                        "TÉLÉVISION",
                         "FOUR",
-                        "MICRO-ONDES"
-                    ].includes(a.nom)
-                )
-                    a.etat = false;
+                        "MICRO-ONDES",
+                        "ENCEINTE"
+                    ].includes(
+                        appareil.nom
+                    )
+                ) {
+
+                    appareil.etat =
+                        false;
+
+                }
 
             }
         );
@@ -1381,16 +1453,28 @@ function commandeGlobale(
 
         afficherMaison();
 
+
+        ajouterHistorique(
+            "Mode nuit"
+        );
+
+
         parler(
             "Mode nuit activé."
         );
 
+
         return true;
+
     }
 
 
+    /*
+       MODE MATIN
+    */
+
     if (
-        texte.includes(
+        t.includes(
             "mode matin"
         )
     ) {
@@ -1412,38 +1496,53 @@ function commandeGlobale(
 
 
         if (lumiere)
-            lumiere.etat = true;
+            lumiere.etat =
+                true;
 
 
         if (volets)
-            volets.etat = true;
+            volets.etat =
+                true;
 
 
         afficherMaison();
+
+
+        ajouterHistorique(
+            "Mode matin"
+        );
+
 
         parler(
             "Mode matin activé."
         );
 
+
         return true;
+
     }
 
 
+    /*
+       ÉTAT DE LA MAISON
+    */
+
     if (
-        texte.includes(
-            "qu'est-ce qui est allumé"
+        t.includes(
+            "qu est ce qui est allume"
         ) ||
-        texte.includes(
-            "qu'est ce qui est allumé"
+        t.includes(
+            "quels appareils sont allumes"
         ) ||
-        texte.includes(
-            "quels appareils sont allumés"
+        t.includes(
+            "quest ce qui est allume"
         )
     ) {
 
         const actifs =
             appareils.filter(
-                a => a.etat
+                a =>
+                    a.etat
             );
 
 
@@ -1451,56 +1550,177 @@ function commandeGlobale(
             actifs.length === 0
         ) {
 
+            resultat.innerHTML =
+                "🌙 Rien n'est actuellement allumé.";
+
+
             parler(
-                "Aucun appareil n'est actif."
+                "Aucun appareil n'est allumé."
             );
 
         }
         else {
 
+            const noms =
+                actifs
+                    .map(
+                        a =>
+                            a.nom
+                    )
+                    .join(", ");
+
+
+            resultat.innerHTML =
+                "🟢 Actifs : " +
+                noms;
+
+
             parler(
-                actifs.length +
-                " appareil(s) sont actifs."
+                "Les appareils actifs sont : " +
+                noms
             );
 
         }
 
+
         return true;
+
     }
 
 
     return false;
+
 }
 
 
 /* =====================================================
-   MULTI-COMMANDES
+   HISTORIQUE
 ===================================================== */
 
-function decouperPhrase(
-    phrase
+function ajouterHistorique(
+    message
 ) {
 
-    return phrase
-        .replace(
-            /\s+puis\s+/gi,
-            "|"
-        )
-        .replace(
-            /\s+ensuite\s+/gi,
-            "|"
-        )
-        .replace(
-            /\s+et\s+(?=(allume|ouvre|ferme|éteins|eteins|active|monte|descends|baisse|verrouille)\b)/gi,
-            "|"
-        )
-        .split("|")
-        .map(
-            x => x.trim()
-        )
-        .filter(
-            x => x.length > 0
+    if (
+        historique.textContent.trim() ===
+        "Aucun historique."
+    ) {
+
+        historique.innerHTML =
+            "";
+
+    }
+
+
+    const ligne =
+        document.createElement(
+            "div"
         );
+
+
+    ligne.className =
+        "log";
+
+
+    const heure =
+        new Date()
+            .toLocaleTimeString(
+                "fr-FR",
+                {
+                    hour: "2-digit",
+                    minute: "2-digit"
+                }
+            );
+
+
+    ligne.textContent =
+        "🕒 " +
+        heure +
+        " — " +
+        message;
+
+
+    historique.prepend(
+        ligne
+    );
+
+}
+
+
+/* =====================================================
+   AFFICHAGE MAISON
+===================================================== */
+
+function afficherMaison() {
+
+    let html = "";
+
+
+    appareils.forEach(
+        appareil => {
+
+            html +=
+
+                "<div class='device'>" +
+
+                appareil.emoji +
+                " <strong>" +
+                appareil.nom +
+                "</strong>" +
+
+                "<br>" +
+
+                "<span class='badge'>" +
+
+                appareil.modules
+                    .map(
+                        module =>
+                            module ===
+                            "electronique"
+                            ?
+                            "⚡ électronique"
+                            :
+                            "🤖 mécanique"
+                    )
+                    .join(" + ") +
+
+                "</span>" +
+
+                "<br>" +
+
+                (
+                    appareil.etat
+                    ?
+                    "🟢 Actif"
+                    :
+                    "⚪ Inactif"
+                );
+
+
+            if (
+                appareil.temperature !==
+                undefined &&
+                appareil.temperature !==
+                null
+            ) {
+
+                html +=
+                    "<br>🌡️ " +
+                    appareil.temperature +
+                    " °C";
+
+            }
+
+
+            html +=
+                "</div>";
+
+        }
+    );
+
+
+    etatMaison.innerHTML =
+        html;
 
 }
 
@@ -1513,13 +1733,26 @@ async function analyserPhrase(
     phrase
 ) {
 
+    if (
+        !phrase ||
+        phrase.trim().length === 0
+    )
+        return;
+
+
+    derniereActivite =
+        Date.now();
+
+
     texte.innerHTML =
         "🗣️ « " +
         phrase +
         " »";
 
 
-    /* CHANGEMENT DE NOM */
+    /*
+       CHANGEMENT DE NOM
+    */
 
     const nouveauNom =
         detecterChangementNom(
@@ -1527,49 +1760,61 @@ async function analyserPhrase(
         );
 
 
-    if (nouveauNom) {
+    if (
+        nouveauNom
+    ) {
 
         changerNom(
             nouveauNom
         );
 
         return;
+
     }
 
 
-    /* VÉRIFICATION DU NOM */
+    /*
+       ACTIVATION
+    */
 
     if (
-        !contientNom(phrase)
-    )
-        return;
-
-
-    const commandeTexte =
-        retirerNom(phrase);
-
-
-    /* COMMANDES GLOBALES */
-
-    if (
-        commandeGlobale(
-            nettoyer(
-                commandeTexte
-            )
+        !verifierActivation(
+            phrase
         )
     ) {
 
-        resultat.innerHTML =
-            "🌐 Commande globale comprise.";
-
         return;
+
     }
 
 
-    /* COMMANDES INDIVIDUELLES */
+    const commandeTexte =
+        retirerNom(
+            phrase
+        );
+
+
+    /*
+       COMMANDES GLOBALES
+    */
+
+    if (
+        traiterCommandeGlobale(
+            commandeTexte
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    /*
+       MULTIPLES COMMANDES
+    */
 
     const morceaux =
-        decouperPhrase(
+        decouperCommandes(
             commandeTexte
         );
 
@@ -1582,16 +1827,19 @@ async function analyserPhrase(
 
             const commande =
                 analyserCommande(
-                    nettoyer(
-                        morceau
-                    )
+                    morceau
                 );
 
 
-            if (commande)
+            if (
+                commande
+            ) {
+
                 commandes.push(
                     commande
                 );
+
+            }
 
         }
     );
@@ -1602,13 +1850,14 @@ async function analyserPhrase(
     ) {
 
         resultat.innerHTML =
-            "❓ Je n'ai pas compris.";
+            "❓ Je n'ai pas reconnu de commande.";
 
         parler(
             "Je n'ai pas compris la commande."
         );
 
         return;
+
     }
 
 
@@ -1629,13 +1878,24 @@ async function analyserPhrase(
     );
 
 
-    parler(
+    if (
         commandes.length === 1
-        ?
-        "C'est fait."
-        :
-        "C'est fait. Toutes les commandes sont exécutées."
-    );
+    ) {
+
+        parler(
+            "C'est fait."
+        );
+
+    }
+    else {
+
+        parler(
+            "C'est fait. J'ai exécuté les " +
+            commandes.length +
+            " commandes."
+        );
+
+    }
 
 }
 
@@ -1649,15 +1909,20 @@ const SpeechRecognition =
     window.webkitSpeechRecognition;
 
 
-let reconnaissance = null;
+let reconnaissance =
+    null;
+
+
+let redemarrageAutorise =
+    true;
 
 
 if (
     !SpeechRecognition
 ) {
 
-    status.innerText =
-        "❌ Reconnaissance vocale indisponible.";
+    status.innerHTML =
+        "❌ La reconnaissance vocale n'est pas disponible dans ce navigateur.";
 
 }
 else {
@@ -1678,13 +1943,17 @@ else {
         false;
 
 
+    reconnaissance.maxAlternatives =
+        3;
+
+
     reconnaissance.onstart =
         function() {
 
-            status.innerText =
+            status.innerHTML =
                 "🟢 " +
                 NOM_IA +
-                " écoute";
+                " écoute...";
 
         };
 
@@ -1692,27 +1961,46 @@ else {
     reconnaissance.onresult =
         function(event) {
 
-            const result =
-                event.results[
-                    event.results.length - 1
-                ];
+            for (
+                let i =
+                    event.resultIndex;
+                i <
+                    event.results.length;
+                i++
+            ) {
+
+                const resultatVocal =
+                    event.results[i];
 
 
-            if (
-                !result.isFinal
-            )
-                return;
+                if (
+                    !resultatVocal.isFinal
+                )
+                    continue;
 
 
-            const phrase =
-                result[0]
-                    .transcript
-                    .trim();
+                /*
+                   On prend la meilleure
+                   transcription.
+                */
+
+                const phrase =
+                    resultatVocal[0]
+                        .transcript
+                        .trim();
 
 
-            analyserPhrase(
-                phrase
-            );
+                if (
+                    phrase.length === 0
+                )
+                    continue;
+
+
+                analyserPhrase(
+                    phrase
+                );
+
+            }
 
         };
 
@@ -1721,9 +2009,20 @@ else {
         function(event) {
 
             console.log(
-                "Erreur micro :",
+                "Erreur reconnaissance :",
                 event.error
             );
+
+
+            if (
+                event.error ===
+                "not-allowed"
+            ) {
+
+                status.innerHTML =
+                    "❌ Autorisation du micro refusée.";
+
+            }
 
         };
 
@@ -1731,32 +2030,59 @@ else {
     reconnaissance.onend =
         function() {
 
+            if (
+                !redemarrageAutorise
+            )
+                return;
+
+
+            status.innerHTML =
+                "🟡 Reconnexion du micro...";
+
+
             setTimeout(
-                () => {
+                function() {
 
                     try {
 
                         reconnaissance.start();
 
                     }
-                    catch (e) {}
+                    catch (e) {
+
+                        console.log(
+                            "Redémarrage :",
+                            e
+                        );
+
+                    }
 
                 },
-                500
+                700
             );
 
         };
 
 
+    /*
+       Premier démarrage
+    */
+
     setTimeout(
-        () => {
+        function() {
 
             try {
 
                 reconnaissance.start();
 
             }
-            catch (e) {}
+            catch (e) {
+
+                console.log(
+                    e
+                );
+
+            }
 
         },
         1000
@@ -1766,7 +2092,7 @@ else {
 
 
 /* =====================================================
-   DÉMARRAGE
+   INITIALISATION
 ===================================================== */
 
 actualiserNom();
@@ -1774,23 +2100,37 @@ actualiserNom();
 afficherMaison();
 
 
-setTimeout(
-    () => {
+/*
+   Sauvegarde périodique
+*/
 
-        status.innerText =
-            "🟢 " +
-            NOM_IA +
-            " écoute";
+setInterval(
+    function() {
 
-
-        parler(
-            "Bonjour. Je suis " +
-            NOM_IA +
-            ". Je t'écoute."
+        localStorage.setItem(
+            "homeai_nom",
+            NOM_IA
         );
 
     },
-    1500
+    3000
+);
+
+
+/*
+   Message de démarrage
+*/
+
+setTimeout(
+    function() {
+
+        status.innerHTML =
+            "🟢 " +
+            NOM_IA +
+            " est prête et écoute.";
+
+    },
+    2000
 );
 
 </script>
