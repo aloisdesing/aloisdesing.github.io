@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HomeAI V2.0</title>
+<title>HomeAI V2.1</title>
 
 <style>
 * {
@@ -13,7 +13,7 @@
 body {
     margin: 0;
     background: #0b0e13;
-    color: #fff;
+    color: white;
     font-family: Arial, sans-serif;
 }
 
@@ -34,7 +34,7 @@ h1 {
 }
 
 .subtitle {
-    color: #8f96a3;
+    color: #9299a6;
 }
 
 .status {
@@ -112,12 +112,16 @@ input[type="range"] {
     width: 100%;
 }
 
+.success {
+    color: #70e090;
+}
+
 .warning {
     color: #ffcc66;
 }
 
-.success {
-    color: #70e090;
+.error {
+    color: #ff7070;
 }
 </style>
 </head>
@@ -129,7 +133,7 @@ input[type="range"] {
 <header>
     <h1>🏠 HomeAI</h1>
     <div class="subtitle">
-        V2.0 — Assistant vocal domestique
+        V2.1 — Assistant vocal domestique
     </div>
 </header>
 
@@ -179,9 +183,7 @@ Voix utilisée :
 <strong id="voixUtilisee">Recherche...</strong>
 </p>
 
-<p>
-Vitesse :
-</p>
+<p>Vitesse :</p>
 
 <input
     id="vitesse"
@@ -192,9 +194,7 @@ Vitesse :
     value="1"
 >
 
-<p>
-Ton :
-</p>
+<p>Ton :</p>
 
 <input
     id="ton"
@@ -221,7 +221,7 @@ Ton :
 
 <div class="panel">
 
-<h2>🎙️ Exemples à essayer</h2>
+<h2>🎙️ Exemples</h2>
 
 <div class="info">
 
@@ -229,11 +229,7 @@ Ton :
 
 <br><br>
 
-« Tu peux allumer la lumière s'il te plaît ? »
-
-<br><br>
-
-« Nova, ferme la porte et éteins la télévision. »
+« Ferme la porte et éteins la télévision. »
 
 <br><br>
 
@@ -242,10 +238,6 @@ Ton :
 <br><br>
 
 « Mets le chauffage à 22 degrés. »
-
-<br><br>
-
-« Quelle température fait-il dans la maison ? »
 
 <br><br>
 
@@ -261,11 +253,11 @@ Ton :
 
 <br><br>
 
-« Nova, comment tu t'appelles ? »
+« Comment tu t'appelles ? »
 
 <br><br>
 
-« Nova, à partir de maintenant tu t'appelles Home. »
+« À partir de maintenant tu t'appelles Home. »
 
 </div>
 
@@ -277,7 +269,7 @@ Ton :
 <script>
 
 /* =========================================================
-   HOMEAI V2.0
+   HOMEAI V2.1
    ========================================================= */
 
 
@@ -291,9 +283,7 @@ let NOM_IA =
 
 let historiqueData =
     JSON.parse(
-        localStorage.getItem(
-            "homeai_historique"
-        ) || "[]"
+        localStorage.getItem("homeai_historique") || "[]"
     );
 
 
@@ -329,8 +319,7 @@ const voixUtilisee =
     document.getElementById("voixUtilisee");
 
 
-nomAffiche.textContent =
-    NOM_IA;
+nomAffiche.textContent = NOM_IA;
 
 
 /* =========================================================
@@ -374,14 +363,8 @@ const appareils = [
         id: "porte",
         nom: "Porte",
         emoji: "🚪",
-        mots: [
-            "porte",
-            "portes"
-        ],
-        type: [
-            "electronique",
-            "mecanique"
-        ],
+        mots: ["porte", "portes"],
+        type: ["electronique", "mecanique"],
         etat: false
     },
 
@@ -389,14 +372,8 @@ const appareils = [
         id: "fenetre",
         nom: "Fenêtre",
         emoji: "🪟",
-        mots: [
-            "fenetre",
-            "fenetres"
-        ],
-        type: [
-            "electronique",
-            "mecanique"
-        ],
+        mots: ["fenetre", "fenetres"],
+        type: ["electronique", "mecanique"],
         etat: false
     },
 
@@ -410,10 +387,7 @@ const appareils = [
             "store",
             "stores"
         ],
-        type: [
-            "electronique",
-            "mecanique"
-        ],
+        type: ["electronique", "mecanique"],
         etat: false
     },
 
@@ -460,9 +434,7 @@ const appareils = [
         id: "four",
         nom: "Four",
         emoji: "🔥",
-        mots: [
-            "four"
-        ],
+        mots: ["four"],
         type: ["electronique"],
         etat: false,
         temperature: null
@@ -491,10 +463,7 @@ const appareils = [
             "refrigerateur",
             "frigidaire"
         ],
-        type: [
-            "electronique",
-            "mecanique"
-        ],
+        type: ["electronique", "mecanique"],
         etat: false
     },
 
@@ -556,10 +525,7 @@ const appareils = [
             "serrure",
             "verrou"
         ],
-        type: [
-            "electronique",
-            "mecanique"
-        ],
+        type: ["electronique", "mecanique"],
         etat: false
     },
 
@@ -600,18 +566,9 @@ function normaliser(texte) {
     return texte
         .toLowerCase()
         .normalize("NFD")
-        .replace(
-            /[\u0300-\u036f]/g,
-            ""
-        )
-        .replace(
-            /[!?;:,.]/g,
-            " "
-        )
-        .replace(
-            /\s+/g,
-            " "
-        )
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[!?;:,.]/g, " ")
+        .replace(/\s+/g, " ")
         .trim();
 
 }
@@ -626,11 +583,11 @@ let voixFrancaise = null;
 
 function chargerVoix() {
 
-    if (
-        !("speechSynthesis" in window)
-    ) {
+    if (!("speechSynthesis" in window)) {
+
         voixUtilisee.textContent =
             "Non disponible";
+
         return;
     }
 
@@ -646,9 +603,7 @@ function chargerVoix() {
                     .startsWith("fr")
         );
 
-    if (
-        francaises.length
-    ) {
+    if (francaises.length) {
 
         voixFrancaise =
             francaises.find(
@@ -660,9 +615,7 @@ function chargerVoix() {
 
     }
 
-    if (
-        voixFrancaise
-    ) {
+    if (voixFrancaise) {
 
         voixUtilisee.textContent =
             voixFrancaise.name +
@@ -677,9 +630,7 @@ function chargerVoix() {
 chargerVoix();
 
 
-if (
-    "speechSynthesis" in window
-) {
+if ("speechSynthesis" in window) {
 
     speechSynthesis.onvoiceschanged =
         chargerVoix;
@@ -688,67 +639,80 @@ if (
 
 
 /* =========================================================
-   PAROLE
+   PARLER
    ========================================================= */
 
 function parler(message) {
 
-    return new Promise(
-        resolve => {
+    return new Promise(resolve => {
 
-            if (
-                !("speechSynthesis" in window)
-            ) {
+        if (!("speechSynthesis" in window)) {
 
-                resolve();
-                return;
-
-            }
-
-            speechSynthesis.cancel();
-
-            const utterance =
-                new SpeechSynthesisUtterance(
-                    message
-                );
-
-            utterance.lang =
-                "fr-FR";
-
-            utterance.rate =
-                Number(
-                    vitesse.value
-                );
-
-            utterance.pitch =
-                Number(
-                    ton.value
-                );
-
-            utterance.volume =
-                1;
-
-            if (
-                voixFrancaise
-            ) {
-
-                utterance.voice =
-                    voixFrancaise;
-
-            }
-
-            utterance.onend =
-                resolve;
-
-            utterance.onerror =
-                resolve;
-
-            speechSynthesis.speak(
-                utterance
-            );
+            resolve();
+            return;
 
         }
-    );
+
+        speechSynthesis.cancel();
+
+        const utterance =
+            new SpeechSynthesisUtterance(
+                message
+            );
+
+        utterance.lang =
+            "fr-FR";
+
+        utterance.rate =
+            Number(vitesse.value);
+
+        utterance.pitch =
+            Number(ton.value);
+
+        utterance.volume = 1;
+
+        if (voixFrancaise) {
+
+            utterance.voice =
+                voixFrancaise;
+
+        }
+
+        utterance.onstart =
+            function() {
+
+                enTrainDeParler = true;
+
+                status.innerHTML =
+                    "🔊 " +
+                    NOM_IA +
+                    " parle...";
+
+            };
+
+        utterance.onend =
+            function() {
+
+                enTrainDeParler = false;
+
+                resolve();
+
+            };
+
+        utterance.onerror =
+            function() {
+
+                enTrainDeParler = false;
+
+                resolve();
+
+            };
+
+        speechSynthesis.speak(
+            utterance
+        );
+
+    });
 
 }
 
@@ -762,10 +726,7 @@ function sauvegarderHistorique() {
     localStorage.setItem(
         "homeai_historique",
         JSON.stringify(
-            historiqueData.slice(
-                0,
-                100
-            )
+            historiqueData
         )
     );
 
@@ -788,8 +749,7 @@ function ajouterHistorique(
                     }
                 ),
 
-        texte:
-            texte
+        texte: texte
 
     });
 
@@ -808,9 +768,7 @@ function ajouterHistorique(
 
 function afficherHistorique() {
 
-    if (
-        historiqueData.length === 0
-    ) {
+    if (!historiqueData.length) {
 
         historique.innerHTML =
             "Aucun historique.";
@@ -841,67 +799,64 @@ function afficherMaison() {
 
     etatMaison.innerHTML =
         appareils
-            .map(
-                appareil => {
+            .map(appareil => {
 
-                    const types =
-                        appareil.type
-                            .map(
-                                t =>
-                                    t ===
-                                    "electronique"
-                                    ?
-                                    "⚡ électronique"
-                                    :
-                                    "⚙️ mécanique"
-                            )
-                            .join(" + ");
+                const types =
+                    appareil.type
+                        .map(
+                            t =>
+                                t === "electronique"
+                                ?
+                                "⚡ électronique"
+                                :
+                                "⚙️ mécanique"
+                        )
+                        .join(" + ");
 
-                    let temperature = "";
+                let temperature = "";
 
-                    if (
-                        appareil.temperature !==
-                        undefined &&
-                        appareil.temperature !==
-                        null
-                    ) {
+                if (
+                    appareil.temperature !==
+                    undefined &&
+                    appareil.temperature !==
+                    null
+                ) {
 
-                        temperature =
-                            `<br>🌡️ ${appareil.temperature} °C`;
-
-                    }
-
-                    return `
-                    <div class="device">
-
-                        ${appareil.emoji}
-                        <strong>
-                            ${appareil.nom}
-                        </strong>
-
-                        <br>
-
-                        <span class="badge">
-                            ${types}
-                        </span>
-
-                        <br>
-
-                        ${
-                            appareil.etat
-                            ?
-                            '<span class="success">🟢 Actif</span>'
-                            :
-                            '⚪ Inactif'
-                        }
-
-                        ${temperature}
-
-                    </div>
-                    `;
+                    temperature =
+                        `<br>🌡️ ${appareil.temperature} °C`;
 
                 }
-            )
+
+                return `
+                <div class="device">
+
+                    ${appareil.emoji}
+                    <strong>
+                        ${appareil.nom}
+                    </strong>
+
+                    <br>
+
+                    <span class="badge">
+                        ${types}
+                    </span>
+
+                    <br>
+
+                    ${
+                        appareil.etat
+                        ?
+                        '<span class="success">🟢 Actif</span>'
+                        :
+                        '⚪ Inactif'
+                    }
+
+                    ${temperature}
+
+                </div>
+                `;
+
+            })
             .join("");
 
 }
@@ -916,15 +871,10 @@ function trouverAppareil(
 ) {
 
     const t =
-        normaliser(
-            phrase
-        );
+        normaliser(phrase);
 
-    let meilleur =
-        null;
-
-    let meilleurScore =
-        0;
+    let meilleur = null;
+    let scoreMax = 0;
 
     appareils.forEach(
         appareil => {
@@ -933,27 +883,20 @@ function trouverAppareil(
                 mot => {
 
                     const m =
-                        normaliser(
-                            mot
-                        );
+                        normaliser(mot);
 
-                    if (
-                        t.includes(m)
-                    ) {
-
-                        const score =
-                            m.length;
+                    if (t.includes(m)) {
 
                         if (
-                            score >
-                            meilleurScore
+                            m.length >
+                            scoreMax
                         ) {
+
+                            scoreMax =
+                                m.length;
 
                             meilleur =
                                 appareil;
-
-                            meilleurScore =
-                                score;
 
                         }
 
@@ -1058,9 +1001,7 @@ function detecterAction(
 ) {
 
     const t =
-        normaliser(
-            phrase
-        );
+        normaliser(phrase);
 
     for (
         const action in actionMots
@@ -1088,7 +1029,7 @@ function detecterAction(
 
 
 /* =========================================================
-   TEMPERATURE
+   TEMPÉRATURE
    ========================================================= */
 
 function trouverTemperature(
@@ -1096,24 +1037,18 @@ function trouverTemperature(
 ) {
 
     const t =
-        normaliser(
-            phrase
-        );
+        normaliser(phrase);
 
     const match =
         t.match(
             /(\d{1,3})\s*(degre|degres)?/
         );
 
-    if (
-        !match
-    )
+    if (!match)
         return null;
 
     const valeur =
-        Number(
-            match[1]
-        );
+        Number(match[1]);
 
     if (
         valeur < 5 ||
@@ -1135,28 +1070,18 @@ function detecterNouveauNom(
 ) {
 
     const t =
-        normaliser(
-            phrase
-        );
+        normaliser(phrase);
 
     const motifs = [
 
         /appelle toi maintenant (.+)/,
-
         /appelle toi (.+)/,
-
         /ton nom est maintenant (.+)/,
-
         /ton nouveau nom est (.+)/,
-
         /change ton nom pour (.+)/,
-
         /change de nom pour (.+)/,
-
         /je veux t appeler (.+)/,
-
         /desormais tu t appelles (.+)/,
-
         /a partir de maintenant tu t appelles (.+)/
 
     ];
@@ -1166,9 +1091,7 @@ function detecterNouveauNom(
     ) {
 
         const match =
-            t.match(
-                motif
-            );
+            t.match(motif);
 
         if (
             match &&
@@ -1250,10 +1173,16 @@ function retirerNom(
     phrase
 ) {
 
+    const nomNormalise =
+        normaliser(NOM_IA);
+
+    if (!nomNormalise)
+        return phrase;
+
     const regex =
         new RegExp(
             "\\b" +
-            NOM_IA
+            nomNormalise
                 .replace(
                     /[.*+?^${}()|[\]\\]/g,
                     "\\$&"
@@ -1273,7 +1202,7 @@ function retirerNom(
 
 
 /* =========================================================
-   NETTOYAGE PHRASE
+   NETTOYAGE
    ========================================================= */
 
 function nettoyerPhrase(
@@ -1297,7 +1226,7 @@ function nettoyerPhrase(
 
 
 /* =========================================================
-   DÉTECTION COMMANDES
+   ANALYSER UNE COMMANDE
    ========================================================= */
 
 function analyserCommande(
@@ -1322,12 +1251,8 @@ function analyserCommande(
 
     return {
 
-        appareil:
-            appareil,
-
-        action:
-            action,
-
+        appareil: appareil,
+        action: action,
         temperature:
             trouverTemperature(
                 phrase
@@ -1339,7 +1264,7 @@ function analyserCommande(
 
 
 /* =========================================================
-   DÉCOUPAGE COMMANDES
+   DÉCOUPAGE
    ========================================================= */
 
 function decouperCommandes(
@@ -1348,11 +1273,6 @@ function decouperCommandes(
 
     let t =
         phrase;
-
-    /*
-       On transforme certaines
-       liaisons en séparateurs.
-    */
 
     t =
         t.replace(
@@ -1371,12 +1291,6 @@ function decouperCommandes(
             /\s+et après\s+/gi,
             "|"
         );
-
-    /*
-       "et" devient séparateur
-       seulement lorsqu'une nouvelle
-       action commence.
-    */
 
     t =
         t.replace(
@@ -1399,7 +1313,7 @@ function decouperCommandes(
 
 
 /* =========================================================
-   EXÉCUTION APPAREIL
+   EXÉCUTER
    ========================================================= */
 
 function executer(
@@ -1414,63 +1328,48 @@ function executer(
     ) {
 
         case "allumer":
-            appareil.etat =
-                true;
+            appareil.etat = true;
             break;
 
         case "eteindre":
-            appareil.etat =
-                false;
+            appareil.etat = false;
             break;
 
         case "ouvrir":
-            appareil.etat =
-                true;
+            appareil.etat = true;
             break;
 
         case "fermer":
-            appareil.etat =
-                false;
+            appareil.etat = false;
             break;
 
         case "monter":
-            appareil.etat =
-                true;
+            appareil.etat = true;
             break;
 
         case "descendre":
-            appareil.etat =
-                false;
+            appareil.etat = false;
             break;
 
         case "verrouiller":
-            appareil.etat =
-                false;
+            appareil.etat = false;
             break;
 
     }
 
-
     if (
-        commande.temperature !==
-        null &&
+        commande.temperature !== null &&
         (
-            appareil.id ===
-            "chauffage" ||
-
-            appareil.id ===
-            "climatisation" ||
-
-            appareil.id ===
-            "four"
+            appareil.id === "chauffage" ||
+            appareil.id === "climatisation" ||
+            appareil.id === "four"
         )
     ) {
 
         appareil.temperature =
             commande.temperature;
 
-        appareil.etat =
-            true;
+        appareil.etat = true;
 
     }
 
@@ -1495,14 +1394,9 @@ function genererReponse(
     if (
         temperature !== null &&
         (
-            commande.appareil.id ===
-            "chauffage" ||
-
-            commande.appareil.id ===
-            "climatisation" ||
-
-            commande.appareil.id ===
-            "four"
+            commande.appareil.id === "chauffage" ||
+            commande.appareil.id === "climatisation" ||
+            commande.appareil.id === "four"
         )
     ) {
 
@@ -1544,9 +1438,7 @@ function genererReponse(
 
 
     return (
-        reponses[
-            commande.action
-        ] +
+        reponses[commande.action] +
         nom.toLowerCase() +
         "."
     );
@@ -1555,7 +1447,7 @@ function genererReponse(
 
 
 /* =========================================================
-   COMMANDES GLOBALES
+   COMMANDES GÉNÉRALES
    ========================================================= */
 
 async function traiterCommandeGlobale(
@@ -1563,25 +1455,13 @@ async function traiterCommandeGlobale(
 ) {
 
     const t =
-        normaliser(
-            phrase
-        );
+        normaliser(phrase);
 
-
-    /*
-       NOM
-    */
 
     if (
-        t.includes(
-            "comment tu t appelles"
-        ) ||
-        t.includes(
-            "quel est ton nom"
-        ) ||
-        t.includes(
-            "c est quoi ton nom"
-        )
+        t.includes("comment tu t appelles") ||
+        t.includes("quel est ton nom") ||
+        t.includes("c est quoi ton nom")
     ) {
 
         comprehension.innerHTML =
@@ -1600,20 +1480,9 @@ async function traiterCommandeGlobale(
     }
 
 
-    /*
-       QUI ES-TU
-    */
-
     if (
-        t.includes(
-            "qui es tu"
-        ) ||
-        t.includes(
-            "qui es tu"
-        ) ||
-        t.includes(
-            "presente toi"
-        )
+        t.includes("qui es tu") ||
+        t.includes("presente toi")
     ) {
 
         await parler(
@@ -1627,15 +1496,9 @@ async function traiterCommandeGlobale(
     }
 
 
-    /*
-       MERCI
-    */
-
     if (
         t === "merci" ||
-        t.includes(
-            "merci beaucoup"
-        )
+        t.includes("merci beaucoup")
     ) {
 
         await parler(
@@ -1647,18 +1510,10 @@ async function traiterCommandeGlobale(
     }
 
 
-    /*
-       BONJOUR
-    */
-
     if (
-        t.includes(
-            "bonjour"
-        ) ||
+        t.includes("bonjour") ||
         t === "salut" ||
-        t.includes(
-            "coucou"
-        )
+        t.includes("coucou")
     ) {
 
         await parler(
@@ -1670,17 +1525,9 @@ async function traiterCommandeGlobale(
     }
 
 
-    /*
-       HEURE
-    */
-
     if (
-        t.includes(
-            "quelle heure"
-        ) ||
-        t.includes(
-            "il est quelle heure"
-        )
+        t.includes("quelle heure") ||
+        t.includes("il est quelle heure")
     ) {
 
         const heure =
@@ -1693,34 +1540,24 @@ async function traiterCommandeGlobale(
                     }
                 );
 
+        comprehension.innerHTML =
+            "🕐 Il est " +
+            heure;
+
         await parler(
             "Il est " +
             heure
         );
-
-        comprehension.innerHTML =
-            "🕐 Il est " +
-            heure;
 
         return true;
 
     }
 
 
-    /*
-       DATE
-    */
-
     if (
-        t.includes(
-            "quelle date"
-        ) ||
-        t.includes(
-            "on est quel jour"
-        ) ||
-        t.includes(
-            "quel jour sommes nous"
-        )
+        t.includes("quelle date") ||
+        t.includes("on est quel jour") ||
+        t.includes("quel jour sommes nous")
     ) {
 
         const date =
@@ -1728,59 +1565,39 @@ async function traiterCommandeGlobale(
                 .toLocaleDateString(
                     "fr-FR",
                     {
-                        weekday:
-                            "long",
-                        day:
-                            "numeric",
-                        month:
-                            "long",
-                        year:
-                            "numeric"
+                        weekday: "long",
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric"
                     }
                 );
+
+        comprehension.innerHTML =
+            "📅 " + date;
 
         await parler(
             "Nous sommes " +
             date
         );
 
-        comprehension.innerHTML =
-            "📅 " +
-            date;
-
         return true;
 
     }
 
 
-    /*
-       ÉTAT MAISON
-    */
-
     if (
-        t.includes(
-            "qu est ce qui est allume"
-        ) ||
-        t.includes(
-            "quels appareils sont allumes"
-        ) ||
-        t.includes(
-            "qu est ce qui fonctionne"
-        ) ||
-        t.includes(
-            "etat de la maison"
-        )
+        t.includes("qu est ce qui est allume") ||
+        t.includes("quels appareils sont allumes") ||
+        t.includes("qu est ce qui fonctionne") ||
+        t.includes("etat de la maison")
     ) {
 
         const actifs =
             appareils.filter(
-                a =>
-                    a.etat
+                a => a.etat
             );
 
-        if (
-            actifs.length === 0
-        ) {
+        if (!actifs.length) {
 
             comprehension.innerHTML =
                 "🌙 Aucun appareil actif.";
@@ -1794,8 +1611,7 @@ async function traiterCommandeGlobale(
             const noms =
                 actifs
                     .map(
-                        a =>
-                            a.nom
+                        a => a.nom
                     )
                     .join(", ");
 
@@ -1815,35 +1631,18 @@ async function traiterCommandeGlobale(
     }
 
 
-    /*
-       TOUT ÉTEINDRE
-    */
-
     if (
-        t.includes(
-            "eteins tout"
-        ) ||
-        t.includes(
-            "eteindre tout"
-        ) ||
-        t.includes(
-            "coupe tout"
-        ) ||
-        t.includes(
-            "arrete tout"
-        )
+        t.includes("eteins tout") ||
+        t.includes("eteindre tout") ||
+        t.includes("coupe tout") ||
+        t.includes("arrete tout")
     ) {
 
         appareils.forEach(
-            appareil =>
-                appareil.etat =
-                    false
+            a => a.etat = false
         );
 
         afficherMaison();
-
-        comprehension.innerHTML =
-            "🌙 Toute la maison a été éteinte.";
 
         ajouterHistorique(
             "Toute la maison éteinte"
@@ -1858,32 +1657,17 @@ async function traiterCommandeGlobale(
     }
 
 
-    /*
-       TOUT ALLUMER
-    */
-
     if (
-        t.includes(
-            "allume tout"
-        ) ||
-        t.includes(
-            "allumer tout"
-        ) ||
-        t.includes(
-            "active tout"
-        )
+        t.includes("allume tout") ||
+        t.includes("allumer tout") ||
+        t.includes("active tout")
     ) {
 
         appareils.forEach(
-            appareil =>
-                appareil.etat =
-                    true
+            a => a.etat = true
         );
 
         afficherMaison();
-
-        comprehension.innerHTML =
-            "☀️ Toute la maison a été allumée.";
 
         ajouterHistorique(
             "Toute la maison allumée"
@@ -1898,17 +1682,9 @@ async function traiterCommandeGlobale(
     }
 
 
-    /*
-       MODE NUIT
-    */
-
     if (
-        t.includes(
-            "mode nuit"
-        ) ||
-        t.includes(
-            "bonne nuit"
-        )
+        t.includes("mode nuit") ||
+        t.includes("bonne nuit")
     ) {
 
         appareils.forEach(
@@ -1926,8 +1702,7 @@ async function traiterCommandeGlobale(
                     )
                 ) {
 
-                    appareil.etat =
-                        false;
+                    appareil.etat = false;
 
                 }
 
@@ -1949,37 +1724,25 @@ async function traiterCommandeGlobale(
     }
 
 
-    /*
-       MODE MATIN
-    */
-
     if (
-        t.includes(
-            "mode matin"
-        )
+        t.includes("mode matin")
     ) {
 
         const lumiere =
             appareils.find(
-                a =>
-                    a.id ===
-                    "lumiere"
+                a => a.id === "lumiere"
             );
 
         const volets =
             appareils.find(
-                a =>
-                    a.id ===
-                    "volets"
+                a => a.id === "volets"
             );
 
         if (lumiere)
-            lumiere.etat =
-                true;
+            lumiere.etat = true;
 
         if (volets)
-            volets.etat =
-                true;
+            volets.etat = true;
 
         afficherMaison();
 
@@ -2022,18 +1785,12 @@ async function analyserPhrase(
         " »";
 
 
-    /*
-       Changement de nom
-    */
-
     const nouveauNom =
         detecterNouveauNom(
             phrase
         );
 
-    if (
-        nouveauNom
-    ) {
+    if (nouveauNom) {
 
         await changerNom(
             nouveauNom
@@ -2044,19 +1801,11 @@ async function analyserPhrase(
     }
 
 
-    /*
-       Retirer le nom de l'IA
-    */
-
     const sansNom =
         retirerNom(
             phrase
         );
 
-
-    /*
-       Commandes générales
-    */
 
     if (
         await traiterCommandeGlobale(
@@ -2068,10 +1817,6 @@ async function analyserPhrase(
 
     }
 
-
-    /*
-       Découpage
-    */
 
     const morceaux =
         decouperCommandes(
@@ -2095,9 +1840,7 @@ async function analyserPhrase(
                     propre
                 );
 
-            if (
-                commande
-            ) {
+            if (commande) {
 
                 commandes.push(
                     commande
@@ -2109,13 +1852,7 @@ async function analyserPhrase(
     );
 
 
-    /*
-       Aucune commande
-    */
-
-    if (
-        commandes.length === 0
-    ) {
+    if (!commandes.length) {
 
         comprehension.innerHTML =
             `<span class="warning">
@@ -2131,10 +1868,6 @@ async function analyserPhrase(
     }
 
 
-    /*
-       Exécution
-    */
-
     const reponses = [];
 
 
@@ -2145,13 +1878,10 @@ async function analyserPhrase(
                 commande
             );
 
-            const texte =
+            reponses.push(
                 genererReponse(
                     commande
-                );
-
-            reponses.push(
-                texte
+                )
             );
 
             ajouterHistorique(
@@ -2164,10 +1894,6 @@ async function analyserPhrase(
     );
 
 
-    /*
-       Affichage
-    */
-
     comprehension.innerHTML =
         commandes
             .map(
@@ -2175,9 +1901,8 @@ async function analyserPhrase(
 
                     return `
                     <div class="command">
-                        ${
-                            commande.appareil.emoji
-                        }
+
+                        ${commande.appareil.emoji}
 
                         <strong>
                             ${commande.appareil.nom}
@@ -2187,13 +1912,13 @@ async function analyserPhrase(
                         ${commande.action}
 
                         ${
-                            commande.temperature !==
-                            null
+                            commande.temperature !== null
                             ?
                             `<br>🌡️ ${commande.temperature} °C`
                             :
                             ""
                         }
+
                     </div>
                     `;
 
@@ -2205,10 +1930,6 @@ async function analyserPhrase(
     afficherMaison();
 
 
-    /*
-       Réponse vocale
-    */
-
     await parler(
         reponses.join(" ")
     );
@@ -2217,7 +1938,7 @@ async function analyserPhrase(
 
 
 /* =========================================================
-   RECONNAISSANCE VOCALE
+   RECONNAISSANCE VOCALE V2.1
    ========================================================= */
 
 const SpeechRecognition =
@@ -2225,36 +1946,129 @@ const SpeechRecognition =
     window.webkitSpeechRecognition;
 
 
-let reconnaissance =
-    null;
+let reconnaissance = null;
 
-let enTrainDeParler =
-    false;
+let enTrainDeParler = false;
 
-let doitEcouter =
-    true;
+let doitEcouter = true;
+
+let redemarrageProgramme = false;
+
+let dernierLancement = 0;
 
 
-if (
-    !SpeechRecognition
-) {
+/* =========================================================
+   DÉMARRER MICRO
+   ========================================================= */
+
+function demarrerMicro() {
+
+    if (!reconnaissance)
+        return;
+
+    if (
+        enTrainDeParler ||
+        !doitEcouter
+    )
+        return;
+
+
+    const maintenant =
+        Date.now();
+
+
+    /*
+       Évite de lancer plusieurs
+       reconnaissances simultanément.
+    */
+
+    if (
+        maintenant -
+        dernierLancement <
+        1000
+    ) {
+
+        return;
+
+    }
+
+
+    dernierLancement =
+        maintenant;
+
+
+    try {
+
+        reconnaissance.start();
+
+    } catch (erreur) {
+
+        /*
+           Si Safari dit que la reconnaissance
+           est déjà démarrée, on ne fait rien.
+        */
+
+        console.log(
+            "Micro déjà actif."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   ARRÊTER MICRO
+   ========================================================= */
+
+function arreterMicro() {
+
+    if (!reconnaissance)
+        return;
+
+    try {
+
+        reconnaissance.stop();
+
+    } catch (erreur) {}
+
+}
+
+
+/* =========================================================
+   INITIALISATION RECONNAISSANCE
+   ========================================================= */
+
+if (!SpeechRecognition) {
 
     status.innerHTML =
-        "❌ La reconnaissance vocale n'est pas disponible sur ce navigateur.";
+        `<span class="error">
+            ❌ La reconnaissance vocale n'est pas disponible sur ce navigateur.
+        </span>`;
 
 } else {
 
     reconnaissance =
         new SpeechRecognition();
 
+
     reconnaissance.lang =
         "fr-FR";
+
+
+    /*
+       On demande une écoute continue.
+       Safari peut malgré tout interrompre
+       la session : on la redémarre alors.
+    */
 
     reconnaissance.continuous =
         true;
 
+
     reconnaissance.interimResults =
         true;
+
 
     reconnaissance.maxAlternatives =
         3;
@@ -2262,6 +2076,9 @@ if (
 
     reconnaissance.onstart =
         function() {
+
+            redemarrageProgramme =
+                false;
 
             status.innerHTML =
                 "🟢 " +
@@ -2312,8 +2129,8 @@ if (
 
 
             /*
-               Évite que HomeAI
-               entende sa propre voix.
+               Empêche HomeAI de traiter
+               sa propre réponse vocale.
             */
 
             if (
@@ -2322,40 +2139,52 @@ if (
                 return;
 
 
+            phraseFinale =
+                phraseFinale.trim();
+
+
+            interaction.textContent =
+                "🗣️ " +
+                phraseFinale;
+
+
+            /*
+               On arrête proprement la reconnaissance
+               pendant le traitement.
+            */
+
             try {
+
                 reconnaissance.stop();
+
             } catch (e) {}
 
 
-            enTrainDeParler =
-                true;
-
-
             await analyserPhrase(
-                phraseFinale.trim()
+                phraseFinale
             );
 
 
-            enTrainDeParler =
-                false;
+            /*
+               Après la réponse :
+               retour automatique à l'écoute.
+            */
 
+            setTimeout(
+                function() {
 
-            if (
-                doitEcouter
-            ) {
+                    if (
+                        doitEcouter &&
+                        !enTrainDeParler
+                    ) {
 
-                setTimeout(
-                    function() {
+                        demarrerMicro();
 
-                        try {
-                            reconnaissance.start();
-                        } catch (e) {}
+                    }
 
-                    },
-                    500
-                );
-
-            }
+                },
+                700
+            );
 
         };
 
@@ -2364,7 +2193,7 @@ if (
         function(event) {
 
             console.log(
-                "Erreur micro :",
+                "Erreur reconnaissance :",
                 event.error
             );
 
@@ -2374,8 +2203,28 @@ if (
                 "not-allowed"
             ) {
 
+                doitEcouter =
+                    false;
+
                 status.innerHTML =
-                    "❌ Autorisation du microphone refusée.";
+                    `<span class="error">
+                        ❌ Autorisation du microphone refusée.
+                    </span>`;
+
+                return;
+
+            }
+
+
+            if (
+                event.error ===
+                "service-not-allowed"
+            ) {
+
+                status.innerHTML =
+                    `<span class="error">
+                        ❌ Le service vocal n'est pas autorisé.
+                    </span>`;
 
                 return;
 
@@ -2388,9 +2237,30 @@ if (
             ) {
 
                 status.innerHTML =
-                    "❌ Aucun microphone disponible.";
+                    `<span class="error">
+                        ❌ Aucun microphone disponible.
+                    </span>`;
 
                 return;
+
+            }
+
+
+            /*
+               Pour les autres erreurs,
+               on tente automatiquement
+               de redémarrer.
+            */
+
+            if (
+                doitEcouter &&
+                !enTrainDeParler
+            ) {
+
+                setTimeout(
+                    demarrerMicro,
+                    800
+                );
 
             }
 
@@ -2400,6 +2270,22 @@ if (
     reconnaissance.onend =
         function() {
 
+            console.log(
+                "Reconnaissance terminée."
+            );
+
+
+            /*
+               C'est la partie importante
+               de V2.1.
+
+               Safari/iPadOS peut couper
+               la reconnaissance après
+               quelques secondes.
+
+               HomeAI la relance.
+            */
+
             if (
                 doitEcouter &&
                 !enTrainDeParler
@@ -2408,9 +2294,7 @@ if (
                 setTimeout(
                     function() {
 
-                        try {
-                            reconnaissance.start();
-                        } catch (e) {}
+                        demarrerMicro();
 
                     },
                     700
@@ -2421,22 +2305,69 @@ if (
         };
 
 
+    reconnaissance.onspeechstart =
+        function() {
+
+            status.innerHTML =
+                "🎙️ " +
+                NOM_IA +
+                " t'entend...";
+
+        };
+
+
+    reconnaissance.onspeechend =
+        function() {
+
+            status.innerHTML =
+                "🟢 " +
+                NOM_IA +
+                " écoute...";
+
+        };
+
+
     /*
-       Démarrage automatique
+       Premier lancement.
     */
 
     setTimeout(
         function() {
 
-            try {
-                reconnaissance.start();
-            } catch (e) {}
+            demarrerMicro();
 
         },
-        1000
+        1200
     );
 
 }
+
+
+/* =========================================================
+   SÉCURITÉ : REMETTRE L'ÉCOUTE
+   ========================================================= */
+
+setInterval(
+    function() {
+
+        if (
+            reconnaissance &&
+            doitEcouter &&
+            !enTrainDeParler
+        ) {
+
+            /*
+               Si aucun événement récent n'a
+               relancé le micro, on tente.
+            */
+
+            demarrerMicro();
+
+        }
+
+    },
+    5000
+);
 
 
 /* =========================================================
@@ -2450,11 +2381,11 @@ afficherHistorique();
 status.innerHTML =
     "🟢 " +
     NOM_IA +
-    " est prête. Tu peux parler.";
+    " est prête. Je t'écoute.";
 
 
 /* =========================================================
-   SAUVEGARDE NOM
+   MÉMOIRE NOM
    ========================================================= */
 
 setInterval(
@@ -2467,6 +2398,41 @@ setInterval(
 
     },
     3000
+);
+
+
+/* =========================================================
+   VISIBILITÉ PAGE
+   ========================================================= */
+
+document.addEventListener(
+    "visibilitychange",
+    function() {
+
+        if (
+            document.visibilityState ===
+            "visible"
+        ) {
+
+            setTimeout(
+                function() {
+
+                    if (
+                        !enTrainDeParler &&
+                        doitEcouter
+                    ) {
+
+                        demarrerMicro();
+
+                    }
+
+                },
+                1000
+            );
+
+        }
+
+    }
 );
 
 </script>
