@@ -1,528 +1,1250 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Porte-clé personnalisé | Alois Design</title>
-  <meta name="description" content="Créez votre porte-clé personnalisé avec votre propre dessin chez Alois Design.">
+  <title>Porte-clé personnalisé | Aloïs Design</title>
+
+  <meta
+    name="description"
+    content="Créez votre porte-clé personnalisé avec Aloïs Design."
+  >
 
   <style>
+
+    :root {
+      --bg: #090909;
+      --bg-light: #121212;
+      --card: #171717;
+      --gold: #d9a72b;
+      --gold-light: #f3cc68;
+      --white: #ffffff;
+      --gray: #aaaaaa;
+      --border: #292929;
+    }
+
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      color: #222;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--white);
       line-height: 1.6;
     }
 
-    header {
-      background: #111;
-      color: white;
-      text-align: center;
-      padding: 20px;
-    }
-
-    header h1 {
-      font-size: 30px;
-      margin-bottom: 5px;
-    }
-
-    header p {
-      color: #ccc;
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
     .container {
-      width: 90%;
-      max-width: 900px;
-      margin: 35px auto;
+      width: min(1120px, 92%);
+      margin: auto;
     }
 
-    .intro {
+    /* =========================
+       HEADER
+    ========================== */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+
+      background: rgba(9, 9, 9, 0.96);
+
+      backdrop-filter: blur(12px);
+
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav {
+      min-height: 72px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 15px;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 900;
+
+      letter-spacing: 2px;
+
+      color: var(--gold);
+
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: white;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+
+      gap: 20px;
+
+      font-size: 14px;
+
+      color: #ddd;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold-light);
+    }
+
+    /* =========================
+       PANIER
+    ========================== */
+
+    .cart-link {
+      position: relative;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 42px;
+      height: 42px;
+
+      border: 1px solid #333;
+
+      border-radius: 10px;
+
+      background: #111;
+
+      transition: 0.2s;
+    }
+
+    .cart-link:hover {
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .cart-icon {
+      width: 25px;
+      height: 25px;
+
+      fill: none;
+
+      stroke: var(--gold-light);
+
+      stroke-width: 2;
+
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .cart-count {
+      position: absolute;
+
+      top: -7px;
+      right: -7px;
+
+      min-width: 20px;
+      height: 20px;
+
+      padding: 2px 5px;
+
+      border-radius: 50%;
+
+      background: var(--gold);
+
+      color: #111;
+
+      font-size: 11px;
+
+      font-weight: 900;
+
       text-align: center;
-      margin-bottom: 30px;
     }
 
-    .intro h2 {
-      font-size: 32px;
+    /* =========================
+       BOUTONS
+    ========================== */
+
+    .btn {
+      display: inline-block;
+
+      padding: 13px 20px;
+
+      border-radius: 10px;
+
+      background: var(--gold);
+
+      border: 1px solid var(--gold);
+
+      color: #111;
+
+      font-weight: 900;
+
+      cursor: pointer;
+
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      background: var(--gold-light);
+      border-color: var(--gold-light);
+    }
+
+    .btn-secondary {
+      background: transparent;
+
+      border-color: #444;
+
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--gold);
+
+      color: var(--gold-light);
+
+      background: transparent;
+    }
+
+    /* =========================
+       HERO
+    ========================== */
+
+    .hero {
+      padding: 110px 0 90px;
+
+      background:
+        radial-gradient(
+          circle at 80% 20%,
+          #30240c 0,
+          transparent 35%
+        );
+    }
+
+    .kicker {
+      color: var(--gold-light);
+
+      text-transform: uppercase;
+
+      letter-spacing: 2px;
+
+      font-size: 13px;
+
+      font-weight: 800;
+
+      margin-bottom: 15px;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 7vw, 72px);
+
+      line-height: 1.02;
+
+      max-width: 850px;
+
+      margin-bottom: 22px;
+    }
+
+    .hero h1 span {
+      color: var(--gold);
+    }
+
+    .hero p {
+      max-width: 730px;
+
+      color: var(--gray);
+
+      font-size: 19px;
+    }
+
+    .hero-buttons {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 12px;
+
+      margin-top: 30px;
+    }
+
+    /* =========================
+       SECTIONS
+    ========================== */
+
+    section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      margin-bottom: 40px;
+    }
+
+    .section-title.center {
+      text-align: center;
+    }
+
+    .section-title h2 {
+      font-size: clamp(30px, 4vw, 44px);
+
+      line-height: 1.1;
+
       margin-bottom: 10px;
     }
 
-    .intro p {
-      color: #666;
+    .section-title p {
+      color: var(--gray);
+    }
+
+    /* =========================
+       CARTES
+    ========================== */
+
+    .grid {
+      display: grid;
+
+      grid-template-columns: repeat(2, 1fr);
+
+      gap: 20px;
     }
 
     .card {
-      background: white;
-      padding: 28px;
+      padding: 30px;
+
+      border: 1px solid var(--border);
+
+      background:
+        linear-gradient(
+          145deg,
+          #181818,
+          #101010
+        );
+
       border-radius: 18px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-      margin-bottom: 25px;
+    }
+
+    .card:hover {
+      border-color: #4a3a15;
+
+      transform: translateY(-4px);
     }
 
     .card h3 {
-      margin-bottom: 18px;
-      font-size: 22px;
+      font-size: 24px;
+
+      color: var(--gold-light);
+
+      margin-bottom: 10px;
     }
 
-    label {
-      display: block;
+    .card p {
+      color: var(--gray);
+
+      margin-bottom: 20px;
+    }
+
+    .card ul {
+      list-style: none;
+    }
+
+    .card li {
+      margin: 9px 0;
+
+      color: #ddd;
+    }
+
+    .card li::before {
+      content: "✓";
+
+      color: var(--gold-light);
+
       font-weight: bold;
-      margin-bottom: 7px;
+
+      margin-right: 9px;
+    }
+
+    /* =========================
+       PERSONNALISATION
+    ========================== */
+
+    .custom-box {
+      background:
+        linear-gradient(
+          145deg,
+          #171207,
+          #0e0e0e
+        );
+
+      border-top: 1px solid #392c10;
+
+      border-bottom: 1px solid #392c10;
+    }
+
+    .custom-content {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 25px;
+    }
+
+    .custom-info,
+    .custom-form {
+      padding: 30px;
+
+      border: 1px solid var(--border);
+
+      border-radius: 18px;
+
+      background: #101010;
+    }
+
+    .custom-info h2 {
+      font-size: 28px;
+
+      color: var(--gold-light);
+
+      margin-bottom: 12px;
+    }
+
+    .custom-info p {
+      color: var(--gray);
+
+      margin-bottom: 20px;
+    }
+
+    .custom-info ul {
+      list-style: none;
+    }
+
+    .custom-info li {
+      margin: 10px 0;
+
+      color: #ddd;
+    }
+
+    .custom-info li::before {
+      content: "✓";
+
+      color: var(--gold);
+
+      margin-right: 10px;
+    }
+
+    /* =========================
+       FORMULAIRE
+    ========================== */
+
+    form label {
+      display: block;
+
+      margin: 12px 0 6px;
+
+      font-size: 14px;
+
+      color: #ddd;
     }
 
     input,
     select,
     textarea {
       width: 100%;
-      padding: 13px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      font-size: 16px;
-      margin-bottom: 18px;
-      font-family: Arial, sans-serif;
+
+      padding: 12px;
+
+      border-radius: 9px;
+
+      border: 1px solid #333;
+
+      background: #080808;
+
+      color: white;
+
+      font: inherit;
     }
 
     input:focus,
     select:focus,
     textarea:focus {
-      outline: none;
-      border-color: #111;
+      outline: 1px solid var(--gold);
+
+      border-color: var(--gold);
     }
 
-    input[type="file"] {
-      padding: 10px;
-      background: #fafafa;
+    textarea {
+      min-height: 120px;
+
+      resize: vertical;
     }
 
-    .preview {
-      display: none;
-      text-align: center;
-      margin-top: 10px;
+    .small-text {
+      font-size: 12px;
+
+      color: #888;
+
+      margin-top: 6px;
     }
 
-    .preview img {
-      max-width: 100%;
-      max-height: 300px;
-      border-radius: 12px;
-      border: 1px solid #ddd;
-      padding: 5px;
-    }
+    /* =========================
+       PANIER
+    ========================== */
 
-    .preview p {
-      color: #666;
-      margin-top: 8px;
-      font-size: 14px;
-    }
-
-    .price-box {
-      background: #f0f0f0;
-      padding: 18px;
-      border-radius: 12px;
-      margin-bottom: 20px;
+    .cart-section {
       text-align: center;
     }
 
-    .price {
-      font-size: 28px;
-      font-weight: bold;
+    .cart-box {
+      padding: 40px;
+
+      border: 1px solid var(--border);
+
+      border-radius: 18px;
+
+      background: var(--card);
     }
 
-    .small {
-      font-size: 14px;
-      color: #666;
+    .cart-box h2 {
+      font-size: 30px;
+
+      margin-bottom: 10px;
     }
 
-    .button {
-      display: block;
-      width: 100%;
-      padding: 15px;
-      border: none;
-      border-radius: 10px;
-      background: #111;
-      color: white;
-      font-size: 17px;
-      font-weight: bold;
-      cursor: pointer;
-      text-align: center;
-      text-decoration: none;
+    .cart-box p {
+      color: var(--gray);
+
+      margin-bottom: 25px;
     }
 
-    .button:hover {
-      opacity: 0.9;
-    }
-
-    .back {
-      text-align: center;
-      margin: 30px 0;
-    }
-
-    .back a {
-      color: #111;
-      font-weight: bold;
-      text-decoration: none;
-    }
+    /* =========================
+       FOOTER
+    ========================== */
 
     footer {
-      background: #111;
-      color: #ccc;
+      border-top: 1px solid var(--border);
+
+      padding: 35px 0;
+
       text-align: center;
-      padding: 25px 15px;
-      margin-top: 40px;
+
+      color: #888;
+
+      font-size: 13px;
     }
 
     footer a {
-      color: white;
-      text-decoration: none;
+      color: var(--gold-light);
     }
 
-    @media (max-width: 600px) {
-      .intro h2 {
-        font-size: 27px;
+    /* =========================
+       MOBILE
+    ========================== */
+
+    @media (max-width: 850px) {
+
+      .nav-links {
+        display: none;
       }
 
-      .card {
-        padding: 20px;
+      .custom-content,
+      .grid {
+        grid-template-columns: 1fr;
       }
+
+      .hero {
+        padding-top: 75px;
+      }
+
     }
+
+    @media (max-width: 500px) {
+
+      .container {
+        width: 90%;
+      }
+
+      .hero h1 {
+        font-size: 42px;
+      }
+
+      .hero p {
+        font-size: 17px;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+      }
+
+      .hero-buttons .btn {
+        width: 100%;
+        text-align: center;
+      }
+
+      section {
+        padding: 60px 0;
+      }
+
+    }
+
   </style>
+
 </head>
+
 
 <body>
 
+
+<!-- =========================
+     HEADER
+========================== -->
+
 <header>
-  <h1>Alois Design</h1>
-  <p>Impression 3D personnalisée</p>
+
+  <div class="container">
+
+    <nav>
+
+      <a
+        href="index.html"
+        class="logo"
+      >
+        ALOÏS <span>DESIGN</span>
+      </a>
+
+
+      <div class="nav-links">
+
+        <a href="index.html">
+          Accueil
+        </a>
+
+        <a href="impression-3d.html">
+          Impression 3D
+        </a>
+
+        <a href="logo3D.html">
+          Logo 3D
+        </a>
+
+        <a href="porte-clé.html">
+          Porte-clé
+        </a>
+
+        <a href="tampons.html">
+          Tampons
+        </a>
+
+      </div>
+
+
+      <!-- PANIER -->
+
+      <a
+        href="panier.html"
+        class="cart-link"
+        aria-label="Voir le panier"
+      >
+
+        <svg
+          class="cart-icon"
+          viewBox="0 0 24 24"
+        >
+
+          <circle
+            cx="9"
+            cy="20"
+            r="1.5"
+          ></circle>
+
+          <circle
+            cx="18"
+            cy="20"
+            r="1.5"
+          ></circle>
+
+          <path
+            d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L21 8H6"
+          ></path>
+
+        </svg>
+
+
+        <span
+          class="cart-count"
+          id="cartCount"
+        >
+          0
+        </span>
+
+      </a>
+
+    </nav>
+
+  </div>
+
 </header>
 
 
-<main class="container">
 
-  <section class="intro">
-    <h2>🔑 Crée ton porte-clé personnalisé</h2>
+<main>
+
+
+<!-- =========================
+     HERO
+========================== -->
+
+<section class="hero">
+
+  <div class="container">
+
+    <div class="kicker">
+      ALOÏS DESIGN
+    </div>
+
+
+    <h1>
+
+      Porte-clé
+      <span>personnalisé.</span>
+
+    </h1>
+
 
     <p>
-      Insère ton dessin ou ton image et nous nous occupons
-      de préparer ton porte-clé pour l'impression 3D.
+
+      Créez un porte-clé unique avec le dessin,
+      le texte, le logo ou le motif de votre choix.
+
     </p>
-  </section>
 
 
-  <!-- IMPORT DU DESSIN -->
-  <section class="card">
+    <div class="hero-buttons">
 
-    <h3>1. Ton dessin</h3>
-
-    <label for="image">
-      Insère ton dessin ou ton image *
-    </label>
-
-    <input
-      type="file"
-      id="image"
-      accept="image/png,image/jpeg,image/webp"
-      required
-    >
-
-    <div class="preview" id="preview">
-      <img id="previewImage" src="" alt="Aperçu du dessin">
-      <p>Aperçu de ton dessin</p>
-    </div>
-
-  </section>
+      <a
+        href="#personnalisation"
+        class="btn"
+      >
+        Personnaliser mon porte-clé
+      </a>
 
 
-  <!-- OPTIONS -->
-  <section class="card">
-
-    <h3>2. Personnalise ton porte-clé</h3>
-
-    <label for="texte">
-      Texte à ajouter
-    </label>
-
-    <input
-      type="text"
-      id="texte"
-      placeholder="Exemple : Alois Design"
-    >
-
-
-    <label for="couleur">
-      Couleur
-    </label>
-
-    <select id="couleur">
-
-      <option value="Noir">
-        Noir
-      </option>
-
-      <option value="Blanc">
-        Blanc
-      </option>
-
-      <option value="Rouge">
-        Rouge
-      </option>
-
-      <option value="Bleu">
-        Bleu
-      </option>
-
-      <option value="Vert">
-        Vert
-      </option>
-
-      <option value="Jaune">
-        Jaune
-      </option>
-
-      <option value="Autre">
-        Autre
-      </option>
-
-    </select>
-
-
-    <label for="taille">
-      Taille
-    </label>
-
-    <select id="taille">
-
-      <option value="Petit">
-        Petit
-      </option>
-
-      <option value="Moyen">
-        Moyen
-      </option>
-
-      <option value="Grand">
-        Grand
-      </option>
-
-    </select>
-
-
-    <label for="quantite">
-      Quantité
-    </label>
-
-    <input
-      type="number"
-      id="quantite"
-      value="1"
-      min="1"
-      max="50"
-      onchange="calculerPrix()"
-    >
-
-  </section>
-
-
-  <!-- PRIX -->
-  <section class="card">
-
-    <div class="price-box">
-
-      <div class="small">
-        Prix indicatif
-      </div>
-
-      <div class="price" id="prix">
-        5,00 €
-      </div>
-
-      <div class="small">
-        Le prix peut être ajusté selon la complexité du dessin.
-      </div>
+      <a
+        href="panier.html"
+        class="btn btn-secondary"
+      >
+        🛒 Voir mon panier
+      </a>
 
     </div>
 
-    <button
-      class="button"
-      onclick="ajouterAuPanier()"
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     INFORMATIONS
+========================== -->
+
+<section>
+
+  <div class="container">
+
+    <div class="section-title center">
+
+      <h2>
+        🔑 Votre porte-clé
+      </h2>
+
+      <p>
+        Une petite création personnalisée réalisée en impression 3D.
+      </p>
+
+    </div>
+
+
+    <div class="grid">
+
+
+      <article class="card">
+
+        <h3>
+          🎨 Votre dessin
+        </h3>
+
+        <p>
+
+          Vous pouvez nous envoyer le dessin
+          ou le motif que vous souhaitez
+          retrouver sur votre porte-clé.
+
+        </p>
+
+        <ul>
+
+          <li>
+            Logo
+          </li>
+
+          <li>
+            Dessin
+          </li>
+
+          <li>
+            Texte
+          </li>
+
+          <li>
+            Motif personnalisé
+          </li>
+
+        </ul>
+
+      </article>
+
+
+      <article class="card">
+
+        <h3>
+          🖨️ Impression 3D
+        </h3>
+
+        <p>
+
+          Votre modèle est préparé puis
+          réalisé en impression 3D.
+
+        </p>
+
+        <ul>
+
+          <li>
+            Fabrication personnalisée
+          </li>
+
+          <li>
+            Plusieurs couleurs possibles
+          </li>
+
+          <li>
+            Modèle adapté à votre demande
+          </li>
+
+          <li>
+            Fabrication sur commande
+          </li>
+
+        </ul>
+
+      </article>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     PERSONNALISATION
+========================== -->
+
+<section
+  class="custom-box"
+  id="personnalisation"
+>
+
+  <div class="container">
+
+
+    <div class="section-title center">
+
+      <h2>
+        Créez votre porte-clé
+      </h2>
+
+      <p>
+        Expliquez-nous ce que vous souhaitez.
+      </p>
+
+    </div>
+
+
+    <div class="custom-content">
+
+
+      <!-- INFORMATIONS -->
+
+      <div class="custom-info">
+
+        <h2>
+          Votre idée
+        </h2>
+
+        <p>
+
+          Indiquez le dessin, le texte ou le
+          logo que vous souhaitez utiliser.
+
+        </p>
+
+
+        <ul>
+
+          <li>
+            Décrivez votre modèle
+          </li>
+
+          <li>
+            Indiquez la couleur souhaitée
+          </li>
+
+          <li>
+            Indiquez la quantité
+          </li>
+
+          <li>
+            Envoyez votre dessin si nécessaire
+          </li>
+
+        </ul>
+
+
+        <p style="margin-top: 25px;">
+
+          📩
+
+          <a
+            href="mailto:aloisryckebuschvandaele@gmail.com"
+            style="
+              color: var(--gold-light);
+              font-weight: bold;
+            "
+          >
+            aloisryckebuschvandaele@gmail.com
+          </a>
+
+        </p>
+
+      </div>
+
+
+
+      <!-- FORMULAIRE -->
+
+      <div class="custom-form">
+
+        <form
+          action="mailto:aloisryckebuschvandaele@gmail.com"
+          method="post"
+          enctype="text/plain"
+        >
+
+
+          <label for="nom">
+            Nom / prénom
+          </label>
+
+          <input
+            type="text"
+            id="nom"
+            name="Nom / prénom"
+            required
+            placeholder="Votre nom et prénom"
+          >
+
+
+          <label for="email">
+            Email
+          </label>
+
+          <input
+            type="email"
+            id="email"
+            name="Email"
+            required
+            placeholder="Votre adresse e-mail"
+          >
+
+
+          <label for="texte">
+            Texte ou inscription
+          </label>
+
+          <input
+            type="text"
+            id="texte"
+            name="Texte"
+            placeholder="Ex. Mon prénom"
+          >
+
+
+          <label for="couleur">
+            Couleur souhaitée
+          </label>
+
+          <select
+            id="couleur"
+            name="Couleur"
+          >
+
+            <option value="">
+              Choisir une couleur
+            </option>
+
+            <option value="Noir">
+              Noir
+            </option>
+
+            <option value="Blanc">
+              Blanc
+            </option>
+
+            <option value="Rouge">
+              Rouge
+            </option>
+
+            <option value="Bleu">
+              Bleu
+            </option>
+
+            <option value="Vert">
+              Vert
+            </option>
+
+            <option value="Jaune">
+              Jaune
+            </option>
+
+            <option value="Autre">
+              Autre
+            </option>
+
+          </select>
+
+
+          <label for="quantite">
+            Quantité
+          </label>
+
+          <input
+            type="number"
+            id="quantite"
+            name="Quantité"
+            min="1"
+            value="1"
+          >
+
+
+          <label for="description">
+            Décrivez votre porte-clé
+          </label>
+
+          <textarea
+            id="description"
+            name="Description"
+            required
+            placeholder="Expliquez-nous le dessin ou le modèle que vous souhaitez..."
+          ></textarea>
+
+
+          <button
+            type="submit"
+            class="btn"
+            style="
+              margin-top: 20px;
+              width: 100%;
+              border: none;
+            "
+          >
+            Envoyer ma demande
+          </button>
+
+
+          <p class="small-text">
+            Votre demande sera envoyée par e-mail.
+          </p>
+
+
+        </form>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     PANIER
+========================== -->
+
+<section class="cart-section">
+
+  <div class="container">
+
+    <div class="cart-box">
+
+      <h2>
+        🛒 Votre panier
+      </h2>
+
+      <p>
+
+        Retrouvez ici vos produits sélectionnés.
+
+      </p>
+
+      <a
+        href="panier.html"
+        class="btn"
+      >
+        Ouvrir mon panier
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     RETOUR
+========================== -->
+
+<section>
+
+  <div
+    class="container"
+    style="text-align: center;"
+  >
+
+    <a
+      href="impression-3d.html"
+      class="btn btn-secondary"
     >
-      🛒 Ajouter au panier
-    </button>
-
-  </section>
-
-
-  <div class="back">
-    <a href="impression.html">
       ← Retour à l'impression 3D
     </a>
+
   </div>
+
+</section>
+
 
 </main>
 
 
+
+<!-- =========================
+     FOOTER
+========================== -->
+
 <footer>
 
-  <p>Alois Design</p>
+  <div class="container">
 
-  <p>
-    <a href="mailto:aloisryckebuschvandaele@gmail.com">
-      aloisryckebuschvandaele@gmail.com
-    </a>
-  </p>
+    <p>
+      Aloïs Design
+    </p>
 
-  <p>
-    © 2026 Alois Design - Tous droits réservés
-  </p>
+    <p>
+      Impression 3D · Création de logos ·
+      Sculpture & gravure
+    </p>
+
+    <p style="margin-top: 10px;">
+
+      <a
+        href="mailto:aloisryckebuschvandaele@gmail.com"
+      >
+        aloisryckebuschvandaele@gmail.com
+      </a>
+
+    </p>
+
+    <p style="margin-top: 10px;">
+      © 2026 Aloïs Design
+    </p>
+
+  </div>
 
 </footer>
 
 
+
+<!-- =========================
+     COMPTEUR PANIER
+========================== -->
+
 <script>
 
-  const imageInput = document.getElementById("image");
-  const preview = document.getElementById("preview");
-  const previewImage = document.getElementById("previewImage");
+  function updateCartCount() {
 
-  /*
-    Affichage de l'image sélectionnée
-  */
+    const cartCount =
+      document.getElementById("cartCount");
 
-  imageInput.addEventListener("change", function() {
+    let panier = [];
 
-    const file = this.files[0];
+    try {
 
-    if (!file) {
-      preview.style.display = "none";
-      return;
-    }
+      panier =
+        JSON.parse(
+          localStorage.getItem("panier")
+        ) || [];
 
-    const reader = new FileReader();
+    } catch (error) {
 
-    reader.onload = function(e) {
-
-      previewImage.src = e.target.result;
-
-      preview.style.display = "block";
-
-    };
-
-    reader.readAsDataURL(file);
-
-  });
-
-
-  /*
-    Calcul du prix
-  */
-
-  function calculerPrix() {
-
-    const quantite =
-      parseInt(document.getElementById("quantite").value) || 1;
-
-    const prixUnitaire = 5;
-
-    const total = prixUnitaire * quantite;
-
-    document.getElementById("prix").textContent =
-      total.toFixed(2).replace(".", ",") + " €";
-
-  }
-
-
-  /*
-    Ajout au panier
-  */
-
-  function ajouterAuPanier() {
-
-    const image =
-      document.getElementById("image").files[0];
-
-    const texte =
-      document.getElementById("texte").value;
-
-    const couleur =
-      document.getElementById("couleur").value;
-
-    const taille =
-      document.getElementById("taille").value;
-
-    const quantite =
-      parseInt(document.getElementById("quantite").value) || 1;
-
-
-    if (!image) {
-
-      alert("Merci d'insérer ton dessin ou ton image.");
-
-      return;
+      panier = [];
 
     }
 
 
-    /*
-      IMPORTANT :
-
-      Pour l'instant, le navigateur garde l'image
-      uniquement sur cette page.
-
-      Le vrai envoi du fichier vers ton entreprise
-      sera ajouté avec le système de commande.
-    */
+    let total = 0;
 
 
-    const produit = {
+    panier.forEach(function(produit) {
 
-      nom: "Porte-clé personnalisé",
+      total +=
+        Number(produit.quantite) || 1;
 
-      prix: 5,
-
-      quantite: quantite,
-
-      texte: texte,
-
-      couleur: couleur,
-
-      taille: taille,
-
-      imageNom: image.name
-
-    };
+    });
 
 
-    /*
-      Récupération du panier existant
-    */
-
-    let panier =
-      JSON.parse(localStorage.getItem("panier")) || [];
-
-
-    panier.push(produit);
-
-
-    localStorage.setItem(
-      "panier",
-      JSON.stringify(panier)
-    );
-
-
-    alert(
-      "Ton porte-clé a été ajouté au panier !"
-    );
-
-
-    window.location.href = "panier.html";
+    cartCount.textContent = total;
 
   }
+
+
+  updateCartCount();
+
+
+  window.addEventListener(
+    "storage",
+    updateCartCount
+  );
 
 </script>
+
 
 </body>
 </html>
