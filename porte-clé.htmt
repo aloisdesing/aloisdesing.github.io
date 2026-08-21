@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Porte-clé personnalisé | Aloïs Design</title>
+
+  <meta
+    name="description"
+    content="Porte-clés personnalisés imprimés en 3D par Aloïs Design."
+  >
+
+  <style>
+    :root {
+      --bg: #090909;
+      --bg-light: #121212;
+      --card: #171717;
+      --gold: #d9a72b;
+      --gold-light: #f3cc68;
+      --white: #ffffff;
+      --gray: #aaaaaa;
+      --border: #292929;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--white);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font-family: inherit;
+    }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: auto;
+    }
+
+    /* =========================
+       HEADER
+    ========================== */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+
+      background: rgba(9, 9, 9, 0.96);
+
+      backdrop-filter: blur(12px);
+
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav {
+      min-height: 72px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 15px;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 2px;
+
+      color: var(--gold);
+
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: white;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+
+      gap: 18px;
+
+      font-size: 14px;
+
+      color: #ddd;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold-light);
+    }
+
+    /* =========================
+       PANIER
+    ========================== */
+
+    .cart-link {
+      position: relative;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 44px;
+      height: 44px;
+
+      border: 1px solid #333;
+
+      border-radius: 10px;
+
+      background: #111;
+
+      transition: 0.2s;
+    }
+
+    .cart-link:hover {
+      border-color: var(--gold);
+
+      transform: translateY(-2px);
+    }
+
+    .cart-icon {
+      width: 25px;
+      height: 25px;
+
+      fill: none;
+
+      stroke: var(--gold-light);
+
+      stroke-width: 2;
+
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .cart-count {
+      position: absolute;
+
+      top: -7px;
+      right: -7px;
+
+      min-width: 20px;
+      height: 20px;
+
+      padding: 2px 5px;
+
+      border-radius: 50%;
+
+      background: var(--gold);
+
+      color: #111;
+
+      font-size: 11px;
+
+      font-weight: 900;
+
+      text-align: center;
+    }
+
+    /* =========================
+       HERO
+    ========================== */
+
+    .hero {
+      padding: 95px 0 70px;
+
+      background:
+        radial-gradient(
+          circle at 80% 20%,
+          #30240c 0,
+          transparent 35%
+        );
+    }
+
+    .kicker {
+      color: var(--gold-light);
+
+      text-transform: uppercase;
+
+      letter-spacing: 2px;
+
+      font-size: 13px;
+
+      font-weight: 800;
+
+      margin-bottom: 14px;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 7vw, 72px);
+
+      line-height: 1.02;
+
+      max-width: 800px;
+
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      color: var(--gold);
+    }
+
+    .hero p {
+      max-width: 720px;
+
+      color: var(--gray);
+
+      font-size: 19px;
+    }
+
+    /* =========================
+       PRODUIT
+    ========================== */
+
+    .product-section {
+      padding: 60px 0 90px;
+    }
+
+    .product-layout {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 30px;
+
+      align-items: start;
+    }
+
+    .product-preview,
+    .product-info {
+      border: 1px solid var(--border);
+
+      border-radius: 20px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #181818,
+          #101010
+        );
+    }
+
+    .product-preview {
+      min-height: 500px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      flex-direction: column;
+
+      padding: 40px;
+
+      text-align: center;
+    }
+
+    .keychain {
+      width: 270px;
+      height: 180px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      position: relative;
+
+      border-radius: 30px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #292929,
+          #111111
+        );
+
+      border: 3px solid #444;
+
+      box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .keychain::after {
+      content: "";
+
+      position: absolute;
+
+      right: -28px;
+
+      top: 50%;
+
+      transform: translateY(-50%);
+
+      width: 48px;
+      height: 48px;
+
+      border: 8px solid #555;
+
+      border-radius: 50%;
+
+      background: #111;
+    }
+
+    .keychain-text {
+      color: var(--gold-light);
+
+      font-size: 27px;
+
+      font-weight: 900;
+
+      letter-spacing: 1px;
+    }
+
+    .preview-label {
+      margin-top: 40px;
+
+      color: var(--gray);
+
+      font-size: 14px;
+    }
+
+    .product-info {
+      padding: 35px;
+    }
+
+    .product-info h2 {
+      font-size: 34px;
+
+      margin-bottom: 10px;
+    }
+
+    .product-description {
+      color: var(--gray);
+
+      margin-bottom: 25px;
+    }
+
+    .price {
+      color: var(--gold-light);
+
+      font-size: 32px;
+
+      font-weight: 900;
+
+      margin-bottom: 25px;
+    }
+
+    /* =========================
+       OPTIONS
+    ========================== */
+
+    .option {
+      margin-top: 20px;
+    }
+
+    .option label {
+      display: block;
+
+      margin-bottom: 8px;
+
+      color: #ddd;
+
+      font-size: 14px;
+
+      font-weight: 700;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+
+      padding: 13px;
+
+      border-radius: 10px;
+
+      border: 1px solid #333;
+
+      background: #080808;
+
+      color: white;
+
+      outline: none;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--gold);
+
+      outline: 1px solid var(--gold);
+    }
+
+    textarea {
+      min-height: 110px;
+
+      resize: vertical;
+    }
+
+    .help {
+      margin-top: 6px;
+
+      color: #777;
+
+      font-size: 12px;
+    }
+
+    /* =========================
+       QUANTITÉ
+    ========================== */
+
+    .quantity-box {
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+    }
+
+    .quantity-box button {
+      width: 38px;
+      height: 38px;
+
+      border-radius: 8px;
+
+      border: 1px solid #444;
+
+      background: #0b0b0b;
+
+      color: white;
+
+      cursor: pointer;
+
+      font-size: 20px;
+    }
+
+    .quantity-box button:hover {
+      border-color: var(--gold);
+
+      color: var(--gold-light);
+    }
+
+    #quantity {
+      width: 70px;
+
+      text-align: center;
+    }
+
+    /* =========================
+       BOUTONS
+    ========================== */
+
+    .btn {
+      display: inline-block;
+
+      width: 100%;
+
+      padding: 14px 20px;
+
+      border-radius: 10px;
+
+      background: var(--gold);
+
+      border: 1px solid var(--gold);
+
+      color: #111;
+
+      font-weight: 900;
+
+      cursor: pointer;
+
+      text-align: center;
+
+      transition: 0.2s;
+
+      margin-top: 25px;
+    }
+
+    .btn:hover {
+      background: var(--gold-light);
+
+      border-color: var(--gold-light);
+    }
+
+    .btn-secondary {
+      background: transparent;
+
+      border-color: #444;
+
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: transparent;
+
+      border-color: var(--gold);
+
+      color: var(--gold-light);
+    }
+
+    /* =========================
+       INFORMATIONS
+    ========================== */
+
+    .features {
+      margin-top: 25px;
+
+      padding-top: 20px;
+
+      border-top: 1px solid var(--border);
+    }
+
+    .feature {
+      margin: 10px 0;
+
+      color: #ccc;
+    }
+
+    .feature span {
+      color: var(--gold-light);
+
+      margin-right: 8px;
+    }
+
+    /* =========================
+       COMMENT ÇA MARCHE
+    ========================== */
+
+    section.info-section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      text-align: center;
+
+      margin-bottom: 40px;
+    }
+
+    .section-title h2 {
+      font-size: 40px;
+
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: var(--gray);
+    }
+
+    .steps {
+      display: grid;
+
+      grid-template-columns: repeat(3, 1fr);
+
+      gap: 20px;
+    }
+
+    .step {
+      padding: 30px;
+
+      border: 1px solid var(--border);
+
+      border-radius: 18px;
+
+      background: var(--bg-light);
+    }
+
+    .step-number {
+      color: var(--gold);
+
+      font-size: 30px;
+
+      font-weight: 900;
+
+      margin-bottom: 8px;
+    }
+
+    .step h3 {
+      margin-bottom: 8px;
+    }
+
+    .step p {
+      color: var(--gray);
+
+      font-size: 14px;
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
+
+    footer {
+      border-top: 1px solid var(--border);
+
+      padding: 35px 0;
+
+      text-align: center;
+
+      color: #888;
+
+      font-size: 13px;
+    }
+
+    .gold {
+      color: var(--gold-light);
+    }
+
+    /* =========================
+       MOBILE
+    ========================== */
+
+    @media (max-width: 850px) {
+
+      .nav-links {
+        display: none;
+      }
+
+      .product-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .product-preview {
+        min-height: 400px;
+      }
+
+    }
+
+    @media (max-width: 500px) {
+
+      .container {
+        width: 90%;
+      }
+
+      .hero {
+        padding-top: 70px;
+      }
+
+      .hero h1 {
+        font-size: 44px;
+      }
+
+      .product-info {
+        padding: 23px;
+      }
+
+      .keychain {
+        width: 210px;
+        height: 140px;
+      }
+
+      .keychain-text {
+        font-size: 20px;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+  <!-- =========================
+       HEADER
+  ========================== -->
+
+  <header>
+
+    <div class="container">
+
+      <nav>
+
+        <a
+          href="index.html"
+          class="logo"
+        >
+          ALOÏS <span>DESIGN</span>
+        </a>
+
+
+        <div class="nav-links">
+
+          <a href="index.html">
+            Accueil
+          </a>
+
+          <a href="impression-3d.html">
+            Impression 3D
+          </a>
+
+          <a href="Logo3D.html">
+            Logo 3D
+          </a>
+
+          <a href="porte-clé.html">
+            Porte-clé
+          </a>
+
+          <a href="tampons.html">
+            Tampons
+          </a>
+
+          <a href="creation-logo.html">
+            Création de logo
+          </a>
+
+        </div>
+
+
+        <a
+          href="panier.html"
+          class="cart-link"
+          aria-label="Voir le panier"
+        >
+
+          <svg
+            class="cart-icon"
+            viewBox="0 0 24 24"
+          >
+
+            <circle
+              cx="9"
+              cy="20"
+              r="1.5"
+            ></circle>
+
+            <circle
+              cx="18"
+              cy="20"
+              r="1.5"
+            ></circle>
+
+            <path
+              d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L21 8H6"
+            ></path>
+
+          </svg>
+
+          <span
+            class="cart-count"
+            id="cartCount"
+          >
+            0
+          </span>
+
+        </a>
+
+      </nav>
+
+    </div>
+
+  </header>
+
+
+  <main>
+
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <section class="hero">
+
+      <div class="container">
+
+        <div class="kicker">
+          Impression 3D personnalisée
+        </div>
+
+        <h1>
+          Créez votre
+          <span>porte-clé.</span>
+        </h1>
+
+        <p>
+          Un porte-clé personnalisé avec le texte,
+          le prénom, le nom ou le dessin de votre choix.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         PRODUIT
+    ========================== -->
+
+    <section class="product-section">
+
+      <div class="container">
+
+        <div class="product-layout">
+
+
+          <!-- APERÇU -->
+
+          <div class="product-preview">
+
+            <div class="keychain">
+
+              <div
+                class="keychain-text"
+                id="previewText"
+              >
+                VOTRE TEXTE
+              </div>
+
+            </div>
+
+            <div class="preview-label">
+              Aperçu indicatif du porte-clé
+            </div>
+
+          </div>
+
+
+          <!-- INFORMATIONS -->
+
+          <div class="product-info">
+
+            <h2>
+              🔑 Porte-clé personnalisé
+            </h2>
+
+            <p class="product-description">
+              Personnalisez votre porte-clé avec un prénom,
+              un nom, un mot ou une idée.
+            </p>
+
+            <div class="price">
+              6,00 €
+            </div>
+
+
+            <!-- TEXTE -->
+
+            <div class="option">
+
+              <label for="customText">
+                Texte à inscrire
+              </label>
+
+              <input
+                type="text"
+                id="customText"
+                maxlength="20"
+                placeholder="Ex. ALOÏS"
+              >
+
+              <div class="help">
+                Maximum 20 caractères.
+              </div>
+
+            </div>
+
+
+            <!-- DESCRIPTION / DESSIN -->
+
+            <div class="option">
+
+              <label for="customDescription">
+                Décrivez votre dessin ou personnalisation
+              </label>
+
+              <textarea
+                id="customDescription"
+                placeholder="Ex. Je voudrais une étoile avec mon prénom..."
+              ></textarea>
+
+              <div class="help">
+                Pour un dessin ou une forme particulière,
+                décrivez votre idée. Nous pourrons ensuite
+                vous confirmer la faisabilité.
+              </div>
+
+            </div>
+
+
+            <!-- COULEUR -->
+
+            <div class="option">
+
+              <label for="color">
+                Couleur souhaitée
+              </label>
+
+              <select id="color">
+
+                <option value="Noir">
+                  Noir
+                </option>
+
+                <option value="Blanc">
+                  Blanc
+                </option>
+
+                <option value="Rouge">
+                  Rouge
+                </option>
+
+                <option value="Bleu">
+                  Bleu
+                </option>
+
+                <option value="Vert">
+                  Vert
+                </option>
+
+                <option value="Jaune">
+                  Jaune
+                </option>
+
+                <option value="Autre">
+                  Autre
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <!-- QUANTITÉ -->
+
+            <div class="option">
+
+              <label>
+                Quantité
+              </label>
+
+              <div class="quantity-box">
+
+                <button
+                  type="button"
+                  onclick="changeQuantity(-1)"
+                >
+                  −
+                </button>
+
+                <input
+                  type="number"
+                  id="quantity"
+                  value="1"
+                  min="1"
+                  max="50"
+                >
+
+                <button
+                  type="button"
+                  onclick="changeQuantity(1)"
+                >
+                  +
+                </button>
+
+              </div>
+
+            </div>
+
+
+            <!-- AJOUT -->
+
+            <button
+              class="btn"
+              onclick="addToCart()"
+            >
+              🛒 Ajouter au panier
+            </button>
+
+
+            <a
+              href="panier.html"
+              class="btn btn-secondary"
+            >
+              Voir mon panier
+            </a>
+
+
+            <!-- CARACTÉRISTIQUES -->
+
+            <div class="features">
+
+              <div class="feature">
+                <span>✓</span>
+                Fabrication personnalisée
+              </div>
+
+              <div class="feature">
+                <span>✓</span>
+                Impression 3D
+              </div>
+
+              <div class="feature">
+                <span>✓</span>
+                Personnalisation possible
+              </div>
+
+              <div class="feature">
+                <span>✓</span>
+                Commande préparée avec soin
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         ÉTAPES
+    ========================== -->
+
+    <section class="info-section">
+
+      <div class="container">
+
+        <div class="section-title">
+
+          <h2>
+            Comment ça marche ?
+          </h2>
+
+          <p>
+            Votre porte-clé personnalisé en quelques étapes.
+          </p>
+
+        </div>
+
+
+        <div class="steps">
+
+
+          <article class="step">
+
+            <div class="step-number">
+              01
+            </div>
+
+            <h3>
+              Personnalisez
+            </h3>
+
+            <p>
+              Indiquez le texte, le dessin ou l'idée
+              que vous souhaitez sur votre porte-clé.
+            </p>
+
+          </article>
+
+
+          <article class="step">
+
+            <div class="step-number">
+              02
+            </div>
+
+            <h3>
+              Ajoutez au panier
+            </h3>
+
+            <p>
+              Choisissez la quantité puis ajoutez
+              votre porte-clé à votre panier.
+            </p>
+
+          </article>
+
+
+          <article class="step">
+
+            <div class="step-number">
+              03
+            </div>
+
+            <h3>
+              Validation
+            </h3>
+
+            <p>
+              Retrouvez votre commande dans le panier
+              et envoyez votre demande.
+            </p>
+
+          </article>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer>
+
+    <div class="container">
+
+      © 2026 Aloïs Design
+
+      <br>
+
+      Impression 3D · Création de logos · Sculpture & gravure
+
+      <br><br>
+
+      <a
+        href="mailto:aloisryckebuschvandaele@gmail.com"
+        class="gold"
+      >
+        aloisryckebuschvandaele@gmail.com
+      </a>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+
+  <script>
+
+    const CART_KEY =
+      "aloisDesignCart";
+
+
+    /* =========================
+       QUANTITÉ
+    ========================== */
+
+    function changeQuantity(amount) {
+
+      const input =
+        document.getElementById("quantity");
+
+      let quantity =
+        Number(input.value) || 1;
+
+      quantity += amount;
+
+      if (quantity < 1) {
+        quantity = 1;
+      }
+
+      if (quantity > 50) {
+        quantity = 50;
+      }
+
+      input.value =
+        quantity;
+
+    }
+
+
+    /* =========================
+       APERÇU DU TEXTE
+    ========================== */
+
+    document
+      .getElementById("customText")
+      .addEventListener(
+        "input",
+        function () {
+
+          const text =
+            this.value.trim();
+
+          const preview =
+            document.getElementById(
+              "previewText"
+            );
+
+          if (text === "") {
+
+            preview.textContent =
+              "VOTRE TEXTE";
+
+          } else {
+
+            preview.textContent =
+              text.toUpperCase();
+
+          }
+
+        }
+      );
+
+
+    /* =========================
+       AJOUT AU PANIER
+    ========================== */
+
+    function addToCart() {
+
+      const customText =
+        document
+          .getElementById("customText")
+          .value
+          .trim();
+
+
+      const description =
+        document
+          .getElementById("customDescription")
+          .value
+          .trim();
+
+
+      const color =
+        document
+          .getElementById("color")
+          .value;
+
+
+      const quantity =
+        Number(
+          document
+            .getElementById("quantity")
+            .value
+        ) || 1;
+
+
+      if (
+        customText === "" &&
+        description === ""
+      ) {
+
+        alert(
+          "Indique au moins un texte ou une description pour personnaliser ton porte-clé."
+        );
+
+        return;
+
+      }
+
+
+      let cart = [];
+
+
+      try {
+
+        cart =
+          JSON.parse(
+            localStorage.getItem(
+              CART_KEY
+            )
+          ) || [];
+
+      } catch (error) {
+
+        cart = [];
+
+      }
+
+
+      const product = {
+
+        id:
+          "porte-cle-" +
+          Date.now(),
+
+        name:
+          "Porte-clé personnalisé" +
+          (
+            customText
+              ? " - " + customText
+              : ""
+          ),
+
+        price:
+          6,
+
+        quantity:
+          quantity,
+
+        customization: {
+
+          text:
+            customText,
+
+          description:
+            description,
+
+          color:
+            color
+
+        }
+
+      };
+
+
+      cart.push(product);
+
+
+      localStorage.setItem(
+        CART_KEY,
+        JSON.stringify(cart)
+      );
+
+
+      updateCartCount();
+
+
+      alert(
+        "✅ Porte-clé ajouté au panier !"
+      );
+
+
+      window.location.href =
+        "panier.html";
+
+    }
+
+
+    /* =========================
+       COMPTEUR
+    ========================== */
+
+    function updateCartCount() {
+
+      let cart = [];
+
+
+      try {
+
+        cart =
+          JSON.parse(
+            localStorage.getItem(
+              CART_KEY
+            )
+          ) || [];
+
+      } catch (error) {
+
+        cart = [];
+
+      }
+
+
+      let count = 0;
+
+
+      cart.forEach(item => {
+
+        count +=
+          Number(item.quantity) || 0;
+
+      });
+
+
+      document.getElementById(
+        "cartCount"
+      ).textContent =
+        count;
+
+    }
+
+
+    updateCartCount();
+
+
+    window.addEventListener(
+      "storage",
+      updateCartCount
+    );
+
+  </script>
+
+
+</body>
+</html>
