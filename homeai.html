@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HomeAI V0.3</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #101114;
+            color: white;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            font-size: 38px;
+            margin-bottom: 5px;
+        }
+
+        .status {
+            color: #aaa;
+            margin-bottom: 40px;
+        }
+
+        #micro {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: none;
+            font-size: 60px;
+            cursor: pointer;
+        }
+
+        #micro.ecoute {
+            transform: scale(1.08);
+        }
+
+        #texte {
+            margin-top: 40px;
+            font-size: 22px;
+            min-height: 35px;
+        }
+
+        #resultat {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 20px;
+            background: #1c1e23;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🏠 HomeAI</h1>
+
+    <div class="status" id="status">
+        Prêt à écouter
+    </div>
+
+    <button id="micro">🎙️</button>
+
+    <div id="texte">
+        Appuie sur le micro et parle.
+    </div>
+
+    <div id="resultat">
+        Aucune commande.
+    </div>
+
+</div>
+
+
+<script>
+
+const micro = document.getElementById("micro");
+const texte = document.getElementById("texte");
+const resultat = document.getElementById("resultat");
+const status = document.getElementById("status");
+
+
+const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+
+if (!SpeechRecognition) {
+
+    status.innerText =
+        "La reconnaissance vocale n'est pas disponible dans ce navigateur.";
+
+} else {
+
+    const reconnaissance = new SpeechRecognition();
+
+    reconnaissance.lang = "fr-FR";
+    reconnaissance.continuous = false;
+    reconnaissance.interimResults = false;
+
+
+    micro.addEventListener("click", () => {
+
+        try {
+
+            reconnaissance.start();
+
+            status.innerText = "🎙️ J'écoute...";
+            micro.classList.add("ecoute");
+
+        } catch (erreur) {
+
+            console.log(erreur);
+
+        }
+
+    });
+
+
+    reconnaissance.onresult = function(event) {
+
+        const commande =
+            event.results[0][0].transcript;
+
+        texte.innerText =
+            "🗣️ « " + commande + " »";
+
+        comprendreCommande(commande);
+
+    };
+
+
+    reconnaissance.onend = function() {
+
+        status.innerText =
+            "Prêt à écouter";
+
+        micro.classList.remove("ecoute");
+
+    };
+
+
+    reconnaissance.onerror = function(event) {
+
+        status.innerText =
+            "Erreur microphone : " + event.error;
+
+        micro.classList.remove("ecoute");
+
+    };
+
+}
+
+
+function comprendreCommande(commande) {
+
+    const c = commande.toLowerCase();
+
+
+    // ==========================
+    // TÉLÉVISION
+    // ==========================
+
+    if (
+        (c.includes("télé") ||
+         c.includes("tele") ||
+         c.includes("tv"))
+        &&
+        (
+            c.includes("allume") ||
+            c.includes("mets") ||
+            c.includes("regarder")
+        )
+    ) {
+
+        afficher(
+            "📺 Télévision",
+            "ALLUMER"
+        );
+
+        return;
+    }
+
+
+    if (
+        (c.includes("télé") ||
+         c.includes("tele") ||
+         c.includes("tv"))
+        &&
+        (
+            c.includes("éteins") ||
+            c.includes("eteins")
+        )
+    ) {
+
+        afficher(
+            "📺 Télévision",
+            "ÉTEINDRE"
+        );
+
+        return;
+    }
+
+
+    // ==========================
+    // LUMIÈRE
+    // ==========================
+
+    if (
+        (c.includes("lumière") ||
+         c.includes("lumiere") ||
+         c.includes("lampe"))
+        &&
+        (
+            c.includes("allume") ||
+            c.includes("mets")
+        )
+    ) {
+
+        afficher(
+            "💡 Lumière",
+            "ALLUMER"
+        );
+
+        return;
+    }
+
+
+    if (
+        (c.includes("lumière") ||
+         c.includes("lumiere") ||
+         c.includes("lampe"))
+        &&
+        (
+            c.includes("éteins") ||
+            c.includes("eteins")
+        )
+    ) {
+
+        afficher(
+            "💡 Lumière",
+            "ÉTEINDRE"
+        );
+
+        return;
+    }
+
+
+    // ==========================
+    // VOLETS
+    // ==========================
+
+    if (
+        c.includes("volet") &&
+        (
+            c.includes("ouvre") ||
+            c.includes("ouvrir")
+        )
+    ) {
+
+        afficher(
+            "🪟 Volets",
+            "OUVRIR"
+        );
+
+        return;
+    }
+
+
+    if (
+        c.includes("volet") &&
+        (
+            c.includes("ferme") ||
+            c.includes("fermer")
+        )
+    ) {
+
+        afficher(
+            "🪟 Volets",
+            "FERMER"
+        );
+
+        return;
+    }
+
+
+    // ==========================
+    // MUSIQUE
+    // ==========================
+
+    if (
+        (
+            c.includes("spotify") ||
+            c.includes("musique")
+        )
+        &&
+        (
+            c.includes("mets") ||
+            c.includes("lance") ||
+            c.includes("joue")
+        )
+    ) {
+
+        afficher(
+            "🎵 Musique",
+            "LANCER SPOTIFY"
+        );
+
+        return;
+    }
+
+
+    // ==========================
+    // CHAUFFAGE
+    // ==========================
+
+    if (
+        c.includes("chauffage") ||
+        c.includes("radiateur")
+    ) {
+
+        let temperature = null;
+
+        for (let i = 5; i <= 35; i++) {
+
+            if (c.includes(i.toString())) {
+
+                temperature = i;
+                break;
+
+            }
+
+        }
+
+
+        if (temperature !== null) {
+
+            afficher(
+                "🌡️ Chauffage",
+                "RÉGLER À " + temperature + "°C"
+            );
+
+        } else {
+
+            afficher(
+                "🌡️ Chauffage",
+                "Commande comprise, température manquante"
+            );
+
+        }
+
+        return;
+    }
+
+
+    // ==========================
+    // COMMANDE INCOMPRISE
+    // ==========================
+
+    afficher(
+        "🤖 HomeAI",
+        "Je n'ai pas compris."
+    );
+
+}
+
+
+function afficher(appareil, action) {
+
+    resultat.innerHTML =
+        "<strong>" + appareil + "</strong><br><br>" +
+        "Action : " + action;
+
+}
+
+</script>
+
+</body>
+</html>
