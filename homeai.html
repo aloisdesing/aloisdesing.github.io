@@ -4,9 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>HomeAI V0.8</title>
+<title>HomeAI V0.9</title>
 
 <style>
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     background: #101114;
@@ -15,9 +19,12 @@ body {
 }
 
 .container {
-    max-width: 750px;
+    max-width: 800px;
     margin: auto;
     padding: 25px 18px 50px;
+}
+
+header {
     text-align: center;
 }
 
@@ -28,12 +35,17 @@ h1 {
 
 .subtitle {
     color: #999;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 .status {
+    text-align: center;
     color: #aaa;
     margin-bottom: 20px;
+}
+
+.micro-container {
+    text-align: center;
 }
 
 #micro {
@@ -41,57 +53,87 @@ h1 {
     height: 150px;
     border-radius: 50%;
     border: none;
+    background: #25282e;
+    color: white;
     font-size: 60px;
     cursor: pointer;
-    background: #25282e;
+    transition: .2s;
+}
+
+#micro:hover {
+    transform: scale(1.04);
 }
 
 #micro.ecoute {
-    transform: scale(1.08);
+    transform: scale(1.1);
 }
 
 #texte {
-    margin-top: 25px;
+    text-align: center;
+    margin: 25px 0;
     font-size: 20px;
-    min-height: 50px;
+    min-height: 45px;
 }
 
-#resultat {
-    margin-top: 25px;
-    padding: 22px;
+.panel {
+    background: #1b1d22;
+    padding: 20px;
     border-radius: 20px;
-    background: #1c1e23;
-    text-align: left;
-    line-height: 1.7;
+    margin-top: 20px;
 }
 
 .commande {
-    background: #26292f;
-    padding: 15px;
+    background: #272a30;
+    padding: 16px;
     border-radius: 15px;
     margin: 12px 0;
 }
 
-#maison {
-    margin-top: 30px;
-    padding: 20px;
-    border-radius: 20px;
-    background: #181a1f;
-    text-align: left;
+.execution {
+    background: #15171b;
+    border-left: 4px solid #777;
+    padding: 12px;
+    margin-top: 12px;
+    border-radius: 10px;
+}
+
+.succes {
+    margin-top: 10px;
+}
+
+.historique {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.log {
+    padding: 10px;
+    border-bottom: 1px solid #333;
+    font-size: 14px;
 }
 
 .objet {
-    padding: 10px 0;
+    padding: 12px 0;
     border-bottom: 1px solid #333;
 }
 
 .badge {
     display: inline-block;
     margin-top: 5px;
-    padding: 3px 8px;
+    padding: 4px 8px;
     border-radius: 8px;
     background: #292c32;
     font-size: 12px;
+}
+
+button.test {
+    border: none;
+    border-radius: 10px;
+    padding: 10px 15px;
+    background: #292c32;
+    color: white;
+    cursor: pointer;
+    margin: 4px;
 }
 </style>
 </head>
@@ -100,31 +142,101 @@ h1 {
 
 <div class="container">
 
+<header>
+
 <h1>🏠 HomeAI</h1>
 
 <div class="subtitle">
-V0.8 — Assistant vocal intelligent pour la maison
+V0.9 — Compréhension + exécution
 </div>
+
+</header>
+
 
 <div class="status" id="status">
-Prêt à écouter
+🟢 HomeAI est prêt
 </div>
 
-<button id="micro">🎙️</button>
+
+<div class="micro-container">
+
+<button id="micro">
+🎙️
+</button>
+
+</div>
+
 
 <div id="texte">
 Appuie sur le micro et parle.
 </div>
 
+
+<div class="panel">
+
+<h2>🧠 Analyse</h2>
+
 <div id="resultat">
-🤖 HomeAI : aucune commande.
+Aucune commande.
 </div>
 
-<div id="maison">
+</div>
+
+
+<div class="panel">
+
+<h2>📡 Centre de contrôle</h2>
+
+<div id="etat">
+Aucune action exécutée.
+</div>
+
+</div>
+
+
+<div class="panel">
+
+<h2>📜 Historique</h2>
+
+<div class="historique" id="historique">
+Aucune commande pour le moment.
+</div>
+
+</div>
+
+
+<div class="panel">
 
 <h2>🏠 Appareils</h2>
 
 <div id="listeMaison"></div>
+
+</div>
+
+
+<div class="panel">
+
+<h2>🧪 Tests rapides</h2>
+
+<button class="test"
+onclick="analyserPhrase('allume la lumière du salon')">
+💡 Lumière
+</button>
+
+<button class="test"
+onclick="analyserPhrase('ouvre les volets du salon')">
+🪟 Volets
+</button>
+
+<button class="test"
+onclick="analyserPhrase('mets le chauffage à 21 degrés')">
+🌡️ Chauffage
+</button>
+
+<button class="test"
+onclick="analyserPhrase('éteins la télé et ferme les volets')">
+🏠 Multiple
+</button>
 
 </div>
 
@@ -137,11 +249,27 @@ Appuie sur le micro et parle.
    RECONNAISSANCE VOCALE
 ===================================================== */
 
-const micro = document.getElementById("micro");
-const texte = document.getElementById("texte");
-const resultat = document.getElementById("resultat");
-const status = document.getElementById("status");
-const listeMaison = document.getElementById("listeMaison");
+const micro =
+    document.getElementById("micro");
+
+const texte =
+    document.getElementById("texte");
+
+const resultat =
+    document.getElementById("resultat");
+
+const status =
+    document.getElementById("status");
+
+const etat =
+    document.getElementById("etat");
+
+const historique =
+    document.getElementById("historique");
+
+const listeMaison =
+    document.getElementById("listeMaison");
+
 
 const SpeechRecognition =
     window.SpeechRecognition ||
@@ -151,27 +279,27 @@ const SpeechRecognition =
 let reconnaissance = null;
 
 
-if (!SpeechRecognition) {
+if (SpeechRecognition) {
 
-    status.innerText =
-        "❌ Reconnaissance vocale indisponible.";
-
-} else {
-
-    reconnaissance = new SpeechRecognition();
+    reconnaissance =
+        new SpeechRecognition();
 
     reconnaissance.lang = "fr-FR";
+
     reconnaissance.continuous = false;
+
     reconnaissance.interimResults = false;
 
 
-    micro.addEventListener("click", () => {
+    micro.onclick = function() {
 
         try {
 
             reconnaissance.start();
 
-            status.innerText = "🎙️ J'écoute...";
+            status.innerText =
+                "🎙️ J'écoute...";
+
             micro.classList.add("ecoute");
 
         } catch (e) {
@@ -180,39 +308,49 @@ if (!SpeechRecognition) {
 
         }
 
-    });
-
-
-    reconnaissance.onresult = function(event) {
-
-        const phrase =
-            event.results[0][0].transcript;
-
-        texte.innerText =
-            "🗣️ « " + phrase + " »";
-
-        analyserPhrase(phrase);
-
     };
 
 
-    reconnaissance.onend = function() {
+    reconnaissance.onresult =
+        function(event) {
 
-        status.innerText = "Prêt à écouter";
+            const phrase =
+                event.results[0][0].transcript;
 
-        micro.classList.remove("ecoute");
+            texte.innerText =
+                "🗣️ « " + phrase + " »";
 
-    };
+            analyserPhrase(phrase);
+
+        };
 
 
-    reconnaissance.onerror = function(event) {
+    reconnaissance.onend =
+        function() {
 
-        status.innerText =
-            "Erreur : " + event.error;
+            status.innerText =
+                "🟢 HomeAI est prêt";
 
-        micro.classList.remove("ecoute");
+            micro.classList.remove("ecoute");
 
-    };
+        };
+
+
+    reconnaissance.onerror =
+        function(event) {
+
+            status.innerText =
+                "❌ Erreur : " +
+                event.error;
+
+            micro.classList.remove("ecoute");
+
+        };
+
+} else {
+
+    status.innerText =
+        "❌ Reconnaissance vocale non disponible.";
 
 }
 
@@ -242,14 +380,6 @@ const appareils = [
     {
         nom: "VOLETS",
         mots: ["volet", "volets", "store", "stores"],
-        pieces: ["salon", "chambre"],
-        modules: ["electronique", "mecanique"],
-        emoji: "🪟"
-    },
-
-    {
-        nom: "RIDEAUX",
-        mots: ["rideau", "rideaux"],
         pieces: ["salon", "chambre"],
         modules: ["electronique", "mecanique"],
         emoji: "🪟"
@@ -294,7 +424,11 @@ const appareils = [
 
     {
         nom: "MICRO-ONDES",
-        mots: ["micro-onde", "micro onde", "microondes"],
+        mots: [
+            "micro-onde",
+            "micro onde",
+            "microondes"
+        ],
         pieces: ["cuisine"],
         modules: ["electronique"],
         emoji: "📡"
@@ -302,7 +436,10 @@ const appareils = [
 
     {
         nom: "LAVE-VAISSELLE",
-        mots: ["lave-vaisselle", "lave vaisselle"],
+        mots: [
+            "lave-vaisselle",
+            "lave vaisselle"
+        ],
         pieces: ["cuisine"],
         modules: ["electronique"],
         emoji: "🍽️"
@@ -310,32 +447,43 @@ const appareils = [
 
     {
         nom: "MACHINE À CAFÉ",
-        mots: ["machine à café", "machine a cafe", "cafetière", "cafetiere"],
+        mots: [
+            "machine à café",
+            "machine a cafe",
+            "cafetière",
+            "cafetiere"
+        ],
         pieces: ["cuisine"],
         modules: ["electronique"],
         emoji: "☕"
     },
 
     {
-        nom: "GRILLE-PAIN",
-        mots: ["grille-pain", "grille pain"],
-        pieces: ["cuisine"],
-        modules: ["electronique"],
-        emoji: "🍞"
-    },
-
-    {
         nom: "CHAUFFAGE",
-        mots: ["chauffage", "radiateur"],
-        pieces: ["salon", "chambre", "cuisine"],
+        mots: [
+            "chauffage",
+            "radiateur"
+        ],
+        pieces: [
+            "salon",
+            "chambre",
+            "cuisine"
+        ],
         modules: ["electronique"],
         emoji: "🌡️"
     },
 
     {
         nom: "CLIMATISATION",
-        mots: ["climatisation", "clim", "climatiseur"],
-        pieces: ["salon", "chambre"],
+        mots: [
+            "climatisation",
+            "clim",
+            "climatiseur"
+        ],
+        pieces: [
+            "salon",
+            "chambre"
+        ],
         modules: ["electronique"],
         emoji: "❄️"
     },
@@ -343,17 +491,12 @@ const appareils = [
     {
         nom: "VENTILATEUR",
         mots: ["ventilateur"],
-        pieces: ["salon", "chambre"],
+        pieces: [
+            "salon",
+            "chambre"
+        ],
         modules: ["electronique"],
         emoji: "🌀"
-    },
-
-    {
-        nom: "VMC",
-        mots: ["vmc", "ventilation"],
-        pieces: ["salle de bain", "maison"],
-        modules: ["electronique"],
-        emoji: "💨"
     },
 
     {
@@ -381,7 +524,10 @@ const appareils = [
         nom: "LIT",
         mots: ["lit"],
         pieces: ["chambre"],
-        modules: ["mecanique", "electronique"],
+        modules: [
+            "electronique",
+            "mecanique"
+        ],
         emoji: "🛏️"
     },
 
@@ -389,72 +535,66 @@ const appareils = [
         nom: "FAUTEUIL",
         mots: ["fauteuil"],
         pieces: ["salon"],
-        modules: ["mecanique", "electronique"],
+        modules: [
+            "electronique",
+            "mecanique"
+        ],
         emoji: "🪑"
     },
 
     {
-        nom: "CANAPÉ",
-        mots: ["canapé", "canape"],
-        pieces: ["salon"],
-        modules: ["mecanique", "electronique"],
-        emoji: "🛋️"
-    },
-
-    {
         nom: "SERRURE",
-        mots: ["serrure", "verrou"],
+        mots: [
+            "serrure",
+            "verrou"
+        ],
         pieces: ["maison"],
-        modules: ["mecanique", "electronique"],
+        modules: [
+            "electronique",
+            "mecanique"
+        ],
         emoji: "🔒"
     },
 
     {
         nom: "PORTE DE GARAGE",
-        mots: ["porte de garage", "garage"],
+        mots: [
+            "porte de garage",
+            "garage"
+        ],
         pieces: ["maison"],
-        modules: ["mecanique", "electronique"],
+        modules: [
+            "electronique",
+            "mecanique"
+        ],
         emoji: "🚗"
     },
 
     {
-        nom: "INTERPHONE",
-        mots: ["interphone", "visiophone"],
-        pieces: ["maison"],
-        modules: ["electronique"],
-        emoji: "🔔"
-    },
-
-    {
         nom: "PRISE",
-        mots: ["prise", "prise électrique", "prise electrique"],
+        mots: [
+            "prise",
+            "prise électrique",
+            "prise electrique"
+        ],
         pieces: ["maison"],
         modules: ["electronique"],
         emoji: "🔌"
     },
 
     {
-        nom: "INTERRUPTEUR",
-        mots: ["interrupteur"],
-        pieces: ["maison"],
-        modules: ["mecanique", "electronique"],
-        emoji: "🔘"
-    },
-
-    {
         nom: "ENCEINTE",
-        mots: ["enceinte", "haut-parleur", "haut parleur"],
-        pieces: ["salon", "chambre"],
+        mots: [
+            "enceinte",
+            "haut-parleur",
+            "haut parleur"
+        ],
+        pieces: [
+            "salon",
+            "chambre"
+        ],
         modules: ["electronique"],
         emoji: "🔊"
-    },
-
-    {
-        nom: "RADIO",
-        mots: ["radio"],
-        pieces: ["salon", "chambre"],
-        modules: ["electronique"],
-        emoji: "📻"
     }
 
 ];
@@ -470,26 +610,18 @@ const vocabulaire = {
         "allume",
         "allumer",
         "allumes",
-        "allume-moi",
-        "allume moi",
         "allumez",
         "active",
         "activer",
-        "activez",
         "démarre",
         "demarre",
         "démarrer",
         "demarrer",
         "lance",
         "lancer",
-        "lances",
         "mets",
         "met",
-        "mettre",
-        "met-moi",
-        "met moi",
-        "fais fonctionner",
-        "fais marcher"
+        "mettre"
     ],
 
     eteindre: [
@@ -499,8 +631,6 @@ const vocabulaire = {
         "eteindre",
         "éteint",
         "eteint",
-        "éteignez",
-        "eteignez",
         "coupe",
         "couper",
         "coupes",
@@ -512,8 +642,7 @@ const vocabulaire = {
         "arrête",
         "arrete",
         "arrêter",
-        "arreter",
-        "stop"
+        "arreter"
     ],
 
     ouvrir: [
@@ -521,8 +650,6 @@ const vocabulaire = {
         "ouvrir",
         "ouvres",
         "ouvrez",
-        "ouvre-moi",
-        "ouvre moi",
         "déverrouille",
         "deverrouille",
         "déverrouiller",
@@ -534,8 +661,6 @@ const vocabulaire = {
         "fermer",
         "fermes",
         "fermez",
-        "ferme-moi",
-        "ferme moi",
         "referme",
         "refermer"
     ],
@@ -597,7 +722,7 @@ function nettoyer(texte) {
 
 
 /* =====================================================
-   PIÈCES
+   PIÈCE
 ===================================================== */
 
 function detecterPiece(texte) {
@@ -609,15 +734,11 @@ function detecterPiece(texte) {
         return "salle de bain";
     }
 
-    if (
-        texte.includes("chambre")
-    ) {
+    if (texte.includes("chambre")) {
         return "chambre";
     }
 
-    if (
-        texte.includes("cuisine")
-    ) {
+    if (texte.includes("cuisine")) {
         return "cuisine";
     }
 
@@ -634,24 +755,33 @@ function detecterPiece(texte) {
 
 
 /* =====================================================
-   TROUVER APPAREIL
+   APPAREIL
 ===================================================== */
 
 function trouverAppareil(texte) {
 
-    const liste = [...appareils].sort(
-        (a, b) => {
+    const liste =
+        [...appareils].sort(
+            (a, b) => {
 
-            const maxA =
-                Math.max(...a.mots.map(x => x.length));
+                const aMax =
+                    Math.max(
+                        ...a.mots.map(
+                            x => x.length
+                        )
+                    );
 
-            const maxB =
-                Math.max(...b.mots.map(x => x.length));
+                const bMax =
+                    Math.max(
+                        ...b.mots.map(
+                            x => x.length
+                        )
+                    );
 
-            return maxB - maxA;
+                return bMax - aMax;
 
-        }
-    );
+            }
+        );
 
 
     for (const appareil of liste) {
@@ -679,43 +809,64 @@ function trouverAppareil(texte) {
 function detecterAction(texte) {
 
     if (
-        contient(texte, vocabulaire.ouvrir)
+        contient(
+            texte,
+            vocabulaire.ouvrir
+        )
     ) {
         return "OUVRIR";
     }
 
     if (
-        contient(texte, vocabulaire.fermer)
+        contient(
+            texte,
+            vocabulaire.fermer
+        )
     ) {
         return "FERMER";
     }
 
     if (
-        contient(texte, vocabulaire.verrouiller)
+        contient(
+            texte,
+            vocabulaire.verrouiller
+        )
     ) {
         return "VERROUILLER";
     }
 
     if (
-        contient(texte, vocabulaire.monter)
+        contient(
+            texte,
+            vocabulaire.monter
+        )
     ) {
         return "MONTER";
     }
 
     if (
-        contient(texte, vocabulaire.descendre)
+        contient(
+            texte,
+            vocabulaire.descendre
+        )
     ) {
         return "DESCENDRE";
     }
 
     if (
-        contient(texte, vocabulaire.eteindre)
+        contient(
+            texte,
+            vocabulaire.eteindre
+        )
     ) {
         return "ÉTEINDRE";
     }
 
     if (
-        contient(texte, vocabulaire.allumer)
+        contient(
+            texte,
+            vocabulaire.allumer
+        )
     ) {
         return "ALLUMER";
     }
@@ -725,19 +876,19 @@ function detecterAction(texte) {
 
 
 /* =====================================================
-   VALEUR / TEMPÉRATURE
+   TEMPÉRATURE
 ===================================================== */
 
 function detecterValeur(texte) {
 
-    const correspondance =
+    const match =
         texte.match(
             /(\d{1,3})\s*(?:°|degr[eé]s?)/i
         );
 
-    if (correspondance) {
+    if (match) {
 
-        return correspondance[1] + "°C";
+        return match[1] + "°C";
 
     }
 
@@ -749,21 +900,22 @@ function detecterValeur(texte) {
    MODULE
 ===================================================== */
 
-function choisirModule(appareil, action) {
+function choisirModule(
+    appareil,
+    action
+) {
 
-    const actionsMecaniques = [
-
+    const mecanique = [
         "OUVRIR",
         "FERMER",
         "MONTER",
         "DESCENDRE",
         "VERROUILLER"
-
     ];
 
 
     if (
-        actionsMecaniques.includes(action) &&
+        mecanique.includes(action) &&
         appareil.modules.includes("mecanique")
     ) {
 
@@ -773,19 +925,12 @@ function choisirModule(appareil, action) {
 
 
     if (
-        appareil.modules.includes("electronique")
+        appareil.modules.includes(
+            "electronique"
+        )
     ) {
 
         return "⚡ ÉLECTRONIQUE";
-
-    }
-
-
-    if (
-        appareil.modules.includes("mecanique")
-    ) {
-
-        return "🤖 MÉCANIQUE";
 
     }
 
@@ -795,122 +940,38 @@ function choisirModule(appareil, action) {
 
 
 /* =====================================================
-   ANALYSER UNE COMMANDE
-===================================================== */
-
-function analyserCommande(texte) {
-
-    const appareil =
-        trouverAppareil(texte);
-
-    const action =
-        detecterAction(texte);
-
-    const pieceDemandee =
-        detecterPiece(texte);
-
-    const valeur =
-        detecterValeur(texte);
-
-
-    if (
-        !appareil ||
-        !action
-    ) {
-
-        return null;
-
-    }
-
-
-    let piece = pieceDemandee;
-
-
-    /*
-       Si aucune pièce n'est donnée,
-       on prend une pièce compatible.
-    */
-
-    if (!piece) {
-
-        piece = appareil.pieces[0];
-
-    }
-
-
-    /*
-       Vérification de la pièce.
-    */
-
-    if (
-        !appareil.pieces.includes(piece)
-    ) {
-
-        piece = appareil.pieces[0];
-
-    }
-
-
-    let vraieAction = action;
-
-
-    if (valeur !== null) {
-
-        vraieAction = "RÉGLER";
-
-    }
-
-
-    const module =
-        choisirModule(
-            appareil,
-            vraieAction
-        );
-
-
-    return {
-
-        appareil: appareil.nom,
-
-        emoji: appareil.emoji,
-
-        piece: piece,
-
-        action: vraieAction,
-
-        module: module,
-
-        valeur: valeur || "aucune"
-
-    };
-
-}
-
-
-/* =====================================================
-   DÉCOUPAGE INTELLIGENT
+   DÉCOUPAGE
 ===================================================== */
 
 function decouperPhrase(phrase) {
 
-    let texte = nettoyer(phrase);
+    let texte =
+        nettoyer(phrase);
 
 
-    /*
-       Séparateurs forts.
-    */
+    texte =
+        texte
+        .replace(
+            /\s+puis\s+/g,
+            "|"
+        )
+        .replace(
+            /\s+ensuite\s+/g,
+            "|"
+        )
+        .replace(
+            /\s+après\s+/g,
+            "|"
+        )
+        .replace(
+            /\s+apres\s+/g,
+            "|"
+        )
+        .replace(
+            /;/g,
+            "|"
+        );
 
-    texte = texte
-        .replace(/\s+puis\s+/g, "|")
-        .replace(/\s+ensuite\s+/g, "|")
-        .replace(/\s+après\s+/g, "|")
-        .replace(/\s+apres\s+/g, "|")
-        .replace(/;/g, "|");
-
-
-    /*
-       "et" seulement devant une nouvelle action.
-    */
 
     const actions = [
 
@@ -960,59 +1021,303 @@ function decouperPhrase(phrase) {
     }
 
 
-    /*
-       Virgules.
-    */
-
     texte =
-        texte.replace(/,/g, "|");
+        texte.replace(
+            /,/g,
+            "|"
+        );
 
 
     return texte
         .split("|")
         .map(x => x.trim())
-        .filter(x => x.length > 0);
+        .filter(x => x);
+}
+
+
+/* =====================================================
+   ANALYSE D'UNE COMMANDE
+===================================================== */
+
+function analyserCommande(texte) {
+
+    const appareil =
+        trouverAppareil(texte);
+
+    const action =
+        detecterAction(texte);
+
+    const piece =
+        detecterPiece(texte);
+
+    const valeur =
+        detecterValeur(texte);
+
+
+    if (
+        !appareil ||
+        !action
+    ) {
+
+        return null;
+
+    }
+
+
+    let vraieAction =
+        valeur
+        ? "RÉGLER"
+        : action;
+
+
+    let vraiePiece =
+        piece;
+
+
+    if (!vraiePiece) {
+
+        vraiePiece =
+            appareil.pieces[0];
+
+    }
+
+
+    if (
+        !appareil.pieces.includes(
+            vraiePiece
+        )
+    ) {
+
+        vraiePiece =
+            appareil.pieces[0];
+
+    }
+
+
+    return {
+
+        appareil: appareil.nom,
+
+        emoji: appareil.emoji,
+
+        piece: vraiePiece,
+
+        action: vraieAction,
+
+        valeur: valeur || "aucune",
+
+        module:
+            choisirModule(
+                appareil,
+                vraieAction
+            )
+
+    };
 
 }
 
 
 /* =====================================================
-   COMMANDE MULTIPLE
+   EXÉCUTION
 ===================================================== */
 
-function analyserPhrase(phrase) {
+function executerCommande(commande) {
+
+    return new Promise(
+        resolve => {
+
+            setTimeout(
+                () => {
+
+                    const maintenant =
+                        new Date()
+                        .toLocaleTimeString(
+                            "fr-FR"
+                        );
+
+
+                    const message =
+
+                        "📡 Module reçu : " +
+
+                        commande.module +
+
+                        "<br>" +
+
+                        "🏠 " +
+
+                        commande.piece +
+
+                        "<br>" +
+
+                        commande.emoji +
+
+                        " " +
+
+                        commande.appareil +
+
+                        "<br>" +
+
+                        "⚙️ " +
+
+                        commande.action +
+
+                        "<br>" +
+
+                        (
+                            commande.valeur !== "aucune"
+                            ? "📊 " +
+                              commande.valeur
+                            : ""
+                        );
+
+
+                    ajouterHistorique(
+                        maintenant +
+                        " — " +
+                        commande.action +
+                        " " +
+                        commande.appareil
+                    );
+
+
+                    resolve(message);
+
+                },
+
+                600
+
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   EXÉCUTION DE TOUTES LES COMMANDES
+===================================================== */
+
+async function executerToutes(
+    commandes
+) {
+
+    etat.innerHTML =
+        "📡 Préparation de " +
+        commandes.length +
+        " commande(s)...";
+
+
+    for (
+        let i = 0;
+        i < commandes.length;
+        i++
+    ) {
+
+        const commande =
+            commandes[i];
+
+
+        etat.innerHTML =
+
+            "📡 Exécution " +
+            (i + 1) +
+            "/" +
+            commandes.length +
+
+            "<br><br>" +
+
+            "⏳ " +
+            commande.emoji +
+            " " +
+            commande.appareil;
+
+
+        const message =
+            await executerCommande(
+                commande
+            );
+
+
+        document
+            .getElementById(
+                "execution-" + i
+            )
+            .innerHTML =
+
+            message +
+
+            "<div class='succes'>" +
+            "✅ Commande exécutée" +
+            "</div>";
+
+    }
+
+
+    etat.innerHTML =
+
+        "🟢 <strong>Terminé</strong><br><br>" +
+
+        "Toutes les commandes ont été " +
+        "traitées par HomeAI.";
+
+}
+
+
+/* =====================================================
+   ANALYSE PRINCIPALE
+===================================================== */
+
+async function analyserPhrase(
+    phrase
+) {
+
+    texte.innerText =
+        "🗣️ « " +
+        phrase +
+        " »";
+
 
     const morceaux =
-        decouperPhrase(phrase);
+        decouperPhrase(
+            phrase
+        );
 
 
     const commandes = [];
 
 
-    for (const morceau of morceaux) {
+    for (
+        const morceau of morceaux
+    ) {
 
         const commande =
-            analyserCommande(morceau);
+            analyserCommande(
+                morceau
+            );
 
 
         if (commande) {
 
-            commandes.push(commande);
+            commandes.push(
+                commande
+            );
 
         }
 
     }
 
 
-    if (commandes.length === 0) {
+    if (
+        commandes.length === 0
+    ) {
 
         resultat.innerHTML =
 
-            "🤖 <strong>HomeAI :</strong><br><br>" +
+            "❌ HomeAI n'a pas compris.<br><br>" +
 
-            "Je n'ai pas compris cette phrase.<br><br>" +
-
-            "Essaie :<br>" +
+            "Essaie par exemple :<br>" +
 
             "« Allume la lumière et ouvre les volets »";
 
@@ -1023,9 +1328,11 @@ function analyserPhrase(phrase) {
 
     let html =
 
-        "🧠 <strong>J'ai compris " +
+        "🧠 <strong>" +
+
         commandes.length +
-        " commande(s)</strong>";
+
+        " commande(s) comprise(s)</strong>";
 
 
     commandes.forEach(
@@ -1041,39 +1348,33 @@ function analyserPhrase(phrase) {
 
                 <br><br>
 
-                📦 Appareil :
-                <strong>
                 ${commande.emoji}
+                <strong>
                 ${commande.appareil}
                 </strong>
 
                 <br>
 
-                🏠 Pièce :
-                <strong>
-                ${commande.piece}
-                </strong>
+                🏠 ${commande.piece}
 
                 <br>
 
-                ⚙️ Action :
-                <strong>
-                ${commande.action}
-                </strong>
+                ⚙️ ${commande.action}
 
                 <br>
 
-                🔧 Module :
-                <strong>
-                ${commande.module}
-                </strong>
+                🔧 ${commande.module}
 
                 <br>
 
-                📊 Valeur :
-                <strong>
-                ${commande.valeur}
-                </strong>
+                📊 ${commande.valeur}
+
+                <div
+                    class="execution"
+                    id="execution-${index}"
+                >
+                    ⏳ En attente...
+                </div>
 
             </div>
 
@@ -1083,20 +1384,57 @@ function analyserPhrase(phrase) {
     );
 
 
-    html +=
-
-        "<br>📡 <strong>" +
-        commandes.length +
-        " commande(s) prête(s).</strong>";
+    resultat.innerHTML =
+        html;
 
 
-    resultat.innerHTML = html;
+    await executerToutes(
+        commandes
+    );
 
 }
 
 
 /* =====================================================
-   AFFICHAGE DES APPAREILS
+   HISTORIQUE
+===================================================== */
+
+function ajouterHistorique(message) {
+
+    if (
+        historique.innerText ===
+        "Aucune commande pour le moment."
+    ) {
+
+        historique.innerHTML = "";
+
+    }
+
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.className =
+        "log";
+
+
+    div.innerHTML =
+        "✅ " +
+        message;
+
+
+    historique.prepend(
+        div
+    );
+
+}
+
+
+/* =====================================================
+   AFFICHAGE MAISON
 ===================================================== */
 
 function afficherMaison() {
@@ -1104,44 +1442,65 @@ function afficherMaison() {
     listeMaison.innerHTML = "";
 
 
-    for (const appareil of appareils) {
+    for (
+        const appareil of appareils
+    ) {
 
         const div =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
-        div.className = "objet";
+
+        div.className =
+            "objet";
 
 
         const modules =
             appareil.modules
-                .map(
-                    module =>
-                        module === "electronique"
-                        ? "⚡ électronique"
-                        : "🤖 mécanique"
-                )
-                .join(" + ");
+            .map(
+                module =>
+
+                    module ===
+                    "electronique"
+
+                    ? "⚡ électronique"
+
+                    : "🤖 mécanique"
+            )
+            .join(" + ");
 
 
         div.innerHTML =
 
             appareil.emoji +
+
             " <strong>" +
+
             appareil.nom +
+
             "</strong>" +
 
-            " — " +
+            "<br>" +
 
-            appareil.pieces.join(", ") +
+            "🏠 " +
+
+            appareil.pieces.join(
+                ", "
+            ) +
 
             "<br>" +
 
             "<span class='badge'>" +
+
             modules +
+
             "</span>";
 
 
-        listeMaison.appendChild(div);
+        listeMaison.appendChild(
+            div
+        );
 
     }
 
