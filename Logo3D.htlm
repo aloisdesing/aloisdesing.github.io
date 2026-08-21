@@ -1,329 +1,1549 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Logo personnalisé | Alois Design</title>
-  <meta name="description" content="Création et impression de logos personnalisés en 3D avec Alois Design.">
+  <title>Logo 3D | Aloïs Design</title>
+
+  <meta
+    name="description"
+    content="Logos 3D personnalisés par Aloïs Design."
+  >
 
   <style>
+
+    :root {
+      --bg: #090909;
+      --bg-light: #121212;
+      --card: #171717;
+      --gold: #d9a72b;
+      --gold-light: #f3cc68;
+      --white: #ffffff;
+      --gray: #aaaaaa;
+      --border: #292929;
+      --danger: #ff7777;
+    }
+
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      color: #222;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--white);
       line-height: 1.6;
     }
 
-    header {
-      background: #111;
-      color: white;
-      padding: 18px 20px;
-      text-align: center;
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
-    header h1 {
-      font-size: 30px;
-      margin-bottom: 5px;
-    }
-
-    header p {
-      color: #ccc;
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
     }
 
     .container {
-      width: 90%;
-      max-width: 1000px;
-      margin: 40px auto;
+      width: min(1120px, 92%);
+      margin: auto;
     }
 
-    .intro {
-      text-align: center;
-      margin-bottom: 35px;
+    /* =========================
+       HEADER
+    ========================== */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+
+      background: rgba(9, 9, 9, 0.96);
+
+      backdrop-filter: blur(12px);
+
+      border-bottom: 1px solid var(--border);
     }
 
-    .intro h2 {
-      font-size: 32px;
-      margin-bottom: 10px;
+    nav {
+      min-height: 72px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 15px;
     }
 
-    .intro p {
-      color: #555;
+    .logo {
+      font-size: 20px;
+      font-weight: 900;
+
+      letter-spacing: 2px;
+
+      color: var(--gold);
+
+      white-space: nowrap;
     }
 
-    .choice-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
-    }
-
-    .choice {
-      background: white;
-      border-radius: 18px;
-      padding: 30px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-      text-align: center;
-    }
-
-    .choice h3 {
-      font-size: 23px;
-      margin-bottom: 12px;
-    }
-
-    .choice p {
-      color: #666;
-      margin-bottom: 22px;
-    }
-
-    .icon {
-      font-size: 50px;
-      margin-bottom: 15px;
-    }
-
-    .button {
-      display: inline-block;
-      padding: 13px 22px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.2s;
-      border: none;
-      cursor: pointer;
-    }
-
-    .button:hover {
-      transform: translateY(-2px);
-      opacity: 0.9;
-    }
-
-    .button-main {
-      background: #111;
+    .logo span {
       color: white;
     }
 
-    .button-secondary {
-      background: #e9e9e9;
+    .nav-links {
+      display: flex;
+      align-items: center;
+
+      gap: 20px;
+
+      font-size: 14px;
+
+      color: #ddd;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold-light);
+    }
+
+    /* =========================
+       PANIER
+    ========================== */
+
+    .cart-link {
+      position: relative;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 42px;
+      height: 42px;
+
+      border: 1px solid #333;
+
+      border-radius: 10px;
+
+      background: #111;
+
+      transition: 0.2s;
+    }
+
+    .cart-link:hover {
+      border-color: var(--gold);
+
+      transform: translateY(-2px);
+    }
+
+    .cart-icon {
+      width: 25px;
+      height: 25px;
+
+      fill: none;
+
+      stroke: var(--gold-light);
+
+      stroke-width: 2;
+
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .cart-count {
+      position: absolute;
+
+      top: -7px;
+      right: -7px;
+
+      min-width: 20px;
+      height: 20px;
+
+      padding: 2px 5px;
+
+      border-radius: 50%;
+
+      background: var(--gold);
+
       color: #111;
-    }
 
-    .offers {
-      margin-top: 45px;
-    }
+      font-size: 11px;
 
-    .offers h2 {
+      font-weight: 900;
+
       text-align: center;
-      margin-bottom: 25px;
-      font-size: 28px;
     }
+
+    /* =========================
+       BOUTONS
+    ========================== */
+
+    .btn {
+      display: inline-block;
+
+      padding: 13px 20px;
+
+      border-radius: 10px;
+
+      background: var(--gold);
+
+      border: 1px solid var(--gold);
+
+      color: #111;
+
+      font-weight: 900;
+
+      cursor: pointer;
+
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      background: var(--gold-light);
+
+      border-color: var(--gold-light);
+    }
+
+    .btn-secondary {
+      background: transparent;
+
+      border-color: #444;
+
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--gold);
+
+      color: var(--gold-light);
+
+      background: transparent;
+    }
+
+    /* =========================
+       HERO
+    ========================== */
+
+    .hero {
+      padding: 110px 0 90px;
+
+      background:
+        radial-gradient(
+          circle at 80% 20%,
+          #30240c 0,
+          transparent 35%
+        );
+    }
+
+    .kicker {
+      color: var(--gold-light);
+
+      text-transform: uppercase;
+
+      letter-spacing: 2px;
+
+      font-size: 13px;
+
+      font-weight: 800;
+
+      margin-bottom: 15px;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 7vw, 72px);
+
+      line-height: 1.02;
+
+      max-width: 850px;
+
+      margin-bottom: 22px;
+    }
+
+    .hero h1 span {
+      color: var(--gold);
+    }
+
+    .hero p {
+      max-width: 730px;
+
+      color: var(--gray);
+
+      font-size: 19px;
+    }
+
+    .hero-buttons {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 12px;
+
+      margin-top: 30px;
+    }
+
+    /* =========================
+       SECTIONS
+    ========================== */
+
+    section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      margin-bottom: 40px;
+    }
+
+    .section-title.center {
+      text-align: center;
+    }
+
+    .section-title h2 {
+      font-size: clamp(30px, 4vw, 44px);
+
+      line-height: 1.1;
+
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: var(--gray);
+    }
+
+    /* =========================
+       PRODUITS
+    ========================== */
 
     .products {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+      grid-template-columns: repeat(2, 1fr);
+
       gap: 20px;
     }
 
     .product {
-      background: white;
-      padding: 22px;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+      padding: 30px;
+
+      border: 1px solid var(--border);
+
+      background:
+        linear-gradient(
+          145deg,
+          #181818,
+          #101010
+        );
+
+      border-radius: 18px;
+
+      transition: 0.2s;
     }
 
-    .product h3 {
-      margin-bottom: 8px;
+    .product:hover {
+      transform: translateY(-5px);
+
+      border-color: #4a3a15;
     }
 
-    .price {
-      font-size: 22px;
-      font-weight: bold;
-      margin: 12px 0;
-    }
+    .product-icon {
+      font-size: 45px;
 
-    .product p {
-      color: #666;
-      font-size: 14px;
       margin-bottom: 15px;
     }
 
-    .back {
-      text-align: center;
-      margin: 40px 0;
+    .product h3 {
+      font-size: 25px;
+
+      color: var(--gold-light);
+
+      margin-bottom: 10px;
     }
 
-    footer {
-      background: #111;
-      color: #ccc;
+    .product p {
+      color: var(--gray);
+
+      margin-bottom: 20px;
+    }
+
+    .price {
+      color: white;
+
+      font-size: 24px;
+
+      font-weight: 900;
+
+      margin-bottom: 20px;
+    }
+
+    .product ul {
+      list-style: none;
+
+      margin-bottom: 20px;
+    }
+
+    .product li {
+      margin: 8px 0;
+
+      color: #ddd;
+    }
+
+    .product li::before {
+      content: "✓";
+
+      color: var(--gold-light);
+
+      margin-right: 9px;
+    }
+
+    /* =========================
+       PERSONNALISATION
+    ========================== */
+
+    .custom-section {
+      background:
+        linear-gradient(
+          145deg,
+          #171207,
+          #0e0e0e
+        );
+
+      border-top: 1px solid #392c10;
+
+      border-bottom: 1px solid #392c10;
+    }
+
+    .custom-grid {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 25px;
+    }
+
+    .custom-info,
+    .custom-form {
+      padding: 30px;
+
+      border: 1px solid var(--border);
+
+      border-radius: 18px;
+
+      background: #101010;
+    }
+
+    .custom-info h3 {
+      font-size: 28px;
+
+      color: var(--gold-light);
+
+      margin-bottom: 12px;
+    }
+
+    .custom-info p {
+      color: var(--gray);
+
+      margin-bottom: 20px;
+    }
+
+    .custom-info ul {
+      list-style: none;
+    }
+
+    .custom-info li {
+      margin: 10px 0;
+
+      color: #ddd;
+    }
+
+    .custom-info li::before {
+      content: "✓";
+
+      color: var(--gold);
+
+      margin-right: 10px;
+    }
+
+    /* =========================
+       FORMULAIRE
+    ========================== */
+
+    form label {
+      display: block;
+
+      margin: 12px 0 6px;
+
+      font-size: 14px;
+
+      color: #ddd;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+
+      padding: 12px;
+
+      border-radius: 9px;
+
+      border: 1px solid #333;
+
+      background: #080808;
+
+      color: white;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: 1px solid var(--gold);
+
+      border-color: var(--gold);
+    }
+
+    textarea {
+      min-height: 120px;
+
+      resize: vertical;
+    }
+
+    /* =========================
+       PANIER RAPIDE
+    ========================== */
+
+    .cart-box {
       text-align: center;
-      padding: 25px 15px;
-      margin-top: 50px;
+
+      padding: 40px;
+
+      border: 1px solid var(--border);
+
+      border-radius: 18px;
+
+      background: var(--card);
+    }
+
+    .cart-box h2 {
+      font-size: 30px;
+
+      margin-bottom: 10px;
+    }
+
+    .cart-box p {
+      color: var(--gray);
+
+      margin-bottom: 25px;
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
+
+    footer {
+      border-top: 1px solid var(--border);
+
+      padding: 35px 0;
+
+      text-align: center;
+
+      color: #888;
+
+      font-size: 13px;
     }
 
     footer a {
-      color: white;
-      text-decoration: none;
+      color: var(--gold-light);
     }
 
-    @media (max-width: 600px) {
-      .intro h2 {
-        font-size: 27px;
+    /* =========================
+       MOBILE
+    ========================== */
+
+    @media (max-width: 850px) {
+
+      .nav-links {
+        display: none;
       }
 
-      header h1 {
-        font-size: 25px;
+      .products,
+      .custom-grid {
+        grid-template-columns: 1fr;
       }
+
+      .hero {
+        padding-top: 75px;
+      }
+
     }
+
+    @media (max-width: 500px) {
+
+      .container {
+        width: 90%;
+      }
+
+      .hero h1 {
+        font-size: 42px;
+      }
+
+      .hero p {
+        font-size: 17px;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+      }
+
+      .hero-buttons .btn {
+        width: 100%;
+
+        text-align: center;
+      }
+
+      section {
+        padding: 60px 0;
+      }
+
+    }
+
   </style>
+
 </head>
+
 
 <body>
 
-  <header>
-    <h1>Alois Design</h1>
-    <p>Impression 3D personnalisée</p>
-  </header>
 
-  <main class="container">
+<!-- =========================
+     HEADER
+========================== -->
 
-    <section class="intro">
-      <h2>Logo personnalisé</h2>
-      <p>
-        Vous souhaitez transformer votre logo en objet 3D ?
-        Choisissez l'option qui correspond à votre projet.
-      </p>
-    </section>
+<header>
 
-    <section class="choice-container">
+  <div class="container">
 
-      <!-- CLIENT QUI A DÉJÀ UN LOGO -->
-      <div class="choice">
-        <div class="icon">🎨</div>
-
-        <h3>J'ai déjà mon logo</h3>
-
-        <p>
-          Vous avez déjà votre logo ?
-          Envoyez-le et choisissez le type d'impression 3D
-          que vous souhaitez.
-        </p>
-
-        <a href="#offres" class="button button-main">
-          Voir les options
-        </a>
-      </div>
-
-      <!-- CLIENT QUI N'A PAS DE LOGO -->
-      <div class="choice">
-        <div class="icon">✨</div>
-
-        <h3>Je n'ai pas encore de logo</h3>
-
-        <p>
-          Vous avez une idée mais pas encore de logo ?
-          Nous pouvons vous aider à créer un logo adapté à votre projet.
-        </p>
-
-        <a href="creation-logo.html" class="button button-main">
-          Créer mon logo
-        </a>
-      </div>
-
-    </section>
+    <nav>
 
 
-    <!-- OFFRES -->
-    <section class="offers" id="offres">
-
-      <h2>Nos options</h2>
-
-      <div class="products">
-
-        <div class="product">
-          <h3>Logo simple</h3>
-
-          <p>
-            Impression de votre logo en 3D
-            avec une finition simple.
-          </p>
-
-          <div class="price">
-            À partir de 5 €
-          </div>
-
-          <a href="panier.html?produit=logo-simple"
-             class="button button-main">
-            Commander
-          </a>
-        </div>
-
-
-        <div class="product">
-          <h3>Logo personnalisé</h3>
-
-          <p>
-            Logo avec dimensions, couleurs
-            ou finitions personnalisées.
-          </p>
-
-          <div class="price">
-            À partir de 8 €
-          </div>
-
-          <a href="panier.html?produit=logo-personnalise"
-             class="button button-main">
-            Commander
-          </a>
-        </div>
-
-
-        <div class="product">
-          <h3>Logo grand format</h3>
-
-          <p>
-            Pour une enseigne, une décoration
-            ou un projet nécessitant un format plus important.
-          </p>
-
-          <div class="price">
-            Sur devis
-          </div>
-
-          <a href="creation-logo.html"
-             class="button button-secondary">
-            Demander un devis
-          </a>
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <div class="back">
-      <a href="impression.html" class="button button-secondary">
-        ← Retour à l'impression 3D
+      <a
+        href="index.html"
+        class="logo"
+      >
+        ALOÏS <span>DESIGN</span>
       </a>
+
+
+      <div class="nav-links">
+
+        <a href="index.html">
+          Accueil
+        </a>
+
+        <a href="impression-3d.html">
+          Impression 3D
+        </a>
+
+        <a href="logo3D.html">
+          Logo 3D
+        </a>
+
+        <a href="porte-clé.html">
+          Porte-clé
+        </a>
+
+        <a href="tampons.html">
+          Tampons
+        </a>
+
+      </div>
+
+
+      <!-- PANIER -->
+
+      <a
+        href="panier.html"
+        class="cart-link"
+        aria-label="Voir le panier"
+      >
+
+        <svg
+          class="cart-icon"
+          viewBox="0 0 24 24"
+        >
+
+          <circle
+            cx="9"
+            cy="20"
+            r="1.5"
+          ></circle>
+
+          <circle
+            cx="18"
+            cy="20"
+            r="1.5"
+          ></circle>
+
+          <path
+            d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L21 8H6"
+          ></path>
+
+        </svg>
+
+
+        <span
+          class="cart-count"
+          id="cartCount"
+        >
+          0
+        </span>
+
+      </a>
+
+
+    </nav>
+
+  </div>
+
+</header>
+
+
+
+<main>
+
+
+<!-- =========================
+     HERO
+========================== -->
+
+<section class="hero">
+
+  <div class="container">
+
+
+    <div class="kicker">
+      IMPRESSION 3D
     </div>
 
-  </main>
 
+    <h1>
 
-  <footer>
-    <p>Alois Design</p>
+      Votre logo en
+      <span>3D.</span>
+
+    </h1>
+
 
     <p>
-      <a href="mailto:aloisryckebuschvandaele@gmail.com">
-        aloisryckebuschvandaele@gmail.com
-      </a>
+
+      Transformez votre logo ou votre identité visuelle
+      en une véritable création en relief grâce à
+      l'impression 3D.
+
     </p>
 
-    <p>© 2026 Alois Design - Tous droits réservés</p>
-  </footer>
+
+    <div class="hero-buttons">
+
+      <a
+        href="#produits"
+        class="btn"
+      >
+        Voir les modèles
+      </a>
+
+
+      <a
+        href="creation-logo.html"
+        class="btn btn-secondary"
+      >
+        Je n'ai pas encore de logo
+      </a>
+
+
+      <a
+        href="panier.html"
+        class="btn btn-secondary"
+      >
+        🛒 Mon panier
+      </a>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     PRODUITS
+========================== -->
+
+<section id="produits">
+
+  <div class="container">
+
+
+    <div class="section-title center">
+
+      <h2>
+        Choisissez votre logo 3D
+      </h2>
+
+      <p>
+        Plusieurs tailles selon votre projet.
+      </p>
+
+    </div>
+
+
+    <div class="products">
+
+
+      <!-- PETIT -->
+
+      <article class="product">
+
+        <div class="product-icon">
+          🔹
+        </div>
+
+
+        <h3>
+          Logo 3D Petit
+        </h3>
+
+
+        <p>
+          Idéal pour une petite décoration,
+          un bureau ou un petit projet.
+        </p>
+
+
+        <div class="price">
+          25 €
+        </div>
+
+
+        <ul>
+
+          <li>
+            Petite taille
+          </li>
+
+          <li>
+            Impression 3D
+          </li>
+
+          <li>
+            Logo personnalisé
+          </li>
+
+        </ul>
+
+
+        <button
+          class="btn"
+          onclick="addToCart(
+            'Logo 3D Petit',
+            25
+          )"
+        >
+          Ajouter au panier
+        </button>
+
+      </article>
+
+
+
+      <!-- MOYEN -->
+
+      <article class="product">
+
+        <div class="product-icon">
+          🔶
+        </div>
+
+
+        <h3>
+          Logo 3D Moyen
+        </h3>
+
+
+        <p>
+          Un format polyvalent pour mettre
+          votre logo en valeur.
+        </p>
+
+
+        <div class="price">
+          45 €
+        </div>
+
+
+        <ul>
+
+          <li>
+            Taille moyenne
+          </li>
+
+          <li>
+            Impression 3D
+          </li>
+
+          <li>
+            Logo personnalisé
+          </li>
+
+        </ul>
+
+
+        <button
+          class="btn"
+          onclick="addToCart(
+            'Logo 3D Moyen',
+            45
+          )"
+        >
+          Ajouter au panier
+        </button>
+
+      </article>
+
+
+
+      <!-- GRAND -->
+
+      <article class="product">
+
+        <div class="product-icon">
+          🟨
+        </div>
+
+
+        <h3>
+          Logo 3D Grand
+        </h3>
+
+
+        <p>
+          Pour une décoration plus importante
+          ou une présentation professionnelle.
+        </p>
+
+
+        <div class="price">
+          70 €
+        </div>
+
+
+        <ul>
+
+          <li>
+            Grande taille
+          </li>
+
+          <li>
+            Impression 3D
+          </li>
+
+          <li>
+            Logo personnalisé
+          </li>
+
+        </ul>
+
+
+        <button
+          class="btn"
+          onclick="addToCart(
+            'Logo 3D Grand',
+            70
+          )"
+        >
+          Ajouter au panier
+        </button>
+
+      </article>
+
+
+
+      <!-- PREMIUM -->
+
+      <article class="product">
+
+        <div class="product-icon">
+          ⭐
+        </div>
+
+
+        <h3>
+          Logo 3D Premium
+        </h3>
+
+
+        <p>
+          Un projet plus complexe ou de grande taille.
+          Contactez-moi pour obtenir un devis.
+        </p>
+
+
+        <div class="price">
+          À partir de 100 €
+        </div>
+
+
+        <ul>
+
+          <li>
+            Grand format
+          </li>
+
+          <li>
+            Projet personnalisé
+          </li>
+
+          <li>
+            Devis sur mesure
+          </li>
+
+        </ul>
+
+
+        <a
+          href="creation-logo.html"
+          class="btn"
+        >
+          Demander un devis
+        </a>
+
+      </article>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     PERSONNALISATION
+========================== -->
+
+<section
+  class="custom-section"
+  id="personnalisation"
+>
+
+  <div class="container">
+
+
+    <div class="section-title center">
+
+      <h2>
+        🎨 Personnalisez votre logo 3D
+      </h2>
+
+      <p>
+        Vous avez déjà votre logo ? Envoyez-moi les détails de votre projet.
+      </p>
+
+    </div>
+
+
+    <div class="custom-grid">
+
+
+      <!-- INFOS -->
+
+      <div class="custom-info">
+
+        <h3>
+          Votre projet
+        </h3>
+
+
+        <p>
+
+          Indiquez les informations nécessaires
+          pour réaliser votre logo en 3D.
+
+        </p>
+
+
+        <ul>
+
+          <li>
+            Nom de votre entreprise
+          </li>
+
+          <li>
+            Taille souhaitée
+          </li>
+
+          <li>
+            Couleur souhaitée
+          </li>
+
+          <li>
+            Quantité
+          </li>
+
+          <li>
+            Description du projet
+          </li>
+
+        </ul>
+
+
+        <p style="margin-top:25px;">
+
+          📩
+
+          <a
+            href="mailto:aloisryckebuschvandaele@gmail.com"
+            style="
+              color:var(--gold-light);
+              font-weight:bold;
+            "
+          >
+            aloisryckebuschvandaele@gmail.com
+          </a>
+
+        </p>
+
+      </div>
+
+
+
+      <!-- FORMULAIRE -->
+
+      <div class="custom-form">
+
+        <form
+          action="mailto:aloisryckebuschvandaele@gmail.com"
+          method="post"
+          enctype="text/plain"
+        >
+
+
+          <label for="nom">
+            Nom / prénom
+          </label>
+
+
+          <input
+            type="text"
+            id="nom"
+            name="Nom / prénom"
+            required
+            placeholder="Votre nom et prénom"
+          >
+
+
+          <label for="email">
+            Email
+          </label>
+
+
+          <input
+            type="email"
+            id="email"
+            name="Email"
+            required
+            placeholder="Votre adresse e-mail"
+          >
+
+
+          <label for="entreprise">
+            Nom de l'entreprise
+          </label>
+
+
+          <input
+            type="text"
+            id="entreprise"
+            name="Entreprise"
+            placeholder="Nom de votre entreprise"
+          >
+
+
+          <label for="taille">
+            Taille souhaitée
+          </label>
+
+
+          <select
+            id="taille"
+            name="Taille"
+          >
+
+            <option value="">
+              Choisir
+            </option>
+
+            <option value="Petit">
+              Petit
+            </option>
+
+            <option value="Moyen">
+              Moyen
+            </option>
+
+            <option value="Grand">
+              Grand
+            </option>
+
+            <option value="Premium">
+              Premium
+            </option>
+
+          </select>
+
+
+          <label for="couleur">
+            Couleur souhaitée
+          </label>
+
+
+          <input
+            type="text"
+            id="couleur"
+            name="Couleur"
+            placeholder="Ex. Noir, blanc, rouge..."
+          >
+
+
+          <label for="quantite">
+            Quantité
+          </label>
+
+
+          <input
+            type="number"
+            id="quantite"
+            name="Quantité"
+            min="1"
+            value="1"
+          >
+
+
+          <label for="description">
+            Description
+          </label>
+
+
+          <textarea
+            id="description"
+            name="Description"
+            required
+            placeholder="Décrivez votre logo et votre projet..."
+          ></textarea>
+
+
+          <button
+            type="submit"
+            class="btn"
+            style="
+              width:100%;
+              margin-top:20px;
+              border:none;
+            "
+          >
+            Envoyer ma demande
+          </button>
+
+
+        </form>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     PAS DE LOGO
+========================== -->
+
+<section>
+
+  <div class="container">
+
+
+    <div class="cart-box">
+
+      <h2>
+        Vous n'avez pas encore de logo ?
+      </h2>
+
+
+      <p>
+
+        Pas de problème. Je peux vous accompagner
+        dans la création de votre logo avant de le transformer
+        en modèle 3D.
+
+      </p>
+
+
+      <a
+        href="creation-logo.html"
+        class="btn"
+      >
+        🎨 Créer mon logo
+      </a>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     PANIER
+========================== -->
+
+<section>
+
+  <div class="container">
+
+
+    <div class="cart-box">
+
+      <h2>
+        🛒 Votre panier
+      </h2>
+
+
+      <p id="cartMessage">
+        Votre panier est actuellement vide.
+      </p>
+
+
+      <a
+        href="panier.html"
+        class="btn"
+      >
+        Voir mon panier
+      </a>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- =========================
+     FOOTER
+========================== -->
+
+<footer>
+
+  <div class="container">
+
+    <p>
+      Aloïs Design
+    </p>
+
+
+    <p>
+      Impression 3D · Création de logos ·
+      Sculpture & gravure
+    </p>
+
+
+    <p style="margin-top:10px;">
+
+      <a
+        href="mailto:aloisryckebuschvandaele@gmail.com"
+      >
+        aloisryckebuschvandaele@gmail.com
+      </a>
+
+    </p>
+
+
+    <p style="margin-top:10px;">
+      © 2026 Aloïs Design
+    </p>
+
+  </div>
+
+</footer>
+
+
+
+<!-- =========================
+     PANIER JAVASCRIPT
+========================== -->
+
+<script>
+
+  const CART_KEY =
+    "aloisDesignCart";
+
+
+  function getCart() {
+
+    try {
+
+      return JSON.parse(
+        localStorage.getItem(CART_KEY)
+      ) || [];
+
+    } catch (error) {
+
+      return [];
+
+    }
+
+  }
+
+
+  function saveCart(cart) {
+
+    localStorage.setItem(
+      CART_KEY,
+      JSON.stringify(cart)
+    );
+
+  }
+
+
+  function addToCart(name, price) {
+
+    const cart =
+      getCart();
+
+
+    const existing =
+      cart.find(function(item) {
+
+        return item.name === name;
+
+      });
+
+
+    if (existing) {
+
+      existing.quantity =
+        Number(existing.quantity || 0) + 1;
+
+    } else {
+
+      cart.push({
+
+        name: name,
+
+        price: Number(price),
+
+        quantity: 1
+
+      });
+
+    }
+
+
+    saveCart(cart);
+
+
+    updateCart();
+
+
+    alert(
+      name +
+      " a été ajouté au panier."
+    );
+
+  }
+
+
+  function updateCart() {
+
+    const cart =
+      getCart();
+
+
+    let count = 0;
+
+
+    cart.forEach(function(item) {
+
+      count +=
+        Number(item.quantity) || 0;
+
+    });
+
+
+    document.getElementById(
+      "cartCount"
+    ).textContent = count;
+
+
+    const message =
+      document.getElementById(
+        "cartMessage"
+      );
+
+
+    if (count === 0) {
+
+      message.textContent =
+        "Votre panier est actuellement vide.";
+
+    } else if (count === 1) {
+
+      message.textContent =
+        "Vous avez 1 produit dans votre panier.";
+
+    } else {
+
+      message.textContent =
+        "Vous avez " +
+        count +
+        " produits dans votre panier.";
+
+    }
+
+  }
+
+
+  updateCart();
+
+
+  window.addEventListener(
+    "storage",
+    updateCart
+  );
+
+</script>
+
 
 </body>
 </html>
