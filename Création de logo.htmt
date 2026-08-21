@@ -1,263 +1,1150 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Création de logo | Alois Design</title>
-  <meta name="description" content="Demandez la création de votre logo personnalisé avec Alois Design.">
+  <title>Création de logo | Aloïs Design</title>
+
+  <meta
+    name="description"
+    content="Création de logos personnalisés par Aloïs Design."
+  >
 
   <style>
+
+    :root {
+      --bg: #090909;
+      --bg-light: #121212;
+      --card: #171717;
+      --gold: #d9a72b;
+      --gold-light: #f3cc68;
+      --white: #ffffff;
+      --gray: #aaaaaa;
+      --border: #292929;
+    }
+
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      color: #222;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--white);
       line-height: 1.6;
     }
 
-    header {
-      background: #111;
-      color: white;
-      text-align: center;
-      padding: 20px;
-    }
-
-    header h1 {
-      font-size: 30px;
-      margin-bottom: 5px;
-    }
-
-    header p {
-      color: #ccc;
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
     .container {
-      width: 90%;
-      max-width: 800px;
-      margin: 40px auto;
+      width: min(1120px, 92%);
+      margin: auto;
     }
 
-    .intro {
+    /* =========================
+       HEADER
+    ========================== */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+
+      background: rgba(9, 9, 9, 0.96);
+      backdrop-filter: blur(12px);
+
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav {
+      min-height: 72px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 15px;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 2px;
+
+      color: var(--gold);
+
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: white;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+
+      font-size: 14px;
+      color: #ddd;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold-light);
+    }
+
+    /* =========================
+       PANIER
+    ========================== */
+
+    .cart-link {
+      position: relative;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 42px;
+      height: 42px;
+
+      border: 1px solid #333;
+      border-radius: 10px;
+
+      background: #111;
+
+      transition: 0.2s;
+    }
+
+    .cart-link:hover {
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .cart-icon {
+      width: 25px;
+      height: 25px;
+
+      fill: none;
+
+      stroke: var(--gold-light);
+
+      stroke-width: 2;
+
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .cart-count {
+      position: absolute;
+
+      top: -7px;
+      right: -7px;
+
+      min-width: 20px;
+      height: 20px;
+
+      padding: 2px 5px;
+
+      border-radius: 50%;
+
+      background: var(--gold);
+
+      color: #111;
+
+      font-size: 11px;
+      font-weight: 900;
+
       text-align: center;
-      margin-bottom: 30px;
     }
 
-    .intro h2 {
-      font-size: 32px;
+    /* =========================
+       BOUTONS
+    ========================== */
+
+    .btn {
+      display: inline-block;
+
+      padding: 13px 20px;
+
+      border-radius: 10px;
+
+      background: var(--gold);
+
+      border: 1px solid var(--gold);
+
+      color: #111;
+
+      font-weight: 900;
+
+      cursor: pointer;
+
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      background: var(--gold-light);
+      border-color: var(--gold-light);
+    }
+
+    .btn-secondary {
+      background: transparent;
+
+      border-color: #444;
+
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: transparent;
+
+      border-color: var(--gold);
+
+      color: var(--gold-light);
+    }
+
+    /* =========================
+       HERO
+    ========================== */
+
+    .hero {
+      padding: 110px 0 90px;
+
+      background:
+        radial-gradient(
+          circle at 80% 20%,
+          #30240c 0,
+          transparent 35%
+        );
+    }
+
+    .kicker {
+      color: var(--gold-light);
+
+      text-transform: uppercase;
+
+      letter-spacing: 2px;
+
+      font-size: 13px;
+
+      font-weight: 800;
+
+      margin-bottom: 15px;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 7vw, 75px);
+
+      line-height: 1.02;
+
+      max-width: 850px;
+
+      margin-bottom: 22px;
+    }
+
+    .hero h1 span {
+      color: var(--gold);
+    }
+
+    .hero p {
+      max-width: 730px;
+
+      color: var(--gray);
+
+      font-size: 19px;
+    }
+
+    .hero-buttons {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 12px;
+
+      margin-top: 30px;
+    }
+
+    /* =========================
+       SECTIONS
+    ========================== */
+
+    section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      margin-bottom: 40px;
+    }
+
+    .section-title.center {
+      text-align: center;
+    }
+
+    .section-title h2 {
+      font-size: clamp(30px, 4vw, 44px);
+
+      line-height: 1.1;
+
       margin-bottom: 10px;
     }
 
-    .intro p {
-      color: #666;
+    .section-title p {
+      color: var(--gray);
     }
 
-    .form-box {
-      background: white;
+    /* =========================
+       SERVICES
+    ========================== */
+
+    .services {
+      display: grid;
+
+      grid-template-columns: repeat(3, 1fr);
+
+      gap: 20px;
+    }
+
+    .service {
       padding: 30px;
+
+      border: 1px solid var(--border);
+
+      background: var(--bg-light);
+
       border-radius: 18px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+
+      transition: 0.2s;
     }
 
-    .form-group {
+    .service:hover {
+      transform: translateY(-5px);
+
+      border-color: #4a3a15;
+    }
+
+    .service-icon {
+      font-size: 42px;
+
+      margin-bottom: 15px;
+    }
+
+    .service h3 {
+      font-size: 22px;
+
+      color: var(--gold-light);
+
+      margin-bottom: 10px;
+    }
+
+    .service p {
+      color: var(--gray);
+    }
+
+    /* =========================
+       FORMULAIRE
+    ========================== */
+
+    .quote {
+      background:
+        linear-gradient(
+          145deg,
+          #171207,
+          #0e0e0e
+        );
+
+      border-top: 1px solid #392c10;
+
+      border-bottom: 1px solid #392c10;
+    }
+
+    .quote-container {
+      display: grid;
+
+      grid-template-columns: 1fr 1.2fr;
+
+      gap: 25px;
+    }
+
+    .quote-info,
+    .quote-form {
+      padding: 30px;
+
+      border: 1px solid var(--border);
+
+      border-radius: 18px;
+
+      background: #101010;
+    }
+
+    .quote-info h3 {
+      font-size: 28px;
+
+      color: var(--gold-light);
+
+      margin-bottom: 12px;
+    }
+
+    .quote-info p {
+      color: var(--gray);
+
       margin-bottom: 20px;
     }
 
-    label {
+    .quote-info ul {
+      list-style: none;
+    }
+
+    .quote-info li {
+      margin: 10px 0;
+
+      color: #ddd;
+    }
+
+    .quote-info li::before {
+      content: "✓";
+
+      color: var(--gold);
+
+      margin-right: 10px;
+    }
+
+    form label {
       display: block;
-      font-weight: bold;
-      margin-bottom: 7px;
+
+      margin: 12px 0 6px;
+
+      font-size: 14px;
+
+      color: #ddd;
     }
 
     input,
     select,
     textarea {
       width: 100%;
-      padding: 13px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      font-size: 16px;
-      font-family: Arial, sans-serif;
-    }
 
-    textarea {
-      min-height: 150px;
-      resize: vertical;
+      padding: 12px;
+
+      border-radius: 9px;
+
+      border: 1px solid #333;
+
+      background: #080808;
+
+      color: white;
     }
 
     input:focus,
     select:focus,
     textarea:focus {
-      outline: none;
-      border-color: #111;
+      outline: 1px solid var(--gold);
+
+      border-color: var(--gold);
     }
 
-    .button {
-      display: inline-block;
-      width: 100%;
-      padding: 14px;
-      border: none;
-      border-radius: 10px;
-      background: #111;
-      color: white;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      text-align: center;
-      text-decoration: none;
+    textarea {
+      min-height: 150px;
+
+      resize: vertical;
     }
 
-    .button:hover {
-      opacity: 0.9;
+    input[type="file"] {
+      padding: 10px;
+
+      background: #080808;
     }
 
-    .info {
-      background: #f0f0f0;
-      padding: 18px;
-      border-radius: 12px;
-      margin-bottom: 25px;
+    /* =========================
+       ÉTAPES
+    ========================== */
+
+    .steps {
+      display: grid;
+
+      grid-template-columns: repeat(4, 1fr);
+
+      gap: 15px;
+    }
+
+    .step {
+      padding: 25px;
+
+      border: 1px solid var(--border);
+
+      background: var(--bg-light);
+
+      border-radius: 16px;
+    }
+
+    .step-number {
+      color: var(--gold);
+
+      font-size: 30px;
+
+      font-weight: 900;
+    }
+
+    .step h3 {
+      margin: 5px 0 8px;
+    }
+
+    .step p {
+      color: var(--gray);
+
       font-size: 14px;
     }
 
-    .back {
+    /* =========================
+       PANIER
+    ========================== */
+
+    .cart-box {
       text-align: center;
-      margin-top: 25px;
+
+      padding: 40px;
+
+      border: 1px solid var(--border);
+
+      border-radius: 18px;
+
+      background: var(--card);
     }
 
-    .back a {
-      color: #111;
-      text-decoration: none;
-      font-weight: bold;
+    .cart-box h2 {
+      font-size: 30px;
+
+      margin-bottom: 10px;
     }
+
+    .cart-box p {
+      color: var(--gray);
+
+      margin-bottom: 25px;
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
 
     footer {
-      background: #111;
-      color: #ccc;
+      border-top: 1px solid var(--border);
+
+      padding: 35px 0;
+
       text-align: center;
-      padding: 25px 15px;
-      margin-top: 50px;
+
+      color: #888;
+
+      font-size: 13px;
     }
 
     footer a {
-      color: white;
-      text-decoration: none;
+      color: var(--gold-light);
     }
 
-    @media (max-width: 600px) {
-      .intro h2 {
-        font-size: 27px;
+    /* =========================
+       MOBILE
+    ========================== */
+
+    @media (max-width: 850px) {
+
+      .nav-links {
+        display: none;
       }
 
-      .form-box {
-        padding: 20px;
+      .services,
+      .steps,
+      .quote-container {
+        grid-template-columns: 1fr;
       }
+
+      .hero {
+        padding-top: 75px;
+      }
+
     }
+
+    @media (max-width: 500px) {
+
+      .container {
+        width: 90%;
+      }
+
+      .hero h1 {
+        font-size: 42px;
+      }
+
+      .hero p {
+        font-size: 17px;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+      }
+
+      .hero-buttons .btn {
+        width: 100%;
+        text-align: center;
+      }
+
+      section {
+        padding: 60px 0;
+      }
+
+    }
+
   </style>
+
 </head>
+
 
 <body>
 
-  <header>
-    <h1>Alois Design</h1>
-    <p>Création de logo personnalisé</p>
-  </header>
 
-  <main class="container">
+<!-- =========================
+     HEADER
+========================== -->
 
-    <section class="intro">
-      <h2>Créons votre logo</h2>
+<header>
 
-      <p>
-        Vous n'avez pas encore de logo ?
-        Expliquez-nous votre idée et nous vous proposerons
-        une solution adaptée à votre projet.
-      </p>
-    </section>
+  <div class="container">
+
+    <nav>
+
+      <a
+        href="index.html"
+        class="logo"
+      >
+        ALOÏS <span>DESIGN</span>
+      </a>
 
 
-    <div class="form-box">
+      <div class="nav-links">
 
-      <div class="info">
-        💡 <strong>Comment ça marche ?</strong><br><br>
+        <a href="index.html">
+          Accueil
+        </a>
 
-        1. Vous nous expliquez votre idée.<br>
-        2. Nous étudions votre demande.<br>
-        3. Nous vous répondons avec une proposition et un devis.
+        <a href="impression-3d.html">
+          Impression 3D
+        </a>
+
+        <a href="logo3D.html">
+          Logo 3D
+        </a>
+
+        <a href="porte-clé.html">
+          Porte-clé
+        </a>
+
+        <a href="tampons.html">
+          Tampons
+        </a>
+
       </div>
 
 
-      <form
-        action="mailto:aloisryckebuschvandaele@gmail.com"
-        method="post"
-        enctype="text/plain"
+      <!-- PANIER -->
+
+      <a
+        href="panier.html"
+        class="cart-link"
+        aria-label="Voir le panier"
       >
 
-        <div class="form-group">
-          <label for="nom">Nom / Prénom *</label>
+        <svg
+          class="cart-icon"
+          viewBox="0 0 24 24"
+        >
+
+          <circle
+            cx="9"
+            cy="20"
+            r="1.5"
+          ></circle>
+
+          <circle
+            cx="18"
+            cy="20"
+            r="1.5"
+          ></circle>
+
+          <path
+            d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L21 8H6"
+          ></path>
+
+        </svg>
+
+
+        <span
+          class="cart-count"
+          id="cartCount"
+        >
+          0
+        </span>
+
+      </a>
+
+    </nav>
+
+  </div>
+
+</header>
+
+
+
+<main>
+
+
+<!-- =========================
+     HERO
+========================== -->
+
+<section class="hero">
+
+  <div class="container">
+
+    <div class="kicker">
+      CRÉATION GRAPHIQUE
+    </div>
+
+
+    <h1>
+
+      Créons votre
+      <span>logo.</span>
+
+    </h1>
+
+
+    <p>
+
+      Vous avez une idée mais pas encore de logo ?
+      Expliquez-moi votre projet et je vous propose
+      une création adaptée à votre activité et à votre style.
+
+    </p>
+
+
+    <div class="hero-buttons">
+
+      <a
+        href="#demande"
+        class="btn"
+      >
+        🎨 Demander mon logo
+      </a>
+
+
+      <a
+        href="logo3D.html"
+        class="btn btn-secondary"
+      >
+        🖨️ Voir les logos 3D
+      </a>
+
+
+      <a
+        href="panier.html"
+        class="btn btn-secondary"
+      >
+        🛒 Mon panier
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     SERVICES
+========================== -->
+
+<section>
+
+  <div class="container">
+
+
+    <div class="section-title center">
+
+      <h2>
+        Ce que je peux créer
+      </h2>
+
+      <p>
+        Un logo pensé pour votre projet.
+      </p>
+
+    </div>
+
+
+    <div class="services">
+
+
+      <article class="service">
+
+        <div class="service-icon">
+          🎨
+        </div>
+
+        <h3>
+          Logo complet
+        </h3>
+
+        <p>
+          Création d'un logo à partir
+          de votre idée, de votre activité
+          et de vos préférences.
+        </p>
+
+      </article>
+
+
+
+      <article class="service">
+
+        <div class="service-icon">
+          ✏️
+        </div>
+
+        <h3>
+          Modification
+        </h3>
+
+        <p>
+          Vous avez déjà un logo ?
+          Je peux travailler dessus pour
+          l'adapter à votre projet.
+        </p>
+
+      </article>
+
+
+
+      <article class="service">
+
+        <div class="service-icon">
+          🖨️
+        </div>
+
+        <h3>
+          Préparation 3D
+        </h3>
+
+        <p>
+          Votre logo peut ensuite être
+          préparé pour devenir une création
+          en impression 3D.
+        </p>
+
+      </article>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     ÉTAPES
+========================== -->
+
+<section>
+
+  <div class="container">
+
+
+    <div class="section-title center">
+
+      <h2>
+        Comment ça fonctionne ?
+      </h2>
+
+      <p>
+        Envoyez votre idée et je m'occupe du reste.
+      </p>
+
+    </div>
+
+
+    <div class="steps">
+
+
+      <div class="step">
+
+        <div class="step-number">
+          01
+        </div>
+
+        <h3>
+          Votre idée
+        </h3>
+
+        <p>
+          Expliquez votre activité,
+          votre style et vos envies.
+        </p>
+
+      </div>
+
+
+
+      <div class="step">
+
+        <div class="step-number">
+          02
+        </div>
+
+        <h3>
+          Étude
+        </h3>
+
+        <p>
+          Votre demande est étudiée
+          pour déterminer le projet.
+        </p>
+
+      </div>
+
+
+
+      <div class="step">
+
+        <div class="step-number">
+          03
+        </div>
+
+        <h3>
+          Création
+        </h3>
+
+        <p>
+          Le logo est créé selon
+          les éléments de votre demande.
+        </p>
+
+      </div>
+
+
+
+      <div class="step">
+
+        <div class="step-number">
+          04
+        </div>
+
+        <h3>
+          Validation
+        </h3>
+
+        <p>
+          Une fois le projet validé,
+          votre logo peut être utilisé
+          ou préparé pour la 3D.
+        </p>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     DEMANDE DE LOGO
+========================== -->
+
+<section
+  id="demande"
+  class="quote"
+>
+
+  <div class="container">
+
+
+    <div class="section-title center">
+
+      <h2>
+        🎨 Demander la création d'un logo
+      </h2>
+
+      <p>
+        Décrivez votre projet le plus précisément possible.
+      </p>
+
+    </div>
+
+
+    <div class="quote-container">
+
+
+      <!-- INFORMATIONS -->
+
+      <div class="quote-info">
+
+        <h3>
+          Parlons de votre projet
+        </h3>
+
+
+        <p>
+
+          Plus vous donnez d'informations,
+          plus il sera facile de comprendre
+          ce que vous recherchez.
+
+        </p>
+
+
+        <ul>
+
+          <li>
+            Nom de votre entreprise
+          </li>
+
+          <li>
+            Activité
+          </li>
+
+          <li>
+            Style souhaité
+          </li>
+
+          <li>
+            Couleurs souhaitées
+          </li>
+
+          <li>
+            Texte à intégrer
+          </li>
+
+          <li>
+            Idées ou exemples
+          </li>
+
+          <li>
+            Utilisation future en 3D
+          </li>
+
+        </ul>
+
+
+        <p style="margin-top:25px;">
+
+          📩
+
+          <a
+            href="mailto:aloisryckebuschvandaele@gmail.com"
+            style="
+              color:var(--gold-light);
+              font-weight:bold;
+            "
+          >
+            aloisryckebuschvandaele@gmail.com
+          </a>
+
+        </p>
+
+      </div>
+
+
+
+      <!-- FORMULAIRE -->
+
+      <div class="quote-form">
+
+        <form
+          action="mailto:aloisryckebuschvandaele@gmail.com"
+          method="post"
+          enctype="text/plain"
+        >
+
+
+          <label for="nom">
+            Nom / prénom
+          </label>
 
           <input
             type="text"
             id="nom"
-            name="Nom / Prénom"
-            placeholder="Votre nom"
+            name="Nom / prénom"
+            placeholder="Votre nom et prénom"
             required
           >
-        </div>
 
 
-        <div class="form-group">
-          <label for="email">Adresse e-mail *</label>
+
+          <label for="email">
+            Adresse e-mail
+          </label>
 
           <input
             type="email"
             id="email"
             name="Email"
-            placeholder="votre@email.com"
+            placeholder="Votre adresse e-mail"
             required
           >
-        </div>
 
 
-        <div class="form-group">
-          <label for="entreprise">Nom de l'entreprise</label>
+
+          <label for="entreprise">
+            Nom de l'entreprise
+          </label>
 
           <input
             type="text"
             id="entreprise"
             name="Entreprise"
-            placeholder="Nom de votre entreprise (facultatif)"
+            placeholder="Nom de votre entreprise"
           >
-        </div>
 
 
-        <div class="form-group">
-          <label for="type">Type de logo souhaité *</label>
 
-          <select id="type" name="Type de logo" required>
+          <label for="type">
+            Type de demande
+          </label>
+
+          <select
+            id="type"
+            name="Type de demande"
+            required
+          >
 
             <option value="">
-              Sélectionnez une option
+              Choisir
             </option>
 
-            <option value="Logo pour entreprise">
-              Logo pour entreprise
+            <option value="Création complète">
+              Création complète
             </option>
 
-            <option value="Logo pour association">
-              Logo pour association
+            <option value="Modification">
+              Modification d'un logo
             </option>
 
-            <option value="Logo pour projet personnel">
-              Logo pour projet personnel
-            </option>
-
-            <option value="Logo pour réseaux sociaux">
-              Logo pour réseaux sociaux
+            <option value="Logo pour impression 3D">
+              Logo destiné à l'impression 3D
             </option>
 
             <option value="Autre">
@@ -265,124 +1152,380 @@
             </option>
 
           </select>
-        </div>
 
 
-        <div class="form-group">
-          <label for="style">Style souhaité</label>
 
-          <select id="style" name="Style souhaité">
+          <label for="style">
+            Style souhaité
+          </label>
 
-            <option value="">
-              Choisissez un style
-            </option>
-
-            <option value="Moderne">
-              Moderne
-            </option>
-
-            <option value="Minimaliste">
-              Minimaliste
-            </option>
-
-            <option value="Professionnel">
-              Professionnel
-            </option>
-
-            <option value="Coloré">
-              Coloré
-            </option>
-
-            <option value="3D">
-              Style 3D
-            </option>
-
-            <option value="Je ne sais pas">
-              Je ne sais pas encore
-            </option>
-
-          </select>
-        </div>
+          <input
+            type="text"
+            id="style"
+            name="Style"
+            placeholder="Ex. moderne, simple, premium..."
+          >
 
 
-        <div class="form-group">
+
+          <label for="couleurs">
+            Couleurs souhaitées
+          </label>
+
+          <input
+            type="text"
+            id="couleurs"
+            name="Couleurs"
+            placeholder="Ex. noir et doré"
+          >
+
+
+
+          <label for="texte">
+            Texte à mettre sur le logo
+          </label>
+
+          <input
+            type="text"
+            id="texte"
+            name="Texte du logo"
+            placeholder="Nom ou texte"
+          >
+
+
+
           <label for="description">
-            Décrivez votre idée *
+            Description du projet
           </label>
 
           <textarea
             id="description"
-            name="Description du projet"
-            placeholder="Expliquez-nous ce que vous imaginez : texte, couleurs, forme, symbole, activité de votre entreprise, etc."
+            name="Description"
+            placeholder="Décrivez votre idée, votre activité et ce que vous imaginez..."
             required
           ></textarea>
-        </div>
 
 
-        <div class="form-group">
-          <label for="budget">
-            Budget approximatif
+
+          <label for="fichier">
+            Fichier ou ancien logo
           </label>
 
-          <select id="budget" name="Budget approximatif">
+          <input
+            type="file"
+            id="fichier"
+            name="Fichier"
+            accept="image/*,.pdf,.svg"
+          >
 
-            <option value="">
-              Je ne sais pas
-            </option>
 
-            <option value="Moins de 20 €">
-              Moins de 20 €
-            </option>
+          <p
+            style="
+              color:#777;
+              font-size:12px;
+              margin-top:6px;
+            "
+          >
+            Si vous avez déjà un logo,
+            vous pouvez l'indiquer dans votre demande.
+          </p>
 
-            <option value="20 à 50 €">
-              20 à 50 €
-            </option>
 
-            <option value="50 à 100 €">
-              50 à 100 €
-            </option>
 
-            <option value="Plus de 100 €">
-              Plus de 100 €
-            </option>
+          <button
+            type="submit"
+            class="btn"
+            style="
+              width:100%;
+              margin-top:20px;
+              border:none;
+            "
+          >
+            📩 Envoyer ma demande
+          </button>
 
-          </select>
+
+        </form>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     APRÈS LE LOGO
+========================== -->
+
+<section>
+
+  <div class="container">
+
+
+    <div class="section-title center">
+
+      <h2>
+        Et ensuite ?
+      </h2>
+
+      <p>
+        Votre logo peut devenir bien plus qu'une image.
+      </p>
+
+    </div>
+
+
+    <div class="services">
+
+
+      <article class="service">
+
+        <div class="service-icon">
+          🖨️
         </div>
 
+        <h3>
+          Logo 3D
+        </h3>
 
-        <button type="submit" class="button">
-          📩 Demander mon devis
-        </button>
+        <p>
+          Transformez votre logo en objet
+          ou décoration imprimée en 3D.
+        </p>
 
-      </form>
+
+        <a
+          href="logo3D.html"
+          class="btn"
+          style="margin-top:20px;"
+        >
+          Voir Logo 3D
+        </a>
+
+      </article>
+
+
+
+      <article class="service">
+
+        <div class="service-icon">
+          🔥
+        </div>
+
+        <h3>
+          Gravure
+        </h3>
+
+        <p>
+          Votre logo peut également être
+          adapté pour différents projets
+          de gravure.
+        </p>
+
+      </article>
+
+
+
+      <article class="service">
+
+        <div class="service-icon">
+          🔑
+        </div>
+
+        <h3>
+          Porte-clé
+        </h3>
+
+        <p>
+          Votre logo peut servir de base
+          à un porte-clé personnalisé.
+        </p>
+
+
+        <a
+          href="porte-clé.html"
+          class="btn"
+          style="margin-top:20px;"
+        >
+          Voir les porte-clés
+        </a>
+
+      </article>
+
 
     </div>
 
+  </div>
 
-    <div class="back">
-      <a href="logo.html">
-        ← Retour à la page Logo
+</section>
+
+
+
+<!-- =========================
+     PANIER
+========================== -->
+
+<section>
+
+  <div class="container">
+
+
+    <div class="cart-box">
+
+      <h2>
+        🛒 Votre panier
+      </h2>
+
+
+      <p id="cartMessage">
+        Votre panier est actuellement vide.
+      </p>
+
+
+      <a
+        href="panier.html"
+        class="btn"
+      >
+        Voir mon panier
       </a>
+
     </div>
 
-  </main>
+
+  </div>
+
+</section>
 
 
-  <footer>
+</main>
 
-    <p>Alois Design</p>
+
+
+<!-- =========================
+     FOOTER
+========================== -->
+
+<footer>
+
+  <div class="container">
 
     <p>
-      <a href="mailto:aloisryckebuschvandaele@gmail.com">
+      Aloïs Design
+    </p>
+
+    <p>
+      Impression 3D · Création de logos ·
+      Sculpture & gravure
+    </p>
+
+    <p style="margin-top:10px;">
+
+      <a
+        href="mailto:aloisryckebuschvandaele@gmail.com"
+      >
         aloisryckebuschvandaele@gmail.com
       </a>
+
     </p>
 
-    <p>
-      © 2026 Alois Design - Tous droits réservés
+    <p style="margin-top:10px;">
+      © 2026 Aloïs Design
     </p>
 
-  </footer>
+  </div>
+
+</footer>
+
+
+
+<!-- =========================
+     PANIER
+========================== -->
+
+<script>
+
+  const CART_KEY = "aloisDesignCart";
+
+
+  function getCart() {
+
+    try {
+
+      return JSON.parse(
+        localStorage.getItem(CART_KEY)
+      ) || [];
+
+    } catch (error) {
+
+      return [];
+
+    }
+
+  }
+
+
+  function updateCart() {
+
+    const cart = getCart();
+
+    let count = 0;
+
+
+    cart.forEach(function(item) {
+
+      count += Number(item.quantity) || 0;
+
+    });
+
+
+    document.getElementById(
+      "cartCount"
+    ).textContent = count;
+
+
+    const message =
+      document.getElementById(
+        "cartMessage"
+      );
+
+
+    if (count === 0) {
+
+      message.textContent =
+        "Votre panier est actuellement vide.";
+
+    } else if (count === 1) {
+
+      message.textContent =
+        "Vous avez 1 produit dans votre panier.";
+
+    } else {
+
+      message.textContent =
+        "Vous avez " +
+        count +
+        " produits dans votre panier.";
+
+    }
+
+  }
+
+
+  updateCart();
+
+
+  window.addEventListener(
+    "storage",
+    updateCart
+  );
+
+</script>
+
 
 </body>
 </html>
