@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>HomeAI V0.4</title>
+<title>HomeAI V0.5</title>
 
 <style>
 body {
@@ -16,9 +16,9 @@ body {
 }
 
 .container {
-    max-width: 600px;
+    max-width: 650px;
     margin: auto;
-    padding: 35px 20px;
+    padding: 30px 20px;
 }
 
 h1 {
@@ -28,7 +28,7 @@ h1 {
 
 .status {
     color: #aaa;
-    margin-bottom: 35px;
+    margin-bottom: 30px;
 }
 
 #micro {
@@ -45,7 +45,7 @@ h1 {
 }
 
 #texte {
-    margin-top: 35px;
+    margin-top: 30px;
     font-size: 21px;
     min-height: 40px;
 }
@@ -56,12 +56,21 @@ h1 {
     border-radius: 20px;
     background: #1c1e23;
     text-align: left;
-    font-size: 19px;
+    font-size: 18px;
     line-height: 1.7;
 }
 
-.label {
-    color: #999;
+#appareils {
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 20px;
+    background: #181a1f;
+    text-align: left;
+}
+
+.appareil {
+    padding: 10px 0;
+    border-bottom: 1px solid #333;
 }
 </style>
 </head>
@@ -83,14 +92,46 @@ Appuie sur le micro et parle.
 </div>
 
 <div id="resultat">
-<span class="label">HomeAI :</span><br>
-Aucune commande.
+🧠 HomeAI : aucune commande.
+</div>
+
+<div id="appareils">
+<h2>🏠 Maison</h2>
+
+<div class="appareil">
+📺 Salon → TV → 📡 électronique
+</div>
+
+<div class="appareil">
+💡 Salon → Lumière → 📡 électronique
+</div>
+
+<div class="appareil">
+🪟 Salon → Volets → 📡 électronique
+</div>
+
+<div class="appareil">
+🍳 Cuisine → Four → 📡 électronique
+</div>
+
+<div class="appareil">
+❄️ Cuisine → Frigo → 🤖 mécanique
+</div>
+
+<div class="appareil">
+💡 Chambre → Lumière → 📡 électronique
+</div>
+
 </div>
 
 </div>
 
 
 <script>
+
+/* =========================================
+   RECONNAISSANCE VOCALE
+========================================= */
 
 const micro = document.getElementById("micro");
 const texte = document.getElementById("texte");
@@ -141,8 +182,7 @@ if (!SpeechRecognition) {
 
     reconnaissance.onend = function() {
 
-        status.innerText =
-            "Prêt à écouter";
+        status.innerText = "Prêt à écouter";
 
         micro.classList.remove("ecoute");
 
@@ -161,9 +201,54 @@ if (!SpeechRecognition) {
 }
 
 
-/* ==================================
-   CERVEAU HOMEAI
-================================== */
+/* =========================================
+   BASE DES APPAREILS
+========================================= */
+
+const appareils = [
+
+    {
+        nom: "TV",
+        piece: "salon",
+        type: "electronique"
+    },
+
+    {
+        nom: "LUMIERE",
+        piece: "salon",
+        type: "electronique"
+    },
+
+    {
+        nom: "VOLETS",
+        piece: "salon",
+        type: "electronique"
+    },
+
+    {
+        nom: "FOUR",
+        piece: "cuisine",
+        type: "electronique"
+    },
+
+    {
+        nom: "FRIGO",
+        piece: "cuisine",
+        type: "mecanique"
+    },
+
+    {
+        nom: "LUMIERE",
+        piece: "chambre",
+        type: "electronique"
+    }
+
+];
+
+
+/* =========================================
+   ANALYSE DE LA COMMANDE
+========================================= */
 
 function analyserCommande(commande) {
 
@@ -171,33 +256,26 @@ function analyserCommande(commande) {
 
     let appareil = null;
     let action = null;
-    let piece = "non précisée";
+    let piece = null;
     let valeur = null;
-    let type = "électronique";
 
 
-    /* PIÈCE */
+    /* -------- PIÈCE -------- */
 
     if (c.includes("salon")) {
         piece = "salon";
-    }
-
-    else if (c.includes("chambre")) {
-        piece = "chambre";
     }
 
     else if (c.includes("cuisine")) {
         piece = "cuisine";
     }
 
-    else if (c.includes("salle de bain")) {
-        piece = "salle de bain";
+    else if (c.includes("chambre")) {
+        piece = "chambre";
     }
 
 
-    /* ==============================
-       TÉLÉ
-    ============================== */
+    /* -------- TV -------- */
 
     if (
         c.includes("télé") ||
@@ -224,9 +302,7 @@ function analyserCommande(commande) {
     }
 
 
-    /* ==============================
-       LUMIÈRE
-    ============================== */
+    /* -------- LUMIÈRE -------- */
 
     else if (
         c.includes("lumière") ||
@@ -234,7 +310,7 @@ function analyserCommande(commande) {
         c.includes("lampe")
     ) {
 
-        appareil = "LUMIÈRE";
+        appareil = "LUMIERE";
 
         if (
             c.includes("allume") ||
@@ -252,33 +328,7 @@ function analyserCommande(commande) {
     }
 
 
-    /* ==============================
-       CHAUFFAGE
-    ============================== */
-
-    else if (
-        c.includes("chauffage") ||
-        c.includes("radiateur")
-    ) {
-
-        appareil = "CHAUFFAGE";
-
-        for (let i = 5; i <= 35; i++) {
-
-            if (c.includes(i.toString())) {
-
-                valeur = i + "°C";
-                action = "RÉGLER";
-                break;
-
-            }
-        }
-    }
-
-
-    /* ==============================
-       VOLETS
-    ============================== */
+    /* -------- VOLETS -------- */
 
     else if (c.includes("volet")) {
 
@@ -300,24 +350,7 @@ function analyserCommande(commande) {
     }
 
 
-    /* ==============================
-       SPOTIFY
-    ============================== */
-
-    else if (
-        c.includes("spotify") ||
-        c.includes("musique")
-    ) {
-
-        appareil = "MUSIQUE";
-        action = "LANCER";
-        valeur = "Spotify";
-    }
-
-
-    /* ==============================
-       FRIGO
-    ============================== */
+    /* -------- FRIGO -------- */
 
     else if (
         c.includes("frigo") ||
@@ -326,7 +359,6 @@ function analyserCommande(commande) {
     ) {
 
         appareil = "FRIGO";
-        type = "mécanique";
 
         if (
             c.includes("ouvre") ||
@@ -344,9 +376,7 @@ function analyserCommande(commande) {
     }
 
 
-    /* ==============================
-       FOUR
-    ============================== */
+    /* -------- FOUR -------- */
 
     else if (c.includes("four")) {
 
@@ -358,6 +388,40 @@ function analyserCommande(commande) {
 
                 valeur = i + "°C";
                 action = "RÉGLER";
+
+                break;
+            }
+        }
+    }
+
+
+    /* =========================================
+       RECHERCHE DANS LA MAISON
+    ========================================= */
+
+    if (appareil === null || action === null) {
+
+        resultat.innerHTML =
+            "🤖 <strong>HomeAI :</strong><br><br>" +
+            "Je n'ai pas compris la commande.";
+
+        return;
+    }
+
+
+    let appareilTrouve = null;
+
+
+    for (const a of appareils) {
+
+        if (a.nom === appareil) {
+
+            if (
+                piece === null ||
+                a.piece === piece
+            ) {
+
+                appareilTrouve = a;
                 break;
 
             }
@@ -365,42 +429,51 @@ function analyserCommande(commande) {
     }
 
 
-    /* ==============================
-       COMMANDE INCOMPRISE
-    ============================== */
+    /* =========================================
+       APPAREIL TROUVÉ
+    ========================================= */
 
-    if (appareil === null || action === null) {
+    if (appareilTrouve !== null) {
 
         resultat.innerHTML =
-            "<span class='label'>🤖 HomeAI</span><br><br>" +
-            "Je n'ai pas compris la commande.";
 
-        return;
+            "🧠 <strong>HomeAI a compris :</strong><br><br>" +
+
+            "📦 Appareil : <strong>" +
+            appareilTrouve.nom +
+            "</strong><br>" +
+
+            "🏠 Pièce : <strong>" +
+            appareilTrouve.piece +
+            "</strong><br>" +
+
+            "⚙️ Action : <strong>" +
+            action +
+            "</strong><br>" +
+
+            "🔧 Module : <strong>" +
+            appareilTrouve.type +
+            "</strong><br>" +
+
+            "📊 Valeur : <strong>" +
+            (valeur || "aucune") +
+            "</strong>";
+
     }
 
+    else {
 
-    /* ==============================
-       COMMANDE STRUCTURÉE
-    ============================== */
+        resultat.innerHTML =
 
-    resultat.innerHTML =
+            "🤖 <strong>HomeAI :</strong><br><br>" +
 
-        "<span class='label'>🧠 HomeAI a compris :</span><br><br>" +
+            "J'ai compris la commande, mais je ne trouve pas " +
 
-        "📦 <strong>Appareil :</strong> " +
-        appareil + "<br>" +
+            "<strong>" + appareil + "</strong>" +
 
-        "⚙️ <strong>Action :</strong> " +
-        action + "<br>" +
+            " dans cette pièce.";
 
-        "🏠 <strong>Pièce :</strong> " +
-        piece + "<br>" +
-
-        "🔧 <strong>Type :</strong> " +
-        type + "<br>" +
-
-        "📊 <strong>Valeur :</strong> " +
-        (valeur || "aucune");
+    }
 
 }
 
