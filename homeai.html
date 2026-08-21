@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>HomeAI V0.5.1</title>
+<title>HomeAI V0.6</title>
 
 <style>
 body {
@@ -12,13 +12,13 @@ body {
     background: #101114;
     color: white;
     font-family: Arial, sans-serif;
-    text-align: center;
 }
 
 .container {
-    max-width: 650px;
+    max-width: 700px;
     margin: auto;
-    padding: 30px 20px;
+    padding: 30px 20px 50px;
+    text-align: center;
 }
 
 h1 {
@@ -26,9 +26,14 @@ h1 {
     margin-bottom: 5px;
 }
 
+.subtitle {
+    color: #999;
+    margin-bottom: 30px;
+}
+
 .status {
     color: #aaa;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 #micro {
@@ -47,7 +52,7 @@ h1 {
 #texte {
     margin-top: 30px;
     font-size: 21px;
-    min-height: 40px;
+    min-height: 45px;
 }
 
 #resultat {
@@ -57,29 +62,43 @@ h1 {
     background: #1c1e23;
     text-align: left;
     font-size: 18px;
-    line-height: 1.7;
+    line-height: 1.8;
 }
 
-#appareils {
-    margin-top: 25px;
+#maison {
+    margin-top: 30px;
     padding: 20px;
     border-radius: 20px;
     background: #181a1f;
     text-align: left;
 }
 
-.appareil {
-    padding: 10px 0;
+.objet {
+    padding: 12px 5px;
     border-bottom: 1px solid #333;
+}
+
+.badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 8px;
+    background: #292c32;
+    font-size: 13px;
+    margin-left: 5px;
 }
 </style>
 </head>
+
 
 <body>
 
 <div class="container">
 
 <h1>🏠 HomeAI</h1>
+
+<div class="subtitle">
+V0.6 — Assistant intelligent pour toute la maison
+</div>
 
 <div class="status" id="status">
 Prêt à écouter
@@ -95,33 +114,12 @@ Appuie sur le micro et parle.
 🤖 HomeAI : aucune commande.
 </div>
 
-<div id="appareils">
 
-<h2>🏠 Maison</h2>
+<div id="maison">
 
-<div class="appareil">
-📺 Salon → TV → 📡 électronique
-</div>
+<h2>🏠 Appareils de la maison</h2>
 
-<div class="appareil">
-💡 Salon → Lumière → 📡 électronique
-</div>
-
-<div class="appareil">
-🪟 Salon → Volets → 📡 électronique
-</div>
-
-<div class="appareil">
-🍳 Cuisine → Four → 📡 électronique
-</div>
-
-<div class="appareil">
-❄️ Cuisine → Frigo → 🤖 mécanique
-</div>
-
-<div class="appareil">
-💡 Chambre → Lumière → 📡 électronique
-</div>
+<div id="listeMaison"></div>
 
 </div>
 
@@ -130,14 +128,15 @@ Appuie sur le micro et parle.
 
 <script>
 
-/* =========================================
+/* =====================================================
    RECONNAISSANCE VOCALE
-========================================= */
+===================================================== */
 
 const micro = document.getElementById("micro");
 const texte = document.getElementById("texte");
 const resultat = document.getElementById("resultat");
 const status = document.getElementById("status");
+const listeMaison = document.getElementById("listeMaison");
 
 const SpeechRecognition =
     window.SpeechRecognition ||
@@ -147,7 +146,7 @@ const SpeechRecognition =
 if (!SpeechRecognition) {
 
     status.innerText =
-        "Reconnaissance vocale non disponible.";
+        "❌ Reconnaissance vocale non disponible.";
 
 } else {
 
@@ -210,54 +209,360 @@ if (!SpeechRecognition) {
 }
 
 
-/* =========================================
+/* =====================================================
    BASE DES APPAREILS
-========================================= */
+===================================================== */
+
+/*
+   modules possibles :
+
+   electronique
+   mecanique
+
+   Un appareil peut avoir :
+   - un seul module
+   - plusieurs modules
+*/
+
 
 const appareils = [
 
+    /* ================= SALON ================= */
+
     {
         nom: "TV",
+        mots: ["télé", "tele", "télévision", "television", "tv"],
         piece: "salon",
-        type: "electronique"
+        modules: ["electronique"],
+        emoji: "📺"
     },
 
     {
         nom: "LUMIERE",
+        mots: ["lumière", "lumiere", "lampe", "éclairage", "eclairage"],
         piece: "salon",
-        type: "electronique"
+        modules: ["electronique", "mecanique"],
+        emoji: "💡"
     },
 
     {
         nom: "VOLETS",
+        mots: ["volet", "volets", "store", "stores"],
         piece: "salon",
-        type: "electronique"
+        modules: ["electronique", "mecanique"],
+        emoji: "🪟"
+    },
+
+    {
+        nom: "RIDEAUX",
+        mots: ["rideau", "rideaux"],
+        piece: "salon",
+        modules: ["electronique", "mecanique"],
+        emoji: "🪟"
+    },
+
+    {
+        nom: "CANAPE",
+        mots: ["canapé", "canape"],
+        piece: "salon",
+        modules: ["mecanique", "electronique"],
+        emoji: "🛋️"
+    },
+
+    {
+        nom: "FAUTEUIL",
+        mots: ["fauteuil"],
+        piece: "salon",
+        modules: ["mecanique", "electronique"],
+        emoji: "🪑"
+    },
+
+    {
+        nom: "ENCEINTE",
+        mots: ["enceinte", "haut-parleur", "haut parleur"],
+        piece: "salon",
+        modules: ["electronique"],
+        emoji: "🔊"
+    },
+
+    {
+        nom: "RADIO",
+        mots: ["radio"],
+        piece: "salon",
+        modules: ["electronique"],
+        emoji: "📻"
+    },
+
+
+    /* ================= CUISINE ================= */
+
+    {
+        nom: "FRIGO",
+        mots: [
+            "frigo",
+            "réfrigérateur",
+            "refrigerateur",
+            "frigidaire"
+        ],
+        piece: "cuisine",
+        modules: ["electronique", "mecanique"],
+        emoji: "🧊"
     },
 
     {
         nom: "FOUR",
+        mots: ["four"],
         piece: "cuisine",
-        type: "electronique"
+        modules: ["electronique"],
+        emoji: "🔥"
     },
 
     {
-        nom: "FRIGO",
+        nom: "MICRO-ONDES",
+        mots: ["micro-onde", "micro onde", "microondes"],
         piece: "cuisine",
-        type: "mecanique"
+        modules: ["electronique"],
+        emoji: "📡"
     },
+
+    {
+        nom: "LAVE-VAISSELLE",
+        mots: ["lave-vaisselle", "lave vaisselle"],
+        piece: "cuisine",
+        modules: ["electronique"],
+        emoji: "🍽️"
+    },
+
+    {
+        nom: "MACHINE A CAFE",
+        mots: ["machine à café", "machine a cafe", "cafetière", "cafetière"],
+        piece: "cuisine",
+        modules: ["electronique"],
+        emoji: "☕"
+    },
+
+    {
+        nom: "GRILLE-PAIN",
+        mots: ["grille-pain", "grille pain"],
+        piece: "cuisine",
+        modules: ["electronique"],
+        emoji: "🍞"
+    },
+
+    {
+        nom: "HOTTE",
+        mots: ["hotte", "hotte aspirante"],
+        piece: "cuisine",
+        modules: ["electronique"],
+        emoji: "💨"
+    },
+
+
+    /* ================= CHAMBRE ================= */
 
     {
         nom: "LUMIERE",
+        mots: ["lumière", "lumiere", "lampe"],
         piece: "chambre",
-        type: "electronique"
+        modules: ["electronique", "mecanique"],
+        emoji: "💡"
+    },
+
+    {
+        nom: "VOLETS",
+        mots: ["volet", "volets"],
+        piece: "chambre",
+        modules: ["electronique", "mecanique"],
+        emoji: "🪟"
+    },
+
+    {
+        nom: "RIDEAUX",
+        mots: ["rideau", "rideaux"],
+        piece: "chambre",
+        modules: ["electronique", "mecanique"],
+        emoji: "🪟"
+    },
+
+    {
+        nom: "LIT",
+        mots: ["lit"],
+        piece: "chambre",
+        modules: ["mecanique", "electronique"],
+        emoji: "🛏️"
+    },
+
+    {
+        nom: "CLIMATISATION",
+        mots: ["climatisation", "clim", "climatiseur"],
+        piece: "chambre",
+        modules: ["electronique"],
+        emoji: "❄️"
+    },
+
+    {
+        nom: "CHAUFFAGE",
+        mots: ["chauffage", "radiateur"],
+        piece: "chambre",
+        modules: ["electronique"],
+        emoji: "🌡️"
+    },
+
+
+    /* ================= SALLE DE BAIN ================= */
+
+    {
+        nom: "LUMIERE",
+        mots: ["lumière", "lumiere", "lampe"],
+        piece: "salle de bain",
+        modules: ["electronique"],
+        emoji: "💡"
+    },
+
+    {
+        nom: "VENTILATION",
+        mots: ["ventilation", "vmc"],
+        piece: "salle de bain",
+        modules: ["electronique"],
+        emoji: "💨"
+    },
+
+
+    /* ================= MAISON ================= */
+
+    {
+        nom: "PORTE",
+        mots: ["porte"],
+        piece: "maison",
+        modules: ["mecanique", "electronique"],
+        emoji: "🚪"
+    },
+
+    {
+        nom: "FENETRE",
+        mots: ["fenêtre", "fenetre"],
+        piece: "maison",
+        modules: ["mecanique", "electronique"],
+        emoji: "🪟"
+    },
+
+    {
+        nom: "SERRURE",
+        mots: ["serrure", "verrou"],
+        piece: "maison",
+        modules: ["mecanique", "electronique"],
+        emoji: "🔒"
+    },
+
+    {
+        nom: "PORTE DE GARAGE",
+        mots: ["porte de garage", "garage"],
+        piece: "maison",
+        modules: ["mecanique", "electronique"],
+        emoji: "🚗"
+    },
+
+    {
+        nom: "INTERPHONE",
+        mots: ["interphone", "visiophone"],
+        piece: "maison",
+        modules: ["electronique"],
+        emoji: "🔔"
+    },
+
+    {
+        nom: "PRISE",
+        mots: ["prise", "prise électrique", "prise electrique"],
+        piece: "maison",
+        modules: ["electronique"],
+        emoji: "🔌"
+    },
+
+    {
+        nom: "INTERRUPTEUR",
+        mots: ["interrupteur"],
+        piece: "maison",
+        modules: ["mecanique", "electronique"],
+        emoji: "🔘"
+    },
+
+    {
+        nom: "ASPIRATEUR",
+        mots: ["aspirateur"],
+        piece: "maison",
+        modules: ["electronique"],
+        emoji: "🧹"
+    },
+
+    {
+        nom: "LAVE-LINGE",
+        mots: ["lave-linge", "lave linge", "machine à laver"],
+        piece: "maison",
+        modules: ["electronique"],
+        emoji: "🧺"
+    },
+
+    {
+        nom: "VENTILATEUR",
+        mots: ["ventilateur"],
+        piece: "maison",
+        modules: ["electronique"],
+        emoji: "🌀"
     }
 
 ];
 
 
-/* =========================================
-   VOCABULAIRE HOMEAI
-========================================= */
+/* =====================================================
+   AFFICHAGE DE LA MAISON
+===================================================== */
+
+function afficherMaison() {
+
+    listeMaison.innerHTML = "";
+
+    for (const appareil of appareils) {
+
+        const div = document.createElement("div");
+
+        div.className = "objet";
+
+        let modules = appareil.modules
+            .map(module => {
+
+                if (module === "electronique") {
+                    return "⚡ électronique";
+                }
+
+                return "🤖 mécanique";
+
+            })
+            .join(" + ");
+
+        div.innerHTML =
+            appareil.emoji +
+            " <strong>" +
+            appareil.nom +
+            "</strong>" +
+            " — " +
+            appareil.piece +
+            "<br>" +
+            "<span class='badge'>" +
+            modules +
+            "</span>";
+
+        listeMaison.appendChild(div);
+
+    }
+
+}
+
+afficherMaison();
+
+
+/* =====================================================
+   VOCABULAIRE
+===================================================== */
 
 const vocabulaire = {
 
@@ -283,7 +588,9 @@ const vocabulaire = {
         "met",
         "mettre",
         "met-moi",
-        "met moi"
+        "met moi",
+        "fais fonctionner",
+        "fais marcher"
     ],
 
     eteindre: [
@@ -308,7 +615,10 @@ const vocabulaire = {
         "arrête",
         "arrete",
         "arrêter",
-        "arreter"
+        "arreter",
+        "stop",
+        "arrête ça",
+        "arrete ça"
     ],
 
     ouvrir: [
@@ -322,7 +632,11 @@ const vocabulaire = {
         "ouvre le",
         "ouvre-la",
         "ouvre la",
-        "ouvert"
+        "ouvert",
+        "déverrouille",
+        "deverrouille",
+        "déverrouiller",
+        "deverrouiller"
     ],
 
     fermer: [
@@ -339,15 +653,39 @@ const vocabulaire = {
         "fermé",
         "fermee",
         "fermer ça",
-        "ferme ça"
-    ]
+        "ferme ça",
+        "referme",
+        "refermer"
+    ],
 
+    monter: [
+        "monte",
+        "monter",
+        "montes",
+        "montez",
+        "soulève",
+        "souleve",
+        "soulevez",
+        "lever",
+        "lève",
+        "leve"
+    ],
+
+    descendre: [
+        "descends",
+        "descendre",
+        "descendez",
+        "baisse",
+        "baisser",
+        "abaisse",
+        "abaisser"
+    ]
 };
 
 
-/* =========================================
-   FONCTION POUR CHERCHER UN MOT
-========================================= */
+/* =====================================================
+   CHERCHER UN MOT
+===================================================== */
 
 function contientUnMot(texte, liste) {
 
@@ -363,232 +701,170 @@ function contientUnMot(texte, liste) {
 }
 
 
-/* =========================================
-   ANALYSE DE LA COMMANDE
-========================================= */
+/* =====================================================
+   TROUVER L'APPAREIL
+===================================================== */
+
+function trouverAppareil(texte) {
+
+    for (const appareil of appareils) {
+
+        for (const mot of appareil.mots) {
+
+            if (texte.includes(mot)) {
+
+                return appareil;
+
+            }
+
+        }
+
+    }
+
+    return null;
+}
+
+
+/* =====================================================
+   CHOISIR LE MODULE
+===================================================== */
+
+function choisirModule(appareil, action) {
+
+    /*
+       Si l'action concerne un mouvement,
+       on privilégie le module mécanique.
+
+       Sinon on privilégie l'électronique.
+    */
+
+    const actionsMecaniques = [
+        "OUVRIR",
+        "FERMER",
+        "MONTER",
+        "DESCENDRE",
+        "VERROUILLER",
+        "DÉVERROUILLER"
+    ];
+
+
+    if (
+        actionsMecaniques.includes(action) &&
+        appareil.modules.includes("mecanique")
+    ) {
+
+        return "🤖 MÉCANIQUE";
+
+    }
+
+
+    if (
+        appareil.modules.includes("electronique")
+    ) {
+
+        return "⚡ ÉLECTRONIQUE";
+
+    }
+
+
+    if (
+        appareil.modules.includes("mecanique")
+    ) {
+
+        return "🤖 MÉCANIQUE";
+
+    }
+
+
+    return "❓ INCONNU";
+
+}
+
+
+/* =====================================================
+   ANALYSER LA COMMANDE
+===================================================== */
 
 function analyserCommande(commande) {
 
-    let c = commande.toLowerCase();
-
-    /*
-       On enlève quelques signes
-       pour faciliter la compréhension.
-    */
-
-    c = c
+    let c = commande
+        .toLowerCase()
         .replace(/[.,!?]/g, "")
         .trim();
 
 
-    let appareil = null;
     let action = null;
-    let piece = null;
     let valeur = null;
 
 
-    /* =====================================
-       DÉTECTION DE LA PIÈCE
-    ===================================== */
+    /* ===============================
+       ACTIONS
+    =============================== */
 
     if (
-        c.includes("salon") ||
-        c.includes("séjour") ||
-        c.includes("sejour")
+        contientUnMot(c, vocabulaire.ouvrir)
     ) {
 
-        piece = "salon";
+        action = "OUVRIR";
 
     }
 
     else if (
-        c.includes("chambre") ||
-        c.includes("chambre à coucher")
+        contientUnMot(c, vocabulaire.fermer)
     ) {
 
-        piece = "chambre";
+        action = "FERMER";
 
     }
 
     else if (
-        c.includes("cuisine")
+        contientUnMot(c, vocabulaire.monter)
     ) {
 
-        piece = "cuisine";
+        action = "MONTER";
 
     }
 
     else if (
-        c.includes("salle de bain") ||
-        c.includes("sdb")
+        contientUnMot(c, vocabulaire.descendre)
     ) {
 
-        piece = "salle de bain";
+        action = "DESCENDRE";
 
     }
-
-
-    /* =====================================
-       TÉLÉVISION
-    ===================================== */
-
-    if (
-        c.includes("télé") ||
-        c.includes("tele") ||
-        c.includes("télévision") ||
-        c.includes("television") ||
-        c.includes("tv")
-    ) {
-
-        appareil = "TV";
-
-
-        if (
-            contientUnMot(c, vocabulaire.allumer) ||
-            c.includes("regarder la télé") ||
-            c.includes("regarder la tv") ||
-            c.includes("je veux regarder")
-        ) {
-
-            action = "ALLUMER";
-
-        }
-
-
-        else if (
-            contientUnMot(c, vocabulaire.eteindre) ||
-            c.includes("je ne veux plus regarder")
-        ) {
-
-            action = "ÉTEINDRE";
-
-        }
-
-    }
-
-
-    /* =====================================
-       LUMIÈRE
-    ===================================== */
 
     else if (
-        c.includes("lumière") ||
-        c.includes("lumiere") ||
-        c.includes("lampe") ||
-        c.includes("éclairage") ||
-        c.includes("eclairage")
+        contientUnMot(c, vocabulaire.eteindre)
     ) {
 
-        appareil = "LUMIERE";
+        action = "ÉTEINDRE";
 
+    }
 
-        if (
-            contientUnMot(c, vocabulaire.allumer)
-        ) {
+    else if (
+        contientUnMot(c, vocabulaire.allumer)
+    ) {
 
-            action = "ALLUMER";
-
-        }
-
-
-        else if (
-            contientUnMot(c, vocabulaire.eteindre)
-        ) {
-
-            action = "ÉTEINDRE";
-
-        }
+        action = "ALLUMER";
 
     }
 
 
-    /* =====================================
-       VOLETS
-    ===================================== */
+    /* ===============================
+       TEMPÉRATURE
+    =============================== */
 
-    else if (
-        c.includes("volet") ||
-        c.includes("volets") ||
-        c.includes("store") ||
-        c.includes("stores")
-    ) {
+    for (let i = 5; i <= 300; i++) {
 
-        appareil = "VOLETS";
+        if (c.includes(i.toString())) {
 
-
-        if (
-            contientUnMot(c, vocabulaire.ouvrir)
-        ) {
-
-            action = "OUVRIR";
-
-        }
-
-
-        else if (
-            contientUnMot(c, vocabulaire.fermer)
-        ) {
-
-            action = "FERMER";
-
-        }
-
-    }
-
-
-    /* =====================================
-       FRIGO
-    ===================================== */
-
-    else if (
-        c.includes("frigo") ||
-        c.includes("réfrigérateur") ||
-        c.includes("refrigerateur") ||
-        c.includes("frigidaire")
-    ) {
-
-        appareil = "FRIGO";
-
-
-        if (
-            contientUnMot(c, vocabulaire.ouvrir)
-        ) {
-
-            action = "OUVRIR";
-
-        }
-
-
-        else if (
-            contientUnMot(c, vocabulaire.fermer)
-        ) {
-
-            action = "FERMER";
-
-        }
-
-    }
-
-
-    /* =====================================
-       FOUR
-    ===================================== */
-
-    else if (
-        c.includes("four")
-    ) {
-
-        appareil = "FOUR";
-
-
-        /*
-           On cherche une température
-           entre 50 et 300°C.
-        */
-
-        for (let i = 50; i <= 300; i++) {
-
-            if (c.includes(i.toString())) {
+            if (
+                c.includes("degré") ||
+                c.includes("degres") ||
+                c.includes("°") ||
+                c.includes("température") ||
+                c.includes("temperature")
+            ) {
 
                 valeur = i + "°C";
 
@@ -600,161 +876,15 @@ function analyserCommande(commande) {
 
         }
 
-
-        /*
-           Si aucune température n'est
-           donnée, on peut quand même
-           comprendre une commande simple.
-        */
-
-        if (
-            action === null &&
-            contientUnMot(c, vocabulaire.allumer)
-        ) {
-
-            action = "ALLUMER";
-
-        }
-
-
-        if (
-            action === null &&
-            contientUnMot(c, vocabulaire.eteindre)
-        ) {
-
-            action = "ÉTEINDRE";
-
-        }
-
     }
 
 
-    /* =====================================
-       CHAUFFAGE
-    ===================================== */
+    /* ===============================
+       TROUVER APPAREIL
+    =============================== */
 
-    else if (
-        c.includes("chauffage") ||
-        c.includes("radiateur") ||
-        c.includes("chauffe")
-    ) {
+    const appareil = trouverAppareil(c);
 
-        appareil = "CHAUFFAGE";
-
-
-        for (let i = 5; i <= 35; i++) {
-
-            if (c.includes(i.toString())) {
-
-                valeur = i + "°C";
-
-                action = "RÉGLER";
-
-                break;
-
-            }
-
-        }
-
-
-        if (
-            action === null &&
-            contientUnMot(c, vocabulaire.allumer)
-        ) {
-
-            action = "ALLUMER";
-
-        }
-
-
-        if (
-            action === null &&
-            contientUnMot(c, vocabulaire.eteindre)
-        ) {
-
-            action = "ÉTEINDRE";
-
-        }
-
-    }
-
-
-    /* =====================================
-       MUSIQUE / SPOTIFY
-    ===================================== */
-
-    else if (
-        c.includes("spotify") ||
-        c.includes("musique") ||
-        c.includes("chanson") ||
-        c.includes("son")
-    ) {
-
-        appareil = "MUSIQUE";
-
-
-        if (
-            contientUnMot(c, vocabulaire.allumer) ||
-            c.includes("joue") ||
-            c.includes("jouer") ||
-            c.includes("écoute") ||
-            c.includes("ecoute")
-        ) {
-
-            action = "LANCER";
-
-            valeur = "Spotify";
-
-        }
-
-
-        else if (
-            contientUnMot(c, vocabulaire.eteindre)
-        ) {
-
-            action = "ARRÊTER";
-
-        }
-
-    }
-
-
-    /* =====================================
-       MICRO-ONDES
-    ===================================== */
-
-    else if (
-        c.includes("micro-onde") ||
-        c.includes("micro onde") ||
-        c.includes("microondes")
-    ) {
-
-        appareil = "MICRO-ONDES";
-
-
-        if (
-            contientUnMot(c, vocabulaire.allumer)
-        ) {
-
-            action = "ALLUMER";
-
-        }
-
-
-        else if (
-            contientUnMot(c, vocabulaire.eteindre)
-        ) {
-
-            action = "ÉTEINDRE";
-
-        }
-
-    }
-
-
-    /* =====================================
-       RECHERCHE DE L'APPAREIL
-    ===================================== */
 
     if (
         appareil === null ||
@@ -767,83 +897,85 @@ function analyserCommande(commande) {
 
             "Je n'ai pas encore compris cette commande.<br><br>" +
 
-            "🗣️ Essaie de la reformuler.";
+            "🗣️ Essaie par exemple :<br>" +
+
+            "« Ouvre le frigo »<br>" +
+
+            "« Ferme les volets »<br>" +
+
+            "« Allume la lumière »<br>" +
+
+            "« Mets le chauffage à 21 degrés »";
 
         return;
 
     }
 
 
-    let appareilTrouve = null;
+    /* ===============================
+       MODULE
+    =============================== */
+
+    const module = choisirModule(
+        appareil,
+        action
+    );
 
 
-    for (const a of appareils) {
+    /* ===============================
+       PIÈCE
+    =============================== */
 
-        if (a.nom === appareil) {
+    let piece = appareil.piece;
 
-            if (
-                piece === null ||
-                a.piece === piece
-            ) {
+    if (c.includes("salon")) {
+        piece = "salon";
+    }
 
-                appareilTrouve = a;
+    else if (c.includes("cuisine")) {
+        piece = "cuisine";
+    }
 
-                break;
+    else if (c.includes("chambre")) {
+        piece = "chambre";
+    }
 
-            }
-
-        }
-
+    else if (c.includes("salle de bain")) {
+        piece = "salle de bain";
     }
 
 
-    /* =====================================
-       APPAREIL TROUVÉ
-    ===================================== */
+    /* ===============================
+       AFFICHAGE
+    =============================== */
 
-    if (appareilTrouve !== null) {
+    resultat.innerHTML =
 
-        resultat.innerHTML =
+        "🧠 <strong>HomeAI a compris :</strong><br><br>" +
 
-            "🧠 <strong>HomeAI a compris :</strong><br><br>" +
+        "📦 Appareil : <strong>" +
+        appareil.emoji +
+        " " +
+        appareil.nom +
+        "</strong><br>" +
 
-            "📦 Appareil : <strong>" +
-            appareilTrouve.nom +
-            "</strong><br>" +
+        "🏠 Pièce : <strong>" +
+        piece +
+        "</strong><br>" +
 
-            "🏠 Pièce : <strong>" +
-            appareilTrouve.piece +
-            "</strong><br>" +
+        "⚙️ Action : <strong>" +
+        action +
+        "</strong><br>" +
 
-            "⚙️ Action : <strong>" +
-            action +
-            "</strong><br>" +
+        "🔧 Module utilisé : <strong>" +
+        module +
+        "</strong><br>" +
 
-            "🔧 Module : <strong>" +
-            appareilTrouve.type +
-            "</strong><br>" +
+        "📊 Valeur : <strong>" +
+        (valeur || "aucune") +
+        "</strong><br><br>" +
 
-            "📊 Valeur : <strong>" +
-            (valeur || "aucune") +
-            "</strong>";
-
-    }
-
-    else {
-
-        resultat.innerHTML =
-
-            "🤖 <strong>HomeAI :</strong><br><br>" +
-
-            "J'ai compris la commande, mais je ne trouve pas " +
-
-            "<strong>" +
-            appareil +
-            "</strong>" +
-
-            " dans cette pièce.";
-
-    }
+        "📡 <strong>Commande prête à être envoyée.</strong>";
 
 }
 
