@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
 
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>Panier | Aloïs Design</title>
 
@@ -48,9 +53,8 @@
       text-decoration: none;
     }
 
-    button,
-    input {
-      font: inherit;
+    button {
+      font-family: inherit;
     }
 
     .container {
@@ -78,7 +82,9 @@
       min-height: 72px;
 
       display: flex;
+
       align-items: center;
+
       justify-content: space-between;
 
       gap: 15px;
@@ -86,6 +92,7 @@
 
     .logo {
       font-size: 20px;
+
       font-weight: 900;
 
       letter-spacing: 2px;
@@ -101,9 +108,10 @@
 
     .nav-links {
       display: flex;
+
       align-items: center;
 
-      gap: 20px;
+      gap: 18px;
 
       font-size: 14px;
 
@@ -122,11 +130,14 @@
       position: relative;
 
       display: flex;
+
       align-items: center;
+
       justify-content: center;
 
-      width: 42px;
-      height: 42px;
+      width: 44px;
+
+      height: 44px;
 
       border: 1px solid var(--gold);
 
@@ -137,6 +148,7 @@
 
     .cart-icon {
       width: 25px;
+
       height: 25px;
 
       fill: none;
@@ -146,6 +158,7 @@
       stroke-width: 2;
 
       stroke-linecap: round;
+
       stroke-linejoin: round;
     }
 
@@ -153,9 +166,11 @@
       position: absolute;
 
       top: -7px;
+
       right: -7px;
 
       min-width: 20px;
+
       height: 20px;
 
       padding: 2px 5px;
@@ -174,77 +189,11 @@
     }
 
     /* =========================
-       BOUTONS
-    ========================== */
-
-    .btn {
-      display: inline-block;
-
-      padding: 13px 20px;
-
-      border-radius: 10px;
-
-      background: var(--gold);
-
-      border: 1px solid var(--gold);
-
-      color: #111;
-
-      font-weight: 900;
-
-      cursor: pointer;
-
-      transition: 0.2s;
-    }
-
-    .btn:hover {
-      background: var(--gold-light);
-
-      border-color: var(--gold-light);
-    }
-
-    .btn-secondary {
-      background: transparent;
-
-      border-color: #444;
-
-      color: white;
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--gold);
-
-      color: var(--gold-light);
-
-      background: transparent;
-    }
-
-    .btn-danger {
-      background: transparent;
-
-      border-color: #633;
-
-      color: #ff7777;
-
-      padding: 8px 12px;
-
-      font-size: 13px;
-    }
-
-    .btn-danger:hover {
-      background: #301010;
-
-      border-color: #a44;
-
-      color: #ff9999;
-    }
-
-    /* =========================
        HERO
     ========================== */
 
     .hero {
-      padding: 90px 0 60px;
+      padding: 85px 0 55px;
 
       background:
         radial-gradient(
@@ -265,15 +214,15 @@
 
       font-weight: 800;
 
-      margin-bottom: 15px;
+      margin-bottom: 12px;
     }
 
     .hero h1 {
-      font-size: clamp(42px, 7vw, 68px);
+      font-size: clamp(40px, 7vw, 70px);
 
-      line-height: 1.02;
+      line-height: 1.05;
 
-      margin-bottom: 18px;
+      margin-bottom: 15px;
     }
 
     .hero h1 span {
@@ -281,48 +230,33 @@
     }
 
     .hero p {
-      max-width: 700px;
-
       color: var(--gray);
 
       font-size: 18px;
+
+      max-width: 700px;
     }
 
     /* =========================
        PANIER
     ========================== */
 
-    section {
-      padding: 50px 0 80px;
+    .cart-section {
+      padding: 40px 0 90px;
     }
 
     .cart-layout {
       display: grid;
 
-      grid-template-columns: 1fr 340px;
+      grid-template-columns: 1fr 350px;
 
       gap: 25px;
 
       align-items: start;
     }
 
-    .cart-list {
-      display: flex;
-
-      flex-direction: column;
-
-      gap: 15px;
-    }
-
-    .cart-item {
-      display: grid;
-
-      grid-template-columns: 1fr auto;
-
-      gap: 20px;
-
-      padding: 25px;
-
+    .cart-box,
+    .summary-box {
       border: 1px solid var(--border);
 
       border-radius: 18px;
@@ -335,61 +269,112 @@
         );
     }
 
-    .item-name {
-      color: var(--gold-light);
-
-      font-size: 21px;
-
-      font-weight: 900;
-
-      margin-bottom: 6px;
+    .cart-box {
+      padding: 25px;
     }
 
-    .item-info {
-      color: var(--gray);
+    .summary-box {
+      padding: 25px;
 
-      font-size: 14px;
+      position: sticky;
+
+      top: 95px;
+    }
+
+    .box-title {
+      font-size: 25px;
+
+      margin-bottom: 20px;
+    }
+
+    /* =========================
+       PRODUITS
+    ========================== */
+
+    .cart-item {
+      display: grid;
+
+      grid-template-columns: 70px 1fr auto;
+
+      gap: 18px;
+
+      align-items: center;
+
+      padding: 20px 0;
+
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .item-icon {
+      width: 70px;
+
+      height: 70px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      border-radius: 14px;
+
+      background: #0b0b0b;
+
+      border: 1px solid #333;
+
+      font-size: 30px;
+    }
+
+    .item-name {
+      font-size: 18px;
+
+      font-weight: 800;
+
+      margin-bottom: 5px;
     }
 
     .item-price {
-      margin-top: 10px;
+      color: var(--gold-light);
 
-      color: white;
-
-      font-weight: 900;
-    }
-
-    .item-right {
-      text-align: right;
+      font-size: 14px;
     }
 
     .item-total {
       color: var(--gold-light);
 
-      font-size: 20px;
+      font-size: 18px;
 
       font-weight: 900;
 
-      margin-bottom: 10px;
+      margin-bottom: 8px;
+
+      text-align: right;
     }
+
+    /* =========================
+       QUANTITÉ
+    ========================== */
 
     .quantity {
       display: flex;
 
       align-items: center;
 
-      justify-content: flex-end;
+      gap: 7px;
 
-      gap: 8px;
-
-      margin-bottom: 12px;
+      margin-top: 10px;
     }
 
     .quantity button {
-      width: 32px;
-      height: 32px;
+      width: 30px;
 
-      border-radius: 8px;
+      height: 30px;
+
+      border-radius: 7px;
 
       border: 1px solid #444;
 
@@ -399,7 +384,7 @@
 
       cursor: pointer;
 
-      font-weight: 900;
+      font-size: 17px;
     }
 
     .quantity button:hover {
@@ -409,41 +394,38 @@
     }
 
     .quantity span {
-      min-width: 25px;
+      min-width: 30px;
 
       text-align: center;
 
-      font-weight: 900;
+      font-weight: 800;
+    }
+
+    /* =========================
+       SUPPRIMER
+    ========================== */
+
+    .remove {
+      background: transparent;
+
+      border: none;
+
+      color: #999;
+
+      cursor: pointer;
+
+      font-size: 13px;
+
+      padding: 0;
+    }
+
+    .remove:hover {
+      color: #ff7777;
     }
 
     /* =========================
        TOTAL
     ========================== */
-
-    .summary {
-      position: sticky;
-
-      top: 95px;
-
-      padding: 30px;
-
-      border: 1px solid var(--border);
-
-      border-radius: 18px;
-
-      background:
-        linear-gradient(
-          145deg,
-          #171207,
-          #101010
-        );
-    }
-
-    .summary h2 {
-      font-size: 25px;
-
-      margin-bottom: 20px;
-    }
 
     .summary-line {
       display: flex;
@@ -454,63 +436,149 @@
 
       padding: 12px 0;
 
-      border-bottom: 1px solid #292929;
-
-      color: #ddd;
+      color: #ccc;
     }
 
-    .summary-total {
-      display: flex;
+    .summary-line.total {
+      margin-top: 10px;
 
-      justify-content: space-between;
+      padding-top: 20px;
 
-      gap: 15px;
+      border-top: 1px solid var(--border);
 
-      padding: 20px 0;
+      color: white;
 
-      font-size: 23px;
+      font-size: 22px;
 
       font-weight: 900;
     }
 
-    .summary-total span:last-child {
+    .summary-total {
       color: var(--gold-light);
     }
 
-    .summary .btn {
+    /* =========================
+       BOUTONS
+    ========================== */
+
+    .btn {
+      display: inline-block;
+
       width: 100%;
 
+      padding: 13px 20px;
+
+      border-radius: 10px;
+
+      background: var(--gold);
+
+      border: 1px solid var(--gold);
+
+      color: #111;
+
+      font-weight: 900;
+
+      cursor: pointer;
+
       text-align: center;
+
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      background: var(--gold-light);
+
+      border-color: var(--gold-light);
+    }
+
+    .btn-secondary {
+      background: transparent;
+
+      border-color: #444;
+
+      color: white;
 
       margin-top: 10px;
     }
 
-    .empty {
-      padding: 60px 30px;
+    .btn-secondary:hover {
+      background: transparent;
 
-      border: 1px solid var(--border);
+      border-color: var(--gold);
 
-      border-radius: 18px;
+      color: var(--gold-light);
+    }
 
-      background: var(--card);
+    .btn-danger {
+      background: transparent;
 
+      border-color: #533;
+
+      color: #ff8a8a;
+
+      margin-top: 10px;
+    }
+
+    .btn-danger:hover {
+      background: #210d0d;
+
+      border-color: #a44;
+
+      color: #ffaaaa;
+    }
+
+    /* =========================
+       PANIER VIDE
+    ========================== */
+
+    .empty-cart {
       text-align: center;
+
+      padding: 65px 25px;
     }
 
     .empty-icon {
-      font-size: 55px;
+      font-size: 65px;
 
       margin-bottom: 15px;
     }
 
-    .empty h2 {
+    .empty-cart h2 {
+      font-size: 28px;
+
       margin-bottom: 10px;
     }
 
-    .empty p {
+    .empty-cart p {
       color: var(--gray);
 
       margin-bottom: 25px;
+    }
+
+    .empty-cart .btn {
+      width: auto;
+
+      min-width: 220px;
+    }
+
+    /* =========================
+       INFO
+    ========================== */
+
+    .info {
+      margin-top: 20px;
+
+      padding: 15px;
+
+      border: 1px solid #3d3012;
+
+      background: #171207;
+
+      border-radius: 10px;
+
+      color: #bbb;
+
+      font-size: 13px;
     }
 
     /* =========================
@@ -529,7 +597,7 @@
       font-size: 13px;
     }
 
-    footer a {
+    .gold {
       color: var(--gold-light);
     }
 
@@ -547,40 +615,46 @@
         grid-template-columns: 1fr;
       }
 
-      .summary {
+      .summary-box {
         position: static;
       }
 
     }
 
-    @media (max-width: 550px) {
+    @media (max-width: 600px) {
 
       .container {
         width: 90%;
       }
 
       .hero {
-        padding-top: 70px;
+        padding-top: 65px;
       }
 
-      .hero h1 {
-        font-size: 42px;
-      }
-
-      .hero p {
-        font-size: 17px;
+      .cart-box {
+        padding: 17px;
       }
 
       .cart-item {
-        grid-template-columns: 1fr;
+        grid-template-columns: 55px 1fr;
+
+        gap: 12px;
       }
 
-      .item-right {
+      .item-icon {
+        width: 55px;
+
+        height: 55px;
+
+        font-size: 24px;
+      }
+
+      .item-actions {
+        grid-column: 2;
+      }
+
+      .item-total {
         text-align: left;
-      }
-
-      .quantity {
-        justify-content: flex-start;
       }
 
     }
@@ -593,340 +667,268 @@
 <body>
 
 
-<!-- =========================
-     HEADER
-========================== -->
+  <!-- =========================
+       HEADER
+  ========================== -->
 
-<header>
+  <header>
 
-  <div class="container">
+    <div class="container">
 
-    <nav>
+      <nav>
 
-      <a
-        href="index.html"
-        class="logo"
-      >
-        ALOÏS <span>DESIGN</span>
-      </a>
-
-
-      <div class="nav-links">
-
-        <a href="index.html">
-          Accueil
+        <a
+          href="index.html"
+          class="logo"
+        >
+          ALOÏS <span>DESIGN</span>
         </a>
 
-        <a href="impression-3d.html">
-          Impression 3D
+
+        <div class="nav-links">
+
+          <a href="index.html">
+            Accueil
+          </a>
+
+          <a href="impression-3d.html">
+            Impression 3D
+          </a>
+
+          <a href="Logo3D.html">
+            Logo 3D
+          </a>
+
+          <a href="porte-clé.html">
+            Porte-clé
+          </a>
+
+          <a href="tampons.html">
+            Tampons
+          </a>
+
+          <a href="creation-logo.html">
+            Création de logo
+          </a>
+
+        </div>
+
+
+        <a
+          href="panier.html"
+          class="cart-link"
+          aria-label="Panier"
+        >
+
+          <svg
+            class="cart-icon"
+            viewBox="0 0 24 24"
+          >
+
+            <circle
+              cx="9"
+              cy="20"
+              r="1.5"
+            ></circle>
+
+            <circle
+              cx="18"
+              cy="20"
+              r="1.5"
+            ></circle>
+
+            <path
+              d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L21 8H6"
+            ></path>
+
+          </svg>
+
+          <span
+            class="cart-count"
+            id="cartCount"
+          >
+            0
+          </span>
+
         </a>
 
-        <a href="logo3D.html">
-          Logo 3D
-        </a>
+      </nav>
 
-        <a href="porte-clé.html">
-          Porte-clé
-        </a>
+    </div>
 
-        <a href="tampons.html">
-          Tampons
-        </a>
+  </header>
+
+
+  <main>
+
+
+    <!-- =========================
+         TITRE
+    ========================== -->
+
+    <section class="hero">
+
+      <div class="container">
+
+        <div class="kicker">
+          Aloïs Design
+        </div>
+
+        <h1>
+          Votre <span>panier.</span>
+        </h1>
+
+        <p>
+          Retrouvez ici toutes les créations que vous
+          avez sélectionnées avant de passer votre commande.
+        </p>
 
       </div>
 
+    </section>
 
-      <a
-        href="panier.html"
-        class="cart-link"
-        aria-label="Panier"
-      >
 
-        <svg
-          class="cart-icon"
-          viewBox="0 0 24 24"
+    <!-- =========================
+         PANIER
+    ========================== -->
+
+    <section class="cart-section">
+
+      <div class="container">
+
+
+        <!-- PANIER REMPLI -->
+
+        <div
+          id="cartContent"
+          class="cart-layout"
         >
 
-          <circle
-            cx="9"
-            cy="20"
-            r="1.5"
-          ></circle>
 
-          <circle
-            cx="18"
-            cy="20"
-            r="1.5"
-          ></circle>
+          <!-- PRODUITS -->
 
-          <path
-            d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L21 8H6"
-          ></path>
+          <div class="cart-box">
 
-        </svg>
+            <h2 class="box-title">
+              🛒 Mes produits
+            </h2>
 
-        <span
-          class="cart-count"
-          id="cartCount"
+            <div id="cartItems"></div>
+
+          </div>
+
+
+          <!-- RÉCAPITULATIF -->
+
+          <aside class="summary-box">
+
+            <h2 class="box-title">
+              Récapitulatif
+            </h2>
+
+
+            <div class="summary-line">
+
+              <span>
+                Produits
+              </span>
+
+              <span id="productsCount">
+                0
+              </span>
+
+            </div>
+
+
+            <div class="summary-line">
+
+              <span>
+                Sous-total
+              </span>
+
+              <span id="subtotal">
+                0,00 €
+              </span>
+
+            </div>
+
+
+            <div class="summary-line">
+
+              <span>
+                Livraison
+              </span>
+
+              <span>
+                À définir
+              </span>
+
+            </div>
+
+
+            <div class="summary-line total">
+
+              <span>
+                Total
+              </span>
+
+              <span
+                class="summary-total"
+                id="total"
+              >
+                0,00 €
+              </span>
+
+            </div>
+
+
+            <div class="info">
+
+              💡 Le montant de la livraison pourra être
+              confirmé selon la commande et l'adresse
+              d'expédition.
+
+            </div>
+
+
+            <button
+              class="btn"
+              style="margin-top:20px;"
+              onclick="sendOrder()"
+            >
+              📩 Passer la commande
+            </button>
+
+
+            <a
+              href="impression-3d.html"
+              class="btn btn-secondary"
+            >
+              Continuer mes achats
+            </a>
+
+
+            <button
+              class="btn btn-danger"
+              onclick="clearCart()"
+            >
+              Vider le panier
+            </button>
+
+          </aside>
+
+        </div>
+
+
+        <!-- =========================
+             PANIER VIDE
+        ========================== -->
+
+        <div
+          id="emptyCart"
+          class="cart-box empty-cart"
+          style="display:none;"
         >
-          0
-        </span>
-
-      </a>
-
-    </nav>
-
-  </div>
-
-</header>
-
-
-
-<main>
-
-
-<!-- =========================
-     HERO
-========================== -->
-
-<section class="hero">
-
-  <div class="container">
-
-    <div class="kicker">
-      ALOÏS DESIGN
-    </div>
-
-    <h1>
-      Mon <span>panier.</span>
-    </h1>
-
-    <p>
-      Retrouvez ici tous les produits que vous
-      avez sélectionnés avant de passer votre commande.
-    </p>
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================
-     CONTENU PANIER
-========================== -->
-
-<section>
-
-  <div class="container">
-
-    <div id="cartContent"></div>
-
-  </div>
-
-</section>
-
-
-</main>
-
-
-
-<!-- =========================
-     FOOTER
-========================== -->
-
-<footer>
-
-  <div class="container">
-
-    <p>
-      Aloïs Design
-    </p>
-
-    <p>
-      Impression 3D · Création de logos ·
-      Sculpture & gravure
-    </p>
-
-    <p style="margin-top: 10px;">
-
-      <a
-        href="mailto:aloisryckebuschvandaele@gmail.com"
-      >
-        aloisryckebuschvandaele@gmail.com
-      </a>
-
-    </p>
-
-    <p style="margin-top: 10px;">
-      © 2026 Aloïs Design
-    </p>
-
-  </div>
-
-</footer>
-
-
-
-<!-- =========================
-     JAVASCRIPT PANIER
-========================== -->
-
-<script>
-
-  const CART_KEY = "aloisDesignCart";
-
-
-  function getCart() {
-
-    try {
-
-      return JSON.parse(
-        localStorage.getItem(CART_KEY)
-      ) || [];
-
-    } catch (error) {
-
-      return [];
-
-    }
-
-  }
-
-
-  function saveCart(cart) {
-
-    localStorage.setItem(
-      CART_KEY,
-      JSON.stringify(cart)
-    );
-
-  }
-
-
-  function getQuantity(item) {
-
-    return Number(
-      item.quantity ??
-      item.quantite ??
-      1
-    ) || 1;
-
-  }
-
-
-  function getPrice(item) {
-
-    return Number(
-      item.price ??
-      item.prix ??
-      0
-    ) || 0;
-
-  }
-
-
-  function getName(item) {
-
-    return (
-      item.name ??
-      item.nom ??
-      item.title ??
-      "Produit"
-    );
-
-  }
-
-
-  function updateHeaderCount(cart) {
-
-    const countElement =
-      document.getElementById("cartCount");
-
-    let total = 0;
-
-    cart.forEach(function(item) {
-
-      total += getQuantity(item);
-
-    });
-
-    countElement.textContent = total;
-
-  }
-
-
-  function changeQuantity(index, change) {
-
-    const cart = getCart();
-
-    if (!cart[index]) {
-      return;
-    }
-
-    let quantity =
-      getQuantity(cart[index]);
-
-    quantity += change;
-
-    if (quantity <= 0) {
-
-      cart.splice(index, 1);
-
-    } else {
-
-      cart[index].quantity = quantity;
-
-      cart[index].quantite = quantity;
-
-    }
-
-    saveCart(cart);
-
-    renderCart();
-
-  }
-
-
-  function removeItem(index) {
-
-    const cart = getCart();
-
-    cart.splice(index, 1);
-
-    saveCart(cart);
-
-    renderCart();
-
-  }
-
-
-  function clearCart() {
-
-    localStorage.removeItem(CART_KEY);
-
-    renderCart();
-
-  }
-
-
-  function renderCart() {
-
-    const cart =
-      getCart();
-
-    const container =
-      document.getElementById("cartContent");
-
-
-    updateHeaderCount(cart);
-
-
-    if (cart.length === 0) {
-
-      container.innerHTML = `
-
-        <div class="empty">
 
           <div class="empty-icon">
             🛒
@@ -949,75 +951,251 @@
 
         </div>
 
-      `;
+      </div>
 
-      return;
+    </section>
+
+
+  </main>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer>
+
+    <div class="container">
+
+      © 2026 Aloïs Design
+
+      <br>
+
+      Impression 3D · Création de logos · Sculpture & gravure
+
+      <br><br>
+
+      <a
+        href="mailto:aloisryckebuschvandaele@gmail.com"
+        class="gold"
+      >
+        aloisryckebuschvandaele@gmail.com
+      </a>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =========================
+       JAVASCRIPT PANIER
+  ========================== -->
+
+  <script>
+
+    const CART_KEY =
+      "aloisDesignCart";
+
+
+    /* =========================
+       RÉCUPÉRER LE PANIER
+    ========================== */
+
+    function getCart() {
+
+      try {
+
+        return JSON.parse(
+          localStorage.getItem(CART_KEY)
+        ) || [];
+
+      } catch (error) {
+
+        return [];
+
+      }
 
     }
 
 
-    let total = 0;
+    /* =========================
+       SAUVEGARDER
+    ========================== */
 
-    let totalQuantity = 0;
+    function saveCart(cart) {
 
+      localStorage.setItem(
+        CART_KEY,
+        JSON.stringify(cart)
+      );
 
-    let productsHTML = "";
-
-
-    cart.forEach(function(item, index) {
-
-      const name =
-        getName(item);
-
-      const price =
-        getPrice(item);
-
-      const quantity =
-        getQuantity(item);
-
-      const itemTotal =
-        price * quantity;
+    }
 
 
-      total += itemTotal;
+    /* =========================
+       FORMAT PRIX
+    ========================== */
 
-      totalQuantity += quantity;
+    function formatPrice(price) {
+
+      return Number(price).toLocaleString(
+        "fr-FR",
+        {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        }
+      ) + " €";
+
+    }
 
 
-      productsHTML += `
+    /* =========================
+       ICÔNE PRODUIT
+    ========================== */
 
-        <article class="cart-item">
+    function getIcon(name) {
+
+      const text =
+        name.toLowerCase();
+
+      if (
+        text.includes("logo")
+      ) {
+        return "🎨";
+      }
+
+      if (
+        text.includes("porte")
+      ) {
+        return "🔑";
+      }
+
+      if (
+        text.includes("tampon")
+      ) {
+        return "🔖";
+      }
+
+      if (
+        text.includes("impression")
+      ) {
+        return "🖨️";
+      }
+
+      return "📦";
+
+    }
+
+
+    /* =========================
+       AFFICHER LE PANIER
+    ========================== */
+
+    function renderCart() {
+
+      const cart =
+        getCart();
+
+
+      const cartContent =
+        document.getElementById(
+          "cartContent"
+        );
+
+      const emptyCart =
+        document.getElementById(
+          "emptyCart"
+        );
+
+      const cartItems =
+        document.getElementById(
+          "cartItems"
+        );
+
+
+      let totalQuantity = 0;
+
+      let totalPrice = 0;
+
+
+      cart.forEach(item => {
+
+        totalQuantity +=
+          Number(item.quantity) || 0;
+
+        totalPrice +=
+          (Number(item.price) || 0) *
+          (Number(item.quantity) || 0);
+
+      });
+
+
+      /* PANIER VIDE */
+
+      if (cart.length === 0) {
+
+        cartContent.style.display =
+          "none";
+
+        emptyCart.style.display =
+          "block";
+
+        updateHeaderCount();
+
+        return;
+
+      }
+
+
+      /* PANIER REMPLI */
+
+      cartContent.style.display =
+        "grid";
+
+      emptyCart.style.display =
+        "none";
+
+
+      cartItems.innerHTML = "";
+
+
+      cart.forEach((item, index) => {
+
+        const quantity =
+          Number(item.quantity) || 1;
+
+        const price =
+          Number(item.price) || 0;
+
+        const itemTotal =
+          price * quantity;
+
+
+        const element =
+          document.createElement(
+            "div"
+          );
+
+
+        element.className =
+          "cart-item";
+
+
+        element.innerHTML = `
+
+          <div class="item-icon">
+            ${getIcon(item.name)}
+          </div>
+
 
           <div>
 
             <div class="item-name">
-              ${escapeHTML(name)}
+              ${escapeHtml(item.name)}
             </div>
 
-            <div class="item-info">
-
-              Prix unitaire :
-              ${formatPrice(price)}
-
-            </div>
-
-            ${
-              item.description
-                ? `
-                  <div class="item-info" style="margin-top:6px;">
-                    ${escapeHTML(item.description)}
-                  </div>
-                `
-                : ""
-            }
-
-          </div>
-
-
-          <div class="item-right">
-
-            <div class="item-total">
-              ${formatPrice(itemTotal)}
+            <div class="item-price">
+              ${formatPrice(price)} / unité
             </div>
 
 
@@ -1043,9 +1221,17 @@
 
             </div>
 
+          </div>
+
+
+          <div class="item-actions">
+
+            <div class="item-total">
+              ${formatPrice(itemTotal)}
+            </div>
 
             <button
-              class="btn btn-danger"
+              class="remove"
               onclick="removeItem(${index})"
             >
               Supprimer
@@ -1053,157 +1239,303 @@
 
           </div>
 
-        </article>
-
-      `;
-
-    });
+        `;
 
 
-    container.innerHTML = `
+        cartItems.appendChild(
+          element
+        );
 
-      <div class="cart-layout">
-
-
-        <div class="cart-list">
-
-          ${productsHTML}
+      });
 
 
-          <div style="margin-top: 5px;">
-
-            <button
-              class="btn btn-danger"
-              onclick="clearCart()"
-            >
-              Vider le panier
-            </button>
-
-          </div>
-
-        </div>
+      document.getElementById(
+        "productsCount"
+      ).textContent =
+        totalQuantity;
 
 
-        <aside class="summary">
-
-          <h2>
-            Résumé
-          </h2>
-
-
-          <div class="summary-line">
-
-            <span>
-              Produits
-            </span>
-
-            <span>
-              ${totalQuantity}
-            </span>
-
-          </div>
+      document.getElementById(
+        "subtotal"
+      ).textContent =
+        formatPrice(totalPrice);
 
 
-          <div class="summary-line">
-
-            <span>
-              Sous-total
-            </span>
-
-            <span>
-              ${formatPrice(total)}
-            </span>
-
-          </div>
+      document.getElementById(
+        "total"
+      ).textContent =
+        formatPrice(totalPrice);
 
 
-          <div class="summary-line">
+      updateHeaderCount();
 
-            <span>
-              Livraison
-            </span>
-
-            <span>
-              À définir
-            </span>
-
-          </div>
+    }
 
 
-          <div class="summary-total">
+    /* =========================
+       MODIFIER QUANTITÉ
+    ========================== */
 
-            <span>
-              Total
-            </span>
+    function changeQuantity(
+      index,
+      amount
+    ) {
 
-            <span>
-              ${formatPrice(total)}
-            </span>
-
-          </div>
-
-
-          <a
-            href="commande.html"
-            class="btn"
-          >
-            Passer la commande
-          </a>
+      const cart =
+        getCart();
 
 
-          <a
-            href="impression-3d.html"
-            class="btn btn-secondary"
-            style="margin-top: 12px;"
-          >
-            Continuer mes achats
-          </a>
-
-        </aside>
-
-
-      </div>
-
-    `;
-
-  }
-
-
-  function formatPrice(price) {
-
-    return Number(price).toLocaleString(
-      "fr-FR",
-      {
-        style: "currency",
-        currency: "EUR"
+      if (!cart[index]) {
+        return;
       }
+
+
+      cart[index].quantity =
+        Number(cart[index].quantity || 1)
+        + amount;
+
+
+      if (
+        cart[index].quantity <= 0
+      ) {
+
+        cart.splice(index, 1);
+
+      }
+
+
+      saveCart(cart);
+
+      renderCart();
+
+    }
+
+
+    /* =========================
+       SUPPRIMER
+    ========================== */
+
+    function removeItem(index) {
+
+      const cart =
+        getCart();
+
+
+      if (!cart[index]) {
+        return;
+      }
+
+
+      cart.splice(
+        index,
+        1
+      );
+
+
+      saveCart(cart);
+
+      renderCart();
+
+    }
+
+
+    /* =========================
+       VIDER LE PANIER
+    ========================== */
+
+    function clearCart() {
+
+      const cart =
+        getCart();
+
+
+      if (
+        cart.length === 0
+      ) {
+        return;
+      }
+
+
+      const confirmation =
+        confirm(
+          "Voulez-vous vraiment vider votre panier ?"
+        );
+
+
+      if (!confirmation) {
+        return;
+      }
+
+
+      localStorage.removeItem(
+        CART_KEY
+      );
+
+
+      renderCart();
+
+    }
+
+
+    /* =========================
+       COMPTEUR HEADER
+    ========================== */
+
+    function updateHeaderCount() {
+
+      const cart =
+        getCart();
+
+
+      let count = 0;
+
+
+      cart.forEach(item => {
+
+        count +=
+          Number(item.quantity) || 0;
+
+      });
+
+
+      document.getElementById(
+        "cartCount"
+      ).textContent =
+        count;
+
+    }
+
+
+    /* =========================
+       SÉCURISER LE TEXTE
+    ========================== */
+
+    function escapeHtml(text) {
+
+      const div =
+        document.createElement(
+          "div"
+        );
+
+      div.textContent =
+        text;
+
+      return div.innerHTML;
+
+    }
+
+
+    /* =========================
+       PASSER COMMANDE
+    ========================== */
+
+    function sendOrder() {
+
+      const cart =
+        getCart();
+
+
+      if (
+        cart.length === 0
+      ) {
+
+        alert(
+          "Votre panier est vide."
+        );
+
+        return;
+
+      }
+
+
+      let message =
+        "Bonjour Aloïs Design,%0D%0A%0D%0A";
+
+      message +=
+        "Je souhaite passer la commande suivante :%0D%0A%0D%0A";
+
+
+      let total = 0;
+
+
+      cart.forEach(item => {
+
+        const quantity =
+          Number(item.quantity) || 1;
+
+        const price =
+          Number(item.price) || 0;
+
+        const itemTotal =
+          price * quantity;
+
+        total +=
+          itemTotal;
+
+
+        message +=
+          "- " +
+          encodeURIComponent(item.name) +
+          " x" +
+          quantity +
+          " : " +
+          encodeURIComponent(
+            formatPrice(itemTotal)
+          ) +
+          "%0D%0A";
+
+      });
+
+
+      message +=
+        "%0D%0ATotal produits : " +
+        encodeURIComponent(
+          formatPrice(total)
+        );
+
+      message +=
+        "%0D%0A%0D%0A";
+
+      message +=
+        "Merci de me confirmer la disponibilité et les frais de livraison.%0D%0A%0D%0A";
+
+      message +=
+        "Nom :%0D%0A";
+
+      message +=
+        "Adresse :%0D%0A";
+
+      message +=
+        "Téléphone :%0D%0A";
+
+
+      window.location.href =
+        "mailto:aloisryckebuschvandaele@gmail.com" +
+        "?subject=" +
+        encodeURIComponent(
+          "Commande Aloïs Design"
+        ) +
+        "&body=" +
+        message;
+
+    }
+
+
+    /* =========================
+       INITIALISATION
+    ========================== */
+
+    renderCart();
+
+
+    window.addEventListener(
+      "storage",
+      renderCart
     );
 
-  }
-
-
-  function escapeHTML(value) {
-
-    return String(value)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
-
-  }
-
-
-  renderCart();
-
-
-  window.addEventListener(
-    "storage",
-    renderCart
-  );
-
-</script>
+  </script>
 
 
 </body>
+
 </html>
