@@ -9,7 +9,7 @@
 
   <meta
     name="description"
-    content="Logos 3D personnalisés par Aloïs Design."
+    content="Transformez votre logo en création 3D avec Aloïs Design."
   >
 
   <style>
@@ -23,7 +23,6 @@
       --white: #ffffff;
       --gray: #aaaaaa;
       --border: #292929;
-      --danger: #ff7777;
     }
 
     * {
@@ -70,7 +69,6 @@
       z-index: 100;
 
       background: rgba(9, 9, 9, 0.96);
-
       backdrop-filter: blur(12px);
 
       border-bottom: 1px solid var(--border);
@@ -131,7 +129,6 @@
       height: 42px;
 
       border: 1px solid #333;
-
       border-radius: 10px;
 
       background: #111;
@@ -141,7 +138,6 @@
 
     .cart-link:hover {
       border-color: var(--gold);
-
       transform: translateY(-2px);
     }
 
@@ -209,7 +205,6 @@
 
     .btn:hover {
       background: var(--gold-light);
-
       border-color: var(--gold-light);
     }
 
@@ -259,7 +254,7 @@
     }
 
     .hero h1 {
-      font-size: clamp(42px, 7vw, 72px);
+      font-size: clamp(42px, 7vw, 75px);
 
       line-height: 1.02;
 
@@ -404,10 +399,50 @@
     }
 
     /* =========================
-       PERSONNALISATION
+       COMMENT ÇA MARCHE
     ========================== */
 
-    .custom-section {
+    .steps {
+      display: grid;
+
+      grid-template-columns: repeat(4, 1fr);
+
+      gap: 15px;
+    }
+
+    .step {
+      padding: 25px;
+
+      border: 1px solid var(--border);
+
+      background: var(--bg-light);
+
+      border-radius: 16px;
+    }
+
+    .step-number {
+      color: var(--gold);
+
+      font-size: 30px;
+
+      font-weight: 900;
+    }
+
+    .step h3 {
+      margin: 5px 0 8px;
+    }
+
+    .step p {
+      color: var(--gray);
+
+      font-size: 14px;
+    }
+
+    /* =========================
+       PAS DE LOGO
+    ========================== */
+
+    .no-logo {
       background:
         linear-gradient(
           145deg,
@@ -420,7 +455,7 @@
       border-bottom: 1px solid #392c10;
     }
 
-    .custom-grid {
+    .no-logo-box {
       display: grid;
 
       grid-template-columns: 1fr 1fr;
@@ -428,8 +463,8 @@
       gap: 25px;
     }
 
-    .custom-info,
-    .custom-form {
+    .info-box,
+    .quote-box {
       padding: 30px;
 
       border: 1px solid var(--border);
@@ -439,7 +474,7 @@
       background: #101010;
     }
 
-    .custom-info h3 {
+    .info-box h3 {
       font-size: 28px;
 
       color: var(--gold-light);
@@ -447,23 +482,23 @@
       margin-bottom: 12px;
     }
 
-    .custom-info p {
+    .info-box p {
       color: var(--gray);
 
       margin-bottom: 20px;
     }
 
-    .custom-info ul {
+    .info-box ul {
       list-style: none;
     }
 
-    .custom-info li {
+    .info-box li {
       margin: 10px 0;
 
       color: #ddd;
     }
 
-    .custom-info li::before {
+    .info-box li::before {
       content: "✓";
 
       color: var(--gold);
@@ -516,7 +551,7 @@
     }
 
     /* =========================
-       PANIER RAPIDE
+       PANIER
     ========================== */
 
     .cart-box {
@@ -574,7 +609,8 @@
       }
 
       .products,
-      .custom-grid {
+      .steps,
+      .no-logo-box {
         grid-template-columns: 1fr;
       }
 
@@ -604,7 +640,6 @@
 
       .hero-buttons .btn {
         width: 100%;
-
         text-align: center;
       }
 
@@ -631,7 +666,6 @@
   <div class="container">
 
     <nav>
-
 
       <a
         href="index.html"
@@ -665,8 +699,6 @@
 
       </div>
 
-
-      <!-- PANIER -->
 
       <a
         href="panier.html"
@@ -707,7 +739,6 @@
 
       </a>
 
-
     </nav>
 
   </div>
@@ -727,7 +758,6 @@
 
   <div class="container">
 
-
     <div class="kicker">
       IMPRESSION 3D
     </div>
@@ -743,9 +773,9 @@
 
     <p>
 
-      Transformez votre logo ou votre identité visuelle
-      en une véritable création en relief grâce à
-      l'impression 3D.
+      Transformez votre logo en une création
+      3D personnalisée, idéale pour votre entreprise,
+      votre bureau, votre boutique ou votre décoration.
 
     </p>
 
@@ -760,11 +790,13 @@
       </a>
 
 
+      <!-- BON NOM DE FICHIER -->
+
       <a
-        href="creation-logo.html"
+        href="création%20de%20logo.html"
         class="btn btn-secondary"
       >
-        Je n'ai pas encore de logo
+        🎨 Je n'ai pas de logo
       </a>
 
 
@@ -776,7 +808,6 @@
       </a>
 
     </div>
-
 
   </div>
 
@@ -796,11 +827,11 @@
     <div class="section-title center">
 
       <h2>
-        Choisissez votre logo 3D
+        Choisissez votre modèle
       </h2>
 
       <p>
-        Plusieurs tailles selon votre projet.
+        Plusieurs formats pour différents projets.
       </p>
 
     </div>
@@ -817,46 +848,38 @@
           🔹
         </div>
 
-
         <h3>
           Logo 3D Petit
         </h3>
 
-
         <p>
-          Idéal pour une petite décoration,
-          un bureau ou un petit projet.
+          Un petit modèle pour bureau,
+          décoration ou présentation.
         </p>
-
 
         <div class="price">
           25 €
         </div>
 
-
         <ul>
 
           <li>
-            Petite taille
-          </li>
-
-          <li>
-            Impression 3D
+            Format petit
           </li>
 
           <li>
             Logo personnalisé
           </li>
 
-        </ul>
+          <li>
+            Impression 3D
+          </li>
 
+        </ul>
 
         <button
           class="btn"
-          onclick="addToCart(
-            'Logo 3D Petit',
-            25
-          )"
+          onclick="addToCart('Logo 3D Petit', 25)"
         >
           Ajouter au panier
         </button>
@@ -873,46 +896,38 @@
           🔶
         </div>
 
-
         <h3>
           Logo 3D Moyen
         </h3>
 
-
         <p>
-          Un format polyvalent pour mettre
-          votre logo en valeur.
+          Un format polyvalent pour
+          mettre votre logo en valeur.
         </p>
-
 
         <div class="price">
           45 €
         </div>
 
-
         <ul>
 
           <li>
-            Taille moyenne
-          </li>
-
-          <li>
-            Impression 3D
+            Format moyen
           </li>
 
           <li>
             Logo personnalisé
           </li>
 
-        </ul>
+          <li>
+            Impression 3D
+          </li>
 
+        </ul>
 
         <button
           class="btn"
-          onclick="addToCart(
-            'Logo 3D Moyen',
-            45
-          )"
+          onclick="addToCart('Logo 3D Moyen', 45)"
         >
           Ajouter au panier
         </button>
@@ -929,46 +944,38 @@
           🟨
         </div>
 
-
         <h3>
           Logo 3D Grand
         </h3>
 
-
         <p>
-          Pour une décoration plus importante
-          ou une présentation professionnelle.
+          Un grand modèle pour décoration,
+          entreprise ou présentation.
         </p>
-
 
         <div class="price">
           70 €
         </div>
 
-
         <ul>
 
           <li>
-            Grande taille
-          </li>
-
-          <li>
-            Impression 3D
+            Grand format
           </li>
 
           <li>
             Logo personnalisé
           </li>
 
-        </ul>
+          <li>
+            Impression 3D
+          </li>
 
+        </ul>
 
         <button
           class="btn"
-          onclick="addToCart(
-            'Logo 3D Grand',
-            70
-          )"
+          onclick="addToCart('Logo 3D Grand', 70)"
         >
           Ajouter au panier
         </button>
@@ -985,42 +992,40 @@
           ⭐
         </div>
 
-
         <h3>
           Logo 3D Premium
         </h3>
 
-
         <p>
-          Un projet plus complexe ou de grande taille.
-          Contactez-moi pour obtenir un devis.
+          Pour les projets complexes,
+          très grands ou entièrement sur mesure.
         </p>
-
 
         <div class="price">
           À partir de 100 €
         </div>
 
-
         <ul>
 
           <li>
-            Grand format
+            Projet sur mesure
           </li>
 
           <li>
-            Projet personnalisé
+            Grande taille possible
           </li>
 
           <li>
-            Devis sur mesure
+            Devis personnalisé
           </li>
 
         </ul>
 
 
+        <!-- BON NOM DE FICHIER -->
+
         <a
-          href="creation-logo.html"
+          href="création%20de%20logo.html"
           class="btn"
         >
           Demander un devis
@@ -1038,13 +1043,10 @@
 
 
 <!-- =========================
-     PERSONNALISATION
+     COMMENT ÇA MARCHE
 ========================== -->
 
-<section
-  class="custom-section"
-  id="personnalisation"
->
+<section>
 
   <div class="container">
 
@@ -1052,220 +1054,87 @@
     <div class="section-title center">
 
       <h2>
-        🎨 Personnalisez votre logo 3D
+        Comment ça marche ?
       </h2>
 
       <p>
-        Vous avez déjà votre logo ? Envoyez-moi les détails de votre projet.
+        De votre logo à votre création 3D.
       </p>
 
     </div>
 
 
-    <div class="custom-grid">
+    <div class="steps">
 
 
-      <!-- INFOS -->
+      <div class="step">
 
-      <div class="custom-info">
+        <div class="step-number">
+          01
+        </div>
 
         <h3>
-          Votre projet
+          Votre logo
         </h3>
 
-
         <p>
-
-          Indiquez les informations nécessaires
-          pour réaliser votre logo en 3D.
-
-        </p>
-
-
-        <ul>
-
-          <li>
-            Nom de votre entreprise
-          </li>
-
-          <li>
-            Taille souhaitée
-          </li>
-
-          <li>
-            Couleur souhaitée
-          </li>
-
-          <li>
-            Quantité
-          </li>
-
-          <li>
-            Description du projet
-          </li>
-
-        </ul>
-
-
-        <p style="margin-top:25px;">
-
-          📩
-
-          <a
-            href="mailto:aloisryckebuschvandaele@gmail.com"
-            style="
-              color:var(--gold-light);
-              font-weight:bold;
-            "
-          >
-            aloisryckebuschvandaele@gmail.com
-          </a>
-
+          Vous fournissez votre logo
+          ou votre fichier.
         </p>
 
       </div>
 
 
+      <div class="step">
 
-      <!-- FORMULAIRE -->
+        <div class="step-number">
+          02
+        </div>
 
-      <div class="custom-form">
+        <h3>
+          Préparation
+        </h3>
 
-        <form
-          action="mailto:aloisryckebuschvandaele@gmail.com"
-          method="post"
-          enctype="text/plain"
-        >
+        <p>
+          Le fichier est adapté pour
+          l'impression 3D.
+        </p>
 
-
-          <label for="nom">
-            Nom / prénom
-          </label>
-
-
-          <input
-            type="text"
-            id="nom"
-            name="Nom / prénom"
-            required
-            placeholder="Votre nom et prénom"
-          >
+      </div>
 
 
-          <label for="email">
-            Email
-          </label>
+      <div class="step">
+
+        <div class="step-number">
+          03
+        </div>
+
+        <h3>
+          Impression
+        </h3>
+
+        <p>
+          Votre logo est fabriqué
+          en impression 3D.
+        </p>
+
+      </div>
 
 
-          <input
-            type="email"
-            id="email"
-            name="Email"
-            required
-            placeholder="Votre adresse e-mail"
-          >
+      <div class="step">
 
+        <div class="step-number">
+          04
+        </div>
 
-          <label for="entreprise">
-            Nom de l'entreprise
-          </label>
+        <h3>
+          Livraison
+        </h3>
 
-
-          <input
-            type="text"
-            id="entreprise"
-            name="Entreprise"
-            placeholder="Nom de votre entreprise"
-          >
-
-
-          <label for="taille">
-            Taille souhaitée
-          </label>
-
-
-          <select
-            id="taille"
-            name="Taille"
-          >
-
-            <option value="">
-              Choisir
-            </option>
-
-            <option value="Petit">
-              Petit
-            </option>
-
-            <option value="Moyen">
-              Moyen
-            </option>
-
-            <option value="Grand">
-              Grand
-            </option>
-
-            <option value="Premium">
-              Premium
-            </option>
-
-          </select>
-
-
-          <label for="couleur">
-            Couleur souhaitée
-          </label>
-
-
-          <input
-            type="text"
-            id="couleur"
-            name="Couleur"
-            placeholder="Ex. Noir, blanc, rouge..."
-          >
-
-
-          <label for="quantite">
-            Quantité
-          </label>
-
-
-          <input
-            type="number"
-            id="quantite"
-            name="Quantité"
-            min="1"
-            value="1"
-          >
-
-
-          <label for="description">
-            Description
-          </label>
-
-
-          <textarea
-            id="description"
-            name="Description"
-            required
-            placeholder="Décrivez votre logo et votre projet..."
-          ></textarea>
-
-
-          <button
-            type="submit"
-            class="btn"
-            style="
-              width:100%;
-              margin-top:20px;
-              border:none;
-            "
-          >
-            Envoyer ma demande
-          </button>
-
-
-        </form>
+        <p>
+          Votre création est préparée
+          puis expédiée.
+        </p>
 
       </div>
 
@@ -1282,36 +1151,96 @@
      PAS DE LOGO
 ========================== -->
 
-<section>
+<section class="no-logo">
 
   <div class="container">
 
 
-    <div class="cart-box">
-
-      <h2>
-        Vous n'avez pas encore de logo ?
-      </h2>
+    <div class="no-logo-box">
 
 
-      <p>
+      <div class="info-box">
 
-        Pas de problème. Je peux vous accompagner
-        dans la création de votre logo avant de le transformer
-        en modèle 3D.
-
-      </p>
+        <h3>
+          Vous n'avez pas encore de logo ?
+        </h3>
 
 
-      <a
-        href="creation-logo.html"
-        class="btn"
-      >
-        🎨 Créer mon logo
-      </a>
+        <p>
+
+          Aucun problème. Vous pouvez d'abord
+          demander la création de votre logo.
+          Une fois votre logo créé, il pourra
+          ensuite être adapté pour la 3D.
+
+        </p>
+
+
+        <ul>
+
+          <li>
+            Création d'un logo
+          </li>
+
+          <li>
+            Modification d'un logo existant
+          </li>
+
+          <li>
+            Préparation pour impression 3D
+          </li>
+
+          <li>
+            Projet personnalisé
+          </li>
+
+        </ul>
+
+
+        <br>
+
+
+        <!-- BON NOM DE FICHIER -->
+
+        <a
+          href="création%20de%20logo.html"
+          class="btn"
+        >
+          🎨 Créer mon logo
+        </a>
+
+      </div>
+
+
+
+      <div class="quote-box">
+
+        <h3>
+          Votre projet est particulier ?
+        </h3>
+
+
+        <p style="color:var(--gray); margin:15px 0 20px;">
+
+          Si vous avez besoin d'une taille,
+          d'une forme ou d'une finition particulière,
+          envoyez votre demande pour obtenir
+          un devis.
+
+        </p>
+
+
+        <a
+          href="création%20de%20logo.html"
+          class="btn btn-secondary"
+        >
+          Demander un devis
+        </a>
+
+      </div>
+
 
     </div>
-
 
   </div>
 
@@ -1371,12 +1300,10 @@
       Aloïs Design
     </p>
 
-
     <p>
       Impression 3D · Création de logos ·
       Sculpture & gravure
     </p>
-
 
     <p style="margin-top:10px;">
 
@@ -1387,7 +1314,6 @@
       </a>
 
     </p>
-
 
     <p style="margin-top:10px;">
       © 2026 Aloïs Design
@@ -1400,13 +1326,12 @@
 
 
 <!-- =========================
-     PANIER JAVASCRIPT
+     JAVASCRIPT PANIER
 ========================== -->
 
 <script>
 
-  const CART_KEY =
-    "aloisDesignCart";
+  const CART_KEY = "aloisDesignCart";
 
 
   function getCart() {
@@ -1438,16 +1363,12 @@
 
   function addToCart(name, price) {
 
-    const cart =
-      getCart();
+    const cart = getCart();
 
 
-    const existing =
-      cart.find(function(item) {
-
-        return item.name === name;
-
-      });
+    const existing = cart.find(
+      item => item.name === name
+    );
 
 
     if (existing) {
@@ -1472,13 +1393,11 @@
 
     saveCart(cart);
 
-
     updateCart();
 
 
     alert(
-      name +
-      " a été ajouté au panier."
+      name + " a été ajouté au panier."
     );
 
   }
@@ -1486,9 +1405,7 @@
 
   function updateCart() {
 
-    const cart =
-      getCart();
-
+    const cart = getCart();
 
     let count = 0;
 
