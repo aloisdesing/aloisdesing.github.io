@@ -1,14 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Panier | Aloïs Design</title>
 
@@ -18,7 +12,6 @@
   >
 
   <style>
-
     :root {
       --bg: #090909;
       --bg-light: #121212;
@@ -53,7 +46,9 @@
       text-decoration: none;
     }
 
-    button {
+    button,
+    input,
+    textarea {
       font-family: inherit;
     }
 
@@ -82,9 +77,7 @@
       min-height: 72px;
 
       display: flex;
-
       align-items: center;
-
       justify-content: space-between;
 
       gap: 15px;
@@ -92,9 +85,7 @@
 
     .logo {
       font-size: 20px;
-
       font-weight: 900;
-
       letter-spacing: 2px;
 
       color: var(--gold);
@@ -108,7 +99,6 @@
 
     .nav-links {
       display: flex;
-
       align-items: center;
 
       gap: 18px;
@@ -130,13 +120,10 @@
       position: relative;
 
       display: flex;
-
       align-items: center;
-
       justify-content: center;
 
       width: 44px;
-
       height: 44px;
 
       border: 1px solid var(--gold);
@@ -148,7 +135,6 @@
 
     .cart-icon {
       width: 25px;
-
       height: 25px;
 
       fill: none;
@@ -158,7 +144,6 @@
       stroke-width: 2;
 
       stroke-linecap: round;
-
       stroke-linejoin: round;
     }
 
@@ -166,11 +151,9 @@
       position: absolute;
 
       top: -7px;
-
       right: -7px;
 
       min-width: 20px;
-
       height: 20px;
 
       padding: 2px 5px;
@@ -193,7 +176,7 @@
     ========================== */
 
     .hero {
-      padding: 85px 0 55px;
+      padding: 90px 0 60px;
 
       background:
         radial-gradient(
@@ -218,11 +201,11 @@
     }
 
     .hero h1 {
-      font-size: clamp(40px, 7vw, 70px);
+      font-size: clamp(42px, 7vw, 70px);
 
       line-height: 1.05;
 
-      margin-bottom: 15px;
+      margin-bottom: 18px;
     }
 
     .hero h1 span {
@@ -233,8 +216,6 @@
       color: var(--gray);
 
       font-size: 18px;
-
-      max-width: 700px;
     }
 
     /* =========================
@@ -242,21 +223,42 @@
     ========================== */
 
     .cart-section {
-      padding: 40px 0 90px;
+      padding: 50px 0 90px;
     }
 
     .cart-layout {
       display: grid;
 
-      grid-template-columns: 1fr 350px;
+      grid-template-columns: 1.5fr 0.8fr;
 
       gap: 25px;
 
       align-items: start;
     }
 
-    .cart-box,
-    .summary-box {
+    /* =========================
+       PRODUITS
+    ========================== */
+
+    .cart-products {
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 15px;
+    }
+
+    .cart-item {
+      display: grid;
+
+      grid-template-columns: 90px 1fr auto;
+
+      gap: 20px;
+
+      align-items: center;
+
+      padding: 22px;
+
       border: 1px solid var(--border);
 
       border-radius: 18px;
@@ -269,70 +271,28 @@
         );
     }
 
-    .cart-box {
-      padding: 25px;
-    }
-
-    .summary-box {
-      padding: 25px;
-
-      position: sticky;
-
-      top: 95px;
-    }
-
-    .box-title {
-      font-size: 25px;
-
-      margin-bottom: 20px;
-    }
-
-    /* =========================
-       PRODUITS
-    ========================== */
-
-    .cart-item {
-      display: grid;
-
-      grid-template-columns: 70px 1fr auto;
-
-      gap: 18px;
-
-      align-items: center;
-
-      padding: 20px 0;
-
-      border-bottom: 1px solid var(--border);
-    }
-
-    .cart-item:last-child {
-      border-bottom: none;
-    }
-
-    .item-icon {
-      width: 70px;
-
-      height: 70px;
+    .product-icon {
+      width: 90px;
+      height: 90px;
 
       display: flex;
 
       align-items: center;
-
       justify-content: center;
 
-      border-radius: 14px;
+      border-radius: 15px;
 
-      background: #0b0b0b;
+      background: #0d0d0d;
 
       border: 1px solid #333;
 
-      font-size: 30px;
+      font-size: 38px;
     }
 
     .item-name {
-      font-size: 18px;
+      font-size: 20px;
 
-      font-weight: 800;
+      font-weight: 900;
 
       margin-bottom: 5px;
     }
@@ -340,107 +300,141 @@
     .item-price {
       color: var(--gold-light);
 
-      font-size: 14px;
-    }
-
-    .item-total {
-      color: var(--gold-light);
-
-      font-size: 18px;
-
       font-weight: 900;
 
       margin-bottom: 8px;
-
-      text-align: right;
     }
 
-    /* =========================
-       QUANTITÉ
-    ========================== */
+    .customization {
+      color: #999;
 
-    .quantity {
+      font-size: 13px;
+
+      margin-top: 8px;
+    }
+
+    .customization strong {
+      color: #ddd;
+    }
+
+    .item-actions {
       display: flex;
 
       align-items: center;
 
-      gap: 7px;
+      gap: 8px;
 
-      margin-top: 10px;
+      margin-top: 12px;
     }
 
-    .quantity button {
-      width: 30px;
-
-      height: 30px;
+    .quantity-button {
+      width: 32px;
+      height: 32px;
 
       border-radius: 7px;
 
       border: 1px solid #444;
 
-      background: #0b0b0b;
+      background: #0a0a0a;
 
       color: white;
 
       cursor: pointer;
 
-      font-size: 17px;
+      font-size: 18px;
     }
 
-    .quantity button:hover {
+    .quantity-button:hover {
       border-color: var(--gold);
 
       color: var(--gold-light);
     }
 
-    .quantity span {
-      min-width: 30px;
+    .quantity-number {
+      min-width: 35px;
 
       text-align: center;
 
       font-weight: 800;
     }
 
-    /* =========================
-       SUPPRIMER
-    ========================== */
+    .item-total {
+      text-align: right;
 
-    .remove {
-      background: transparent;
+      font-size: 20px;
+
+      font-weight: 900;
+
+      color: var(--gold-light);
+
+      white-space: nowrap;
+    }
+
+    .remove-button {
+      display: block;
+
+      margin-top: 10px;
 
       border: none;
 
-      color: #999;
+      background: transparent;
+
+      color: #888;
 
       cursor: pointer;
 
-      font-size: 13px;
-
-      padding: 0;
+      font-size: 12px;
     }
 
-    .remove:hover {
+    .remove-button:hover {
       color: #ff7777;
     }
 
     /* =========================
-       TOTAL
+       RÉSUMÉ
     ========================== */
+
+    .summary {
+      padding: 28px;
+
+      border: 1px solid var(--border);
+
+      border-radius: 18px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #181818,
+          #101010
+        );
+
+      position: sticky;
+
+      top: 95px;
+    }
+
+    .summary h2 {
+      font-size: 25px;
+
+      margin-bottom: 25px;
+    }
 
     .summary-line {
       display: flex;
 
+      align-items: center;
+
       justify-content: space-between;
 
-      gap: 15px;
+      gap: 20px;
 
-      padding: 12px 0;
+      padding: 10px 0;
 
       color: #ccc;
     }
 
     .summary-line.total {
-      margin-top: 10px;
+      margin-top: 15px;
 
       padding-top: 20px;
 
@@ -453,7 +447,7 @@
       font-weight: 900;
     }
 
-    .summary-total {
+    .total-price {
       color: var(--gold-light);
     }
 
@@ -462,11 +456,13 @@
     ========================== */
 
     .btn {
-      display: inline-block;
+      display: block;
 
       width: 100%;
 
-      padding: 13px 20px;
+      padding: 14px 20px;
+
+      margin-top: 18px;
 
       border-radius: 10px;
 
@@ -478,9 +474,9 @@
 
       font-weight: 900;
 
-      cursor: pointer;
-
       text-align: center;
+
+      cursor: pointer;
 
       transition: 0.2s;
     }
@@ -497,8 +493,6 @@
       border-color: #444;
 
       color: white;
-
-      margin-top: 10px;
     }
 
     .btn-secondary:hover {
@@ -512,19 +506,105 @@
     .btn-danger {
       background: transparent;
 
-      border-color: #533;
+      border-color: #4b2424;
 
-      color: #ff8a8a;
-
-      margin-top: 10px;
+      color: #ff7777;
     }
 
     .btn-danger:hover {
-      background: #210d0d;
+      background: #251010;
 
-      border-color: #a44;
+      border-color: #ff5555;
 
-      color: #ffaaaa;
+      color: #ff7777;
+    }
+
+    /* =========================
+       FORMULAIRE COMMANDE
+    ========================== */
+
+    .order-form {
+      margin-top: 25px;
+
+      padding: 28px;
+
+      border: 1px solid var(--border);
+
+      border-radius: 18px;
+
+      background: #101010;
+    }
+
+    .order-form h2 {
+      font-size: 26px;
+
+      margin-bottom: 8px;
+    }
+
+    .order-form > p {
+      color: var(--gray);
+
+      font-size: 14px;
+
+      margin-bottom: 20px;
+    }
+
+    .form-grid {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 15px;
+    }
+
+    .form-group {
+      margin-bottom: 5px;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-group label {
+      display: block;
+
+      margin-bottom: 7px;
+
+      color: #ddd;
+
+      font-size: 14px;
+
+      font-weight: 700;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+
+      padding: 12px;
+
+      border-radius: 9px;
+
+      border: 1px solid #333;
+
+      background: #080808;
+
+      color: white;
+
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold);
+
+      outline: 1px solid var(--gold);
+    }
+
+    .form-group textarea {
+      min-height: 100px;
+
+      resize: vertical;
     }
 
     /* =========================
@@ -532,13 +612,19 @@
     ========================== */
 
     .empty-cart {
+      padding: 70px 25px;
+
       text-align: center;
 
-      padding: 65px 25px;
+      border: 1px solid var(--border);
+
+      border-radius: 18px;
+
+      background: var(--card);
     }
 
     .empty-icon {
-      font-size: 65px;
+      font-size: 60px;
 
       margin-bottom: 15px;
     }
@@ -546,7 +632,7 @@
     .empty-cart h2 {
       font-size: 28px;
 
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .empty-cart p {
@@ -556,29 +642,15 @@
     }
 
     .empty-cart .btn {
+      display: inline-block;
+
       width: auto;
 
-      min-width: 220px;
-    }
+      margin: 0;
 
-    /* =========================
-       INFO
-    ========================== */
+      padding-left: 25px;
 
-    .info {
-      margin-top: 20px;
-
-      padding: 15px;
-
-      border: 1px solid #3d3012;
-
-      background: #171207;
-
-      border-radius: 10px;
-
-      color: #bbb;
-
-      font-size: 13px;
+      padding-right: 25px;
     }
 
     /* =========================
@@ -615,7 +687,7 @@
         grid-template-columns: 1fr;
       }
 
-      .summary-box {
+      .summary {
         position: static;
       }
 
@@ -628,39 +700,39 @@
       }
 
       .hero {
-        padding-top: 65px;
-      }
-
-      .cart-box {
-        padding: 17px;
+        padding-top: 70px;
       }
 
       .cart-item {
-        grid-template-columns: 55px 1fr;
+        grid-template-columns: 70px 1fr;
 
-        gap: 12px;
+        gap: 15px;
       }
 
-      .item-icon {
-        width: 55px;
+      .product-icon {
+        width: 70px;
+        height: 70px;
 
-        height: 55px;
-
-        font-size: 24px;
-      }
-
-      .item-actions {
-        grid-column: 2;
+        font-size: 30px;
       }
 
       .item-total {
+        grid-column: 2;
+
         text-align: left;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-group.full {
+        grid-column: auto;
       }
 
     }
 
   </style>
-
 </head>
 
 
@@ -699,7 +771,7 @@
             Logo 3D
           </a>
 
-          <a href="porte-clé.html">
+          <a href="porte-cle.html">
             Porte-clé
           </a>
 
@@ -745,7 +817,7 @@
 
           <span
             class="cart-count"
-            id="cartCount"
+            id="headerCartCount"
           >
             0
           </span>
@@ -763,7 +835,7 @@
 
 
     <!-- =========================
-         TITRE
+         HERO
     ========================== -->
 
     <section class="hero">
@@ -779,8 +851,8 @@
         </h1>
 
         <p>
-          Retrouvez ici toutes les créations que vous
-          avez sélectionnées avant de passer votre commande.
+          Retrouvez ici tous les produits que vous avez
+          sélectionnés avant d'envoyer votre commande.
         </p>
 
       </div>
@@ -796,138 +868,209 @@
 
       <div class="container">
 
-
-        <!-- PANIER REMPLI -->
+        <!-- PANIER AVEC PRODUITS -->
 
         <div
           id="cartContent"
-          class="cart-layout"
         >
 
+          <div class="cart-layout">
 
-          <!-- PRODUITS -->
 
-          <div class="cart-box">
+            <!-- PRODUITS -->
 
-            <h2 class="box-title">
-              🛒 Mes produits
-            </h2>
+            <div>
 
-            <div id="cartItems"></div>
+              <div
+                class="cart-products"
+                id="cartProducts"
+              ></div>
+
+
+              <!-- FORMULAIRE -->
+
+              <div class="order-form">
+
+                <h2>
+                  📦 Informations de commande
+                </h2>
+
+                <p>
+                  Remplissez vos coordonnées avant d'envoyer
+                  votre demande de commande.
+                </p>
+
+
+                <div class="form-grid">
+
+
+                  <div class="form-group">
+
+                    <label for="customerName">
+                      Nom / prénom
+                    </label>
+
+                    <input
+                      type="text"
+                      id="customerName"
+                      placeholder="Votre nom et prénom"
+                    >
+
+                  </div>
+
+
+                  <div class="form-group">
+
+                    <label for="customerEmail">
+                      Email
+                    </label>
+
+                    <input
+                      type="email"
+                      id="customerEmail"
+                      placeholder="Votre adresse e-mail"
+                    >
+
+                  </div>
+
+
+                  <div class="form-group full">
+
+                    <label for="customerAddress">
+                      Adresse de livraison
+                    </label>
+
+                    <input
+                      type="text"
+                      id="customerAddress"
+                      placeholder="Rue, numéro, ville, code postal"
+                    >
+
+                  </div>
+
+
+                  <div class="form-group full">
+
+                    <label for="customerMessage">
+                      Message complémentaire
+                    </label>
+
+                    <textarea
+                      id="customerMessage"
+                      placeholder="Une précision concernant votre commande..."
+                    ></textarea>
+
+                  </div>
+
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- RÉSUMÉ -->
+
+            <aside class="summary">
+
+              <h2>
+                Résumé
+              </h2>
+
+
+              <div class="summary-line">
+
+                <span>
+                  Articles
+                </span>
+
+                <strong id="summaryItems">
+                  0
+                </strong>
+
+              </div>
+
+
+              <div class="summary-line">
+
+                <span>
+                  Sous-total
+                </span>
+
+                <strong id="summarySubtotal">
+                  0,00 €
+                </strong>
+
+              </div>
+
+
+              <div class="summary-line">
+
+                <span>
+                  Livraison
+                </span>
+
+                <span>
+                  À confirmer
+                </span>
+
+              </div>
+
+
+              <div class="summary-line total">
+
+                <span>
+                  Total produits
+                </span>
+
+                <span
+                  class="total-price"
+                  id="summaryTotal"
+                >
+                  0,00 €
+                </span>
+
+              </div>
+
+
+              <button
+                class="btn"
+                onclick="sendOrder()"
+              >
+                📩 Envoyer ma commande
+              </button>
+
+
+              <a
+                href="impression-3d.html"
+                class="btn btn-secondary"
+              >
+                Continuer mes achats
+              </a>
+
+
+              <button
+                class="btn btn-danger"
+                onclick="clearCart()"
+              >
+                🗑️ Vider le panier
+              </button>
+
+            </aside>
+
 
           </div>
-
-
-          <!-- RÉCAPITULATIF -->
-
-          <aside class="summary-box">
-
-            <h2 class="box-title">
-              Récapitulatif
-            </h2>
-
-
-            <div class="summary-line">
-
-              <span>
-                Produits
-              </span>
-
-              <span id="productsCount">
-                0
-              </span>
-
-            </div>
-
-
-            <div class="summary-line">
-
-              <span>
-                Sous-total
-              </span>
-
-              <span id="subtotal">
-                0,00 €
-              </span>
-
-            </div>
-
-
-            <div class="summary-line">
-
-              <span>
-                Livraison
-              </span>
-
-              <span>
-                À définir
-              </span>
-
-            </div>
-
-
-            <div class="summary-line total">
-
-              <span>
-                Total
-              </span>
-
-              <span
-                class="summary-total"
-                id="total"
-              >
-                0,00 €
-              </span>
-
-            </div>
-
-
-            <div class="info">
-
-              💡 Le montant de la livraison pourra être
-              confirmé selon la commande et l'adresse
-              d'expédition.
-
-            </div>
-
-
-            <button
-              class="btn"
-              style="margin-top:20px;"
-              onclick="sendOrder()"
-            >
-              📩 Passer la commande
-            </button>
-
-
-            <a
-              href="impression-3d.html"
-              class="btn btn-secondary"
-            >
-              Continuer mes achats
-            </a>
-
-
-            <button
-              class="btn btn-danger"
-              onclick="clearCart()"
-            >
-              Vider le panier
-            </button>
-
-          </aside>
 
         </div>
 
 
-        <!-- =========================
-             PANIER VIDE
-        ========================== -->
+        <!-- PANIER VIDE -->
 
         <div
+          class="empty-cart"
           id="emptyCart"
-          class="cart-box empty-cart"
-          style="display:none;"
+          style="display: none;"
         >
 
           <div class="empty-icon">
@@ -939,14 +1082,15 @@
           </h2>
 
           <p>
-            Vous n'avez encore ajouté aucun produit.
+            Ajoutez un produit à votre panier
+            pour commencer votre commande.
           </p>
 
           <a
             href="impression-3d.html"
             class="btn"
           >
-            Découvrir les produits
+            Voir l'impression 3D
           </a>
 
         </div>
@@ -954,7 +1098,6 @@
       </div>
 
     </section>
-
 
   </main>
 
@@ -1006,7 +1149,9 @@
       try {
 
         return JSON.parse(
-          localStorage.getItem(CART_KEY)
+          localStorage.getItem(
+            CART_KEY
+          )
         ) || [];
 
       } catch (error) {
@@ -1038,13 +1183,8 @@
 
     function formatPrice(price) {
 
-      return Number(price).toLocaleString(
-        "fr-FR",
-        {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2
-        }
-      ) + " €";
+      return Number(price).toFixed(2)
+        .replace(".", ",") + " €";
 
     }
 
@@ -1053,33 +1193,42 @@
        ICÔNE PRODUIT
     ========================== */
 
-    function getIcon(name) {
+    function getProductIcon(name) {
 
-      const text =
+      const product =
         name.toLowerCase();
 
       if (
-        text.includes("logo")
+        product.includes("porte-clé") ||
+        product.includes("porte-cle")
       ) {
-        return "🎨";
-      }
 
-      if (
-        text.includes("porte")
-      ) {
         return "🔑";
+
       }
 
       if (
-        text.includes("tampon")
+        product.includes("logo")
       ) {
+
+        return "🎨";
+
+      }
+
+      if (
+        product.includes("tampon")
+      ) {
+
         return "🔖";
+
       }
 
       if (
-        text.includes("impression")
+        product.includes("impression")
       ) {
+
         return "🖨️";
+
       }
 
       return "📦";
@@ -1097,42 +1246,27 @@
         getCart();
 
 
+      const products =
+        document.getElementById(
+          "cartProducts"
+        );
+
+
       const cartContent =
         document.getElementById(
           "cartContent"
         );
+
 
       const emptyCart =
         document.getElementById(
           "emptyCart"
         );
 
-      const cartItems =
-        document.getElementById(
-          "cartItems"
-        );
 
-
-      let totalQuantity = 0;
-
-      let totalPrice = 0;
-
-
-      cart.forEach(item => {
-
-        totalQuantity +=
-          Number(item.quantity) || 0;
-
-        totalPrice +=
-          (Number(item.price) || 0) *
-          (Number(item.quantity) || 0);
-
-      });
-
-
-      /* PANIER VIDE */
-
-      if (cart.length === 0) {
+      if (
+        cart.length === 0
+      ) {
 
         cartContent.style.display =
           "none";
@@ -1147,122 +1281,204 @@
       }
 
 
-      /* PANIER REMPLI */
-
       cartContent.style.display =
-        "grid";
+        "block";
 
       emptyCart.style.display =
         "none";
 
 
-      cartItems.innerHTML = "";
+      products.innerHTML =
+        "";
 
 
-      cart.forEach((item, index) => {
+      let totalItems = 0;
 
-        const quantity =
-          Number(item.quantity) || 1;
-
-        const price =
-          Number(item.price) || 0;
-
-        const itemTotal =
-          price * quantity;
+      let totalPrice = 0;
 
 
-        const element =
-          document.createElement(
-            "div"
-          );
+      cart.forEach(
+        (item, index) => {
+
+          const quantity =
+            Number(item.quantity) || 1;
+
+          const price =
+            Number(item.price) || 0;
+
+          const itemTotal =
+            price * quantity;
 
 
-        element.className =
-          "cart-item";
+          totalItems +=
+            quantity;
+
+          totalPrice +=
+            itemTotal;
 
 
-        element.innerHTML = `
-
-          <div class="item-icon">
-            ${getIcon(item.name)}
-          </div>
+          let customizationHTML =
+            "";
 
 
-          <div>
+          if (
+            item.customization
+          ) {
 
-            <div class="item-name">
-              ${escapeHtml(item.name)}
+            if (
+              item.customization.text
+            ) {
+
+              customizationHTML +=
+                `<strong>Texte :</strong> ${
+                  escapeHTML(
+                    item.customization.text
+                  )
+                }<br>`;
+
+            }
+
+
+            if (
+              item.customization.color
+            ) {
+
+              customizationHTML +=
+                `<strong>Couleur :</strong> ${
+                  escapeHTML(
+                    item.customization.color
+                  )
+                }<br>`;
+
+            }
+
+
+            if (
+              item.customization.description
+            ) {
+
+              customizationHTML +=
+                `<strong>Personnalisation :</strong> ${
+                  escapeHTML(
+                    item.customization.description
+                  )
+                }`;
+
+            }
+
+          }
+
+
+          if (
+            item.options
+          ) {
+
+            customizationHTML +=
+              `<strong>Options :</strong> ${
+                escapeHTML(
+                  JSON.stringify(
+                    item.options
+                  )
+                )
+              }`;
+
+          }
+
+
+          const div =
+            document.createElement(
+              "div"
+            );
+
+
+          div.className =
+            "cart-item";
+
+
+          div.innerHTML = `
+
+            <div class="product-icon">
+              ${getProductIcon(item.name || "Produit")}
             </div>
 
-            <div class="item-price">
-              ${formatPrice(price)} / unité
-            </div>
+            <div>
 
+              <div class="item-name">
+                ${escapeHTML(item.name || "Produit")}
+              </div>
 
-            <div class="quantity">
+              <div class="item-price">
+                ${formatPrice(price)} / unité
+              </div>
+
+              ${
+                customizationHTML
+                  ? `
+                    <div class="customization">
+                      ${customizationHTML}
+                    </div>
+                  `
+                  : ""
+              }
+
+              <div class="item-actions">
+
+                <button
+                  class="quantity-button"
+                  onclick="changeItemQuantity(${index}, -1)"
+                >
+                  −
+                </button>
+
+                <span class="quantity-number">
+                  ${quantity}
+                </span>
+
+                <button
+                  class="quantity-button"
+                  onclick="changeItemQuantity(${index}, 1)"
+                >
+                  +
+                </button>
+
+              </div>
 
               <button
-                onclick="changeQuantity(${index}, -1)"
-                aria-label="Diminuer"
+                class="remove-button"
+                onclick="removeItem(${index})"
               >
-                −
-              </button>
-
-              <span>
-                ${quantity}
-              </span>
-
-              <button
-                onclick="changeQuantity(${index}, 1)"
-                aria-label="Augmenter"
-              >
-                +
+                Supprimer ce produit
               </button>
 
             </div>
-
-          </div>
-
-
-          <div class="item-actions">
 
             <div class="item-total">
               ${formatPrice(itemTotal)}
             </div>
 
-            <button
-              class="remove"
-              onclick="removeItem(${index})"
-            >
-              Supprimer
-            </button>
-
-          </div>
-
-        `;
+          `;
 
 
-        cartItems.appendChild(
-          element
-        );
+          products.appendChild(div);
 
-      });
+        }
+      );
 
 
       document.getElementById(
-        "productsCount"
+        "summaryItems"
       ).textContent =
-        totalQuantity;
+        totalItems;
 
 
       document.getElementById(
-        "subtotal"
+        "summarySubtotal"
       ).textContent =
         formatPrice(totalPrice);
 
 
       document.getElementById(
-        "total"
+        "summaryTotal"
       ).textContent =
         formatPrice(totalPrice);
 
@@ -1276,7 +1492,7 @@
        MODIFIER QUANTITÉ
     ========================== */
 
-    function changeQuantity(
+    function changeItemQuantity(
       index,
       amount
     ) {
@@ -1290,16 +1506,29 @@
       }
 
 
-      cart[index].quantity =
-        Number(cart[index].quantity || 1)
-        + amount;
+      let quantity =
+        Number(
+          cart[index].quantity
+        ) || 1;
+
+
+      quantity +=
+        amount;
 
 
       if (
-        cart[index].quantity <= 0
+        quantity <= 0
       ) {
 
-        cart.splice(index, 1);
+        cart.splice(
+          index,
+          1
+        );
+
+      } else {
+
+        cart[index].quantity =
+          quantity;
 
       }
 
@@ -1340,7 +1569,7 @@
 
 
     /* =========================
-       VIDER LE PANIER
+       VIDER
     ========================== */
 
     function clearCart() {
@@ -1352,7 +1581,9 @@
       if (
         cart.length === 0
       ) {
+
         return;
+
       }
 
 
@@ -1362,8 +1593,12 @@
         );
 
 
-      if (!confirmation) {
+      if (
+        !confirmation
+      ) {
+
         return;
+
       }
 
 
@@ -1390,16 +1625,20 @@
       let count = 0;
 
 
-      cart.forEach(item => {
+      cart.forEach(
+        item => {
 
-        count +=
-          Number(item.quantity) || 0;
+          count +=
+            Number(
+              item.quantity
+            ) || 0;
 
-      });
+        }
+      );
 
 
       document.getElementById(
-        "cartCount"
+        "headerCartCount"
       ).textContent =
         count;
 
@@ -1407,26 +1646,7 @@
 
 
     /* =========================
-       SÉCURISER LE TEXTE
-    ========================== */
-
-    function escapeHtml(text) {
-
-      const div =
-        document.createElement(
-          "div"
-        );
-
-      div.textContent =
-        text;
-
-      return div.innerHTML;
-
-    }
-
-
-    /* =========================
-       PASSER COMMANDE
+       ENVOYER LA COMMANDE
     ========================== */
 
     function sendOrder() {
@@ -1448,65 +1668,191 @@
       }
 
 
-      let message =
+      const name =
+        document
+          .getElementById(
+            "customerName"
+          )
+          .value
+          .trim();
+
+
+      const email =
+        document
+          .getElementById(
+            "customerEmail"
+          )
+          .value
+          .trim();
+
+
+      const address =
+        document
+          .getElementById(
+            "customerAddress"
+          )
+          .value
+          .trim();
+
+
+      const message =
+        document
+          .getElementById(
+            "customerMessage"
+          )
+          .value
+          .trim();
+
+
+      if (
+        !name ||
+        !email ||
+        !address
+      ) {
+
+        alert(
+          "Merci de remplir votre nom, votre email et votre adresse."
+        );
+
+        return;
+
+      }
+
+
+      let orderText =
         "Bonjour Aloïs Design,%0D%0A%0D%0A";
 
-      message +=
+      orderText +=
         "Je souhaite passer la commande suivante :%0D%0A%0D%0A";
 
 
-      let total = 0;
+      let total =
+        0;
 
 
-      cart.forEach(item => {
+      cart.forEach(
+        item => {
 
-        const quantity =
-          Number(item.quantity) || 1;
+          const quantity =
+            Number(item.quantity) || 1;
 
-        const price =
-          Number(item.price) || 0;
+          const price =
+            Number(item.price) || 0;
 
-        const itemTotal =
-          price * quantity;
-
-        total +=
-          itemTotal;
+          const itemTotal =
+            price * quantity;
 
 
-        message +=
-          "- " +
-          encodeURIComponent(item.name) +
-          " x" +
-          quantity +
-          " : " +
-          encodeURIComponent(
-            formatPrice(itemTotal)
-          ) +
-          "%0D%0A";
-
-      });
+          total +=
+            itemTotal;
 
 
-      message +=
+          orderText +=
+            "- " +
+            encodeURIComponent(
+              item.name
+            ) +
+            " x" +
+            quantity +
+            " = " +
+            encodeURIComponent(
+              formatPrice(itemTotal)
+            ) +
+            "%0D%0A";
+
+
+          if (
+            item.customization
+          ) {
+
+            if (
+              item.customization.text
+            ) {
+
+              orderText +=
+                "  Texte : " +
+                encodeURIComponent(
+                  item.customization.text
+                ) +
+                "%0D%0A";
+
+            }
+
+
+            if (
+              item.customization.color
+            ) {
+
+              orderText +=
+                "  Couleur : " +
+                encodeURIComponent(
+                  item.customization.color
+                ) +
+                "%0D%0A";
+
+            }
+
+
+            if (
+              item.customization.description
+            ) {
+
+              orderText +=
+                "  Personnalisation : " +
+                encodeURIComponent(
+                  item.customization.description
+                ) +
+                "%0D%0A";
+
+            }
+
+          }
+
+        }
+      );
+
+
+      orderText +=
         "%0D%0ATotal produits : " +
         encodeURIComponent(
           formatPrice(total)
         );
 
-      message +=
+
+      orderText +=
         "%0D%0A%0D%0A";
 
-      message +=
-        "Merci de me confirmer la disponibilité et les frais de livraison.%0D%0A%0D%0A";
 
-      message +=
-        "Nom :%0D%0A";
+      orderText +=
+        "Nom / prénom : " +
+        encodeURIComponent(name) +
+        "%0D%0A";
 
-      message +=
-        "Adresse :%0D%0A";
 
-      message +=
-        "Téléphone :%0D%0A";
+      orderText +=
+        "Email : " +
+        encodeURIComponent(email) +
+        "%0D%0A";
+
+
+      orderText +=
+        "Adresse : " +
+        encodeURIComponent(address) +
+        "%0D%0A";
+
+
+      if (message) {
+
+        orderText +=
+          "Message : " +
+          encodeURIComponent(message) +
+          "%0D%0A";
+
+      }
+
+
+      orderText +=
+        "%0D%0AMerci.";
 
 
       window.location.href =
@@ -1516,7 +1862,38 @@
           "Commande Aloïs Design"
         ) +
         "&body=" +
-        message;
+        orderText;
+
+    }
+
+
+    /* =========================
+       PROTECTION HTML
+    ========================== */
+
+    function escapeHTML(text) {
+
+      return String(text)
+        .replace(
+          /&/g,
+          "&amp;"
+        )
+        .replace(
+          /</g,
+          "&lt;"
+        )
+        .replace(
+          />/g,
+          "&gt;"
+        )
+        .replace(
+          /"/g,
+          "&quot;"
+        )
+        .replace(
+          /'/g,
+          "&#039;"
+        );
 
     }
 
@@ -1535,7 +1912,5 @@
 
   </script>
 
-
 </body>
-
 </html>
