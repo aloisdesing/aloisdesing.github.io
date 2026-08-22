@@ -1,78 +1,1180 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Panier | Aloïs Design</title><meta name="description" content="Aloïs Design : impression 3D, logos, tampons et créations personnalisées."><style>
-:root{--bg:#090909;--bg2:#121212;--card:#171717;--gold:#d9a72b;--gold2:#f3cc68;--white:#fff;--gray:#aaa;--border:#292929}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--white);line-height:1.6}
-a{text-decoration:none;color:inherit}.container{width:min(1120px,92%);margin:auto}
-header{position:sticky;top:0;z-index:100;background:rgba(9,9,9,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
-nav{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:15px}
-.logo{font-size:20px;font-weight:900;letter-spacing:2px;color:var(--gold);white-space:nowrap}.logo span{color:#fff}
-.nav-links{display:flex;gap:18px;align-items:center;color:#ddd;font-size:14px}.nav-links a:hover{color:var(--gold2)}
-.cart-link{position:relative;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:1px solid #333;border-radius:10px;background:#111}
-.cart-link:hover{border-color:var(--gold)}.cart-icon{width:25px;height:25px;fill:none;stroke:var(--gold2);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.cart-count{position:absolute;top:-7px;right:-7px;min-width:20px;height:20px;padding:2px 5px;border-radius:50%;background:var(--gold);color:#111;font-size:11px;font-weight:900;text-align:center}
-.btn{display:inline-block;padding:13px 20px;border-radius:10px;background:var(--gold);border:1px solid var(--gold);color:#111;font-weight:900;cursor:pointer}.btn:hover{background:var(--gold2);border-color:var(--gold2)}
-.btn.secondary{background:transparent;border-color:#444;color:#fff}.btn.secondary:hover{border-color:var(--gold);color:var(--gold2)}
-.hero{padding:100px 0 80px;background:radial-gradient(circle at 80% 20%,#30240c 0,transparent 35%)}
-.kicker{color:var(--gold2);text-transform:uppercase;letter-spacing:2px;font-size:13px;font-weight:800;margin-bottom:15px}
-h1{font-size:clamp(42px,7vw,76px);line-height:1.02;margin-bottom:20px}.hero h1 span{color:var(--gold)}
-.hero p{max-width:760px;color:var(--gray);font-size:19px}.hero-buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
-section{padding:75px 0}.section-title{margin-bottom:35px}.section-title.center{text-align:center}.section-title h2{font-size:clamp(30px,4vw,44px);line-height:1.1;margin-bottom:10px}.section-title p{color:var(--gray)}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.card,.service,.form-box{padding:28px;border:1px solid var(--border);background:linear-gradient(145deg,#181818,#101010);border-radius:18px}
-.card h3,.service h3{font-size:24px;margin-bottom:9px}.card p,.service p{color:var(--gray)}.card ul{list-style:none;margin-top:15px}.card li{margin:8px 0;color:#ddd}.card li:before{content:"✓";color:var(--gold2);font-weight:bold;margin-right:9px}
-.service:hover,.card:hover{border-color:#4a3a15;transform:translateY(-2px);transition:.2s}.service-icon{font-size:38px;margin-bottom:12px}.service h3{color:var(--gold2)}
-.price{font-size:26px;font-weight:900;color:var(--gold2);margin:15px 0}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-form label{display:block;margin:12px 0 6px;color:#ddd;font-size:14px}input,select,textarea{width:100%;padding:12px;border-radius:9px;border:1px solid #333;background:#080808;color:#fff;font:inherit}textarea{min-height:130px;resize:vertical}input:focus,select:focus,textarea:focus{outline:1px solid var(--gold);border-color:var(--gold)}
-.notice{padding:15px 18px;border:1px solid #4a3a15;background:#171207;border-radius:12px;color:#ddd;margin:20px 0}.gold{color:var(--gold2)}
-footer{border-top:1px solid var(--border);padding:35px 0;text-align:center;color:#888;font-size:13px}
-.table-wrap{overflow:auto}.cart-table{width:100%;border-collapse:collapse}.cart-table th,.cart-table td{padding:14px 10px;border-bottom:1px solid var(--border);text-align:left}.cart-table th{color:var(--gold2)}
-.qty{width:75px}.total-box{margin-top:25px;padding:25px;border:1px solid var(--border);border-radius:16px;background:#101010;display:flex;justify-content:space-between;align-items:center;gap:15px}
-.preview{display:none;margin-top:15px;max-width:220px;max-height:220px;border-radius:12px;border:1px solid var(--border)}
-@media(max-width:850px){.nav-links{display:none}.grid,.grid3{grid-template-columns:1fr}.hero{padding-top:70px}.hero h1{font-size:48px}.total-box{flex-direction:column;align-items:stretch}}
-@media(max-width:500px){.container{width:90%}.hero h1{font-size:42px}.hero-buttons,.actions{flex-direction:column}.btn{width:100%;text-align:center}section{padding:55px 0}}
-</style></head><body>
-<header><div class="container"><nav>
-<a href="index.html" class="logo">ALOÏS <span>DESIGN</span></a>
-<div class="nav-links">
-<a href="index.html">Accueil</a>
-<a href="impression-3d.html">Impression 3D</a>
-<a href="creation-logo.html">Création de logo</a>
-<a href="tampons.html">Tampons</a>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Panier — Aloïs Design</title>
+
+    <meta name="description"
+          content="Votre panier Aloïs Design. Retrouvez vos produits et préparez votre demande de commande.">
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* =========================
+           PAGE PANIER
+        ========================= */
+
+        .cart-page {
+            padding-top: 150px;
+            padding-bottom: 100px;
+            min-height: 80vh;
+        }
+
+        .cart-container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 5%;
+        }
+
+        .cart-title {
+            margin-bottom: 15px;
+        }
+
+        .cart-intro {
+            color: var(--muted);
+            margin-bottom: 50px;
+            font-size: 16px;
+        }
+
+        /* =========================
+           PANIER VIDE
+        ========================= */
+
+        .empty-cart {
+            text-align: center;
+            padding: 90px 25px;
+
+            background: var(--black-card);
+            border: 1px solid rgba(255,255,255,.08);
+        }
+
+        .empty-cart h2 {
+            margin-bottom: 15px;
+            font-size: 30px;
+        }
+
+        .empty-cart p {
+            margin-bottom: 30px;
+            color: var(--muted);
+        }
+
+        /* =========================
+           ARTICLES
+        ========================= */
+
+        .cart-layout {
+            display: grid;
+            grid-template-columns: 1fr 360px;
+            gap: 30px;
+            align-items: start;
+        }
+
+        .cart-items {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .cart-item {
+            display: grid;
+            grid-template-columns: 120px 1fr auto;
+            gap: 25px;
+            align-items: center;
+
+            padding: 20px;
+
+            background: var(--black-card);
+            border: 1px solid rgba(255,255,255,.08);
+
+            transition: .3s ease;
+        }
+
+        .cart-item:hover {
+            border-color: var(--border);
+        }
+
+        .cart-item-image {
+            width: 120px;
+            height: 120px;
+
+            background: #0b0b0b;
+
+            border: 1px solid rgba(255,255,255,.08);
+
+            overflow: hidden;
+        }
+
+        .cart-item-image img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+        }
+
+        .cart-item-info h3 {
+            margin-bottom: 8px;
+            font-size: 20px;
+        }
+
+        .cart-item-price {
+            color: var(--gold);
+            font-size: 14px;
+            margin-bottom: 18px;
+        }
+
+        /* =========================
+           QUANTITÉ
+        ========================= */
+
+        .quantity-control {
+            display: inline-flex;
+            align-items: center;
+
+            border: 1px solid rgba(255,255,255,.15);
+        }
+
+        .quantity-control button {
+            width: 38px;
+            height: 38px;
+
+            border: none;
+            background: transparent;
+
+            color: var(--white);
+
+            font-size: 18px;
+
+            cursor: pointer;
+
+            transition: .2s ease;
+        }
+
+        .quantity-control button:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        .quantity-number {
+            min-width: 42px;
+
+            text-align: center;
+
+            color: var(--white);
+            font-size: 14px;
+        }
+
+        /* =========================
+           TOTAL ARTICLE
+        ========================= */
+
+        .cart-item-right {
+            text-align: right;
+        }
+
+        .cart-item-total {
+            margin-bottom: 15px;
+
+            color: var(--white);
+
+            font-size: 19px;
+            font-weight: 700;
+        }
+
+        .remove-button {
+            border: none;
+            background: transparent;
+
+            color: #999;
+
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+
+            cursor: pointer;
+
+            transition: .2s ease;
+        }
+
+        .remove-button:hover {
+            color: var(--gold);
+        }
+
+        /* =========================
+           RÉSUMÉ
+        ========================= */
+
+        .cart-summary {
+            position: sticky;
+            top: 110px;
+
+            padding: 30px;
+
+            background: var(--black-card);
+
+            border: 1px solid var(--border);
+        }
+
+        .cart-summary h2 {
+            margin-bottom: 25px;
+
+            font-size: 25px;
+        }
+
+        .summary-line {
+            display: flex;
+            justify-content: space-between;
+
+            padding: 13px 0;
+
+            color: var(--muted);
+
+            border-bottom: 1px solid rgba(255,255,255,.06);
+
+            font-size: 14px;
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+
+            margin-top: 20px;
+            padding-top: 20px;
+
+            border-top: 1px solid var(--border);
+
+            color: var(--white);
+
+            font-size: 21px;
+            font-weight: 700;
+        }
+
+        .summary-total span:last-child {
+            color: var(--gold);
+        }
+
+        .cart-summary .button {
+            width: 100%;
+            margin-top: 25px;
+        }
+
+        .continue-shopping {
+            display: block;
+
+            margin-top: 15px;
+
+            color: var(--muted);
+
+            text-align: center;
+
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+
+            transition: .2s ease;
+        }
+
+        .continue-shopping:hover {
+            color: var(--gold);
+        }
+
+        .clear-cart {
+            width: 100%;
+
+            margin-top: 25px;
+            padding-top: 20px;
+
+            border: none;
+            border-top: 1px solid rgba(255,255,255,.06);
+
+            background: transparent;
+
+            color: #777;
+
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+
+            cursor: pointer;
+
+            transition: .2s ease;
+        }
+
+        .clear-cart:hover {
+            color: #fff;
+        }
+
+        /* =========================
+           NOTIFICATION
+        ========================= */
+
+        .cart-notification {
+            position: fixed;
+
+            right: 25px;
+            bottom: 25px;
+
+            padding: 15px 20px;
+
+            background: var(--gold);
+            color: var(--black);
+
+            font-size: 13px;
+            font-weight: 700;
+
+            opacity: 0;
+            transform: translateY(30px);
+
+            pointer-events: none;
+
+            transition: .3s ease;
+
+            z-index: 3000;
+        }
+
+        .cart-notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .cart-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .cart-summary {
+                position: static;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .cart-page {
+                padding-top: 120px;
+            }
+
+            .cart-container {
+                padding: 0 20px;
+            }
+
+            .cart-item {
+                grid-template-columns: 80px 1fr;
+                gap: 15px;
+            }
+
+            .cart-item-image {
+                width: 80px;
+                height: 80px;
+            }
+
+            .cart-item-right {
+                grid-column: 1 / -1;
+
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                text-align: left;
+            }
+
+            .cart-item-total {
+                margin: 0;
+            }
+
+            .cart-summary {
+                padding: 25px 20px;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header class="site-header">
+
+    <a href="index.html" class="logo">
+
+        <span class="logo-ad">
+            AD
+        </span>
+
+        <span class="logo-text">
+            ALOÏS DESIGN
+        </span>
+
+    </a>
+
+
+    <nav class="navigation">
+
+        <a href="index.html">
+            Accueil
+        </a>
+
+        <a href="impression-3d.html">
+            Impression 3D
+        </a>
+
+        <a href="gravure.html">
+            Gravure
+        </a>
+
+        <a href="autocollants.html">
+            Autocollants
+        </a>
+
+        <a href="panier.html" class="cart-link active">
+            Panier <span id="cart-count">0</span>
+        </a>
+
+    </nav>
+
+
+    <button
+        class="menu-button"
+        onclick="toggleMenu()"
+    >
+        MENU
+    </button>
+
+</header>
+
+
+<!-- =========================
+     MENU MOBILE
+========================= -->
+
+<div id="mobile-menu" class="mobile-menu">
+
+    <a href="index.html">
+        Accueil
+    </a>
+
+    <a href="impression-3d.html">
+        Impression 3D
+    </a>
+
+    <a href="gravure.html">
+        Gravure
+    </a>
+
+    <a href="autocollants.html">
+        Autocollants
+    </a>
+
+    <a href="panier.html">
+        Panier <span id="mobile-cart-count">0</span>
+    </a>
+
 </div>
-<a href="panier.html" class="cart-link" aria-label="Panier">
-<svg class="cart-icon" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.5"></circle><circle cx="18" cy="20" r="1.5"></circle><path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L21 8H6"></path></svg>
-<span class="cart-count" data-cart-count>0</span></a>
-</nav></div></header>
-<main>
-<section class="hero"><div class="container"><div class="kicker">Commande</div><h1>🛒 Votre <span>panier</span></h1><p>Tous les produits ajoutés depuis les différentes pages apparaissent ici.</p></div></section>
-<section><div class="container"><div id="empty" class="card" style="text-align:center;display:none"><h2>Votre panier est vide.</h2><p>Ajoutez un produit depuis la boutique.</p><div class="actions" style="justify-content:center"><a class="btn" href="impression-3d.html">Voir les produits</a></div></div>
-<div id="cartArea" style="display:none"><div class="table-wrap"><table class="cart-table"><thead><tr><th>Produit</th><th>Détails</th><th>Prix</th><th>Qté</th><th>Sous-total</th><th></th></tr></thead><tbody id="cartBody"></tbody></table></div>
-<div class="total-box"><div><div style="color:#aaa">Total produits</div><strong id="total" class="gold" style="font-size:30px">0,00 €</strong></div><div class="actions"><button class="btn secondary" onclick="clearCart()">Vider le panier</button><button class="btn" onclick="sendOrder()">📩 Envoyer la commande</button></div></div>
-<div class="notice">⚠️ Le bouton d'envoi ouvre votre application e-mail avec le récapitulatif. Vous pourrez vérifier les informations avant l'envoi.</div>
-</div></div></section>
-<script>
-function euros(n){return Number(n).toFixed(2).replace(".",",")+" €"}
-function renderCart(){const cart=getCart(),empty=document.getElementById("empty"),area=document.getElementById("cartArea"),body=document.getElementById("cartBody");if(!cart.length){empty.style.display="block";area.style.display="none";return}empty.style.display="none";area.style.display="block";body.innerHTML="";let total=0;
-cart.forEach(i=>{let sub=Number(i.price)*Number(i.quantity);total+=sub;let tr=document.createElement("tr");tr.innerHTML=`<td><strong>${escapeHtml(i.name)}</strong></td><td>${escapeHtml(i.details||"—")}</td><td>${euros(i.price)}</td><td><input class="qty" type="number" min="1" value="${Number(i.quantity)}" onchange="changeQty('${String(i.key).replace(/'/g,"&#39;")}',this.value)"></td><td>${euros(sub)}</td><td><button class="btn secondary" onclick="removeFromCart('${String(i.key).replace(/'/g,"&#39;")}')">Supprimer</button></td>`;body.appendChild(tr)});document.getElementById("total").textContent=euros(total)}
-function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]))}
-function clearCart(){if(confirm("Vider le panier ?")){localStorage.removeItem(CART_KEY);updateCartCount();renderCart()}}
-function sendOrder(){const cart=getCart();if(!cart.length)return;let total=cart.reduce((s,i)=>s+Number(i.price)*Number(i.quantity),0);let lines=cart.map(i=>`- ${i.name} x${i.quantity} — ${euros(Number(i.price)*Number(i.quantity))}${i.details?" | "+i.details:""}`).join("%0D%0A");let subject=encodeURIComponent("Commande Aloïs Design");let body=encodeURIComponent("Bonjour,%0D%0A%0D%0AJe souhaite commander :%0D%0A"+cart.map(i=>`- ${i.name} x${i.quantity} — ${euros(Number(i.price)*Number(i.quantity))}${i.details?" | "+i.details:""}`).join("\n")+"\n\nTotal : "+euros(total)+"\n\nNom / prénom : \nAdresse : \nTéléphone : \n\nMerci.");location.href="mailto:aloisryckebuschvandaele@gmail.com?subject="+subject+"&body="+body}
-renderCart();window.addEventListener("cartUpdated",renderCart);
-</script>
+
+
+<!-- =========================
+     CONTENU
+========================= -->
+
+<main class="cart-page">
+
+    <div class="cart-container">
+
+        <p class="section-label">
+            ALOÏS DESIGN
+        </p>
+
+        <h1 class="cart-title">
+            Votre panier
+        </h1>
+
+        <div class="gold-line"></div>
+
+        <p class="cart-intro">
+            Retrouvez ici les produits et prestations que vous avez sélectionnés.
+        </p>
+
+
+        <!-- =========================
+             PANIER VIDE
+        ========================= -->
+
+        <div
+            id="empty-cart"
+            class="empty-cart"
+            style="display:none;"
+        >
+
+            <h2>
+                Votre panier est vide
+            </h2>
+
+            <p>
+                Vous n'avez encore sélectionné aucun produit.
+            </p>
+
+            <a
+                href="impression-3d.html"
+                class="button button-gold"
+            >
+                Découvrir nos services
+            </a>
+
+        </div>
+
+
+        <!-- =========================
+             PANIER AVEC ARTICLES
+        ========================= -->
+
+        <div
+            id="cart-layout"
+            class="cart-layout"
+            style="display:none;"
+        >
+
+
+            <!-- ARTICLES -->
+
+            <div
+                id="cart-items"
+                class="cart-items"
+            ></div>
+
+
+            <!-- RÉSUMÉ -->
+
+            <aside class="cart-summary">
+
+                <h2>
+                    Résumé
+                </h2>
+
+
+                <div class="summary-line">
+
+                    <span>
+                        Articles
+                    </span>
+
+                    <span id="summary-quantity">
+                        0
+                    </span>
+
+                </div>
+
+
+                <div class="summary-line">
+
+                    <span>
+                        Sous-total
+                    </span>
+
+                    <span id="summary-subtotal">
+                        0,00 €
+                    </span>
+
+                </div>
+
+
+                <div class="summary-line">
+
+                    <span>
+                        Personnalisation
+                    </span>
+
+                    <span>
+                        Selon projet
+                    </span>
+
+                </div>
+
+
+                <div class="summary-total">
+
+                    <span>
+                        Total
+                    </span>
+
+                    <span id="summary-total">
+                        0,00 €
+                    </span>
+
+                </div>
+
+
+                <a
+                    href="mailto:contact@aloisdesign.fr?subject=Demande%20de%20commande%20Aloïs%20Design"
+                    class="button button-gold"
+                >
+                    Passer commande
+                </a>
+
+
+                <a
+                    href="impression-3d.html"
+                    class="continue-shopping"
+                >
+                    Continuer mes achats
+                </a>
+
+
+                <button
+                    class="clear-cart"
+                    onclick="clearCart()"
+                >
+                    Vider le panier
+                </button>
+
+            </aside>
+
+        </div>
+
+    </div>
+
 </main>
-<footer><div class="container">© 2026 Aloïs Design<br>Impression 3D · Création de logos · Sculpture & gravure<br><br>
-<a class="gold" href="mailto:aloisryckebuschvandaele@gmail.com">aloisryckebuschvandaele@gmail.com</a></div></footer>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer class="site-footer">
+
+    <div class="footer-main">
+
+
+        <div class="footer-brand">
+
+            <div class="logo">
+
+                <span class="logo-ad">
+                    AD
+                </span>
+
+                <span class="logo-text">
+                    ALOÏS DESIGN
+                </span>
+
+            </div>
+
+            <p>
+                Solutions personnalisées pour les entreprises.
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>
+                Navigation
+            </h4>
+
+            <a href="index.html">
+                Accueil
+            </a>
+
+            <a href="impression-3d.html">
+                Impression 3D
+            </a>
+
+            <a href="gravure.html">
+                Gravure
+            </a>
+
+            <a href="autocollants.html">
+                Autocollants
+            </a>
+
+            <a href="panier.html">
+                Panier
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>
+                Contact
+            </h4>
+
+            <a href="mailto:contact@aloisdesign.fr">
+                contact@aloisdesign.fr
+            </a>
+
+            <a href="mailto:contact@aloisdesign.fr">
+                Demander un devis
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 Aloïs Design — Tous droits réservés.
+        </p>
+
+    </div>
+
+</footer>
+
+
+<!-- =========================
+     NOTIFICATION
+========================= -->
+
+<div
+    id="cart-notification"
+    class="cart-notification"
+>
+    Panier mis à jour
+</div>
+
+
+<!-- =========================
+     JAVASCRIPT PANIER
+========================= -->
 
 <script>
-const CART_KEY="aloisDesignCart";
-function getCart(){try{return JSON.parse(localStorage.getItem(CART_KEY))||[]}catch(e){return[]}}
-function saveCart(cart){localStorage.setItem(CART_KEY,JSON.stringify(cart));updateCartCount();window.dispatchEvent(new Event("cartUpdated"))}
-function updateCartCount(){let n=getCart().reduce((s,i)=>s+(Number(i.quantity)||0),0);document.querySelectorAll("[data-cart-count]").forEach(e=>e.textContent=n)}
-function addToCart(name,price,extra={}){let cart=getCart();let key=extra.key||name;let item=cart.find(i=>i.key===key);if(item)item.quantity=(Number(item.quantity)||0)+1;else cart.push({key,name,price:Number(price),quantity:1,...extra});saveCart(cart);alert(name+" a été ajouté au panier.");}
-function removeFromCart(key){saveCart(getCart().filter(i=>i.key!==key));renderCart?.()}
-function changeQty(key,q){let cart=getCart(),i=cart.find(x=>x.key===key);if(!i)return;i.quantity=Math.max(1,Number(q)||1);saveCart(cart);renderCart?.()}
-updateCartCount();
-window.addEventListener("storage",updateCartCount);window.addEventListener("cartUpdated",updateCartCount);
+
+/* =========================================
+   MENU MOBILE
+========================================= */
+
+function toggleMenu() {
+
+    const menu =
+        document.getElementById("mobile-menu");
+
+    menu.classList.toggle(
+        "mobile-menu-open"
+    );
+
+}
+
+
+/* =========================================
+   RÉCUPÉRER LE PANIER
+========================================= */
+
+function getCart() {
+
+    return JSON.parse(
+        localStorage.getItem(
+            "aloisDesignCart"
+        )
+    ) || [];
+
+}
+
+
+/* =========================================
+   SAUVEGARDER LE PANIER
+========================================= */
+
+function saveCart(cart) {
+
+    localStorage.setItem(
+        "aloisDesignCart",
+        JSON.stringify(cart)
+    );
+
+}
+
+
+/* =========================================
+   FORMAT PRIX
+========================================= */
+
+function formatPrice(price) {
+
+    return Number(price)
+        .toFixed(2)
+        .replace(".", ",") + " €";
+
+}
+
+
+/* =========================================
+   AFFICHER LE PANIER
+========================================= */
+
+function renderCart() {
+
+    const cart = getCart();
+
+    const emptyCart =
+        document.getElementById("empty-cart");
+
+    const cartLayout =
+        document.getElementById("cart-layout");
+
+    const cartItems =
+        document.getElementById("cart-items");
+
+
+    if (cart.length === 0) {
+
+        emptyCart.style.display = "block";
+
+        cartLayout.style.display = "none";
+
+        updateCartCount();
+
+        return;
+
+    }
+
+
+    emptyCart.style.display = "none";
+
+    cartLayout.style.display = "grid";
+
+
+    cartItems.innerHTML = "";
+
+
+    let totalQuantity = 0;
+
+    let subtotal = 0;
+
+
+    cart.forEach((item, index) => {
+
+        const quantity =
+            Number(item.quantity) || 1;
+
+        const price =
+            Number(item.price) || 0;
+
+        const itemTotal =
+            price * quantity;
+
+
+        totalQuantity += quantity;
+
+        subtotal += itemTotal;
+
+
+        const itemElement =
+            document.createElement("article");
+
+        itemElement.className =
+            "cart-item";
+
+
+        itemElement.innerHTML = `
+
+            <div class="cart-item-image">
+
+                <img
+                    src="${item.image || "images/impression-3d.jpg"}"
+                    alt="${escapeHTML(item.name)}"
+                    onerror="this.src='images/impression-3d.jpg'"
+                >
+
+            </div>
+
+
+            <div class="cart-item-info">
+
+                <h3>
+                    ${escapeHTML(item.name)}
+                </h3>
+
+                <div class="cart-item-price">
+                    ${formatPrice(price)} / unité
+                </div>
+
+
+                <div class="quantity-control">
+
+                    <button
+                        onclick="changeQuantity(${index}, -1)"
+                        aria-label="Diminuer la quantité"
+                    >
+                        −
+                    </button>
+
+
+                    <span class="quantity-number">
+                        ${quantity}
+                    </span>
+
+
+                    <button
+                        onclick="changeQuantity(${index}, 1)"
+                        aria-label="Augmenter la quantité"
+                    >
+                        +
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="cart-item-right">
+
+                <div class="cart-item-total">
+                    ${formatPrice(itemTotal)}
+                </div>
+
+
+                <button
+                    class="remove-button"
+                    onclick="removeItem(${index})"
+                >
+                    Supprimer
+                </button>
+
+            </div>
+
+        `;
+
+
+        cartItems.appendChild(itemElement);
+
+    });
+
+
+    document.getElementById(
+        "summary-quantity"
+    ).textContent = totalQuantity;
+
+
+    document.getElementById(
+        "summary-subtotal"
+    ).textContent = formatPrice(subtotal);
+
+
+    document.getElementById(
+        "summary-total"
+    ).textContent = formatPrice(subtotal);
+
+
+    updateCartCount();
+
+}
+
+
+/* =========================================
+   MODIFIER QUANTITÉ
+========================================= */
+
+function changeQuantity(index, amount) {
+
+    let cart = getCart();
+
+
+    if (!cart[index]) {
+        return;
+    }
+
+
+    cart[index].quantity =
+        Number(cart[index].quantity) + amount;
+
+
+    if (cart[index].quantity <= 0) {
+
+        cart.splice(index, 1);
+
+    }
+
+
+    saveCart(cart);
+
+    renderCart();
+
+    showNotification();
+
+}
+
+
+/* =========================================
+   SUPPRIMER ARTICLE
+========================================= */
+
+function removeItem(index) {
+
+    let cart = getCart();
+
+
+    if (!cart[index]) {
+        return;
+    }
+
+
+    cart.splice(index, 1);
+
+
+    saveCart(cart);
+
+    renderCart();
+
+    showNotification();
+
+}
+
+
+/* =========================================
+   VIDER LE PANIER
+========================================= */
+
+function clearCart() {
+
+    const cart = getCart();
+
+
+    if (cart.length === 0) {
+        return;
+    }
+
+
+    const confirmation =
+        confirm(
+            "Voulez-vous vraiment vider votre panier ?"
+        );
+
+
+    if (!confirmation) {
+        return;
+    }
+
+
+    localStorage.removeItem(
+        "aloisDesignCart"
+    );
+
+
+    renderCart();
+
+    showNotification();
+
+}
+
+
+/* =========================================
+   COMPTEUR HEADER
+========================================= */
+
+function updateCartCount() {
+
+    const cart = getCart();
+
+    let total = 0;
+
+
+    cart.forEach(item => {
+
+        total +=
+            Number(item.quantity) || 0;
+
+    });
+
+
+    const desktopCount =
+        document.getElementById(
+            "cart-count"
+        );
+
+
+    const mobileCount =
+        document.getElementById(
+            "mobile-cart-count"
+        );
+
+
+    if (desktopCount) {
+
+        desktopCount.textContent =
+            total;
+
+    }
+
+
+    if (mobileCount) {
+
+        mobileCount.textContent =
+            total;
+
+    }
+
+}
+
+
+/* =========================================
+   NOTIFICATION
+========================================= */
+
+function showNotification() {
+
+    const notification =
+        document.getElementById(
+            "cart-notification"
+        );
+
+
+    notification.classList.add(
+        "show"
+    );
+
+
+    setTimeout(() => {
+
+        notification.classList.remove(
+            "show"
+        );
+
+    }, 1800);
+
+}
+
+
+/* =========================================
+   PROTECTION TEXTE HTML
+========================================= */
+
+function escapeHTML(text) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent =
+        text;
+
+    return div.innerHTML;
+
+}
+
+
+/* =========================================
+   INITIALISATION
+========================================= */
+
+renderCart();
+
 </script>
-</body></html>
+
+</body>
+</html>
