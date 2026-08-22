@@ -1,85 +1,564 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Accueil | Aloïs Design</title><meta name="description" content="Aloïs Design : impression 3D, logos, tampons et créations personnalisées."><style>
-:root{--bg:#090909;--bg2:#121212;--card:#171717;--gold:#d9a72b;--gold2:#f3cc68;--white:#fff;--gray:#aaa;--border:#292929}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--white);line-height:1.6}
-a{text-decoration:none;color:inherit}.container{width:min(1120px,92%);margin:auto}
-header{position:sticky;top:0;z-index:100;background:rgba(9,9,9,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
-nav{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:15px}
-.logo{font-size:20px;font-weight:900;letter-spacing:2px;color:var(--gold);white-space:nowrap}.logo span{color:#fff}
-.nav-links{display:flex;gap:18px;align-items:center;color:#ddd;font-size:14px}.nav-links a:hover{color:var(--gold2)}
-.cart-link{position:relative;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:1px solid #333;border-radius:10px;background:#111}
-.cart-link:hover{border-color:var(--gold)}.cart-icon{width:25px;height:25px;fill:none;stroke:var(--gold2);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.cart-count{position:absolute;top:-7px;right:-7px;min-width:20px;height:20px;padding:2px 5px;border-radius:50%;background:var(--gold);color:#111;font-size:11px;font-weight:900;text-align:center}
-.btn{display:inline-block;padding:13px 20px;border-radius:10px;background:var(--gold);border:1px solid var(--gold);color:#111;font-weight:900;cursor:pointer}.btn:hover{background:var(--gold2);border-color:var(--gold2)}
-.btn.secondary{background:transparent;border-color:#444;color:#fff}.btn.secondary:hover{border-color:var(--gold);color:var(--gold2)}
-.hero{padding:100px 0 80px;background:radial-gradient(circle at 80% 20%,#30240c 0,transparent 35%)}
-.kicker{color:var(--gold2);text-transform:uppercase;letter-spacing:2px;font-size:13px;font-weight:800;margin-bottom:15px}
-h1{font-size:clamp(42px,7vw,76px);line-height:1.02;margin-bottom:20px}.hero h1 span{color:var(--gold)}
-.hero p{max-width:760px;color:var(--gray);font-size:19px}.hero-buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
-section{padding:75px 0}.section-title{margin-bottom:35px}.section-title.center{text-align:center}.section-title h2{font-size:clamp(30px,4vw,44px);line-height:1.1;margin-bottom:10px}.section-title p{color:var(--gray)}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.card,.service,.form-box{padding:28px;border:1px solid var(--border);background:linear-gradient(145deg,#181818,#101010);border-radius:18px}
-.card h3,.service h3{font-size:24px;margin-bottom:9px}.card p,.service p{color:var(--gray)}.card ul{list-style:none;margin-top:15px}.card li{margin:8px 0;color:#ddd}.card li:before{content:"✓";color:var(--gold2);font-weight:bold;margin-right:9px}
-.service:hover,.card:hover{border-color:#4a3a15;transform:translateY(-2px);transition:.2s}.service-icon{font-size:38px;margin-bottom:12px}.service h3{color:var(--gold2)}
-.price{font-size:26px;font-weight:900;color:var(--gold2);margin:15px 0}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-form label{display:block;margin:12px 0 6px;color:#ddd;font-size:14px}input,select,textarea{width:100%;padding:12px;border-radius:9px;border:1px solid #333;background:#080808;color:#fff;font:inherit}textarea{min-height:130px;resize:vertical}input:focus,select:focus,textarea:focus{outline:1px solid var(--gold);border-color:var(--gold)}
-.notice{padding:15px 18px;border:1px solid #4a3a15;background:#171207;border-radius:12px;color:#ddd;margin:20px 0}.gold{color:var(--gold2)}
-footer{border-top:1px solid var(--border);padding:35px 0;text-align:center;color:#888;font-size:13px}
-.table-wrap{overflow:auto}.cart-table{width:100%;border-collapse:collapse}.cart-table th,.cart-table td{padding:14px 10px;border-bottom:1px solid var(--border);text-align:left}.cart-table th{color:var(--gold2)}
-.qty{width:75px}.total-box{margin-top:25px;padding:25px;border:1px solid var(--border);border-radius:16px;background:#101010;display:flex;justify-content:space-between;align-items:center;gap:15px}
-.preview{display:none;margin-top:15px;max-width:220px;max-height:220px;border-radius:12px;border:1px solid var(--border)}
-@media(max-width:850px){.nav-links{display:none}.grid,.grid3{grid-template-columns:1fr}.hero{padding-top:70px}.hero h1{font-size:48px}.total-box{flex-direction:column;align-items:stretch}}
-@media(max-width:500px){.container{width:90%}.hero h1{font-size:42px}.hero-buttons,.actions{flex-direction:column}.btn{width:100%;text-align:center}section{padding:55px 0}}
-</style></head><body>
-<header><div class="container"><nav>
-<a href="index.html" class="logo">ALOÏS <span>DESIGN</span></a>
-<div class="nav-links">
-<a href="index.html">Accueil</a>
-<a href="impression-3d.html">Impression 3D</a>
-<a href="creation-logo.html">Création de logo</a>
-<a href="tampons.html">Tampons</a>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Aloïs Design — Solutions personnalisées pour entreprises</title>
+
+    <meta name="description"
+          content="Aloïs Design accompagne les entreprises avec des solutions personnalisées en impression 3D, gravure et autocollants professionnels.">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header class="site-header">
+
+    <a href="index.html" class="logo">
+        <span class="logo-ad">AD</span>
+        <span class="logo-text">ALOÏS DESIGN</span>
+    </a>
+
+    <nav class="navigation">
+        <a href="index.html" class="active">Accueil</a>
+        <a href="impression-3d.html">Impression 3D</a>
+        <a href="gravure.html">Gravure</a>
+        <a href="autocollants.html">Autocollants</a>
+        <a href="panier.html" class="cart-link">
+            Panier <span id="cart-count">0</span>
+        </a>
+    </nav>
+
+    <button class="menu-button" onclick="toggleMenu()">
+        MENU
+    </button>
+
+</header>
+
+
+<!-- =========================
+     MENU MOBILE
+========================= -->
+
+<div id="mobile-menu" class="mobile-menu">
+
+    <a href="index.html">Accueil</a>
+    <a href="impression-3d.html">Impression 3D</a>
+    <a href="gravure.html">Gravure</a>
+    <a href="autocollants.html">Autocollants</a>
+    <a href="panier.html">Panier <span id="mobile-cart-count">0</span></a>
+
 </div>
-<a href="panier.html" class="cart-link" aria-label="Panier">
-<svg class="cart-icon" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.5"></circle><circle cx="18" cy="20" r="1.5"></circle><path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L21 8H6"></path></svg>
-<span class="cart-count" data-cart-count>0</span></a>
-</nav></div></header>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
 <main>
-<section class="hero" id="accueil"><div class="container">
-<div class="kicker">Création personnalisée</div>
-<h1>Donnez forme à vos <span>idées.</span></h1>
-<p>Impression 3D, création de logos, tampons et objets personnalisés : des créations pensées pour vos projets, vos entreprises et vos envies.</p>
-<div class="hero-buttons"><a class="btn" href="#activites">Découvrir mes activités</a><a class="btn secondary" href="impression-3d.html">🛒 Voir la boutique 3D</a></div>
-</div></section>
 
-<section id="activites"><div class="container"><div class="section-title center"><h2>Mes services</h2><p>Choisissez directement ce dont vous avez besoin.</p></div>
-<div class="grid3">
-<article class="service"><div class="service-icon">🖨️</div><h3>Impression 3D</h3><p>Tampons, logos 3D, porte-clés et créations personnalisées.</p><div class="actions"><a class="btn" href="impression-3d.html">Voir les produits →</a></div></article>
-<article class="service"><div class="service-icon">🎨</div><h3>Création de logos</h3><p>Vous n'avez pas encore de logo ? Expliquez votre idée et recevez un devis.</p><div class="actions"><a class="btn" href="creation-logo.html">Créer mon logo →</a></div></article>
-<article class="service"><div class="service-icon">🔥</div><h3>Tampons</h3><p>Tampons personnalisés pour particuliers et entreprises.</p><div class="actions"><a class="btn" href="tampons.html">Voir les tampons →</a></div></article>
-</div></div></section>
+<section class="hero">
 
-<section><div class="container"><div class="section-title center"><h2>Comment ça marche ?</h2><p>Simple et rapide.</p></div>
-<div class="grid3">
-<div class="card"><h3>01 — Choisissez</h3><p>Choisissez un produit disponible ou demandez une création sur mesure.</p></div>
-<div class="card"><h3>02 — Commandez</h3><p>Ajoutez vos produits au panier. Les quantités sont conservées sur votre appareil.</p></div>
-<div class="card"><h3>03 — Finalisez</h3><p>Envoyez votre demande ou votre commande par e-mail pour valider les détails.</p></div>
-</div></div></section>
+    <div class="hero-overlay"></div>
 
-<section><div class="container"><div class="card" style="text-align:center"><h2>🛒 Votre panier vous suit partout</h2><p>Ajoutez un produit depuis Impression 3D, Porte-clé, Logo 3D ou Tampons : tout arrive dans le même panier.</p><div class="actions" style="justify-content:center"><a class="btn" href="panier.html">Ouvrir le panier</a><a class="btn secondary" href="porte-cle.html">Créer un porte-clé</a></div></div></div></section>
+    <div class="hero-content">
+
+        <p class="hero-small-title">
+            ALOÏS DESIGN
+        </p>
+
+        <h1>
+            Votre identité.<br>
+            Notre savoir-faire.
+        </h1>
+
+        <p class="hero-description">
+            Des solutions personnalisées pour donner une nouvelle
+            dimension à votre entreprise.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="#services" class="button button-gold">
+                Découvrir nos services
+            </a>
+
+            <a href="#contact" class="button button-outline">
+                Demander un devis
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     INTRODUCTION
+========================= -->
+
+<section class="intro section">
+
+    <div class="section-heading">
+
+        <p class="section-label">
+            ALOÏS DESIGN
+        </p>
+
+        <h2>
+            Des créations pensées<br>
+            pour les professionnels
+        </h2>
+
+        <div class="gold-line"></div>
+
+    </div>
+
+    <div class="intro-content">
+
+        <p>
+            Aloïs Design propose aux entreprises des solutions
+            personnalisées pour valoriser leur image, leurs produits
+            et leurs espaces professionnels.
+        </p>
+
+        <p>
+            Impression 3D, gravure et autocollants : chaque projet
+            est réalisé selon vos besoins et votre identité.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     SERVICES
+========================= -->
+
+<section id="services" class="services section">
+
+    <div class="section-heading centered">
+
+        <p class="section-label">
+            NOS SERVICES
+        </p>
+
+        <h2>
+            Des solutions sur mesure
+        </h2>
+
+        <div class="gold-line"></div>
+
+        <p class="section-subtitle">
+            Découvrez nos différentes solutions destinées
+            aux entreprises et aux professionnels.
+        </p>
+
+    </div>
+
+
+    <div class="services-grid">
+
+
+        <!-- IMPRESSION 3D -->
+
+        <article class="service-card">
+
+            <div class="service-image service-image-3d">
+                <div class="image-label">
+                    IMPRESSION 3D
+                </div>
+            </div>
+
+            <div class="service-content">
+
+                <p class="service-number">
+                    01
+                </p>
+
+                <h3>
+                    Impression 3D
+                </h3>
+
+                <p>
+                    Logos, plaques, objets personnalisés,
+                    prototypes et créations professionnelles.
+                </p>
+
+                <a href="impression-3d.html" class="service-link">
+                    Découvrir →
+                </a>
+
+            </div>
+
+        </article>
+
+
+        <!-- GRAVURE -->
+
+        <article class="service-card">
+
+            <div class="service-image service-image-gravure">
+                <div class="image-label">
+                    GRAVURE
+                </div>
+            </div>
+
+            <div class="service-content">
+
+                <p class="service-number">
+                    02
+                </p>
+
+                <h3>
+                    Gravure
+                </h3>
+
+                <p>
+                    Personnalisation sur bois, verre, métal,
+                    cuir et différents supports.
+                </p>
+
+                <a href="gravure.html" class="service-link">
+                    Découvrir →
+                </a>
+
+            </div>
+
+        </article>
+
+
+        <!-- AUTOCOLLANTS -->
+
+        <article class="service-card">
+
+            <div class="service-image service-image-stickers">
+                <div class="image-label">
+                    AUTOCOLLANTS
+                </div>
+            </div>
+
+            <div class="service-content">
+
+                <p class="service-number">
+                    03
+                </p>
+
+                <h3>
+                    Autocollants
+                </h3>
+
+                <p>
+                    Stickers, étiquettes, vitrines et supports
+                    personnalisés à l'image de votre entreprise.
+                </p>
+
+                <a href="autocollants.html" class="service-link">
+                    Découvrir →
+                </a>
+
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     IDENTITÉ
+========================= -->
+
+<section class="identity section">
+
+    <div class="identity-content">
+
+        <p class="section-label">
+            NOTRE IDENTITÉ
+        </p>
+
+        <h2>
+            Votre marque mérite<br>
+            une identité forte.
+        </h2>
+
+        <div class="gold-line"></div>
+
+        <p>
+            Nous créons des supports personnalisés qui permettent
+            à votre entreprise de se démarquer.
+        </p>
+
+        <p>
+            De la conception à la réalisation, nous accordons une
+            attention particulière aux détails, aux finitions et
+            à la cohérence de votre identité visuelle.
+        </p>
+
+        <a href="#contact" class="button button-gold">
+            Parler de votre projet
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     POUR LES ENTREPRISES
+========================= -->
+
+<section class="business section">
+
+    <div class="section-heading centered">
+
+        <p class="section-label">
+            POUR LES ENTREPRISES
+        </p>
+
+        <h2>
+            Une solution adaptée<br>
+            à votre projet
+        </h2>
+
+        <div class="gold-line"></div>
+
+    </div>
+
+
+    <div class="business-grid">
+
+        <div class="business-item">
+
+            <span class="business-number">
+                01
+            </span>
+
+            <h3>
+                Personnalisation
+            </h3>
+
+            <p>
+                Votre logo, vos couleurs, vos dimensions
+                et vos besoins.
+            </p>
+
+        </div>
+
+
+        <div class="business-item">
+
+            <span class="business-number">
+                02
+            </span>
+
+            <h3>
+                Petites séries
+            </h3>
+
+            <p>
+                Des solutions adaptées aux petites
+                productions comme aux commandes plus importantes.
+            </p>
+
+        </div>
+
+
+        <div class="business-item">
+
+            <span class="business-number">
+                03
+            </span>
+
+            <h3>
+                Projet sur mesure
+            </h3>
+
+            <p>
+                Une idée particulière ? Nous pouvons
+                étudier votre projet.
+            </p>
+
+        </div>
+
+
+        <div class="business-item">
+
+            <span class="business-number">
+                04
+            </span>
+
+            <h3>
+                Demande de devis
+            </h3>
+
+            <p>
+                Présentez-nous votre besoin et obtenez
+                une proposition adaptée.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     APPEL À L'ACTION
+========================= -->
+
+<section id="contact" class="cta section">
+
+    <div class="cta-content">
+
+        <p class="section-label">
+            VOTRE PROJET
+        </p>
+
+        <h2>
+            Parlons de votre projet.
+        </h2>
+
+        <p>
+            Vous êtes une entreprise et vous avez besoin
+            d'une création personnalisée ?
+        </p>
+
+        <a href="mailto:contact@aloisdesign.fr"
+           class="button button-gold">
+            Demander un devis
+        </a>
+
+    </div>
+
+</section>
+
 </main>
-<footer><div class="container">© 2026 Aloïs Design<br>Impression 3D · Création de logos · Sculpture & gravure<br><br>
-<a class="gold" href="mailto:aloisryckebuschvandaele@gmail.com">aloisryckebuschvandaele@gmail.com</a></div></footer>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer class="site-footer">
+
+    <div class="footer-main">
+
+        <div class="footer-brand">
+
+            <div class="logo">
+                <span class="logo-ad">AD</span>
+                <span class="logo-text">ALOÏS DESIGN</span>
+            </div>
+
+            <p>
+                Solutions personnalisées pour les entreprises.
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>
+                Navigation
+            </h4>
+
+            <a href="index.html">Accueil</a>
+            <a href="impression-3d.html">Impression 3D</a>
+            <a href="gravure.html">Gravure</a>
+            <a href="autocollants.html">Autocollants</a>
+            <a href="panier.html">Panier</a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>
+                Contact
+            </h4>
+
+            <a href="mailto:contact@aloisdesign.fr">
+                contact@aloisdesign.fr
+            </a>
+
+            <a href="#contact">
+                Demander un devis
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 Aloïs Design — Tous droits réservés.
+        </p>
+
+    </div>
+
+</footer>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
 
 <script>
-const CART_KEY="aloisDesignCart";
-function getCart(){try{return JSON.parse(localStorage.getItem(CART_KEY))||[]}catch(e){return[]}}
-function saveCart(cart){localStorage.setItem(CART_KEY,JSON.stringify(cart));updateCartCount();window.dispatchEvent(new Event("cartUpdated"))}
-function updateCartCount(){let n=getCart().reduce((s,i)=>s+(Number(i.quantity)||0),0);document.querySelectorAll("[data-cart-count]").forEach(e=>e.textContent=n)}
-function addToCart(name,price,extra={}){let cart=getCart();let key=extra.key||name;let item=cart.find(i=>i.key===key);if(item)item.quantity=(Number(item.quantity)||0)+1;else cart.push({key,name,price:Number(price),quantity:1,...extra});saveCart(cart);alert(name+" a été ajouté au panier.");}
-function removeFromCart(key){saveCart(getCart().filter(i=>i.key!==key));renderCart?.()}
-function changeQty(key,q){let cart=getCart(),i=cart.find(x=>x.key===key);if(!i)return;i.quantity=Math.max(1,Number(q)||1);saveCart(cart);renderCart?.()}
+
+function toggleMenu() {
+
+    const menu = document.getElementById("mobile-menu");
+
+    menu.classList.toggle("mobile-menu-open");
+
+}
+
+
+// Mise à jour du compteur panier
+
+function updateCartCount() {
+
+    let cart = JSON.parse(localStorage.getItem("aloisDesignCart")) || [];
+
+    let totalQuantity = 0;
+
+    cart.forEach(item => {
+
+        totalQuantity += Number(item.quantity) || 0;
+
+    });
+
+    const cartCount = document.getElementById("cart-count");
+    const mobileCartCount = document.getElementById("mobile-cart-count");
+
+    if (cartCount) {
+        cartCount.textContent = totalQuantity;
+    }
+
+    if (mobileCartCount) {
+        mobileCartCount.textContent = totalQuantity;
+    }
+
+}
+
+
 updateCartCount();
-window.addEventListener("storage",updateCartCount);window.addEventListener("cartUpdated",updateCartCount);
+
 </script>
-</body></html>
+
+</body>
+</html>
