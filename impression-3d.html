@@ -4,16 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Impression 3D — Aloïs Design</title>
+    <title>Impression 3D & Tampons professionnels — Aloïs Design</title>
 
     <meta name="description"
-          content="Aloïs Design propose des solutions d'impression 3D personnalisées pour les entreprises : logos, plaques, objets professionnels, prototypes et petites séries.">
+          content="Aloïs Design propose des impressions 3D, logos, porte-clés et tampons professionnels personnalisés pour les entreprises.">
 
     <link rel="stylesheet" href="style.css">
 
     <style>
+
         /* =========================
-           PAGE IMPRESSION 3D
+           HERO
         ========================= */
 
         .page-hero {
@@ -29,13 +30,14 @@
                 linear-gradient(
                     90deg,
                     rgba(0,0,0,.95),
-                    rgba(0,0,0,.65)
+                    rgba(0,0,0,.60)
                 ),
-                url("images/impression-3d.jpg") center / cover no-repeat;
+                url("images/impression-3d.jpg")
+                center / cover no-repeat;
         }
 
         .page-hero-content {
-            max-width: 800px;
+            max-width: 850px;
         }
 
         .page-hero h1 {
@@ -44,41 +46,81 @@
             margin-bottom: 25px;
         }
 
-        .page-hero p {
-            max-width: 650px;
+        .page-hero p:not(.section-label) {
+            max-width: 700px;
+
             color: var(--text);
+
             font-size: 18px;
             line-height: 1.8;
         }
 
+
+        /* =========================
+           INTRO
+        ========================= */
+
+        .intro-section {
+            max-width: var(--max-width);
+            margin: auto;
+
+            padding: 110px 5%;
+        }
+
+        .intro-text {
+            max-width: 780px;
+
+            color: var(--text);
+
+            font-size: 17px;
+            line-height: 1.9;
+        }
+
+
+        /* =========================
+           GALERIE
+        ========================= */
+
         .gallery {
             max-width: var(--max-width);
             margin: auto;
-            padding: 110px 5%;
+
+            padding: 0 5% 110px;
         }
 
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
             gap: 20px;
         }
 
         .gallery-item {
             height: 300px;
-            overflow: hidden;
+
             position: relative;
 
+            overflow: hidden;
+
             background: var(--black-card);
-            border: 1px solid rgba(255,255,255,.08);
+
+            border:
+                1px solid
+                rgba(255,255,255,.08);
         }
 
         .gallery-item img {
             width: 100%;
             height: 100%;
+
             object-fit: cover;
+
             display: block;
 
-            transition: transform .5s ease;
+            transition:
+                transform .5s ease;
         }
 
         .gallery-item:hover img {
@@ -87,139 +129,305 @@
 
         .gallery-caption {
             position: absolute;
+
             left: 0;
             right: 0;
             bottom: 0;
 
             padding: 22px;
 
-            background: linear-gradient(
-                transparent,
-                rgba(0,0,0,.9)
-            );
+            background:
+                linear-gradient(
+                    transparent,
+                    rgba(0,0,0,.92)
+                );
 
             color: white;
-            font-size: 13px;
+
+            font-size: 12px;
             font-weight: 700;
-            letter-spacing: 1px;
+
+            letter-spacing: 2px;
         }
+
+
+        /* =========================
+           ACTIVITÉS
+        ========================= */
 
         .activities {
             max-width: none;
-            background: var(--black-soft);
+
+            background:
+                var(--black-soft);
         }
 
         .activities-grid {
             max-width: var(--max-width);
+
             margin: auto;
 
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
             gap: 20px;
         }
 
         .activity {
             padding: 35px;
 
-            background: var(--black-card);
-            border: 1px solid rgba(255,255,255,.07);
+            background:
+                var(--black-card);
 
-            transition: .3s ease;
+            border:
+                1px solid
+                rgba(255,255,255,.07);
+
+            transition:
+                .3s ease;
         }
 
         .activity:hover {
-            border-color: var(--border);
-            transform: translateY(-5px);
+            border-color:
+                var(--border);
+
+            transform:
+                translateY(-5px);
         }
 
         .activity-number {
             color: var(--gold);
+
             font-size: 12px;
+
             letter-spacing: 2px;
         }
 
         .activity h3 {
-            margin: 25px 0 12px;
+            margin:
+                25px 0 12px;
+
             font-size: 22px;
         }
 
         .activity p {
             color: var(--muted);
+
             font-size: 14px;
+
             line-height: 1.7;
         }
 
+
+        /* =========================
+           SECTION TAMPONS
+        ========================= */
+
+        .stamps-section {
+            max-width: none;
+
+            background:
+                var(--black);
+        }
+
+        .stamps-grid {
+            max-width: var(--max-width);
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 20px;
+        }
+
+        .stamp-card {
+            padding: 32px;
+
+            background:
+                var(--black-card);
+
+            border:
+                1px solid
+                rgba(255,255,255,.08);
+
+            display: flex;
+
+            flex-direction: column;
+
+            transition:
+                .3s ease;
+        }
+
+        .stamp-card:hover {
+            border-color:
+                var(--border);
+
+            transform:
+                translateY(-5px);
+        }
+
+        .stamp-number {
+            color: var(--gold);
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            letter-spacing: 3px;
+        }
+
+        .stamp-card h3 {
+            margin:
+                18px 0 10px;
+
+            font-size: 23px;
+        }
+
+        .stamp-description {
+            color: var(--muted);
+
+            font-size: 14px;
+
+            line-height: 1.7;
+
+            margin-bottom: 22px;
+        }
+
+        .stamp-price {
+            color: var(--white);
+
+            font-size: 24px;
+
+            font-weight: 700;
+
+            margin-bottom: 25px;
+        }
+
+        .stamp-price span {
+            color: var(--muted);
+
+            font-size: 12px;
+
+            font-weight: 400;
+        }
+
+        .stamp-card .button {
+            margin-top: auto;
+        }
+
+
+        /* =========================
+           TARIFS IMPRESSION 3D
+        ========================= */
+
         .pricing {
             max-width: none;
-            background: var(--black);
+
+            background:
+                var(--black-soft);
         }
 
         .pricing-grid {
             max-width: var(--max-width);
+
             margin: auto;
 
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
             gap: 20px;
         }
 
         .pricing-card {
-            padding: 40px 32px;
+            padding:
+                40px 32px;
 
-            background: var(--black-card);
-            border: 1px solid rgba(255,255,255,.08);
+            background:
+                var(--black-card);
+
+            border:
+                1px solid
+                rgba(255,255,255,.08);
 
             display: flex;
+
             flex-direction: column;
         }
 
         .pricing-card.featured {
-            border-color: var(--gold);
-            transform: translateY(-10px);
+            border-color:
+                var(--gold);
+
+            transform:
+                translateY(-10px);
         }
 
         .pricing-label {
             color: var(--gold);
+
             font-size: 11px;
+
             font-weight: 700;
+
             letter-spacing: 3px;
-            text-transform: uppercase;
+
+            text-transform:
+                uppercase;
         }
 
         .pricing-card h3 {
-            margin: 18px 0 10px;
+            margin:
+                18px 0 10px;
+
             font-size: 30px;
         }
 
         .price {
             margin-bottom: 25px;
+
             color: var(--white);
+
             font-size: 35px;
+
             font-weight: 700;
         }
 
         .price span {
             color: var(--muted);
+
             font-size: 13px;
+
             font-weight: 400;
         }
 
         .pricing-list {
             list-style: none;
+
             margin-bottom: 30px;
         }
 
         .pricing-list li {
             padding: 11px 0;
 
-            border-bottom: 1px solid rgba(255,255,255,.06);
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.06);
 
             color: var(--text);
+
             font-size: 14px;
         }
 
         .pricing-list li::before {
             content: "— ";
+
             color: var(--gold);
         }
 
@@ -227,78 +435,132 @@
             margin-top: auto;
         }
 
+
+        /* =========================
+           DEVIS
+        ========================= */
+
         .quote-section {
             max-width: none;
+
             text-align: center;
-            background: var(--black-soft);
+
+            background:
+                var(--black);
         }
 
         .quote-content {
             max-width: 750px;
+
             margin: auto;
         }
 
         .quote-content p:not(.section-label) {
-            margin: 25px 0 35px;
+            margin:
+                25px 0 35px;
+
             color: var(--text);
+
             font-size: 17px;
+
+            line-height: 1.8;
         }
+
+
+        /* =========================
+           NOTIFICATION PANIER
+        ========================= */
 
         .cart-notice {
             position: fixed;
+
             right: 25px;
             bottom: 25px;
 
-            padding: 15px 20px;
+            padding:
+                15px 20px;
 
-            background: var(--gold);
-            color: var(--black);
+            background:
+                var(--gold);
+
+            color:
+                var(--black);
 
             font-size: 13px;
+
             font-weight: 700;
 
-            transform: translateY(120px);
+            transform:
+                translateY(120px);
+
             opacity: 0;
 
-            transition: .3s ease;
+            transition:
+                .3s ease;
 
-            z-index: 2000;
+            z-index: 3000;
         }
 
         .cart-notice.show {
-            transform: translateY(0);
+            transform:
+                translateY(0);
+
             opacity: 1;
         }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 1100px) {
+
+            .activities-grid,
+            .stamps-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
 
         @media (max-width: 900px) {
 
             .gallery-grid,
-            .activities-grid,
             .pricing-grid {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns:
+                    repeat(2, 1fr);
             }
 
             .pricing-card.featured {
                 transform: none;
             }
+
         }
+
 
         @media (max-width: 650px) {
 
             .page-hero {
                 min-height: 75vh;
-                padding: 130px 25px 70px;
+
+                padding:
+                    130px 25px 70px;
             }
 
+            .intro-section,
             .gallery,
             .activities,
-            .pricing {
+            .stamps-section,
+            .pricing,
+            .quote-section {
                 padding-left: 25px;
                 padding-right: 25px;
             }
 
             .gallery-grid,
             .activities-grid,
+            .stamps-grid,
             .pricing-grid {
                 grid-template-columns: 1fr;
             }
@@ -307,14 +569,14 @@
                 height: 260px;
             }
 
-            .pricing-card.featured {
-                transform: none;
-            }
         }
+
     </style>
 </head>
 
+
 <body>
+
 
 <!-- =========================
      HEADER
@@ -323,9 +585,17 @@
 <header class="site-header">
 
     <a href="index.html" class="logo">
-        <span class="logo-ad">AD</span>
-        <span class="logo-text">ALOÏS DESIGN</span>
+
+        <span class="logo-ad">
+            AD
+        </span>
+
+        <span class="logo-text">
+            ALOÏS DESIGN
+        </span>
+
     </a>
+
 
     <nav class="navigation">
 
@@ -333,7 +603,10 @@
             Accueil
         </a>
 
-        <a href="impression-3d.html" class="active">
+        <a
+            href="impression-3d.html"
+            class="active"
+        >
             Impression 3D
         </a>
 
@@ -345,13 +618,21 @@
             Autocollants
         </a>
 
-        <a href="panier.html" class="cart-link">
-            Panier <span id="cart-count">0</span>
+        <a
+            href="panier.html"
+            class="cart-link"
+        >
+            Panier
+            <span id="cart-count">0</span>
         </a>
 
     </nav>
 
-    <button class="menu-button" onclick="toggleMenu()">
+
+    <button
+        class="menu-button"
+        onclick="toggleMenu()"
+    >
         MENU
     </button>
 
@@ -359,10 +640,13 @@
 
 
 <!-- =========================
-     MOBILE MENU
+     MENU MOBILE
 ========================= -->
 
-<div id="mobile-menu" class="mobile-menu">
+<div
+    id="mobile-menu"
+    class="mobile-menu"
+>
 
     <a href="index.html">
         Accueil
@@ -381,13 +665,15 @@
     </a>
 
     <a href="panier.html">
-        Panier <span id="mobile-cart-count">0</span>
+        Panier
+        <span id="mobile-cart-count">0</span>
     </a>
 
 </div>
 
 
 <main>
+
 
 <!-- =========================
      HERO
@@ -402,15 +688,16 @@
         </p>
 
         <h1>
-            Donnez du volume<br>
-            à votre identité.
+            Donnez forme<br>
+            à vos idées.
         </h1>
 
         <div class="gold-line"></div>
 
         <p>
-            Création d'objets et de supports en impression 3D
-            pour les entreprises, commerces et professionnels.
+            Impression 3D personnalisée, objets professionnels,
+            logos, porte-clés et tampons : nous transformons
+            vos besoins en réalisations concrètes.
         </p>
 
     </div>
@@ -419,57 +706,59 @@
 
 
 <!-- =========================
-     INTRO
+     INTRODUCTION
 ========================= -->
 
-<section class="section">
+<section class="intro-section">
 
     <div class="section-heading">
 
         <p class="section-label">
-            NOS RÉALISATIONS
+            IMPRESSION 3D
         </p>
 
         <h2>
-            Des créations conçues<br>
-            pour votre entreprise.
+            Des créations pensées<br>
+            pour les entreprises.
         </h2>
 
         <div class="gold-line"></div>
 
     </div>
 
-    <p style="
-        max-width: 750px;
-        color: var(--text);
-        font-size: 17px;
-        line-height: 1.9;
-    ">
-        L'impression 3D permet de créer des supports personnalisés,
-        des objets professionnels et des prototypes adaptés à
-        votre activité.
+
+    <p class="intro-text">
+
+        Aloïs Design accompagne les entreprises dans la création
+        d'objets personnalisés en impression 3D.
+
+        Du simple objet promotionnel à la pièce personnalisée,
+        nous pouvons adapter les dimensions, le modèle,
+        le texte et l'identité visuelle à votre projet.
+
     </p>
 
 </section>
 
 
 <!-- =========================
-     GALERIE
+     EXEMPLES
 ========================= -->
 
 <section class="gallery">
 
     <div class="gallery-grid">
 
+
         <div class="gallery-item">
 
             <img
-                src="images/3d-1.jpg"
-                alt="Exemple d'impression 3D professionnelle"
+                src="images/impression-3d-1.jpg"
+                alt="Objet professionnel imprimé en 3D"
             >
 
             <div class="gallery-caption">
-                OBJET PERSONNALISÉ
+                OBJETS PERSONNALISÉS
             </div>
 
         </div>
@@ -478,12 +767,12 @@
         <div class="gallery-item">
 
             <img
-                src="images/3d-2.jpg"
-                alt="Logo réalisé en impression 3D"
+                src="images/impression-3d-2.jpg"
+                alt="Logo d'entreprise imprimé en 3D"
             >
 
             <div class="gallery-caption">
-                LOGO EN 3D
+                LOGOS 3D
             </div>
 
         </div>
@@ -492,12 +781,12 @@
         <div class="gallery-item">
 
             <img
-                src="images/3d-3.jpg"
-                alt="Plaque professionnelle imprimée en 3D"
+                src="images/impression-3d-3.jpg"
+                alt="Porte-clés personnalisé imprimé en 3D"
             >
 
             <div class="gallery-caption">
-                PLAQUE PROFESSIONNELLE
+                PORTE-CLÉS
             </div>
 
         </div>
@@ -506,12 +795,12 @@
         <div class="gallery-item">
 
             <img
-                src="images/3d-4.jpg"
-                alt="Prototype imprimé en 3D"
+                src="images/impression-3d-4.jpg"
+                alt="Pièce personnalisée imprimée en 3D"
             >
 
             <div class="gallery-caption">
-                PROTOTYPE
+                PIÈCES SUR MESURE
             </div>
 
         </div>
@@ -520,12 +809,12 @@
         <div class="gallery-item">
 
             <img
-                src="images/3d-5.jpg"
-                alt="Objet publicitaire imprimé en 3D"
+                src="images/tampon-entreprise.jpg"
+                alt="Tampon professionnel pour entreprise"
             >
 
             <div class="gallery-caption">
-                OBJET PUBLICITAIRE
+                TAMPONS PROFESSIONNELS
             </div>
 
         </div>
@@ -534,15 +823,16 @@
         <div class="gallery-item">
 
             <img
-                src="images/3d-6.jpg"
-                alt="Création personnalisée en impression 3D"
+                src="images/tampon-logo.jpg"
+                alt="Tampon personnalisé avec logo"
             >
 
             <div class="gallery-caption">
-                CRÉATION SUR MESURE
+                TAMPONS AVEC LOGO
             </div>
 
         </div>
+
 
     </div>
 
@@ -550,7 +840,7 @@
 
 
 <!-- =========================
-     ACTIVITÉS
+     NOS ACTIVITÉS
 ========================= -->
 
 <section class="activities section">
@@ -562,8 +852,8 @@
         </p>
 
         <h2>
-            L'impression 3D<br>
-            au service de vos projets.
+            Des solutions pour<br>
+            votre entreprise.
         </h2>
 
         <div class="gold-line"></div>
@@ -581,12 +871,12 @@
             </span>
 
             <h3>
-                Logos 3D
+                Objets personnalisés
             </h3>
 
             <p>
-                Transformez votre identité visuelle en
-                véritable objet grâce à un logo en relief.
+                Création d'objets adaptés à votre activité,
+                votre communication ou vos besoins internes.
             </p>
 
         </article>
@@ -599,12 +889,12 @@
             </span>
 
             <h3>
-                Plaques professionnelles
+                Logos 3D
             </h3>
 
             <p>
-                Plaques, signalétique et éléments
-                d'identification personnalisés.
+                Transformez votre identité visuelle en
+                logo 3D pour vos bureaux, événements ou vitrines.
             </p>
 
         </article>
@@ -617,12 +907,12 @@
             </span>
 
             <h3>
-                Objets publicitaires
+                Porte-clés
             </h3>
 
             <p>
-                Créez des objets personnalisés pour
-                promouvoir votre entreprise.
+                Porte-clés personnalisés avec votre logo,
+                votre nom ou votre identité d'entreprise.
             </p>
 
         </article>
@@ -635,51 +925,16 @@
             </span>
 
             <h3>
-                Prototypes
+                Tampons professionnels
             </h3>
 
             <p>
-                Testez rapidement une idée ou une
-                pièce avant une production définitive.
+                Tampons personnalisés pour vos documents,
+                votre entreprise, vos emballages et votre identité.
             </p>
 
         </article>
 
-
-        <article class="activity">
-
-            <span class="activity-number">
-                05
-            </span>
-
-            <h3>
-                Petites séries
-            </h3>
-
-            <p>
-                Production de plusieurs exemplaires
-                adaptés à vos besoins professionnels.
-            </p>
-
-        </article>
-
-
-        <article class="activity">
-
-            <span class="activity-number">
-                06
-            </span>
-
-            <h3>
-                Création sur mesure
-            </h3>
-
-            <p>
-                Vous avez une idée particulière ?
-                Nous pouvons étudier votre projet.
-            </p>
-
-        </article>
 
     </div>
 
@@ -687,7 +942,196 @@
 
 
 <!-- =========================
-     TARIFS
+     TAMPONS
+========================= -->
+
+<section class="stamps-section section">
+
+    <div class="section-heading centered">
+
+        <p class="section-label">
+            TAMPONS PROFESSIONNELS
+        </p>
+
+        <h2>
+            Votre entreprise,<br>
+            sur tous vos documents.
+        </h2>
+
+        <div class="gold-line"></div>
+
+        <p class="section-subtitle">
+
+            Des tampons personnalisés adaptés aux entreprises,
+            associations, indépendants et professionnels.
+
+        </p>
+
+    </div>
+
+
+    <div class="stamps-grid">
+
+
+        <!-- PETIT TAMPON -->
+
+        <article class="stamp-card">
+
+            <span class="stamp-number">
+                01
+            </span>
+
+            <h3>
+                Petit tampon
+            </h3>
+
+            <p class="stamp-description">
+
+                Format compact pour les petites mentions,
+                signatures, informations courtes ou usages quotidiens.
+
+            </p>
+
+            <div class="stamp-price">
+                10–15 €
+                <span>à partir de</span>
+            </div>
+
+            <button
+                class="button button-outline"
+                onclick="addToCart(
+                    'Petit tampon professionnel',
+                    10,
+                    'images/tampon-entreprise.jpg'
+                )"
+            >
+                Ajouter au panier
+            </button>
+
+        </article>
+
+
+        <!-- TAMPON ENTREPRISE -->
+
+        <article class="stamp-card">
+
+            <span class="stamp-number">
+                02
+            </span>
+
+            <h3>
+                Tampon entreprise
+            </h3>
+
+            <p class="stamp-description">
+
+                Un tampon adapté à votre entreprise avec
+                vos informations professionnelles.
+
+            </p>
+
+            <div class="stamp-price">
+                15–25 €
+                <span>à partir de</span>
+            </div>
+
+            <button
+                class="button button-gold"
+                onclick="addToCart(
+                    'Tampon entreprise',
+                    15,
+                    'images/tampon-entreprise.jpg'
+                )"
+            >
+                Ajouter au panier
+            </button>
+
+        </article>
+
+
+        <!-- LOGO -->
+
+        <article class="stamp-card">
+
+            <span class="stamp-number">
+                03
+            </span>
+
+            <h3>
+                Tampon avec logo
+            </h3>
+
+            <p class="stamp-description">
+
+                Intégrez votre logo et votre identité visuelle
+                directement sur votre tampon professionnel.
+
+            </p>
+
+            <div class="stamp-price">
+                20–30 €
+                <span>à partir de</span>
+            </div>
+
+            <button
+                class="button button-outline"
+                onclick="addToCart(
+                    'Tampon professionnel avec logo',
+                    20,
+                    'images/tampon-logo.jpg'
+                )"
+            >
+                Ajouter au panier
+            </button>
+
+        </article>
+
+
+        <!-- GROS TAMPON -->
+
+        <article class="stamp-card">
+
+            <span class="stamp-number">
+                04
+            </span>
+
+            <h3>
+                Gros tampon personnalisé
+            </h3>
+
+            <p class="stamp-description">
+
+                Pour les grands formats, informations détaillées
+                et besoins professionnels spécifiques.
+
+            </p>
+
+            <div class="stamp-price">
+                25–40 €
+                <span>à partir de</span>
+            </div>
+
+            <button
+                class="button button-outline"
+                onclick="addToCart(
+                    'Gros tampon personnalisé',
+                    25,
+                    'images/tampon-logo.jpg'
+                )"
+            >
+                Ajouter au panier
+            </button>
+
+        </article>
+
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     TARIFS IMPRESSION 3D
 ========================= -->
 
 <section class="pricing section">
@@ -695,19 +1139,22 @@
     <div class="section-heading centered">
 
         <p class="section-label">
-            NOS FORFAITS
+            IMPRESSION 3D
         </p>
 
         <h2>
-            Choisissez la formule<br>
-            adaptée à votre projet.
+            Des forfaits adaptés<br>
+            à votre projet.
         </h2>
 
         <div class="gold-line"></div>
 
         <p class="section-subtitle">
-            Les tarifs peuvent évoluer selon la complexité,
-            la taille et la quantité demandée.
+
+            Les tarifs sont indicatifs et peuvent évoluer
+            selon les dimensions, la matière, la complexité
+            et la quantité.
+
         </p>
 
     </div>
@@ -729,36 +1176,38 @@
             </h3>
 
             <div class="price">
-                25 €
+                15 €
                 <span>à partir de</span>
             </div>
+
 
             <ul class="pricing-list">
 
                 <li>
-                    Petite création 3D
+                    Petite pièce
                 </li>
 
                 <li>
-                    Personnalisation simple
+                    Design simple
                 </li>
 
                 <li>
-                    Finition standard
+                    Impression standard
                 </li>
 
                 <li>
-                    Petite quantité
+                    Une couleur
                 </li>
 
             </ul>
+
 
             <button
                 class="button button-outline"
                 onclick="addToCart(
                     'Impression 3D — Essentiel',
-                    25,
-                    'images/3d-1.jpg'
+                    15,
+                    'images/impression-3d-1.jpg'
                 )"
             >
                 Ajouter au panier
@@ -780,36 +1229,38 @@
             </h3>
 
             <div class="price">
-                45 €
+                30 €
                 <span>à partir de</span>
             </div>
+
 
             <ul class="pricing-list">
 
                 <li>
-                    Création personnalisée
+                    Pièce personnalisée
                 </li>
 
                 <li>
-                    Logo ou identité visuelle
+                    Plusieurs dimensions
                 </li>
 
                 <li>
-                    Finition améliorée
+                    Choix de finition
                 </li>
 
                 <li>
-                    Quantité professionnelle
+                    Logo ou texte possible
                 </li>
 
             </ul>
+
 
             <button
                 class="button button-gold"
                 onclick="addToCart(
                     'Impression 3D — Pro',
-                    45,
-                    'images/3d-2.jpg'
+                    30,
+                    'images/impression-3d-2.jpg'
                 )"
             >
                 Ajouter au panier
@@ -831,42 +1282,45 @@
             </h3>
 
             <div class="price">
-                70 €
+                60 €
                 <span>à partir de</span>
             </div>
+
 
             <ul class="pricing-list">
 
                 <li>
-                    Projet entièrement sur mesure
+                    Projet complexe
                 </li>
 
                 <li>
-                    Design complexe
+                    Design sur mesure
                 </li>
 
                 <li>
-                    Finitions premium
+                    Plusieurs couleurs
                 </li>
 
                 <li>
-                    Production en série
+                    Production en série possible
                 </li>
 
             </ul>
+
 
             <button
                 class="button button-outline"
                 onclick="addToCart(
                     'Impression 3D — Premium',
-                    70,
-                    'images/3d-3.jpg'
+                    60,
+                    'images/impression-3d-4.jpg'
                 )"
             >
                 Ajouter au panier
             </button>
 
         </article>
+
 
     </div>
 
@@ -882,23 +1336,31 @@
     <div class="quote-content">
 
         <p class="section-label">
-            PROJET PERSONNALISÉ
+            PROJET SUR MESURE
         </p>
 
         <h2>
-            Votre projet ne rentre<br>
-            dans aucun forfait ?
+            Vous avez un projet ?
         </h2>
 
-        <div class="gold-line"
-             style="margin-left:auto;margin-right:auto;">
-        </div>
+        <div
+            class="gold-line"
+            style="
+                margin-left:auto;
+                margin-right:auto;
+            "
+        ></div>
 
         <p>
-            Contactez Aloïs Design pour obtenir une proposition
-            adaptée aux dimensions, quantités et exigences de
-            votre entreprise.
+
+            Vous avez besoin d'une pièce particulière,
+            d'un logo 3D ou d'un tampon personnalisé ?
+
+            Envoyez-nous votre demande et nous étudierons
+            votre projet.
+
         </p>
+
 
         <a
             href="mailto:contact@aloisdesign.fr"
@@ -911,6 +1373,7 @@
 
 </section>
 
+
 </main>
 
 
@@ -921,6 +1384,7 @@
 <footer class="site-footer">
 
     <div class="footer-main">
+
 
         <div class="footer-brand">
 
@@ -988,6 +1452,7 @@
 
         </div>
 
+
     </div>
 
 
@@ -1003,10 +1468,13 @@
 
 
 <!-- =========================
-     NOTIFICATION PANIER
+     NOTIFICATION
 ========================= -->
 
-<div id="cart-notice" class="cart-notice">
+<div
+    id="cart-notice"
+    class="cart-notice"
+>
     Produit ajouté au panier
 </div>
 
@@ -1017,27 +1485,43 @@
 
 <script>
 
+
+/* =========================================
+   MENU MOBILE
+========================================= */
+
 function toggleMenu() {
 
-    const menu = document.getElementById("mobile-menu");
+    const menu =
+        document.getElementById(
+            "mobile-menu"
+        );
 
-    menu.classList.toggle("mobile-menu-open");
+    menu.classList.toggle(
+        "mobile-menu-open"
+    );
 
 }
 
 
-/* =========================
-   PANIER
-========================= */
+/* =========================================
+   RÉCUPÉRER LE PANIER
+========================================= */
 
 function getCart() {
 
     return JSON.parse(
-        localStorage.getItem("aloisDesignCart")
+        localStorage.getItem(
+            "aloisDesignCart"
+        )
     ) || [];
 
 }
 
+
+/* =========================================
+   SAUVEGARDER LE PANIER
+========================================= */
 
 function saveCart(cart) {
 
@@ -1049,13 +1533,24 @@ function saveCart(cart) {
 }
 
 
-function addToCart(name, price, image) {
+/* =========================================
+   AJOUTER AU PANIER
+========================================= */
+
+function addToCart(
+    name,
+    price,
+    image
+) {
 
     let cart = getCart();
 
-    const existingProduct = cart.find(
-        item => item.name === name
-    );
+
+    const existingProduct =
+        cart.find(
+            item =>
+                item.name === name
+        );
 
 
     if (existingProduct) {
@@ -1090,57 +1585,91 @@ function addToCart(name, price, image) {
 }
 
 
+/* =========================================
+   COMPTEUR DU PANIER
+========================================= */
+
 function updateCartCount() {
 
     const cart = getCart();
 
     let total = 0;
 
+
     cart.forEach(item => {
 
-        total += Number(item.quantity) || 0;
+        total +=
+            Number(item.quantity) || 0;
 
     });
 
 
     const desktopCount =
-        document.getElementById("cart-count");
+        document.getElementById(
+            "cart-count"
+        );
+
 
     const mobileCount =
-        document.getElementById("mobile-cart-count");
+        document.getElementById(
+            "mobile-cart-count"
+        );
 
 
     if (desktopCount) {
-        desktopCount.textContent = total;
+
+        desktopCount.textContent =
+            total;
+
     }
 
+
     if (mobileCount) {
-        mobileCount.textContent = total;
+
+        mobileCount.textContent =
+            total;
+
     }
 
 }
 
 
+/* =========================================
+   NOTIFICATION
+========================================= */
+
 function showCartNotice() {
 
     const notice =
-        document.getElementById("cart-notice");
+        document.getElementById(
+            "cart-notice"
+        );
 
-    notice.classList.add("show");
+
+    notice.classList.add(
+        "show"
+    );
 
 
     setTimeout(() => {
 
-        notice.classList.remove("show");
+        notice.classList.remove(
+            "show"
+        );
 
     }, 2200);
 
 }
 
 
+/* =========================================
+   INITIALISATION
+========================================= */
+
 updateCartCount();
 
 </script>
+
 
 </body>
 </html>
