@@ -3,10 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>HomeAI V2.6</title>
+<title>HomeAI V2.7</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+    box-sizing:border-box;
+}
 
 body{
     margin:0;
@@ -21,22 +23,34 @@ body{
     padding:18px;
 }
 
-header{text-align:center;margin-bottom:20px}
-
-h1{font-size:42px;margin:5px}
-
-.subtitle{color:#8f98a7}
-
-.panel,.setup-card{
-    background:#181d25;
-    border-radius:22px;
-    padding:20px;
-    margin-bottom:18px;
+header{
+    text-align:center;
+    margin-bottom:20px;
 }
 
-.hidden{display:none!important}
+h1{
+    font-size:42px;
+    margin:5px;
+}
+
+h2{
+    margin-top:0;
+}
+
+.subtitle{
+    color:#8f98a7;
+}
+
+.hidden{
+    display:none!important;
+}
+
+/* =========================
+   CONFIGURATION
+========================= */
 
 .setup{
+    position:relative;
     min-height:100vh;
     display:flex;
     align-items:center;
@@ -45,8 +59,30 @@ h1{font-size:42px;margin:5px}
 }
 
 .setup-card{
+    position:relative;
     width:100%;
     max-width:720px;
+    background:#181d25;
+    border-radius:22px;
+    padding:65px 20px 20px;
+}
+
+.exit-button{
+    position:absolute;
+    top:15px;
+    right:15px;
+    border:0;
+    border-radius:12px;
+    padding:10px 16px;
+    background:#49262b;
+    color:#ff8d8d;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.exit-button:hover{
+    background:#633138;
 }
 
 .setup-icon{
@@ -131,9 +167,17 @@ h1{font-size:42px;margin:5px}
     font-size:17px;
 }
 
-.setup-button.primary{background:#5865f2}
+.setup-button.primary{
+    background:#5865f2;
+}
 
-.setup-button:disabled{opacity:.35}
+.setup-button:disabled{
+    opacity:.35;
+}
+
+/* =========================
+   HOMEAI
+========================= */
 
 .avatar{
     text-align:center;
@@ -159,6 +203,17 @@ h1{font-size:42px;margin:5px}
     text-align:center;
     margin-bottom:15px;
 }
+
+.panel{
+    background:#181d25;
+    border-radius:22px;
+    padding:20px;
+    margin-bottom:18px;
+}
+
+/* =========================
+   CLAVIER
+========================= */
 
 .chat-box{
     background:#181d25;
@@ -191,6 +246,10 @@ h1{font-size:42px;margin:5px}
     color:white;
     font-size:20px;
 }
+
+/* =========================
+   MAISON
+========================= */
 
 .room{
     background:#10151c;
@@ -226,13 +285,34 @@ h1{font-size:42px;margin:5px}
     margin-top:5px;
 }
 
-.success{color:#72df92}
-.warning{color:#ffcf70}
-.error{color:#ff7474}
-.info{color:#abb3bf;line-height:1.7}
+.delete-button{
+    margin-top:10px;
+    border:0;
+    background:#49262b;
+    color:#ff8d8d;
+    padding:8px 12px;
+    border-radius:9px;
+}
 
-button{
-    cursor:pointer;
+/* =========================
+   AUTRES
+========================= */
+
+.success{
+    color:#72df92;
+}
+
+.warning{
+    color:#ffcf70;
+}
+
+.error{
+    color:#ff7474;
+}
+
+.info{
+    color:#abb3bf;
+    line-height:1.7;
 }
 
 .test-button{
@@ -287,22 +367,27 @@ input[type=text]{
     font-size:16px;
 }
 
-input[type=range]{width:100%}
-
-.delete-button{
-    margin-top:10px;
-    border:0;
-    background:#49262b;
-    color:#ff8d8d;
-    padding:8px 12px;
-    border-radius:9px;
+input[type=range]{
+    width:100%;
 }
 
 @media(max-width:600px){
-    h1{font-size:34px}
-    .options{grid-template-columns:1fr}
-    .chat-row{flex-direction:column}
-    .send-button{padding:14px}
+
+    h1{
+        font-size:34px;
+    }
+
+    .options{
+        grid-template-columns:1fr;
+    }
+
+    .chat-row{
+        flex-direction:column;
+    }
+
+    .send-button{
+        padding:14px;
+    }
 }
 </style>
 </head>
@@ -310,238 +395,283 @@ input[type=range]{width:100%}
 <body>
 
 <!-- =====================================================
-CONFIGURATION
+     PAGE DE CONFIGURATION
 ===================================================== -->
 
 <div id="setupScreen" class="setup">
 
-<div class="setup-card">
+    <div class="setup-card">
 
-<div class="setup-icon">🏠</div>
+        <!-- NOUVEAU BOUTON EXIT -->
+        <button id="exitSetup" class="exit-button">
+            ✕ EXIT
+        </button>
 
-<div class="setup-title">
-Configurons ta maison
-</div>
+        <div class="setup-icon">
+            🏠
+        </div>
 
-<p class="setup-description" id="setupDescription">
-Je vais enregistrer tes appareils un par un.
-</p>
+        <div class="setup-title">
+            Configurons ta maison
+        </div>
 
-<div class="progress">
-<div id="progressBar" class="progress-bar"></div>
-</div>
+        <p class="setup-description" id="setupDescription">
+            Je vais enregistrer tes appareils un par un.
+        </p>
 
-<div id="setupContent"></div>
+        <div class="progress">
+            <div id="progressBar" class="progress-bar"></div>
+        </div>
 
-<div class="setup-buttons">
+        <div id="setupContent"></div>
 
-<button id="setupBack" class="setup-button">
-← Retour
-</button>
+        <div class="setup-buttons">
 
-<button id="setupNext" class="setup-button primary">
-Continuer →
-</button>
+            <button id="setupBack" class="setup-button">
+                ← Retour
+            </button>
 
-</div>
+            <button id="setupNext" class="setup-button primary">
+                Continuer →
+            </button>
 
-</div>
+        </div>
+
+    </div>
+
 </div>
 
 
 <!-- =====================================================
-APPLICATION
+     APPLICATION
 ===================================================== -->
 
 <div id="appScreen" class="container hidden">
 
-<header>
+    <header>
 
-<h1>🏠 HomeAI</h1>
+        <h1>
+            🏠 HomeAI
+        </h1>
 
-<div class="subtitle">
-V2.6 — Maison intelligente
-</div>
+        <div class="subtitle">
+            V2.7 — Maison intelligente
+        </div>
 
-</header>
+    </header>
 
-<div id="status" class="status">
-🟢 Initialisation...
-</div>
+    <div id="status" class="status">
+        🟢 Initialisation...
+    </div>
 
-<div class="avatar">🤖</div>
+    <div class="avatar">
+        🤖
+    </div>
 
-<div id="nomAffiche" class="name">
-Nova
-</div>
+    <div id="nomAffiche" class="name">
+        Nova
+    </div>
 
-<div id="interaction" class="interaction">
-Je t'écoute...
-</div>
+    <div id="interaction" class="interaction">
+        Je t'écoute...
+    </div>
 
 
-<!-- CLAVIER -->
+    <!-- CLAVIER -->
 
-<div class="chat-box">
+    <div class="chat-box">
 
-<div class="chat-row">
+        <div class="chat-row">
 
-<input
-id="questionInput"
-class="chat-input"
-type="text"
-autocomplete="off"
-placeholder="Écris une question ou une commande..."
->
+            <input
+                id="questionInput"
+                class="chat-input"
+                type="text"
+                autocomplete="off"
+                placeholder="Écris une question ou une commande..."
+            >
 
-<button id="sendButton" class="send-button">
-➤
-</button>
+            <button
+                id="sendButton"
+                class="send-button"
+            >
+                ➤
+            </button>
 
-</div>
+        </div>
 
-</div>
+    </div>
 
 
-<!-- COMPRÉHENSION -->
+    <!-- COMPRÉHENSION -->
 
-<div class="panel">
+    <div class="panel">
 
-<h2>🧠 Compréhension</h2>
+        <h2>
+            🧠 Compréhension
+        </h2>
 
-<div id="comprehension">
-Aucune commande.
-</div>
+        <div id="comprehension">
+            Aucune commande.
+        </div>
 
-</div>
+    </div>
 
 
-<!-- MA MAISON -->
+    <!-- MA MAISON -->
 
-<div class="panel">
+    <div class="panel">
 
-<h2>🏠 Ma maison</h2>
+        <h2>
+            🏠 Ma maison
+        </h2>
 
-<div id="maison"></div>
+        <div id="maison"></div>
 
-<br>
+        <br>
 
-<button id="ajouterAppareil" class="test-button">
-➕ Ajouter un appareil
-</button>
+        <button
+            id="ajouterAppareil"
+            class="test-button"
+        >
+            ➕ Ajouter un appareil
+        </button>
 
-<button id="modifierMaison" class="test-button">
-⚙️ Modifier ma maison
-</button>
+        <button
+            id="modifierMaison"
+            class="test-button"
+        >
+            ⚙️ Modifier ma maison
+        </button>
 
-</div>
+    </div>
 
 
-<!-- DOMOTIQUE -->
+    <!-- DOMOTIQUE -->
 
-<div class="panel">
+    <div class="panel">
 
-<h2>📡 Domotique</h2>
+        <h2>
+            📡 Domotique
+        </h2>
 
-<div class="mode">
+        <div class="mode">
 
-<button id="simulationButton">
-🧪 Simulation
-</button>
+            <button id="simulationButton">
+                🧪 Simulation
+            </button>
 
-<button id="espButton">
-📡 ESP32
-</button>
+            <button id="espButton">
+                📡 ESP32
+            </button>
 
-</div>
+        </div>
 
-<p id="modeInfo" class="info">
-Mode simulation.
-</p>
+        <p id="modeInfo" class="info">
+            Mode simulation.
+        </p>
 
-</div>
+    </div>
 
 
-<!-- ESP32 -->
+    <!-- ESP32 -->
 
-<div class="panel">
+    <div class="panel">
 
-<h2>🔌 ESP32</h2>
+        <h2>
+            🔌 ESP32
+        </h2>
 
-<p class="info">
-Adresse IP de ton ESP32 :
-</p>
+        <p class="info">
+            Adresse IP de ton ESP32 :
+        </p>
 
-<input
-id="espIP"
-type="text"
-placeholder="192.168.1.50"
->
+        <input
+            id="espIP"
+            type="text"
+            placeholder="192.168.1.50"
+        >
 
-<br>
+        <br>
 
-<button id="saveESP" class="test-button">
-💾 Enregistrer
-</button>
+        <button
+            id="saveESP"
+            class="test-button"
+        >
+            💾 Enregistrer
+        </button>
 
-<button id="testESP" class="test-button">
-🔎 Tester
-</button>
+        <button
+            id="testESP"
+            class="test-button"
+        >
+            🔎 Tester
+        </button>
 
-<div id="espStatus">
-⚪ ESP32 non testé
-</div>
+        <div id="espStatus">
+            ⚪ ESP32 non testé
+        </div>
 
-</div>
+    </div>
 
 
-<!-- VOIX -->
+    <!-- VOIX -->
 
-<div class="panel">
+    <div class="panel">
 
-<h2>🔊 Voix</h2>
+        <h2>
+            🔊 Voix
+        </h2>
 
-<p>
-Voix :
-<strong id="voixUtilisee">Recherche...</strong>
-</p>
+        <p>
+            Voix :
+            <strong id="voixUtilisee">
+                Recherche...
+            </strong>
+        </p>
 
-<p>Vitesse</p>
+        <p>
+            Vitesse
+        </p>
 
-<input
-id="vitesse"
-type="range"
-min="0.6"
-max="1.4"
-step="0.1"
-value="1"
->
+        <input
+            id="vitesse"
+            type="range"
+            min="0.6"
+            max="1.4"
+            step="0.1"
+            value="1"
+        >
 
-<p>Ton</p>
+        <p>
+            Ton
+        </p>
 
-<input
-id="ton"
-type="range"
-min="0.7"
-max="1.4"
-step="0.1"
-value="1"
->
+        <input
+            id="ton"
+            type="range"
+            min="0.7"
+            max="1.4"
+            step="0.1"
+            value="1"
+        >
 
-</div>
+    </div>
 
 
-<!-- HISTORIQUE -->
+    <!-- HISTORIQUE -->
 
-<div class="panel">
+    <div class="panel">
 
-<h2>📜 Historique</h2>
+        <h2>
+            📜 Historique
+        </h2>
 
-<div id="historique" class="history">
-Aucun historique.
-</div>
+        <div id="historique" class="history">
+            Aucun historique.
+        </div>
 
-</div>
+    </div>
 
 </div>
 
@@ -549,2075 +679,2533 @@ Aucun historique.
 <script>
 
 /* =====================================================
-HOMEAI V2.6
+   VARIABLES
 ===================================================== */
 
 let NOM_IA =
-localStorage.getItem("homeai_nom") || "Nova";
+    localStorage.getItem("homeai_nom") || "Nova";
 
 let modeDomotique =
-localStorage.getItem("homeai_mode") || "simulation";
+    localStorage.getItem("homeai_mode") || "simulation";
 
 let espIP =
-localStorage.getItem("homeai_esp_ip") || "";
+    localStorage.getItem("homeai_esp_ip") || "";
 
 let historiqueData =
-JSON.parse(
-localStorage.getItem("homeai_historique") || "[]"
-);
+    JSON.parse(
+        localStorage.getItem("homeai_historique") || "[]"
+    );
 
 let maisonUtilisateur =
-JSON.parse(
-localStorage.getItem("homeai_maison") || "[]"
-);
+    JSON.parse(
+        localStorage.getItem("homeai_maison") || "[]"
+    );
 
 
 /* =====================================================
-CATALOGUE
+   CATALOGUE
 ===================================================== */
 
 const catalogue = [
 
-{
-id:"lumiere",
-nom:"Lumière",
-emoji:"💡",
-types:["electronique"]
-},
+    {
+        id:"lumiere",
+        nom:"Lumière",
+        emoji:"💡",
+        types:["electronique"]
+    },
 
-{
-id:"television",
-nom:"Télévision",
-emoji:"📺",
-types:["electronique"]
-},
+    {
+        id:"lampe",
+        nom:"Lampe",
+        emoji:"🛋️",
+        types:["electronique"]
+    },
 
-{
-id:"chauffage",
-nom:"Chauffage",
-emoji:"🌡️",
-types:["electronique"]
-},
+    {
+        id:"television",
+        nom:"Télévision",
+        emoji:"📺",
+        types:["electronique"]
+    },
 
-{
-id:"volets",
-nom:"Volets",
-emoji:"🪟",
-types:["electronique","mecanique"]
-},
+    {
+        id:"chauffage",
+        nom:"Chauffage",
+        emoji:"🌡️",
+        types:["electronique"]
+    },
 
-{
-id:"porte",
-nom:"Porte",
-emoji:"🚪",
-types:["electronique","mecanique"]
-},
+    {
+        id:"volets",
+        nom:"Volets",
+        emoji:"🪟",
+        types:["electronique","mecanique"]
+    },
 
-{
-id:"serrure",
-nom:"Serrure",
-emoji:"🔒",
-types:["electronique","mecanique"]
-},
+    {
+        id:"porte",
+        nom:"Porte",
+        emoji:"🚪",
+        types:["electronique","mecanique"]
+    },
 
-{
-id:"four",
-nom:"Four",
-emoji:"🔥",
-types:["electronique"]
-},
+    {
+        id:"serrure",
+        nom:"Serrure",
+        emoji:"🔒",
+        types:["electronique","mecanique"]
+    },
 
-{
-id:"microondes",
-nom:"Micro-ondes",
-emoji:"📡",
-types:["electronique"]
-},
+    {
+        id:"four",
+        nom:"Four",
+        emoji:"🔥",
+        types:["electronique"]
+    },
 
-{
-id:"cafetiere",
-nom:"Cafetière",
-emoji:"☕",
-types:["electronique"]
-},
+    {
+        id:"microondes",
+        nom:"Micro-ondes",
+        emoji:"📡",
+        types:["electronique"]
+    },
 
-{
-id:"ventilateur",
-nom:"Ventilateur",
-emoji:"🌀",
-types:["electronique"]
-},
+    {
+        id:"cafetiere",
+        nom:"Cafetière",
+        emoji:"☕",
+        types:["electronique"]
+    },
 
-{
-id:"porte_garage",
-nom:"Porte de garage",
-emoji:"🚗",
-types:["electronique","mecanique"]
-},
+    {
+        id:"ventilateur",
+        nom:"Ventilateur",
+        emoji:"🌀",
+        types:["electronique"]
+    },
 
-{
-id:"aspirateur",
-nom:"Aspirateur",
-emoji:"🧹",
-types:["electronique"]
-},
+    {
+        id:"porte_garage",
+        nom:"Porte de garage",
+        emoji:"🚗",
+        types:["electronique","mecanique"]
+    },
 
-{
-id:"ordinateur",
-nom:"Ordinateur",
-emoji:"💻",
-types:["electronique"]
-},
+    {
+        id:"aspirateur",
+        nom:"Aspirateur",
+        emoji:"🧹",
+        types:["electronique"]
+    },
 
-{
-id:"console",
-nom:"Console",
-emoji:"🎮",
-types:["electronique"]
-},
+    {
+        id:"ordinateur",
+        nom:"Ordinateur",
+        emoji:"💻",
+        types:["electronique"]
+    },
 
-{
-id:"enceinte",
-nom:"Enceinte",
-emoji:"🔊",
-types:["electronique"]
-},
+    {
+        id:"console",
+        nom:"Console",
+        emoji:"🎮",
+        types:["electronique"]
+    },
 
-{
-id:"lampe",
-nom:"Lampe",
-emoji:"🛋️",
-types:["electronique"]
-},
+    {
+        id:"enceinte",
+        nom:"Enceinte",
+        emoji:"🔊",
+        types:["electronique"]
+    },
 
-{
-id:"frigo",
-nom:"Réfrigérateur",
-emoji:"🧊",
-types:["electronique"]
-},
+    {
+        id:"frigo",
+        nom:"Réfrigérateur",
+        emoji:"🧊",
+        types:["electronique"]
+    },
 
-{
-id:"lave_linge",
-nom:"Lave-linge",
-emoji:"🧺",
-types:["electronique"]
-},
+    {
+        id:"lave_linge",
+        nom:"Lave-linge",
+        emoji:"🧺",
+        types:["electronique"]
+    },
 
-{
-id:"lave_vaisselle",
-nom:"Lave-vaisselle",
-emoji:"🍽️",
-types:["electronique"]
-},
+    {
+        id:"lave_vaisselle",
+        nom:"Lave-vaisselle",
+        emoji:"🍽️",
+        types:["electronique"]
+    },
 
-{
-id:"alarme",
-nom:"Alarme",
-emoji:"🚨",
-types:["electronique"]
-}
+    {
+        id:"alarme",
+        nom:"Alarme",
+        emoji:"🚨",
+        types:["electronique"]
+    }
 
 ];
 
 
 /* =====================================================
-PIÈCES
+   PIÈCES
 ===================================================== */
 
 const pieces = [
 
-{id:"salon",nom:"Salon",emoji:"🛋️"},
-{id:"cuisine",nom:"Cuisine",emoji:"🍳"},
-{id:"chambre",nom:"Chambre",emoji:"🛏️"},
-{id:"salledebain",nom:"Salle de bain",emoji:"🚿"},
-{id:"bureau",nom:"Bureau",emoji:"🖥️"},
-{id:"garage",nom:"Garage",emoji:"🚗"},
-{id:"entree",nom:"Entrée",emoji:"🚪"},
-{id:"couloir",nom:"Couloir",emoji:"🚶"},
-{id:"exterieur",nom:"Extérieur",emoji:"🌳"}
+    {
+        id:"salon",
+        nom:"Salon",
+        emoji:"🛋️"
+    },
+
+    {
+        id:"cuisine",
+        nom:"Cuisine",
+        emoji:"🍳"
+    },
+
+    {
+        id:"chambre",
+        nom:"Chambre",
+        emoji:"🛏️"
+    },
+
+    {
+        id:"salledebain",
+        nom:"Salle de bain",
+        emoji:"🚿"
+    },
+
+    {
+        id:"bureau",
+        nom:"Bureau",
+        emoji:"🖥️"
+    },
+
+    {
+        id:"garage",
+        nom:"Garage",
+        emoji:"🚗"
+    },
+
+    {
+        id:"entree",
+        nom:"Entrée",
+        emoji:"🚪"
+    },
+
+    {
+        id:"couloir",
+        nom:"Couloir",
+        emoji:"🚶"
+    },
+
+    {
+        id:"exterieur",
+        nom:"Extérieur",
+        emoji:"🌳"
+    }
 
 ];
 
 
 /* =====================================================
-ÉLÉMENTS
+   ÉLÉMENTS
 ===================================================== */
 
 const setupScreen =
-document.getElementById("setupScreen");
+    document.getElementById("setupScreen");
 
 const appScreen =
-document.getElementById("appScreen");
+    document.getElementById("appScreen");
 
 const setupContent =
-document.getElementById("setupContent");
+    document.getElementById("setupContent");
 
 const setupNext =
-document.getElementById("setupNext");
+    document.getElementById("setupNext");
 
 const setupBack =
-document.getElementById("setupBack");
+    document.getElementById("setupBack");
+
+const exitSetup =
+    document.getElementById("exitSetup");
 
 const progressBar =
-document.getElementById("progressBar");
+    document.getElementById("progressBar");
 
 const setupDescription =
-document.getElementById("setupDescription");
+    document.getElementById("setupDescription");
 
 const status =
-document.getElementById("status");
+    document.getElementById("status");
 
 const interaction =
-document.getElementById("interaction");
+    document.getElementById("interaction");
 
 const nomAffiche =
-document.getElementById("nomAffiche");
+    document.getElementById("nomAffiche");
 
 const comprehension =
-document.getElementById("comprehension");
+    document.getElementById("comprehension");
 
 const maison =
-document.getElementById("maison");
+    document.getElementById("maison");
 
 const historique =
-document.getElementById("historique");
+    document.getElementById("historique");
 
 const questionInput =
-document.getElementById("questionInput");
+    document.getElementById("questionInput");
 
 const sendButton =
-document.getElementById("sendButton");
+    document.getElementById("sendButton");
 
 const vitesse =
-document.getElementById("vitesse");
+    document.getElementById("vitesse");
 
 const ton =
-document.getElementById("ton");
+    document.getElementById("ton");
 
 const voixUtilisee =
-document.getElementById("voixUtilisee");
+    document.getElementById("voixUtilisee");
 
 const espIPInput =
-document.getElementById("espIP");
+    document.getElementById("espIP");
 
 const espStatus =
-document.getElementById("espStatus");
+    document.getElementById("espStatus");
 
 const modeInfo =
-document.getElementById("modeInfo");
+    document.getElementById("modeInfo");
 
-nomAffiche.textContent=NOM_IA;
-espIPInput.value=espIP;
+
+nomAffiche.textContent =
+    NOM_IA;
+
+espIPInput.value =
+    espIP;
 
 
 /* =====================================================
-ÉTAT CONFIGURATION
+   ÉTAT DE CONFIGURATION
 ===================================================== */
 
-let setupStep=0;
+let setupStep = 0;
 
-let appareilEnCours={
-catalogueId:null,
-piece:null,
-type:null,
-nom:""
+let appareilEnCours = {
+    catalogueId:null,
+    piece:null,
+    type:null,
+    nom:""
 };
 
 
 /* =====================================================
-AFFICHER CONFIGURATION
+   AFFICHER CONFIGURATION
 ===================================================== */
 
 function afficherSetup(){
 
-progressBar.style.width=
-((setupStep+1)/4*100)+"%";
+    progressBar.style.width =
+        ((setupStep + 1) / 4 * 100) + "%";
 
-setupBack.disabled=
-setupStep===0;
+    setupBack.disabled =
+        setupStep === 0;
 
 
-/* -----------------------------------------------------
-1 — APPAREIL
------------------------------------------------------ */
+    /* APPAREIL */
 
-if(setupStep===0){
+    if(setupStep === 0){
 
-setupDescription.textContent=
-"Choisis l'appareil que tu veux ajouter.";
+        setupDescription.textContent =
+            "Choisis l'appareil que tu veux ajouter.";
 
-setupContent.innerHTML=`
+        setupContent.innerHTML = `
 
-<div class="question">
-Quel appareil veux-tu ajouter ?
-</div>
+            <div class="question">
+                Quel appareil veux-tu ajouter ?
+            </div>
 
-<div class="options">
+            <div class="options">
 
-${catalogue.map(a=>`
+                ${catalogue.map(a => `
 
-<button
-class="option ${
-appareilEnCours.catalogueId===a.id
-?"selected":""
-}"
-data-device="${a.id}"
->
+                    <button
+                        class="option ${
+                            appareilEnCours.catalogueId === a.id
+                            ? "selected"
+                            : ""
+                        }"
+                        data-device="${a.id}"
+                    >
 
-${a.emoji}
-<strong>${a.nom}</strong>
+                        ${a.emoji}
 
-<small>
-${
-a.types.length===2
-?
-"Électrique + mécanique"
-:
-"Électrique"
-}
-</small>
+                        <strong>
+                            ${a.nom}
+                        </strong>
 
-</button>
+                        <small>
+                            ${
+                                a.types.length === 2
+                                ? "Électrique + mécanique"
+                                : "Électrique"
+                            }
+                        </small>
 
-`).join("")}
+                    </button>
 
-</div>
-`;
+                `).join("")}
 
-document
-.querySelectorAll("[data-device]")
-.forEach(button=>{
+            </div>
+        `;
 
-button.addEventListener(
-"click",
-function(){
+        document
+            .querySelectorAll("[data-device]")
+            .forEach(button => {
 
-appareilEnCours.catalogueId=
-this.dataset.device;
+                button.addEventListener(
+                    "click",
+                    function(){
 
-document
-.querySelectorAll("[data-device]")
-.forEach(b=>
-b.classList.remove("selected")
-);
+                        appareilEnCours.catalogueId =
+                            this.dataset.device;
 
-this.classList.add("selected");
+                        document
+                            .querySelectorAll("[data-device]")
+                            .forEach(b =>
+                                b.classList.remove("selected")
+                            );
 
-});
+                        this.classList.add("selected");
 
-});
+                    }
+                );
 
-}
+            });
 
+    }
 
-/* -----------------------------------------------------
-2 — PIÈCE
------------------------------------------------------ */
 
-if(setupStep===1){
+    /* PIÈCE */
 
-setupDescription.textContent=
-"Indique où se trouve cet appareil.";
+    if(setupStep === 1){
 
-setupContent.innerHTML=`
+        setupDescription.textContent =
+            "Indique où se trouve cet appareil.";
 
-<div class="question">
-Dans quelle pièce se trouve-t-il ?
-</div>
+        setupContent.innerHTML = `
 
-<div class="options">
+            <div class="question">
+                Dans quelle pièce se trouve-t-il ?
+            </div>
 
-${pieces.map(p=>`
+            <div class="options">
 
-<button
-class="option ${
-appareilEnCours.piece===p.id
-?"selected":""
-}"
-data-piece="${p.id}"
->
+                ${pieces.map(p => `
 
-${p.emoji}
-<strong>${p.nom}</strong>
+                    <button
+                        class="option ${
+                            appareilEnCours.piece === p.id
+                            ? "selected"
+                            : ""
+                        }"
+                        data-piece="${p.id}"
+                    >
 
-</button>
+                        ${p.emoji}
 
-`).join("")}
+                        <strong>
+                            ${p.nom}
+                        </strong>
 
-</div>
-`;
+                    </button>
 
-document
-.querySelectorAll("[data-piece]")
-.forEach(button=>{
+                `).join("")}
 
-button.addEventListener(
-"click",
-function(){
+            </div>
+        `;
 
-appareilEnCours.piece=
-this.dataset.piece;
+        document
+            .querySelectorAll("[data-piece]")
+            .forEach(button => {
 
-document
-.querySelectorAll("[data-piece]")
-.forEach(b=>
-b.classList.remove("selected")
-);
+                button.addEventListener(
+                    "click",
+                    function(){
 
-this.classList.add("selected");
+                        appareilEnCours.piece =
+                            this.dataset.piece;
 
-});
+                        document
+                            .querySelectorAll("[data-piece]")
+                            .forEach(b =>
+                                b.classList.remove("selected")
+                            );
 
-});
+                        this.classList.add("selected");
 
-}
+                    }
+                );
 
+            });
 
-/* -----------------------------------------------------
-3 — TYPE
------------------------------------------------------ */
+    }
 
-if(setupStep===2){
 
-const appareil=
-catalogue.find(
-a=>a.id===appareilEnCours.catalogueId
-);
+    /* TYPE */
 
-setupDescription.textContent=
-"Choisis son mode de fonctionnement.";
+    if(setupStep === 2){
 
-let options="";
+        const appareil =
+            catalogue.find(
+                a =>
+                    a.id ===
+                    appareilEnCours.catalogueId
+            );
 
-if(
-appareil &&
-appareil.types.includes("electronique")
-){
+        setupDescription.textContent =
+            "Choisis son mode de fonctionnement.";
 
-options+=`
+        let options = "";
 
-<button
-class="option ${
-appareilEnCours.type==="electronique"
-?"selected":""
-}"
-data-type="electronique"
->
+        if(
+            appareil &&
+            appareil.types.includes("electronique")
+        ){
 
-⚡
-<strong>Électrique</strong>
+            options += `
 
-<small>
-L'appareil utilise l'électricité.
-</small>
+                <button
+                    class="option ${
+                        appareilEnCours.type === "electronique"
+                        ? "selected"
+                        : ""
+                    }"
+                    data-type="electronique"
+                >
 
-</button>
-`;
+                    ⚡
 
-}
+                    <strong>
+                        Électrique
+                    </strong>
 
-if(
-appareil &&
-appareil.types.includes("mecanique")
-){
+                    <small>
+                        L'appareil utilise l'électricité.
+                    </small>
 
-options+=`
+                </button>
+            `;
+        }
 
-<button
-class="option ${
-appareilEnCours.type==="mecanique"
-?"selected":""
-}"
-data-type="mecanique"
->
+        if(
+            appareil &&
+            appareil.types.includes("mecanique")
+        ){
 
-⚙️
-<strong>Mécanique</strong>
+            options += `
 
-<small>
-Fonctionnement mécanique.
-</small>
+                <button
+                    class="option ${
+                        appareilEnCours.type === "mecanique"
+                        ? "selected"
+                        : ""
+                    }"
+                    data-type="mecanique"
+                >
 
-</button>
+                    ⚙️
 
-<button
-class="option ${
-appareilEnCours.type==="mixte"
-?"selected":""
-}"
-data-type="mixte"
->
+                    <strong>
+                        Mécanique
+                    </strong>
 
-🔌⚙️
-<strong>Électrique + mécanique</strong>
+                    <small>
+                        Fonctionnement mécanique.
+                    </small>
 
-<small>
-Les deux systèmes.
-</small>
+                </button>
 
-</button>
-`;
+                <button
+                    class="option ${
+                        appareilEnCours.type === "mixte"
+                        ? "selected"
+                        : ""
+                    }"
+                    data-type="mixte"
+                >
 
-}
+                    🔌⚙️
 
-setupContent.innerHTML=`
+                    <strong>
+                        Électrique + mécanique
+                    </strong>
 
-<div class="question">
-Comment fonctionne-t-il ?
-</div>
+                    <small>
+                        Les deux systèmes.
+                    </small>
 
-<div class="options">
-${options}
-</div>
-`;
+                </button>
+            `;
+        }
 
-document
-.querySelectorAll("[data-type]")
-.forEach(button=>{
+        setupContent.innerHTML = `
 
-button.addEventListener(
-"click",
-function(){
+            <div class="question">
+                Comment fonctionne-t-il ?
+            </div>
 
-appareilEnCours.type=
-this.dataset.type;
+            <div class="options">
+                ${options}
+            </div>
+        `;
 
-document
-.querySelectorAll("[data-type]")
-.forEach(b=>
-b.classList.remove("selected")
-);
+        document
+            .querySelectorAll("[data-type]")
+            .forEach(button => {
 
-this.classList.add("selected");
+                button.addEventListener(
+                    "click",
+                    function(){
 
-});
+                        appareilEnCours.type =
+                            this.dataset.type;
 
-});
+                        document
+                            .querySelectorAll("[data-type]")
+                            .forEach(b =>
+                                b.classList.remove("selected")
+                            );
 
-}
+                        this.classList.add("selected");
 
+                    }
+                );
 
-/* -----------------------------------------------------
-4 — NOM
------------------------------------------------------ */
+            });
 
-if(setupStep===3){
+    }
 
-setupDescription.textContent=
-"Donne-lui un nom que Nova pourra comprendre.";
 
-setupContent.innerHTML=`
+    /* NOM */
 
-<div class="question">
-Comment veux-tu l'appeler ?
-</div>
+    if(setupStep === 3){
 
-<p class="setup-description">
-Exemple : « Lampe du canapé », « TV du salon »,
-« Volet chambre »...
-</p>
+        setupDescription.textContent =
+            "Donne-lui un nom que Nova pourra comprendre.";
 
-<input
-id="deviceName"
-type="text"
-placeholder="Nom personnalisé"
-value="${appareilEnCours.nom}"
->
-`;
+        setupContent.innerHTML = `
 
-document
-.getElementById("deviceName")
-.addEventListener(
-"input",
-function(){
+            <div class="question">
+                Comment veux-tu l'appeler ?
+            </div>
 
-appareilEnCours.nom=
-this.value;
+            <p class="setup-description">
+                Exemple : « Lampe du canapé »,
+                « TV du salon »,
+                « Volet chambre »...
+            </p>
 
-});
+            <input
+                id="deviceName"
+                type="text"
+                placeholder="Nom personnalisé"
+                value="${appareilEnCours.nom}"
+            >
+        `;
 
-}
+        document
+            .getElementById("deviceName")
+            .addEventListener(
+                "input",
+                function(){
 
-setupNext.textContent=
-setupStep===3
-?
-"Ajouter l'appareil ✓"
-:
-"Continuer →";
+                    appareilEnCours.nom =
+                        this.value;
+
+                }
+            );
+
+    }
+
+
+    setupNext.textContent =
+        setupStep === 3
+        ? "Ajouter l'appareil ✓"
+        : "Continuer →";
 
 }
 
 
 /* =====================================================
-BOUTON SUIVANT
+   BOUTON EXIT
+===================================================== */
+
+exitSetup.addEventListener(
+    "click",
+    function(){
+
+        appareilEnCours = {
+            catalogueId:null,
+            piece:null,
+            type:null,
+            nom:""
+        };
+
+        setupScreen.classList.add(
+            "hidden"
+        );
+
+        appScreen.classList.remove(
+            "hidden"
+        );
+
+        afficherMaison();
+
+        afficherHistorique();
+
+        actualiserMode();
+
+        status.innerHTML =
+            "🟢 " +
+            NOM_IA +
+            " est prête.";
+
+        interaction.textContent =
+            "Création d'appareil annulée.";
+
+    }
+);
+
+
+/* =====================================================
+   BOUTON SUIVANT
 ===================================================== */
 
 setupNext.addEventListener(
-"click",
-function(){
+    "click",
+    function(){
 
-if(setupStep===0){
+        if(setupStep === 0){
 
-if(!appareilEnCours.catalogueId){
+            if(!appareilEnCours.catalogueId){
 
-alert("Choisis un appareil.");
+                alert(
+                    "Choisis un appareil."
+                );
 
-return;
+                return;
+            }
 
-}
+            setupStep = 1;
 
-setupStep=1;
-afficherSetup();
-return;
+            afficherSetup();
 
-}
-
-
-if(setupStep===1){
-
-if(!appareilEnCours.piece){
-
-alert("Choisis une pièce.");
-
-return;
-
-}
-
-setupStep=2;
-afficherSetup();
-return;
-
-}
+            return;
+        }
 
 
-if(setupStep===2){
+        if(setupStep === 1){
 
-if(!appareilEnCours.type){
+            if(!appareilEnCours.piece){
 
-alert(
-"Choisis le type de fonctionnement."
+                alert(
+                    "Choisis une pièce."
+                );
+
+                return;
+            }
+
+            setupStep = 2;
+
+            afficherSetup();
+
+            return;
+        }
+
+
+        if(setupStep === 2){
+
+            if(!appareilEnCours.type){
+
+                alert(
+                    "Choisis le type de fonctionnement."
+                );
+
+                return;
+            }
+
+            setupStep = 3;
+
+            afficherSetup();
+
+            return;
+        }
+
+
+        if(setupStep === 3){
+
+            const nom =
+                document
+                    .getElementById("deviceName")
+                    .value
+                    .trim();
+
+            if(!nom){
+
+                alert(
+                    "Donne un nom à l'appareil."
+                );
+
+                return;
+            }
+
+            appareilEnCours.nom =
+                nom;
+
+            ajouterAppareil();
+
+        }
+
+    }
 );
-
-return;
-
-}
-
-setupStep=3;
-afficherSetup();
-return;
-
-}
-
-
-if(setupStep===3){
-
-const nom=
-document
-.getElementById("deviceName")
-.value.trim();
-
-if(!nom){
-
-alert(
-"Donne un nom à l'appareil."
-);
-
-return;
-
-}
-
-appareilEnCours.nom=nom;
-
-ajouterAppareil();
-
-}
-
-});
 
 
 /* =====================================================
-AJOUTER APPAREIL
+   RETOUR
+===================================================== */
+
+setupBack.addEventListener(
+    "click",
+    function(){
+
+        if(setupStep > 0){
+
+            setupStep--;
+
+            afficherSetup();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   AJOUTER APPAREIL
 ===================================================== */
 
 function ajouterAppareil(){
 
-const base=
-catalogue.find(
-a=>a.id===appareilEnCours.catalogueId
-);
+    const base =
+        catalogue.find(
+            a =>
+                a.id ===
+                appareilEnCours.catalogueId
+        );
 
-const appareil={
+    const appareil = {
 
-id:
-"device_"+Date.now()+"_"+Math.random()
-.toString(36)
-.substring(2,8),
+        id:
+            "device_" +
+            Date.now() +
+            "_" +
+            Math.random()
+                .toString(36)
+                .substring(2,8),
 
-catalogueId:
-base.id,
+        catalogueId:
+            base.id,
 
-nom:
-appareilEnCours.nom,
+        nom:
+            appareilEnCours.nom,
 
-emoji:
-base.emoji,
+        emoji:
+            base.emoji,
 
-piece:
-appareilEnCours.piece,
+        piece:
+            appareilEnCours.piece,
 
-type:
-appareilEnCours.type,
+        type:
+            appareilEnCours.type,
 
-etat:false
+        etat:false
 
-};
+    };
 
-maisonUtilisateur.push(appareil);
+    maisonUtilisateur.push(
+        appareil
+    );
 
-localStorage.setItem(
-"homeai_maison",
-JSON.stringify(
-maisonUtilisateur
-)
-);
+    localStorage.setItem(
+        "homeai_maison",
+        JSON.stringify(
+            maisonUtilisateur
+        )
+    );
 
-const continuer=
-confirm(
-"✅ "+appareil.nom+
-" a été ajouté dans "+
-pieces.find(
-p=>p.id===appareil.piece
-).nom+
-".\n\nVeux-tu ajouter un autre appareil ?"
-);
 
-if(continuer){
+    const continuer =
+        confirm(
+            "✅ " +
+            appareil.nom +
+            " a été ajouté.\n\n" +
+            "Veux-tu ajouter un autre appareil ?"
+        );
 
-appareilEnCours={
-catalogueId:null,
-piece:null,
-type:null,
-nom:""
-};
 
-setupStep=0;
+    if(continuer){
 
-afficherSetup();
+        appareilEnCours = {
+            catalogueId:null,
+            piece:null,
+            type:null,
+            nom:""
+        };
 
-}
-else{
+        setupStep = 0;
 
-terminerConfiguration();
+        afficherSetup();
 
-}
+    }
+    else{
+
+        terminerConfiguration();
+
+    }
 
 }
 
 
 /* =====================================================
-RETOUR
-===================================================== */
-
-setupBack.addEventListener(
-"click",
-function(){
-
-if(setupStep>0){
-
-setupStep--;
-
-afficherSetup();
-
-}
-
-});
-
-
-/* =====================================================
-FIN CONFIGURATION
+   FIN CONFIGURATION
 ===================================================== */
 
 function terminerConfiguration(){
 
-localStorage.setItem(
-"homeai_configuree",
-"oui"
-);
+    localStorage.setItem(
+        "homeai_configuree",
+        "oui"
+    );
 
-setupScreen.classList.add("hidden");
-appScreen.classList.remove("hidden");
+    setupScreen.classList.add(
+        "hidden"
+    );
 
-afficherMaison();
-afficherHistorique();
-actualiserMode();
+    appScreen.classList.remove(
+        "hidden"
+    );
 
-status.innerHTML=
-"🟢 "+NOM_IA+" est prête.";
+    afficherMaison();
 
-parler(
-"Configuration terminée. Je connais maintenant ta maison."
-);
+    afficherHistorique();
+
+    actualiserMode();
+
+    status.innerHTML =
+        "🟢 " +
+        NOM_IA +
+        " est prête.";
+
+    interaction.textContent =
+        "Configuration terminée.";
+
+    parler(
+        "Configuration terminée. " +
+        "Je connais maintenant ta maison."
+    );
 
 }
 
 
 /* =====================================================
-AJOUTER APPAREIL DEPUIS APPLICATION
+   AJOUTER APPAREIL
 ===================================================== */
 
 document
-.getElementById("ajouterAppareil")
-.addEventListener(
-"click",
-function(){
+    .getElementById("ajouterAppareil")
+    .addEventListener(
+        "click",
+        function(){
 
-appareilEnCours={
-catalogueId:null,
-piece:null,
-type:null,
-nom:""
-};
+            appareilEnCours = {
+                catalogueId:null,
+                piece:null,
+                type:null,
+                nom:""
+            };
 
-setupStep=0;
+            setupStep = 0;
 
-setupScreen.classList.remove("hidden");
-appScreen.classList.add("hidden");
+            setupScreen.classList.remove(
+                "hidden"
+            );
 
-afficherSetup();
+            appScreen.classList.add(
+                "hidden"
+            );
 
-});
+            afficherSetup();
 
-
-document
-.getElementById("modifierMaison")
-.addEventListener(
-"click",
-function(){
-
-appareilEnCours={
-catalogueId:null,
-piece:null,
-type:null,
-nom:""
-};
-
-setupStep=0;
-
-setupScreen.classList.remove("hidden");
-appScreen.classList.add("hidden");
-
-afficherSetup();
-
-});
+        }
+    );
 
 
 /* =====================================================
-AFFICHER MAISON
+   MODIFIER MA MAISON
+===================================================== */
+
+document
+    .getElementById("modifierMaison")
+    .addEventListener(
+        "click",
+        function(){
+
+            appareilEnCours = {
+                catalogueId:null,
+                piece:null,
+                type:null,
+                nom:""
+            };
+
+            setupStep = 0;
+
+            setupScreen.classList.remove(
+                "hidden"
+            );
+
+            appScreen.classList.add(
+                "hidden"
+            );
+
+            afficherSetup();
+
+        }
+    );
+
+
+/* =====================================================
+   AFFICHER MA MAISON
 ===================================================== */
 
 function afficherMaison(){
 
-if(!maisonUtilisateur.length){
+    if(!maisonUtilisateur.length){
 
-maison.innerHTML=`
-<p class="info">
-Aucun appareil configuré.
-</p>
-`;
+        maison.innerHTML = `
+            <p class="info">
+                Aucun appareil configuré.
+            </p>
+        `;
 
-return;
+        return;
+    }
 
-}
 
-maison.innerHTML="";
+    maison.innerHTML = "";
 
-pieces.forEach(piece=>{
 
-const appareils=
-maisonUtilisateur.filter(
-a=>a.piece===piece.id
-);
+    pieces.forEach(
+        piece => {
 
-if(!appareils.length)return;
+            const appareils =
+                maisonUtilisateur.filter(
+                    a =>
+                        a.piece ===
+                        piece.id
+                );
 
-let html=`
+            if(!appareils.length)
+                return;
 
-<div class="room">
 
-<div class="room-title">
-${piece.emoji} ${piece.nom}
-</div>
-`;
+            let html = `
 
-appareils.forEach(appareil=>{
+                <div class="room">
 
-html+=`
+                    <div class="room-title">
+                        ${piece.emoji}
+                        ${piece.nom}
+                    </div>
+            `;
 
-<div class="device">
 
-<div class="device-name">
+            appareils.forEach(
+                appareil => {
 
-${appareil.emoji}
-${appareil.nom}
+                    html += `
 
-</div>
+                        <div class="device">
 
-<span class="badge">
+                            <div class="device-name">
 
-${
-appareil.type==="electronique"
-?
-"⚡ Électrique"
-:
-appareil.type==="mecanique"
-?
-"⚙️ Mécanique"
-:
-"🔌⚙️ Électrique + mécanique"
-}
+                                ${appareil.emoji}
 
-</span>
+                                ${appareil.nom}
 
-<br><br>
+                            </div>
 
-${
-appareil.etat
-?
-'<span class="success">🟢 Actif</span>'
-:
-'⚪ Inactif'
-}
+                            <span class="badge">
 
-<br>
+                                ${
+                                    appareil.type ===
+                                    "electronique"
 
-<button
-class="delete-button"
-onclick="supprimerAppareil('${appareil.id}')"
->
-🗑️ Supprimer
-</button>
+                                    ? "⚡ Électrique"
 
-</div>
-`;
+                                    : appareil.type ===
+                                    "mecanique"
 
-});
+                                    ? "⚙️ Mécanique"
 
-html+=`</div>`;
+                                    : "🔌⚙️ Électrique + mécanique"
+                                }
 
-maison.innerHTML+=html;
+                            </span>
 
-});
+                            <br><br>
+
+                            ${
+                                appareil.etat
+                                ? '<span class="success">🟢 Actif</span>'
+                                : '⚪ Inactif'
+                            }
+
+                            <br>
+
+                            <button
+                                class="delete-button"
+                                onclick="supprimerAppareil('${appareil.id}')"
+                            >
+                                🗑️ Supprimer
+                            </button>
+
+                        </div>
+                    `;
+
+                }
+            );
+
+
+            html += `
+                </div>
+            `;
+
+            maison.innerHTML +=
+                html;
+
+        }
+    );
 
 }
 
 
 /* =====================================================
-SUPPRIMER
+   SUPPRIMER APPAREIL
 ===================================================== */
 
 function supprimerAppareil(id){
 
-const appareil=
-maisonUtilisateur.find(
-a=>a.id===id
-);
+    const appareil =
+        maisonUtilisateur.find(
+            a =>
+                a.id === id
+        );
 
-if(!appareil)return;
+    if(!appareil)
+        return;
 
-if(
-!confirm(
-"Supprimer "+appareil.nom+" ?"
-)
-)return;
 
-maisonUtilisateur=
-maisonUtilisateur.filter(
-a=>a.id!==id
-);
+    if(
+        !confirm(
+            "Supprimer " +
+            appareil.nom +
+            " ?"
+        )
+    )
+        return;
 
-localStorage.setItem(
-"homeai_maison",
-JSON.stringify(
-maisonUtilisateur
-)
-);
 
-afficherMaison();
+    maisonUtilisateur =
+        maisonUtilisateur.filter(
+            a =>
+                a.id !== id
+        );
+
+
+    localStorage.setItem(
+        "homeai_maison",
+        JSON.stringify(
+            maisonUtilisateur
+        )
+    );
+
+
+    afficherMaison();
 
 }
 
 
 /* =====================================================
-NORMALISATION
+   NORMALISER
 ===================================================== */
 
 function normaliser(texte){
 
-return texte
-.toLowerCase()
-.normalize("NFD")
-.replace(
-/[\u0300-\u036f]/g,
-""
-)
-.replace(
-/[!?;:,.]/g,
-" "
-)
-.replace(
-/\s+/g,
-" "
-)
-.trim();
+    return texte
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(
+            /[\u0300-\u036f]/g,
+            ""
+        )
+        .replace(
+            /[!?;:,.]/g,
+            " "
+        )
+        .replace(
+            /\s+/g,
+            " "
+        )
+        .trim();
 
 }
 
 
 /* =====================================================
-TROUVER APPAREILS
+   TROUVER APPAREILS
 ===================================================== */
 
 function trouverAppareils(phrase){
 
-const t=normaliser(phrase);
+    const t =
+        normaliser(phrase);
 
-return maisonUtilisateur.filter(
-appareil=>{
+    return maisonUtilisateur.filter(
+        appareil => {
 
-const nom=
-normaliser(appareil.nom);
+            const nom =
+                normaliser(
+                    appareil.nom
+                );
 
-if(t.includes(nom))
-return true;
+            if(
+                t.includes(nom)
+            )
+                return true;
 
-const base=
-catalogue.find(
-a=>a.id===appareil.catalogueId
-);
 
-if(
-base &&
-t.includes(
-normaliser(base.nom)
-)
-)
-return true;
+            const base =
+                catalogue.find(
+                    a =>
+                        a.id ===
+                        appareil.catalogueId
+                );
 
-return false;
 
-});
+            if(
+                base &&
+                t.includes(
+                    normaliser(
+                        base.nom
+                    )
+                )
+            )
+                return true;
+
+
+            return false;
+
+        }
+    );
 
 }
 
 
 /* =====================================================
-TROUVER PIÈCE
+   TROUVER PIÈCE
 ===================================================== */
 
 function trouverPiece(phrase){
 
-const t=normaliser(phrase);
+    const t =
+        normaliser(phrase);
 
-return pieces.find(
-p=>
-t.includes(
-normaliser(p.nom)
-)
-);
+    return pieces.find(
+        p =>
+            t.includes(
+                normaliser(
+                    p.nom
+                )
+            )
+    );
 
 }
 
 
 /* =====================================================
-ACTIONS
+   ACTIONS
 ===================================================== */
 
-const actions={
+const actions = {
 
-allumer:[
-"allume",
-"allumer",
-"active",
-"activer",
-"demarre",
-"demarrer",
-"lance",
-"lancer"
-],
+    allumer:[
+        "allume",
+        "allumer",
+        "active",
+        "activer",
+        "demarre",
+        "demarrer",
+        "lance",
+        "lancer"
+    ],
 
-eteindre:[
-"eteins",
-"eteindre",
-"coupe",
-"couper",
-"desactive",
-"desactiver",
-"arrete",
-"arreter"
-],
+    eteindre:[
+        "eteins",
+        "eteindre",
+        "coupe",
+        "couper",
+        "desactive",
+        "desactiver",
+        "arrete",
+        "arreter"
+    ],
 
-ouvrir:[
-"ouvre",
-"ouvrir",
-"deverrouille",
-"deverrouiller"
-],
+    ouvrir:[
+        "ouvre",
+        "ouvrir",
+        "deverrouille",
+        "deverrouiller"
+    ],
 
-fermer:[
-"ferme",
-"fermer",
-"referme",
-"refermer"
-],
+    fermer:[
+        "ferme",
+        "fermer",
+        "referme",
+        "refermer"
+    ],
 
-verrouiller:[
-"verrouille",
-"verrouiller"
-]
+    verrouiller:[
+        "verrouille",
+        "verrouiller"
+    ]
 
 };
 
 
 function trouverAction(phrase){
 
-const t=normaliser(phrase);
+    const t =
+        normaliser(phrase);
 
-for(
-const action in actions
-){
 
-if(
-actions[action].some(
-mot=>t.includes(mot)
-)
-){
+    for(
+        const action in actions
+    ){
 
-return action;
+        if(
+            actions[action].some(
+                mot =>
+                    t.includes(mot)
+            )
+        ){
 
-}
+            return action;
 
-}
+        }
 
-return null;
+    }
+
+
+    return null;
 
 }
 
 
 /* =====================================================
-NOUVEAU NOM NOVA
+   CHANGEMENT DE NOM
 ===================================================== */
 
 function detecterNouveauNom(phrase){
 
-const t=normaliser(phrase);
+    const t =
+        normaliser(phrase);
 
-const motifs=[
 
-/appelle toi (.+)/,
+    const motifs = [
 
-/appelle toi desormais (.+)/,
+        /appelle toi (.+)/,
 
-/change ton nom pour (.+)/,
+        /appelle toi desormais (.+)/,
 
-/change de nom pour (.+)/,
+        /change ton nom pour (.+)/,
 
-/ton nom est (.+)/,
+        /change de nom pour (.+)/,
 
-/tu t appelles (.+)/,
+        /ton nom est (.+)/,
 
-/je veux t appeler (.+)/
+        /tu t appelles (.+)/,
 
-];
+        /je veux t appeler (.+)/
 
-for(
-const motif of motifs
-){
+    ];
 
-const match=t.match(motif);
 
-if(
-match &&
-match[1]
-){
+    for(
+        const motif of motifs
+    ){
 
-return match[1]
-.trim()
-.split(" ")
-.map(
-x=>
-x.charAt(0).toUpperCase()+
-x.slice(1)
-)
-.join(" ");
+        const match =
+            t.match(motif);
 
-}
 
-}
+        if(
+            match &&
+            match[1]
+        ){
 
-return null;
+            return match[1]
+                .trim()
+                .split(" ")
+                .map(
+                    x =>
+                        x.charAt(0)
+                        .toUpperCase() +
+                        x.slice(1)
+                )
+                .join(" ");
+
+        }
+
+    }
+
+
+    return null;
 
 }
 
 
 /* =====================================================
-VOIX
+   VOIX
 ===================================================== */
 
-let voixFrancaise=null;
+let voixFrancaise = null;
 
 function chargerVoix(){
 
-if(
-!("speechSynthesis" in window)
-)return;
+    if(
+        !("speechSynthesis" in window)
+    )
+        return;
 
-const voix=
-speechSynthesis.getVoices();
 
-const fr=
-voix.filter(
-v=>
-v.lang &&
-v.lang
-.toLowerCase()
-.startsWith("fr")
-);
+    const voix =
+        speechSynthesis
+            .getVoices();
 
-if(fr.length){
 
-voixFrancaise=
-fr.find(
-v=>
-/google|natural|premium|enhanced/i
-.test(v.name)
-)
-||
-fr[0];
+    const fr =
+        voix.filter(
+            v =>
+                v.lang &&
+                v.lang
+                    .toLowerCase()
+                    .startsWith("fr")
+        );
 
-voixUtilisee.textContent=
-voixFrancaise.name;
+
+    if(fr.length){
+
+        voixFrancaise =
+            fr.find(
+                v =>
+                    /google|natural|premium|enhanced/i
+                    .test(v.name)
+            )
+            ||
+            fr[0];
+
+
+        voixUtilisee.textContent =
+            voixFrancaise.name;
+
+    }
 
 }
 
-}
 
 chargerVoix();
 
+
 if(
-"speechSynthesis" in window
+    "speechSynthesis" in window
 ){
 
-speechSynthesis.onvoiceschanged=
-chargerVoix;
+    speechSynthesis.onvoiceschanged =
+        chargerVoix;
 
 }
 
-let enTrainDeParler=false;
+
+let enTrainDeParler =
+    false;
+
 
 function parler(message){
 
-return new Promise(resolve=>{
+    return new Promise(
+        resolve => {
 
-if(
-!("speechSynthesis" in window)
-){
+            if(
+                !("speechSynthesis" in window)
+            ){
 
-resolve();
-return;
+                resolve();
 
-}
+                return;
+            }
 
-speechSynthesis.cancel();
 
-const u=
-new SpeechSynthesisUtterance(
-message
-);
+            speechSynthesis.cancel();
 
-u.lang="fr-FR";
-u.rate=Number(vitesse.value);
-u.pitch=Number(ton.value);
 
-if(voixFrancaise)
-u.voice=voixFrancaise;
+            const u =
+                new SpeechSynthesisUtterance(
+                    message
+                );
 
-u.onstart=()=>{
 
-enTrainDeParler=true;
+            u.lang =
+                "fr-FR";
 
-status.innerHTML=
-"🔊 "+NOM_IA+" parle...";
+            u.rate =
+                Number(
+                    vitesse.value
+                );
 
-};
+            u.pitch =
+                Number(
+                    ton.value
+                );
 
-u.onend=()=>{
 
-enTrainDeParler=false;
+            if(
+                voixFrancaise
+            )
+                u.voice =
+                    voixFrancaise;
 
-status.innerHTML=
-"🟢 "+NOM_IA+" écoute...";
 
-resolve();
+            u.onstart =
+                () => {
 
-};
+                    enTrainDeParler =
+                        true;
 
-speechSynthesis.speak(u);
+                    status.innerHTML =
+                        "🔊 " +
+                        NOM_IA +
+                        " parle...";
 
-});
+                };
+
+
+            u.onend =
+                () => {
+
+                    enTrainDeParler =
+                        false;
+
+                    status.innerHTML =
+                        "🟢 " +
+                        NOM_IA +
+                        " écoute...";
+
+                    resolve();
+
+                };
+
+
+            speechSynthesis.speak(u);
+
+        }
+    );
 
 }
 
 
 /* =====================================================
-HISTORIQUE
+   HISTORIQUE
 ===================================================== */
 
 function ajouterHistorique(texte){
 
-historiqueData.unshift({
+    historiqueData.unshift({
 
-heure:
-new Date()
-.toLocaleTimeString(
-"fr-FR",
-{
-hour:"2-digit",
-minute:"2-digit"
-}
-),
+        heure:
+            new Date()
+                .toLocaleTimeString(
+                    "fr-FR",
+                    {
+                        hour:"2-digit",
+                        minute:"2-digit"
+                    }
+                ),
 
-texte:texte
+        texte:texte
 
-});
+    });
 
-historiqueData=
-historiqueData.slice(0,100);
 
-localStorage.setItem(
-"homeai_historique",
-JSON.stringify(
-historiqueData
-)
-);
+    historiqueData =
+        historiqueData.slice(
+            0,
+            100
+        );
 
-afficherHistorique();
+
+    localStorage.setItem(
+        "homeai_historique",
+        JSON.stringify(
+            historiqueData
+        )
+    );
+
+
+    afficherHistorique();
 
 }
 
 
 function afficherHistorique(){
 
-if(!historiqueData.length){
+    if(
+        !historiqueData.length
+    ){
 
-historique.innerHTML=
-"Aucun historique.";
+        historique.innerHTML =
+            "Aucun historique.";
 
-return;
+        return;
+    }
 
-}
 
-historique.innerHTML=
-historiqueData.map(
-x=>
-`
-<div class="log">
-🕒 ${x.heure} — ${x.texte}
-</div>
-`
-).join("");
+    historique.innerHTML =
+        historiqueData
+            .map(
+                x => `
+
+                    <div class="log">
+                        🕒 ${x.heure}
+                        —
+                        ${x.texte}
+                    </div>
+
+                `
+            )
+            .join("");
 
 }
 
 
 /* =====================================================
-EXÉCUTER APPAREIL
+   EXÉCUTER APPAREIL
 ===================================================== */
 
-async function executer(appareil,action){
-
-const original=
-maisonUtilisateur.find(
-a=>a.id===appareil.id
-);
-
-if(!original)return false;
-
-
-/* SIMULATION */
-
-if(
-modeDomotique==="simulation"
+async function executer(
+    appareil,
+    action
 ){
 
-if(
-action==="allumer" ||
-action==="ouvrir"
-){
-
-original.etat=true;
-
-}
-
-if(
-action==="eteindre" ||
-action==="fermer" ||
-action==="verrouiller"
-){
-
-original.etat=false;
-
-}
-
-localStorage.setItem(
-"homeai_maison",
-JSON.stringify(
-maisonUtilisateur
-)
-);
-
-return true;
-
-}
+    const original =
+        maisonUtilisateur.find(
+            a =>
+                a.id ===
+                appareil.id
+        );
 
 
-/* ESP32 */
+    if(!original)
+        return false;
 
-if(!espIP)
-return false;
 
-try{
+    if(
+        modeDomotique ===
+        "simulation"
+    ){
 
-const response=
-await fetch(
-"http://"+
-espIP+
-"/homeai",
-{
+        if(
+            action === "allumer" ||
+            action === "ouvrir"
+        ){
 
-method:"POST",
+            original.etat =
+                true;
 
-headers:{
-"Content-Type":
-"application/json"
-},
+        }
 
-body:JSON.stringify({
 
-id:appareil.id,
+        if(
+            action === "eteindre" ||
+            action === "fermer" ||
+            action === "verrouiller"
+        ){
 
-nom:appareil.nom,
+            original.etat =
+                false;
 
-piece:appareil.piece,
+        }
 
-action:action
 
-})
+        localStorage.setItem(
+            "homeai_maison",
+            JSON.stringify(
+                maisonUtilisateur
+            )
+        );
 
-});
 
-return response.ok;
+        return true;
 
-}
-catch(e){
+    }
 
-return false;
 
-}
+    if(!espIP)
+        return false;
+
+
+    try{
+
+        const response =
+            await fetch(
+                "http://" +
+                espIP +
+                "/homeai",
+                {
+
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            id:
+                                appareil.id,
+
+                            nom:
+                                appareil.nom,
+
+                            piece:
+                                appareil.piece,
+
+                            action:
+                                action
+
+                        })
+
+                }
+            );
+
+
+        return response.ok;
+
+    }
+    catch(e){
+
+        return false;
+
+    }
 
 }
 
 
 /* =====================================================
-ANALYSE PHRASE
+   ANALYSER PHRASE
 ===================================================== */
 
-async function analyserPhrase(phrase){
-
-if(!phrase.trim())return;
-
-interaction.textContent=
-"🗣️ « "+phrase+" »";
-
-
-/* CHANGER NOM */
-
-const nouveauNom=
-detecterNouveauNom(phrase);
-
-if(nouveauNom){
-
-NOM_IA=nouveauNom;
-
-localStorage.setItem(
-"homeai_nom",
-NOM_IA
-);
-
-nomAffiche.textContent=
-NOM_IA;
-
-await parler(
-"D'accord. Maintenant je m'appelle "+
-NOM_IA+"."
-);
-
-return;
-
-}
-
-
-/* QUESTIONS */
-
-const t=normaliser(phrase);
-
-if(
-t.includes("comment tu t appelles") ||
-t.includes("quel est ton nom")
+async function analyserPhrase(
+    phrase
 ){
 
-await parler(
-"Je m'appelle "+NOM_IA+"."
-);
+    if(!phrase.trim())
+        return;
 
-return;
 
-}
+    interaction.textContent =
+        "🗣️ « " +
+        phrase +
+        " »";
 
-if(
-t.includes("bonjour") ||
-t==="salut" ||
-t.includes("coucou")
-){
 
-await parler(
-"Bonjour ! Je suis là."
-);
+    /* CHANGER NOM */
 
-return;
+    const nouveauNom =
+        detecterNouveauNom(
+            phrase
+        );
 
-}
 
-if(t.includes("merci")){
+    if(nouveauNom){
 
-await parler(
-"Avec plaisir."
-);
+        NOM_IA =
+            nouveauNom;
 
-return;
 
-}
+        localStorage.setItem(
+            "homeai_nom",
+            NOM_IA
+        );
 
 
-/* MULTIPLES DEMANDES */
+        nomAffiche.textContent =
+            NOM_IA;
 
-const morceaux=
-phrase
-.replace(
-/\s+puis\s+/gi,
-"|"
-)
-.replace(
-/\s+et\s+(?=allume|eteins|ouvre|ferme|active|desactive|arrete)/gi,
-"|"
-)
-.split("|")
-.map(x=>x.trim())
-.filter(Boolean);
 
-let executions=[];
+        await parler(
+            "D'accord. Maintenant je m'appelle " +
+            NOM_IA +
+            "."
+        );
 
-for(
-const morceau of morceaux
-){
 
-const action=
-trouverAction(morceau);
+        return;
+    }
 
-if(!action)continue;
 
-let liste=
-trouverAppareils(morceau);
+    const t =
+        normaliser(
+            phrase
+        );
 
-const piece=
-trouverPiece(morceau);
 
-if(piece){
+    /* NOM */
 
-const filtres=
-liste.filter(
-a=>a.piece===piece.id
-);
+    if(
+        t.includes(
+            "comment tu t appelles"
+        )
+        ||
+        t.includes(
+            "quel est ton nom"
+        )
+    ){
 
-if(filtres.length)
-liste=filtres;
+        await parler(
+            "Je m'appelle " +
+            NOM_IA +
+            "."
+        );
 
-else{
+        return;
+    }
 
-liste=
-maisonUtilisateur.filter(
-a=>a.piece===piece.id
-);
 
-}
+    /* SALUT */
 
-}
+    if(
+        t.includes("bonjour")
+        ||
+        t === "salut"
+        ||
+        t.includes("coucou")
+    ){
 
-for(
-const appareil of liste
-){
+        await parler(
+            "Bonjour ! Je suis là."
+        );
 
-const ok=
-await executer(
-appareil,
-action
-);
+        return;
+    }
 
-executions.push({
-appareil,
-action,
-ok
-});
 
-}
+    /* MERCI */
 
-}
+    if(
+        t.includes("merci")
+    ){
 
+        await parler(
+            "Avec plaisir."
+        );
 
-/* RIEN COMPRIS */
+        return;
+    }
 
-if(!executions.length){
 
-comprehension.innerHTML=
-`
-<span class="warning">
-❓ Je n'ai pas compris.
-</span>
-`;
+    /* MULTIPLES COMMANDES */
 
-await parler(
-"Je n'ai pas compris. Tu peux me préciser l'appareil ?"
-);
+    const morceaux =
+        phrase
+            .replace(
+                /\s+puis\s+/gi,
+                "|"
+            )
+            .replace(
+                /\s+et\s+(?=allume|eteins|ouvre|ferme|active|desactive|arrete)/gi,
+                "|"
+            )
+            .split("|")
+            .map(
+                x =>
+                    x.trim()
+            )
+            .filter(Boolean);
 
-return;
 
-}
+    let executions = [];
 
 
-/* AFFICHAGE */
+    for(
+        const morceau of morceaux
+    ){
 
-comprehension.innerHTML=
-executions.map(
-x=>
-`
-<div class="command">
+        const action =
+            trouverAction(
+                morceau
+            );
 
-${x.appareil.emoji}
 
-<strong>
-${x.appareil.nom}
-</strong>
+        if(!action)
+            continue;
 
-—
 
-${x.action}
+        let liste =
+            trouverAppareils(
+                morceau
+            );
 
-<br>
 
-📍
-${
-pieces.find(
-p=>p.id===x.appareil.piece
-)?.nom || ""
-}
+        const piece =
+            trouverPiece(
+                morceau
+            );
 
-<br>
 
-${
-x.ok
-?
-'<span class="success">✓ Commande exécutée</span>'
-:
-'<span class="error">✕ Échec</span>'
-}
+        if(piece){
 
-</div>
-`
-).join("");
+            const filtres =
+                liste.filter(
+                    a =>
+                        a.piece ===
+                        piece.id
+                );
 
 
-afficherMaison();
+            if(filtres.length)
+                liste = filtres;
 
+            else{
 
-/* RÉPONSE VOCALE */
+                liste =
+                    maisonUtilisateur.filter(
+                        a =>
+                            a.piece ===
+                            piece.id
+                    );
 
-const reponses=
-executions.map(
-x=>{
+            }
 
-if(x.action==="allumer")
-return
-"J'allume "+x.appareil.nom+".";
+        }
 
-if(x.action==="eteindre")
-return
-"J'éteins "+x.appareil.nom+".";
 
-if(x.action==="ouvrir")
-return
-"J'ouvre "+x.appareil.nom+".";
+        for(
+            const appareil of liste
+        ){
 
-if(x.action==="fermer")
-return
-"Je ferme "+x.appareil.nom+".";
+            const ok =
+                await executer(
+                    appareil,
+                    action
+                );
 
-if(x.action==="verrouiller")
-return
-"Je verrouille "+x.appareil.nom+".";
 
-return "Commande effectuée.";
+            executions.push({
 
-}
-);
+                appareil,
+                action,
+                ok
 
+            });
 
-executions.forEach(
-x=>
-ajouterHistorique(
-x.action+
-" → "+
-x.appareil.nom
-)
-);
+        }
 
+    }
 
-await parler(
-reponses.join(" ")
-);
+
+    /* PAS COMPRIS */
+
+    if(
+        !executions.length
+    ){
+
+        comprehension.innerHTML = `
+
+            <span class="warning">
+                ❓ Je n'ai pas compris.
+            </span>
+
+        `;
+
+
+        await parler(
+            "Je n'ai pas compris. " +
+            "Tu peux me préciser l'appareil ?"
+        );
+
+
+        return;
+    }
+
+
+    /* AFFICHAGE */
+
+    comprehension.innerHTML =
+        executions
+            .map(
+                x => `
+
+                    <div class="command">
+
+                        ${x.appareil.emoji}
+
+                        <strong>
+                            ${x.appareil.nom}
+                        </strong>
+
+                        —
+
+                        ${x.action}
+
+                        <br>
+
+                        📍
+
+                        ${
+                            pieces.find(
+                                p =>
+                                    p.id ===
+                                    x.appareil.piece
+                            )?.nom || ""
+                        }
+
+                        <br>
+
+                        ${
+                            x.ok
+                            ?
+                            '<span class="success">✓ Commande exécutée</span>'
+                            :
+                            '<span class="error">✕ Échec</span>'
+                        }
+
+                    </div>
+
+                `
+            )
+            .join("");
+
+
+    afficherMaison();
+
+
+    const reponses =
+        executions.map(
+            x => {
+
+                if(
+                    x.action ===
+                    "allumer"
+                )
+                    return
+                    "J'allume " +
+                    x.appareil.nom +
+                    ".";
+
+
+                if(
+                    x.action ===
+                    "eteindre"
+                )
+                    return
+                    "J'éteins " +
+                    x.appareil.nom +
+                    ".";
+
+
+                if(
+                    x.action ===
+                    "ouvrir"
+                )
+                    return
+                    "J'ouvre " +
+                    x.appareil.nom +
+                    ".";
+
+
+                if(
+                    x.action ===
+                    "fermer"
+                )
+                    return
+                    "Je ferme " +
+                    x.appareil.nom +
+                    ".";
+
+
+                if(
+                    x.action ===
+                    "verrouiller"
+                )
+                    return
+                    "Je verrouille " +
+                    x.appareil.nom +
+                    ".";
+
+
+                return
+                    "Commande effectuée.";
+
+            }
+        );
+
+
+    executions.forEach(
+        x =>
+            ajouterHistorique(
+                x.action +
+                " → " +
+                x.appareil.nom
+            )
+    );
+
+
+    await parler(
+        reponses.join(" ")
+    );
 
 }
 
 
 /* =====================================================
-CLAVIER
+   CLAVIER
 ===================================================== */
 
 sendButton.addEventListener(
-"click",
-function(){
+    "click",
+    function(){
 
-const texte=
-questionInput.value.trim();
+        const texte =
+            questionInput.value
+                .trim();
 
-if(!texte)return;
 
-questionInput.value="";
+        if(!texte)
+            return;
 
-analyserPhrase(texte);
 
-});
+        questionInput.value =
+            "";
+
+
+        analyserPhrase(
+            texte
+        );
+
+    }
+);
 
 
 questionInput.addEventListener(
-"keydown",
-function(e){
+    "keydown",
+    function(e){
 
-if(e.key==="Enter"){
+        if(
+            e.key === "Enter"
+        ){
 
-e.preventDefault();
+            e.preventDefault();
 
-sendButton.click();
+            sendButton.click();
 
-}
+        }
 
-});
+    }
+);
 
 
 /* =====================================================
-MICRO AUTOMATIQUE
+   MICRO
 ===================================================== */
 
-const SpeechRecognition=
-window.SpeechRecognition ||
-window.webkitSpeechRecognition;
+const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
 
-let reconnaissance=null;
-let doitEcouter=true;
+
+let reconnaissance =
+    null;
+
+let doitEcouter =
+    true;
+
 
 if(SpeechRecognition){
 
-reconnaissance=
-new SpeechRecognition();
-
-reconnaissance.lang="fr-FR";
-
-reconnaissance.continuous=true;
-
-reconnaissance.interimResults=false;
+    reconnaissance =
+        new SpeechRecognition();
 
 
-reconnaissance.onstart=
-function(){
-
-status.innerHTML=
-"🟢 "+NOM_IA+" écoute...";
-
-};
+    reconnaissance.lang =
+        "fr-FR";
 
 
-reconnaissance.onresult=
-function(event){
-
-const texte=
-event.results[
-event.results.length-1
-][0].transcript;
-
-if(
-texte &&
-!enTrainDeParler
-){
-
-analyserPhrase(texte);
-
-}
-
-};
+    reconnaissance.continuous =
+        true;
 
 
-reconnaissance.onerror=
-function(){
-
-if(doitEcouter){
-
-setTimeout(
-demarrerMicro,
-1200
-);
-
-}
-
-};
+    reconnaissance.interimResults =
+        false;
 
 
-reconnaissance.onend=
-function(){
+    reconnaissance.onstart =
+        function(){
 
-if(
-doitEcouter &&
-!enTrainDeParler
-){
+            status.innerHTML =
+                "🟢 " +
+                NOM_IA +
+                " écoute...";
 
-setTimeout(
-demarrerMicro,
-700
-);
-
-}
-
-};
+        };
 
 
-function demarrerMicro(){
+    reconnaissance.onresult =
+        function(event){
 
-if(
-!doitEcouter ||
-enTrainDeParler
-)return;
-
-try{
-reconnaissance.start();
-}
-catch(e){}
-
-}
+            const texte =
+                event.results[
+                    event.results.length - 1
+                ][0]
+                .transcript;
 
 
-setTimeout(
-demarrerMicro,
-1000
-);
+            if(
+                texte &&
+                !enTrainDeParler
+            ){
+
+                analyserPhrase(
+                    texte
+                );
+
+            }
+
+        };
+
+
+    reconnaissance.onerror =
+        function(){
+
+            if(
+                doitEcouter
+            ){
+
+                setTimeout(
+                    demarrerMicro,
+                    1200
+                );
+
+            }
+
+        };
+
+
+    reconnaissance.onend =
+        function(){
+
+            if(
+                doitEcouter &&
+                !enTrainDeParler
+            ){
+
+                setTimeout(
+                    demarrerMicro,
+                    700
+                );
+
+            }
+
+        };
+
+
+    function demarrerMicro(){
+
+        if(
+            !doitEcouter ||
+            enTrainDeParler
+        )
+            return;
+
+
+        try{
+
+            reconnaissance.start();
+
+        }
+        catch(e){}
+
+    }
+
+
+    setTimeout(
+        demarrerMicro,
+        1000
+    );
 
 }
 else{
 
-status.innerHTML=
-"⚠️ Reconnaissance vocale non disponible.";
+    status.innerHTML =
+        "⚠️ Reconnaissance vocale non disponible.";
 
 }
 
 
 /* =====================================================
-MODE DOMOTIQUE
+   MODE DOMOTIQUE
 ===================================================== */
 
 function actualiserMode(){
 
-document
-.getElementById("simulationButton")
-.classList.toggle(
-"active",
-modeDomotique==="simulation"
-);
+    document
+        .getElementById(
+            "simulationButton"
+        )
+        .classList.toggle(
+            "active",
+            modeDomotique ===
+            "simulation"
+        );
 
-document
-.getElementById("espButton")
-.classList.toggle(
-"active",
-modeDomotique==="esp"
-);
 
-modeInfo.textContent=
-modeDomotique==="simulation"
-?
-"🧪 Mode simulation actif."
-:
-"📡 Mode ESP32 actif.";
+    document
+        .getElementById(
+            "espButton"
+        )
+        .classList.toggle(
+            "active",
+            modeDomotique ===
+            "esp"
+        );
+
+
+    modeInfo.textContent =
+        modeDomotique ===
+        "simulation"
+
+        ?
+        "🧪 Mode simulation actif."
+
+        :
+        "📡 Mode ESP32 actif.";
 
 }
 
 
 document
-.getElementById("simulationButton")
-.addEventListener(
-"click",
-function(){
+    .getElementById(
+        "simulationButton"
+    )
+    .addEventListener(
+        "click",
+        function(){
 
-modeDomotique="simulation";
+            modeDomotique =
+                "simulation";
 
-localStorage.setItem(
-"homeai_mode",
-modeDomotique
-);
 
-actualiserMode();
+            localStorage.setItem(
+                "homeai_mode",
+                modeDomotique
+            );
 
-});
+
+            actualiserMode();
+
+        }
+    );
 
 
 document
-.getElementById("espButton")
-.addEventListener(
-"click",
-function(){
+    .getElementById(
+        "espButton"
+    )
+    .addEventListener(
+        "click",
+        function(){
 
-modeDomotique="esp";
+            modeDomotique =
+                "esp";
 
-localStorage.setItem(
-"homeai_mode",
-modeDomotique
-);
 
-actualiserMode();
+            localStorage.setItem(
+                "homeai_mode",
+                modeDomotique
+            );
 
-});
+
+            actualiserMode();
+
+        }
+    );
 
 
 /* =====================================================
-ESP32
+   ESP32
 ===================================================== */
 
 document
-.getElementById("saveESP")
-.addEventListener(
-"click",
-function(){
+    .getElementById(
+        "saveESP"
+    )
+    .addEventListener(
+        "click",
+        function(){
 
-espIP=
-espIPInput.value.trim();
+            espIP =
+                espIPInput
+                    .value
+                    .trim();
 
-localStorage.setItem(
-"homeai_esp_ip",
-espIP
-);
 
-espStatus.innerHTML=
-"💾 Adresse enregistrée.";
+            localStorage.setItem(
+                "homeai_esp_ip",
+                espIP
+            );
 
-});
+
+            espStatus.innerHTML =
+                "💾 Adresse enregistrée.";
+
+        }
+    );
 
 
 document
-.getElementById("testESP")
-.addEventListener(
-"click",
-async function(){
+    .getElementById(
+        "testESP"
+    )
+    .addEventListener(
+        "click",
+        async function(){
 
-if(!espIP){
+            if(!espIP){
 
-espStatus.innerHTML=
-"⚠️ Entre une adresse IP.";
+                espStatus.innerHTML =
+                    "⚠️ Entre une adresse IP.";
 
-return;
+                return;
+            }
 
-}
 
-espStatus.innerHTML=
-"🟡 Test...";
+            espStatus.innerHTML =
+                "🟡 Test...";
 
-try{
 
-const response=
-await fetch(
-"http://"+espIP+"/"
-);
+            try{
 
-if(response.ok){
+                const response =
+                    await fetch(
+                        "http://" +
+                        espIP +
+                        "/"
+                    );
 
-espStatus.innerHTML=
-'<span class="success">🟢 ESP32 accessible !</span>';
 
-}
-else{
+                if(response.ok){
 
-espStatus.innerHTML=
-"🟠 L'ESP32 répond avec une erreur.";
+                    espStatus.innerHTML =
+                        '<span class="success">' +
+                        '🟢 ESP32 accessible !' +
+                        '</span>';
 
-}
+                }
+                else{
 
-}
-catch(e){
+                    espStatus.innerHTML =
+                        "🟠 L'ESP32 répond avec une erreur.";
 
-espStatus.innerHTML=
-'<span class="error">🔴 ESP32 inaccessible.</span>';
+                }
 
-}
+            }
+            catch(e){
 
-});
+                espStatus.innerHTML =
+                    '<span class="error">' +
+                    '🔴 ESP32 inaccessible.' +
+                    '</span>';
+
+            }
+
+        }
+    );
 
 
 /* =====================================================
-INITIALISATION
+   LANCEMENT
 ===================================================== */
 
 function lancerHomeAI(){
 
-setupScreen.classList.add("hidden");
-appScreen.classList.remove("hidden");
+    setupScreen.classList.add(
+        "hidden"
+    );
 
-nomAffiche.textContent=NOM_IA;
+    appScreen.classList.remove(
+        "hidden"
+    );
 
-afficherMaison();
-afficherHistorique();
-actualiserMode();
+    nomAffiche.textContent =
+        NOM_IA;
 
-status.innerHTML=
-"🟢 "+NOM_IA+" est prête.";
+    afficherMaison();
+
+    afficherHistorique();
+
+    actualiserMode();
+
+    status.innerHTML =
+        "🟢 " +
+        NOM_IA +
+        " est prête.";
 
 }
 
 
 if(
-!localStorage.getItem("homeai_configuree") ||
-!maisonUtilisateur.length
+    !localStorage.getItem(
+        "homeai_configuree"
+    )
+    ||
+    !maisonUtilisateur.length
 ){
 
-afficherSetup();
+    afficherSetup();
 
 }
 else{
 
-lancerHomeAI();
+    lancerHomeAI();
 
 }
 
