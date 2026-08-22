@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gravure professionnelle — Aloïs Design</title>
+
+    <meta name="description"
+          content="Aloïs Design propose des gravures personnalisées pour les entreprises sur bois, verre, métal, cuir et différents supports.">
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .page-hero {
+            min-height: 70vh;
+            padding: 150px 8% 90px;
+
+            display: flex;
+            align-items: center;
+
+            position: relative;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(0,0,0,.95),
+                    rgba(0,0,0,.62)
+                ),
+                url("images/gravure.jpg") center / cover no-repeat;
+        }
+
+        .page-hero-content {
+            max-width: 800px;
+        }
+
+        .page-hero h1 {
+            font-size: clamp(45px, 7vw, 80px);
+            line-height: 1;
+            margin-bottom: 25px;
+        }
+
+        .page-hero p:not(.section-label) {
+            max-width: 650px;
+            color: var(--text);
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        .gallery {
+            max-width: var(--max-width);
+            margin: auto;
+            padding: 110px 5%;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .gallery-item {
+            height: 300px;
+            position: relative;
+            overflow: hidden;
+
+            background: var(--black-card);
+            border: 1px solid rgba(255,255,255,.08);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+
+            transition: transform .5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            padding: 22px;
+
+            background:
+                linear-gradient(
+                    transparent,
+                    rgba(0,0,0,.9)
+                );
+
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .activities {
+            max-width: none;
+            background: var(--black-soft);
+        }
+
+        .activities-grid {
+            max-width: var(--max-width);
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .activity {
+            padding: 35px;
+
+            background: var(--black-card);
+            border: 1px solid rgba(255,255,255,.07);
+
+            transition: .3s ease;
+        }
+
+        .activity:hover {
+            border-color: var(--border);
+            transform: translateY(-5px);
+        }
+
+        .activity-number {
+            color: var(--gold);
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
+
+        .activity h3 {
+            margin: 25px 0 12px;
+            font-size: 22px;
+        }
+
+        .activity p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .pricing {
+            max-width: none;
+            background: var(--black);
+        }
+
+        .pricing-grid {
+            max-width: var(--max-width);
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .pricing-card {
+            padding: 40px 32px;
+
+            background: var(--black-card);
+            border: 1px solid rgba(255,255,255,.08);
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--gold);
+            transform: translateY(-10px);
+        }
+
+        .pricing-label {
+            color: var(--gold);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .pricing-card h3 {
+            margin: 18px 0 10px;
+            font-size: 30px;
+        }
+
+        .price {
+            margin-bottom: 25px;
+            color: var(--white);
+            font-size: 35px;
+            font-weight: 700;
+        }
+
+        .price span {
+            color: var(--muted);
+            font-size: 13px;
+            font-weight: 400;
+        }
+
+        .pricing-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .pricing-list li {
+            padding: 11px 0;
+
+            border-bottom: 1px solid rgba(255,255,255,.06);
+
+            color: var(--text);
+            font-size: 14px;
+        }
+
+        .pricing-list li::before {
+            content: "— ";
+            color: var(--gold);
+        }
+
+        .pricing-card .button {
+            margin-top: auto;
+        }
+
+        .quote-section {
+            max-width: none;
+            text-align: center;
+            background: var(--black-soft);
+        }
+
+        .quote-content {
+            max-width: 750px;
+            margin: auto;
+        }
+
+        .quote-content p:not(.section-label) {
+            margin: 25px 0 35px;
+            color: var(--text);
+            font-size: 17px;
+        }
+
+        .cart-notice {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+
+            padding: 15px 20px;
+
+            background: var(--gold);
+            color: var(--black);
+
+            font-size: 13px;
+            font-weight: 700;
+
+            transform: translateY(120px);
+            opacity: 0;
+
+            transition: .3s ease;
+
+            z-index: 2000;
+        }
+
+        .cart-notice.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        @media (max-width: 900px) {
+            .gallery-grid,
+            .activities-grid,
+            .pricing-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .pricing-card.featured {
+                transform: none;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .page-hero {
+                min-height: 75vh;
+                padding: 130px 25px 70px;
+            }
+
+            .gallery,
+            .activities,
+            .pricing {
+                padding-left: 25px;
+                padding-right: 25px;
+            }
+
+            .gallery-grid,
+            .activities-grid,
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-item {
+                height: 260px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="site-header">
+
+    <a href="index.html" class="logo">
+        <span class="logo-ad">AD</span>
+        <span class="logo-text">ALOÏS DESIGN</span>
+    </a>
+
+    <nav class="navigation">
+
+        <a href="index.html">
+            Accueil
+        </a>
+
+        <a href="impression-3d.html">
+            Impression 3D
+        </a>
+
+        <a href="gravure.html" class="active">
+            Gravure
+        </a>
+
+        <a href="autocollants.html">
+            Autocollants
+        </a>
+
+        <a href="panier.html" class="cart-link">
+            Panier <span id="cart-count">0</span>
+        </a>
+
+    </nav>
+
+    <button class="menu-button" onclick="toggleMenu()">
+        MENU
+    </button>
+
+</header>
+
+
+<div id="mobile-menu" class="mobile-menu">
+
+    <a href="index.html">
+        Accueil
+    </a>
+
+    <a href="impression-3d.html">
+        Impression 3D
+    </a>
+
+    <a href="gravure.html">
+        Gravure
+    </a>
+
+    <a href="autocollants.html">
+        Autocollants
+    </a>
+
+    <a href="panier.html">
+        Panier <span id="mobile-cart-count">0</span>
+    </a>
+
+</div>
+
+
+<main>
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="page-hero">
+
+    <div class="page-hero-content">
+
+        <p class="section-label">
+            ALOÏS DESIGN — GRAVURE
+        </p>
+
+        <h1>
+            Votre identité<br>
+            dans la matière.
+        </h1>
+
+        <div class="gold-line"></div>
+
+        <p>
+            Des gravures personnalisées pour mettre en valeur
+            votre entreprise, vos produits et vos espaces professionnels.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     INTRO
+========================= -->
+
+<section class="section">
+
+    <div class="section-heading">
+
+        <p class="section-label">
+            NOS RÉALISATIONS
+        </p>
+
+        <h2>
+            Une finition qui<br>
+            fait la différence.
+        </h2>
+
+        <div class="gold-line"></div>
+
+    </div>
+
+    <p style="
+        max-width:750px;
+        color:var(--text);
+        font-size:17px;
+        line-height:1.9;
+    ">
+        La gravure permet de personnaliser de nombreux supports
+        avec votre logo, votre nom, vos coordonnées ou votre message.
+        Nous adaptons chaque réalisation à votre projet professionnel.
+    </p>
+
+</section>
+
+
+<!-- =========================
+     GALERIE
+========================= -->
+
+<section class="gallery">
+
+    <div class="gallery-grid">
+
+        <div class="gallery-item">
+
+            <img
+                src="images/gravure-bois.jpg"
+                alt="Gravure professionnelle sur bois"
+            >
+
+            <div class="gallery-caption">
+                GRAVURE SUR BOIS
+            </div>
+
+        </div>
+
+
+        <div class="gallery-item">
+
+            <img
+                src="images/gravure-verre.jpg"
+                alt="Gravure professionnelle sur verre"
+            >
+
+            <div class="gallery-caption">
+                GRAVURE SUR VERRE
+            </div>
+
+        </div>
+
+
+        <div class="gallery-item">
+
+            <img
+                src="images/gravure-metal.jpg"
+                alt="Gravure professionnelle sur métal"
+            >
+
+            <div class="gallery-caption">
+                GRAVURE SUR MÉTAL
+            </div>
+
+        </div>
+
+
+        <div class="gallery-item">
+
+            <img
+                src="images/gravure-cuir.jpg"
+                alt="Gravure professionnelle sur cuir"
+            >
+
+            <div class="gallery-caption">
+                GRAVURE SUR CUIR
+            </div>
+
+        </div>
+
+
+        <div class="gallery-item">
+
+            <img
+                src="images/plaque-gravee.jpg"
+                alt="Plaque professionnelle gravée"
+            >
+
+            <div class="gallery-caption">
+                PLAQUE PROFESSIONNELLE
+            </div>
+
+        </div>
+
+
+        <div class="gallery-item">
+
+            <img
+                src="images/logo-grave.jpg"
+                alt="Logo d'entreprise gravé"
+            >
+
+            <div class="gallery-caption">
+                LOGO PERSONNALISÉ
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     ACTIVITÉS
+========================= -->
+
+<section class="activities section">
+
+    <div class="section-heading centered">
+
+        <p class="section-label">
+            NOS ACTIVITÉS
+        </p>
+
+        <h2>
+            Des supports adaptés<br>
+            à votre activité.
+        </h2>
+
+        <div class="gold-line"></div>
+
+    </div>
+
+
+    <div class="activities-grid">
+
+
+        <article class="activity">
+
+            <span class="activity-number">
+                01
+            </span>
+
+            <h3>
+                Gravure sur bois
+            </h3>
+
+            <p>
+                Logos, textes, plaques, enseignes et objets
+                personnalisés sur différents types de bois.
+            </p>
+
+        </article>
+
+
+        <article class="activity">
+
+            <span class="activity-number">
+                02
+            </span>
+
+            <h3>
+                Gravure sur verre
+            </h3>
+
+            <p>
+                Personnalisation de verres, objets décoratifs
+                et supports professionnels en verre.
+            </p>
+
+        </article>
+
+
+        <article class="activity">
+
+            <span class="activity-number">
+                03
+            </span>
+
+            <h3>
+                Gravure sur métal
+            </h3>
+
+            <p>
+                Plaques, marquages, identifications et
+                personnalisations sur supports métalliques.
+            </p>
+
+        </article>
+
+
+        <article class="activity">
+
+            <span class="activity-number">
+                04
+            </span>
+
+            <h3>
+                Gravure sur cuir
+            </h3>
+
+            <p>
+                Personnalisation de porte-documents,
+                accessoires et objets en cuir.
+            </p>
+
+        </article>
+
+
+        <article class="activity">
+
+            <span class="activity-number">
+                05
+            </span>
+
+            <h3>
+                Plaques professionnelles
+            </h3>
+
+            <p>
+                Plaques d'identification, signalétique
+                et informations pour vos locaux.
+            </p>
+
+        </article>
+
+
+        <article class="activity">
+
+            <span class="activity-number">
+                06
+            </span>
+
+            <h3>
+                Logos et textes
+            </h3>
+
+            <p>
+                Reproduction de votre identité visuelle
+                sur le support de votre choix.
+            </p>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     TARIFS
+========================= -->
+
+<section class="pricing section">
+
+    <div class="section-heading centered">
+
+        <p class="section-label">
+            NOS FORFAITS
+        </p>
+
+        <h2>
+            Des offres adaptées<br>
+            à vos besoins.
+        </h2>
+
+        <div class="gold-line"></div>
+
+        <p class="section-subtitle">
+            Les prix indiqués sont des tarifs de départ.
+            Le tarif final dépend du support, des dimensions,
+            de la complexité et de la quantité.
+        </p>
+
+    </div>
+
+
+    <div class="pricing-grid">
+
+
+        <!-- ESSENTIEL -->
+
+        <article class="pricing-card">
+
+            <span class="pricing-label">
+                Formule 01
+            </span>
+
+            <h3>
+                Essentiel
+            </h3>
+
+            <div class="price">
+                20 €
+                <span>à partir de</span>
+            </div>
+
+            <ul class="pricing-list">
+
+                <li>
+                    Gravure simple
+                </li>
+
+                <li>
+                    Texte ou petit logo
+                </li>
+
+                <li>
+                    Support standard
+                </li>
+
+                <li>
+                    Petite quantité
+                </li>
+
+            </ul>
+
+            <button
+                class="button button-outline"
+                onclick="addToCart(
+                    'Gravure — Essentiel',
+                    20,
+                    'images/gravure-bois.jpg'
+                )"
+            >
+                Ajouter au panier
+            </button>
+
+        </article>
+
+
+        <!-- PRO -->
+
+        <article class="pricing-card featured">
+
+            <span class="pricing-label">
+                Formule 02
+            </span>
+
+            <h3>
+                Pro
+            </h3>
+
+            <div class="price">
+                35 €
+                <span>à partir de</span>
+            </div>
+
+            <ul class="pricing-list">
+
+                <li>
+                    Logo personnalisé
+                </li>
+
+                <li>
+                    Choix du support
+                </li>
+
+                <li>
+                    Finition professionnelle
+                </li>
+
+                <li>
+                    Quantité adaptée aux entreprises
+                </li>
+
+            </ul>
+
+            <button
+                class="button button-gold"
+                onclick="addToCart(
+                    'Gravure — Pro',
+                    35,
+                    'images/logo-grave.jpg'
+                )"
+            >
+                Ajouter au panier
+            </button>
+
+        </article>
+
+
+        <!-- PREMIUM -->
+
+        <article class="pricing-card">
+
+            <span class="pricing-label">
+                Formule 03
+            </span>
+
+            <h3>
+                Premium
+            </h3>
+
+            <div class="price">
+                60 €
+                <span>à partir de</span>
+            </div>
+
+            <ul class="pricing-list">
+
+                <li>
+                    Projet entièrement personnalisé
+                </li>
+
+                <li>
+                    Gravure complexe
+                </li>
+
+                <li>
+                    Support spécifique
+                </li>
+
+                <li>
+                    Production en série possible
+                </li>
+
+            </ul>
+
+            <button
+                class="button button-outline"
+                onclick="addToCart(
+                    'Gravure — Premium',
+                    60,
+                    'images/gravure-metal.jpg'
+                )"
+            >
+                Ajouter au panier
+            </button>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     DEVIS
+========================= -->
+
+<section class="quote-section section">
+
+    <div class="quote-content">
+
+        <p class="section-label">
+            PROJET SUR MESURE
+        </p>
+
+        <h2>
+            Vous avez une idée précise ?
+        </h2>
+
+        <div
+            class="gold-line"
+            style="margin-left:auto;margin-right:auto;"
+        ></div>
+
+        <p>
+            Envoyez-nous votre projet, votre logo ou vos besoins.
+            Nous étudierons la meilleure solution pour votre entreprise.
+        </p>
+
+        <a
+            href="mailto:contact@aloisdesign.fr"
+            class="button button-gold"
+        >
+            Demander un devis
+        </a>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer class="site-footer">
+
+    <div class="footer-main">
+
+        <div class="footer-brand">
+
+            <div class="logo">
+
+                <span class="logo-ad">
+                    AD
+                </span>
+
+                <span class="logo-text">
+                    ALOÏS DESIGN
+                </span>
+
+            </div>
+
+            <p>
+                Solutions personnalisées pour les entreprises.
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>
+                Navigation
+            </h4>
+
+            <a href="index.html">
+                Accueil
+            </a>
+
+            <a href="impression-3d.html">
+                Impression 3D
+            </a>
+
+            <a href="gravure.html">
+                Gravure
+            </a>
+
+            <a href="autocollants.html">
+                Autocollants
+            </a>
+
+            <a href="panier.html">
+                Panier
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>
+                Contact
+            </h4>
+
+            <a href="mailto:contact@aloisdesign.fr">
+                contact@aloisdesign.fr
+            </a>
+
+            <a href="mailto:contact@aloisdesign.fr">
+                Demander un devis
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 Aloïs Design — Tous droits réservés.
+        </p>
+
+    </div>
+
+</footer>
+
+
+<!-- =========================
+     NOTIFICATION
+========================= -->
+
+<div
+    id="cart-notice"
+    class="cart-notice"
+>
+    Produit ajouté au panier
+</div>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+function toggleMenu() {
+
+    const menu =
+        document.getElementById("mobile-menu");
+
+    menu.classList.toggle(
+        "mobile-menu-open"
+    );
+
+}
+
+
+/* =========================================
+   PANIER
+========================================= */
+
+function getCart() {
+
+    return JSON.parse(
+        localStorage.getItem(
+            "aloisDesignCart"
+        )
+    ) || [];
+
+}
+
+
+function saveCart(cart) {
+
+    localStorage.setItem(
+        "aloisDesignCart",
+        JSON.stringify(cart)
+    );
+
+}
+
+
+function addToCart(name, price, image) {
+
+    let cart = getCart();
+
+    const existingProduct =
+        cart.find(
+            item => item.name === name
+        );
+
+
+    if (existingProduct) {
+
+        existingProduct.quantity += 1;
+
+    } else {
+
+        cart.push({
+
+            id: Date.now(),
+
+            name: name,
+
+            price: Number(price),
+
+            image: image,
+
+            quantity: 1
+
+        });
+
+    }
+
+
+    saveCart(cart);
+
+    updateCartCount();
+
+    showCartNotice();
+
+}
+
+
+function updateCartCount() {
+
+    const cart = getCart();
+
+    let total = 0;
+
+
+    cart.forEach(item => {
+
+        total +=
+            Number(item.quantity) || 0;
+
+    });
+
+
+    const desktopCount =
+        document.getElementById(
+            "cart-count"
+        );
+
+
+    const mobileCount =
+        document.getElementById(
+            "mobile-cart-count"
+        );
+
+
+    if (desktopCount) {
+        desktopCount.textContent = total;
+    }
+
+
+    if (mobileCount) {
+        mobileCount.textContent = total;
+    }
+
+}
+
+
+function showCartNotice() {
+
+    const notice =
+        document.getElementById(
+            "cart-notice"
+        );
+
+
+    notice.classList.add("show");
+
+
+    setTimeout(() => {
+
+        notice.classList.remove("show");
+
+    }, 2200);
+
+}
+
+
+updateCartCount();
+
+</script>
+
+</body>
+</html>
