@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Objets personnalisés | Aloïs Design</title>
+
+    <meta name="description"
+          content="Objets personnalisés en impression 3D pour les entreprises.">
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        .product-hero {
+            min-height: 65vh;
+            padding: 150px 8% 90px;
+            display: flex;
+            align-items: center;
+            position: relative;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(0,0,0,.96),
+                    rgba(0,0,0,.62)
+                ),
+                url("images/objets-personnalises.jpg")
+                center / cover no-repeat;
+        }
+
+        .product-hero-content {
+            max-width: 800px;
+        }
+
+        .product-hero h1 {
+            font-size: clamp(45px, 7vw, 80px);
+            line-height: 1;
+            margin-bottom: 25px;
+        }
+
+        .product-hero p:not(.section-label) {
+            max-width: 680px;
+            color: var(--text);
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        .back-section {
+            max-width: var(--max-width);
+            margin: auto;
+            padding: 35px 5% 0;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--muted);
+            font-size: 13px;
+            text-decoration: none;
+            transition: .3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--white);
+        }
+
+        .product-intro {
+            max-width: var(--max-width);
+            margin: auto;
+            padding: 90px 5% 60px;
+        }
+
+        .product-intro-text {
+            max-width: 780px;
+            color: var(--text);
+            font-size: 17px;
+            line-height: 1.9;
+        }
+
+        .formats-section {
+            max-width: none;
+            background: var(--black-soft);
+        }
+
+        .formats-grid {
+            max-width: var(--max-width);
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .format-card {
+            padding: 35px 30px;
+
+            display: flex;
+            flex-direction: column;
+
+            background: var(--black-card);
+
+            border:
+                1px solid
+                rgba(255,255,255,.08);
+
+            transition: .3s ease;
+        }
+
+        .format-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--border);
+        }
+
+        .format-card.featured {
+            border-color: var(--gold);
+        }
+
+        .format-number {
+            color: var(--gold);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+        }
+
+        .format-card h3 {
+            margin: 20px 0 10px;
+            font-size: 27px;
+        }
+
+        .format-size {
+            color: var(--muted);
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .format-description {
+            color: var(--text);
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .format-price {
+            margin-bottom: 25px;
+            color: var(--white);
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .format-price span {
+            display: block;
+            margin-top: 4px;
+            color: var(--muted);
+            font-size: 11px;
+            font-weight: 400;
+        }
+
+        .format-card .button {
+            width: 100%;
+            margin-top: auto;
+        }
+
+        .personalisation {
+            max-width: var(--max-width);
+            margin: auto;
+            padding: 110px 5%;
+        }
+
+        .personalisation-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+            align-items: center;
+        }
+
+        .personalisation-image {
+            min-height: 430px;
+
+            background:
+                url("images/objets-personnalises-detail.jpg")
+                center / cover no-repeat;
+
+            border:
+                1px solid
+                rgba(255,255,255,.08);
+        }
+
+        .personalisation-text p {
+            color: var(--text);
+            font-size: 16px;
+            line-height: 1.9;
+        }
+
+        .personalisation-list {
+            list-style: none;
+            margin-top: 25px;
+        }
+
+        .personalisation-list li {
+            padding: 12px 0;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.07);
+
+            color: var(--text);
+            font-size: 14px;
+        }
+
+        .personalisation-list li::before {
+            content: "— ";
+            color: var(--gold);
+        }
+
+        .quote-section {
+            max-width: none;
+            text-align: center;
+            background: var(--black);
+        }
+
+        .quote-content {
+            max-width: 750px;
+            margin: auto;
+        }
+
+        .quote-content p:not(.section-label) {
+            margin: 25px 0 35px;
+            color: var(--text);
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        .cart-notice {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+
+            padding: 15px 20px;
+
+            background: var(--gold);
+            color: var(--black);
+
+            font-size: 13px;
+            font-weight: 700;
+
+            transform: translateY(120px);
+            opacity: 0;
+
+            transition: .3s ease;
+
+            z-index: 3000;
+        }
+
+        .cart-notice.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        @media (max-width: 1100px) {
+
+            .formats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 700px) {
+
+            .product-hero {
+                min-height: 70vh;
+                padding: 130px 25px 70px;
+            }
+
+            .back-section,
+            .product-intro,
+            .formats-section,
+            .personalisation {
+                padding-left: 25px;
+                padding-right: 25px;
+            }
+
+            .formats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .personalisation-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .personalisation-image {
+                min-height: 300px;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+<header class="site-header">
+
+    <a href="index.html" class="logo">
+
+        <span class="logo-ad">
+            AD
+        </span>
+
+        <span class="logo-text">
+            ALOÏS DESIGN
+        </span>
+
+    </a>
+
+    <nav class="navigation">
+
+        <a href="index.html">
+            Accueil
+        </a>
+
+        <a href="impression-3d.html" class="active">
+            Impression 3D
+        </a>
+
+        <a href="gravure.html">
+            Gravure
+        </a>
+
+        <a href="autocollants.html">
+            Autocollants
+        </a>
+
+        <a href="panier.html" class="cart-link">
+            Panier
+            <span id="cart-count">0</span>
+        </a>
+
+    </nav>
+
+    <button
+        class="menu-button"
+        onclick="toggleMenu()"
+    >
+        MENU
+    </button>
+
+</header>
+
+
+<div id="mobile-menu" class="mobile-menu">
+
+    <a href="index.html">
+        Accueil
+    </a>
+
+    <a href="impression-3d.html">
+        Impression 3D
+    </a>
+
+    <a href="gravure.html">
+        Gravure
+    </a>
+
+    <a href="autocollants.html">
+        Autocollants
+    </a>
+
+    <a href="panier.html">
+        Panier
+        <span id="mobile-cart-count">0</span>
+    </a>
+
+</div>
+
+
+<main>
+
+
+<!-- HERO -->
+
+<section class="product-hero">
+
+    <div class="product-hero-content">
+
+        <p class="section-label">
+            ALOÏS DESIGN — OBJETS PERSONNALISÉS
+        </p>
+
+        <h1>
+            Donnez forme<br>
+            à vos idées.
+        </h1>
+
+        <div class="gold-line"></div>
+
+        <p>
+            Création et fabrication d'objets personnalisés
+            en impression 3D pour les entreprises,
+            événements et projets professionnels.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- RETOUR -->
+
+<div class="back-section">
+
+    <a
+        href="impression-3d.html"
+        class="back-link"
+    >
+        ← Retour à Impression 3D
+    </a>
+
+</div>
+
+
+<!-- INTRO -->
+
+<section class="product-intro">
+
+    <div class="section-heading">
+
+        <p class="section-label">
+            IMPRESSION 3D SUR MESURE
+        </p>
+
+        <h2>
+            Un objet pensé<br>
+            pour votre entreprise.
+        </h2>
+
+        <div class="gold-line"></div>
+
+    </div>
+
+    <p class="product-intro-text">
+
+        Besoin d'un support spécifique, d'un objet
+        promotionnel ou d'une pièce conçue pour
+        répondre à un besoin précis ?
+
+        Nous transformons votre idée en objet
+        imprimé en 3D.
+
+    </p>
+
+</section>
+
+
+<!-- FORMATS -->
+
+<section class="formats-section section">
+
+    <div class="section-heading centered">
+
+        <p class="section-label">
+            NOS OFFRES
+        </p>
+
+        <h2>
+            Choisissez votre niveau.
+        </h2>
+
+        <div class="gold-line"></div>
+
+        <p class="section-subtitle">
+
+            Des solutions adaptées aux différents
+            types de projets professionnels.
+
+        </p>
+
+    </div>
+
+
+    <div class="formats-grid">
+
+
+        <!-- PETIT -->
+
+        <article class="format-card">
+
+            <span class="format-number">
+                OFFRE 01
+            </span>
+
+            <h3>
+                Petit
+            </h3>
+
+            <p class="format-size">
+                Objet compact
+            </p>
+
+            <p class="format-description">
+
+                Idéal pour de petits accessoires,
+                supports ou objets personnalisés.
+
+            </p>
+
+            <div class="format-price">
+                15 €
+                <span>à partir de</span>
+            </div>
+
+            <button
+                class="button button-outline"
+                onclick="addToCart(
+                    'Objet personnalisé — Petit',
+                    15,
+                    'images/objets-personnalises.jpg'
+                )"
+            >
+                Ajouter au panier
+            </button>
+
+        </article>
+
+
+        <!-- STANDARD -->
+
+        <article class="format-card featured">
+
+            <span class="format-number">
+                OFFRE 02
+            </span>
+
+            <h3>
+                Standard
+            </h3>
+
+            <p class="format-size">
+                Format polyvalent
+            </p>
+
+            <p class="format-description">
+
+                Une solution adaptée aux objets
+                professionnels du quotidien.
+
+            </p>
+
+            <div class="format-price">
+                25 €
+                <span>à partir de</span>
+            </div>
+
+            <button
+                class="button button-gold"
+                onclick="addToCart(
+                    'Objet personnalisé — Standard',
+                    25,
+                    'images/objets-personnalises.jpg'
+                )"
+            >
+                Ajouter au panier
+            </button>
+
+        </article>
+
+
+        <!-- GRAND -->
+
+        <article class="format-card">
+
+            <span class="format-number">
+                OFFRE 03
+            </span>
+
+            <h3>
+                Grand
+            </h3>
+
+            <p class="format-size">
+                Forte présence
+            </p>
+
+            <p class="format-description">
+
+                Pour des objets plus imposants,
+                des présentoirs ou éléments décoratifs.
+
+            </p>
+
+            <div class="format-price">
+                40 €
+                <span>à partir de</span>
+            </div>
+
+            <button
+                class="button button-outline"
+                onclick="addToCart(
+                    'Objet personnalisé — Grand',
+                    40,
+                    'images/objets-personnalises.jpg'
+                )"
+            >
+                Ajouter au panier
+            </button>
+
+        </article>
+
+
+        <!-- PREMIUM -->
+
+        <article class="format-card">
+
+            <span class="format-number">
+                OFFRE 04
+            </span>
+
+            <h3>
+                Premium
+            </h3>
+
+            <p class="format-size">
+                Projet sur mesure
+            </p>
+
+            <p class="format-description">
+
+                Objet complexe, grande dimension
+                ou création entièrement personnalisée.
+
+            </p>
+
+            <div class="format-price">
+                60 €+
+                <span>sur devis</span>
+            </div>
+
+            <button
+                class="button button-outline"
+                onclick="addToCart(
+                    'Objet personnalisé — Premium',
+                    60,
+                    'images/objets-personnalises.jpg'
+                )"
+            >
+                Ajouter au panier
+            </button>
+
+        </article>
+
+
+    </div>
+
+</section>
+
+
+<!-- PERSONNALISATION -->
+
+<section class="personalisation">
+
+    <div class="personalisation-grid">
+
+        <div class="personalisation-image"></div>
+
+
+        <div class="personalisation-text">
+
+            <p class="section-label">
+                CRÉATION SUR MESURE
+            </p>
+
+            <h2>
+                De l'idée<br>
+                à l'objet.
+            </h2>
+
+            <div class="gold-line"></div>
+
+            <p>
+
+                Nous pouvons adapter votre projet
+                aux dimensions et contraintes
+                de votre entreprise.
+
+            </p>
+
+
+            <ul class="personalisation-list">
+
+                <li>
+                    Création à partir de votre idée
+                </li>
+
+                <li>
+                    Dimensions personnalisées
+                </li>
+
+                <li>
+                    Forme adaptée à votre besoin
+                </li>
+
+                <li>
+                    Personnalisation avec votre identité
+                </li>
+
+                <li>
+                    Production à l'unité ou en série
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- DEVIS -->
+
+<section class="quote-section section">
+
+    <div class="quote-content">
+
+        <p class="section-label">
+            PROJET SPÉCIFIQUE
+        </p>
+
+        <h2>
+            Vous avez une idée ?
+        </h2>
+
+        <div
+            class="gold-line"
+            style="
+                margin-left:auto;
+                margin-right:auto;
+            "
+        ></div>
+
+        <p>
+
+            Si votre projet ne correspond pas
+            aux offres proposées, nous pouvons
+            étudier une création sur mesure.
+
+        </p>
+
+        <a
+            href="mailto:contact@aloisdesign.fr"
+            class="button button-gold"
+        >
+            Demander un devis
+        </a>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<footer class="site-footer">
+
+    <div class="footer-main">
+
+        <div class="footer-brand">
+
+            <div class="logo">
+
+                <span class="logo-ad">
+                    AD
+                </span>
+
+                <span class="logo-text">
+                    ALOÏS DESIGN
+                </span>
+
+            </div>
+
+            <p>
+                Solutions personnalisées pour les entreprises.
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>
+                Navigation
+            </h4>
+
+            <a href="index.html">
+                Accueil
+            </a>
+
+            <a href="impression-3d.html">
+                Impression 3D
+            </a>
+
+            <a href="gravure.html">
+                Gravure
+            </a>
+
+            <a href="autocollants.html">
+                Autocollants
+            </a>
+
+            <a href="panier.html">
+                Panier
+            </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>
+                Contact
+            </h4>
+
+            <a href="mailto:contact@aloisdesign.fr">
+                contact@aloisdesign.fr
+            </a>
+
+            <a href="mailto:contact@aloisdesign.fr">
+                Demander un devis
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 Aloïs Design — Tous droits réservés.
+        </p>
+
+    </div>
+
+</footer>
+
+
+<!-- NOTIFICATION -->
+
+<div
+    id="cart-notice"
+    class="cart-notice"
+>
+    Produit ajouté au panier
+</div>
+
+
+<script>
+
+/* =========================
+   MENU MOBILE
+========================= */
+
+function toggleMenu() {
+
+    const menu =
+        document.getElementById(
+            "mobile-menu"
+        );
+
+    menu.classList.toggle(
+        "mobile-menu-open"
+    );
+
+}
+
+
+/* =========================
+   RÉCUPÉRER LE PANIER
+========================= */
+
+function getCart() {
+
+    return JSON.parse(
+        localStorage.getItem(
+            "aloisDesignCart"
+        )
+    ) || [];
+
+}
+
+
+/* =========================
+   SAUVEGARDER
+========================= */
+
+function saveCart(cart) {
+
+    localStorage.setItem(
+        "aloisDesignCart",
+        JSON.stringify(cart)
+    );
+
+}
+
+
+/* =========================
+   AJOUTER AU PANIER
+========================= */
+
+function addToCart(
+    name,
+    price,
+    image
+) {
+
+    let cart = getCart();
+
+
+    const existingProduct =
+        cart.find(
+            item =>
+                item.name === name
+        );
+
+
+    if (existingProduct) {
+
+        existingProduct.quantity += 1;
+
+    } else {
+
+        cart.push({
+
+            id: Date.now(),
+
+            name: name,
+
+            price: Number(price),
+
+            image: image,
+
+            quantity: 1
+
+        });
+
+    }
+
+
+    saveCart(cart);
+
+    updateCartCount();
+
+    showCartNotice();
+
+}
+
+
+/* =========================
+   COMPTEUR PANIER
+========================= */
+
+function updateCartCount() {
+
+    const cart = getCart();
+
+    let total = 0;
+
+
+    cart.forEach(item => {
+
+        total +=
+            Number(item.quantity) || 0;
+
+    });
+
+
+    const desktopCount =
+        document.getElementById(
+            "cart-count"
+        );
+
+    const mobileCount =
+        document.getElementById(
+            "mobile-cart-count"
+        );
+
+
+    if (desktopCount) {
+
+        desktopCount.textContent =
+            total;
+
+    }
+
+
+    if (mobileCount) {
+
+        mobileCount.textContent =
+            total;
+
+    }
+
+}
+
+
+/* =========================
+   NOTIFICATION
+========================= */
+
+function showCartNotice() {
+
+    const notice =
+        document.getElementById(
+            "cart-notice"
+        );
+
+
+    notice.classList.add(
+        "show"
+    );
+
+
+    setTimeout(() => {
+
+        notice.classList.remove(
+            "show"
+        );
+
+    }, 2200);
+
+}
+
+
+/* =========================
+   INITIALISATION
+========================= */
+
+updateCartCount();
+
+</script>
+
+
+</body>
+</html>
